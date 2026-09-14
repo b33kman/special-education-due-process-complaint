@@ -131,6 +131,8 @@ node scripts/run-gates.mjs <case>
 
 It runs the draft gate, assembles the complaint from `case.json` and the fixed wording, validates every § 300.508(b) element and every caption fact's source, checks the state block and the limitations window, and writes `complaint.md`, `complaint.html`, `sources.md` and `verification-report.md`. The last line is `FINAL` or `DRAFT — NOT FOR FILING`. If DRAFT, read `verification-report.md`, fix what it names (usually a missing caption fact, an unsourced state field, or a claim with no facts under it), and run it again.
 
+The complaint's form is fixed — a pleading with a bracketed caption, numbered double-spaced paragraphs, a signature block and a certificate of service — and is described in `references/format.md`. The assembler produces it; do not restyle or reorder it by hand, and do not put tags, page cites or explanations into the pleading's text (an item's reason for being blank goes in its `note`).
+
 ### 9. Hand it over, honestly
 
 Tell the person: the status; where the four files are; how many readings were confirmed and how many the draft cites; which facts rest on their own statement rather than a document; every warning the validator raised (an event outside the limitations window, a filing date already past, an item left blank, a procedural claim without an impact statement, relief outside the usual authority); and the filing instructions, which `verification-report.md` sets out under *How to file* (where the original goes, where the copy goes, the channels, any form). Say what the skill did not do: it did not decide which claims the file supports and it says nothing about how the complaint will fare.
@@ -160,4 +162,4 @@ node scripts/check-draft.mjs <case>                    # 7  the statement gate (
 node scripts/run-gates.mjs <case>                      # 8  check → assemble → validate → report
 ```
 
-References: `references/exemplar.md` (the voice), `references/drafting-rules.md` (the gate's rules), `references/extraction-schema.json` (what to read), `references/claims.json`, `references/relief.json`, `references/state-research.md` + `references/state-rules.json` (the state), `references/posture.md` (what the skill is not).
+References: `references/exemplar.md` (the voice), `references/drafting-rules.md` (the gate's rules), `references/format.md` (the form of the pleading), `references/extraction-schema.json` (what to read), `references/claims.json`, `references/relief.json`, `references/state-research.md` + `references/state-rules.json` (the state), `references/posture.md` (what the skill is not).

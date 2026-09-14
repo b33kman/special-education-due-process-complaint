@@ -192,7 +192,7 @@ const textOf = (tag) => {
   const label = `state-required item ${i + 1}${item.heading ? ` (${item.heading})` : ''}`
   // A blank left on purpose ("no document states the county") is honest, and
   // the person signing has to know it is there before it goes out.
-  if (!String(item.text ?? '').trim() || /_{3,}/.test(String(item.text))) add('warning', 'blank-item', `${label} is left blank on the complaint; fill it in by hand or state why it is blank before filing`)
+  if (!String(item.text ?? '').trim() || /_{3,}/.test(String(item.text))) add('warning', 'blank-item', `${label} is left blank on the complaint${item.note ? ` — ${item.note}` : ''}; fill it in by hand before filing`)
   const texts = (item.sources ?? []).map(textOf)
   if (!item.sources?.length || texts.some((t) => t === null)) { add('blocking', 'unsourced', `${label} cites no confirmed reading or state source`); return }
   const cited = texts.join('\n')

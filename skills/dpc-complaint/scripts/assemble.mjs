@@ -197,28 +197,41 @@ if (extra.length) {
   section('state-additional', `V. Additional information required in ${stateName}`, extra.map((item) => P(`${item.heading ? item.heading + ': ' : ''}${item.text}`, item.sources ?? [])))
 }
 
-// Signature block
+// Signature block. A pleading closes with "Dated:" at the left margin and
+// the signer's block on the right half of the page: a signature line, the
+// name, the capacity, and how to reach the signer, one item per line.
+// The street and the city/state/ZIP go on separate lines, as on letterhead.
+const splitAddress = (addr) => {
+  const s = String(addr ?? '').replace(/\s*\n\s*/g, ', ').trim()
+  if (!s) return []
+  const m = s.match(/^(.*?),\s*([^,]+,\s*[A-Z]{2}\s+\d{5}(?:-\d{4})?)$/)
+  return m ? [m[1], m[2]] : [s]
+}
+const SIGLINE = '______________________________'
+const DATED = 'Dated: ______________________'
 const signature = counsel
   ? [
-      P('Respectfully submitted,', []),
+      P(DATED, [], 'dated'),
+      P('Respectfully submitted,', [], 'lead'),
+      P(SIGLINE, [], 'sigline'),
       P(counsel.name, []),
       P('Attorney for Petitioner', []),
       P(counsel.barNumber?.trim() ? `Bar No. ${counsel.barNumber.trim()}${counsel.barJurisdiction ? ` (${counsel.barJurisdiction})` : ''}` : 'Bar No. ____________', []),
       P(counsel.firmName, []),
-      ...(counsel.firmAddress ? [P(String(counsel.firmAddress).replace(/\n/g, ', '), [])] : []),
+      ...splitAddress(counsel.firmAddress).map((line) => P(line, [])),
       ...(counsel.firmPhone ? [P(String(counsel.firmPhone), [])] : []),
       ...(counsel.firmEmail ? [P(String(counsel.firmEmail), [])] : []),
-      P('Date: ______________________', []),
     ]
   : [
-      P('Respectfully submitted,', []),
+      P(DATED, [], 'dated'),
+      P('Respectfully submitted,', [], 'lead'),
+      P(SIGLINE, [], 'sigline'),
       P(parentName, [...src(c.parent?.first), ...src(c.parent?.last)]),
       P(`Parent of ${studentName}`, []),
       P('Self-represented (pro se)', []),
-      ...(c.student?.homeless ? [] : [P(addressOneLine, addressSources)]),
+      ...(c.student?.homeless ? [] : addressLines.map((line) => P(line, addressSources))),
       ...(v(c.parent?.phone) ? [P(v(c.parent?.phone), src(c.parent?.phone))] : []),
       ...(v(c.parent?.email) ? [P(v(c.parent?.email), src(c.parent?.email))] : []),
-      P('Date: ______________________', []),
     ]
 section('signature', null, signature, { cls: 'signature' })
 
@@ -231,9 +244,11 @@ section('service', 'Certificate of service', [
     `${counsel ? 'Counsel for Petitioner' : 'The Parent'} certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on ${recipientText}, by the method indicated below.`,
     state.serviceRecipients?.sources ?? [],
   ),
-  P('Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing', []),
-  P(counsel ? `${counsel.name}, Attorney for Petitioner` : `${parentName}, self-represented`, []),
-  P('Date: ______________________', []),
+  P('Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing', [], 'method'),
+  P(DATED, [], 'dated'),
+  P(SIGLINE, [], 'sigline'),
+  P(counsel ? counsel.name : parentName, []),
+  P(counsel ? 'Attorney for Petitioner' : 'Self-represented (pro se)', []),
 ])
 
 // ─── Paragraph numbers ────────────────────────────────────────────────
@@ -274,35 +289,38 @@ html.push(`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Due
 <style>
   @page { size: letter; margin: 1in; @bottom-center { content: counter(page); font: 11pt "Times New Roman", Times, serif; } }
   html { background: #fff; }
-  body { font-family: "Times New Roman", Times, Georgia, serif; font-size: 12pt; line-height: 1.2; color: #000; margin: 0 auto; padding: 0; width: 6.5in; max-width: 100%; box-sizing: border-box; }
-  .court { text-align: center; font-weight: bold; text-transform: uppercase; margin: 0 0 1.5em; }
-  .court p { margin: 0; }
-  table.caption { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 1.5em; }
-  table.caption td { vertical-align: top; padding: 0; font-size: 12pt; }
-  td.parties { width: 55%; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 0 0.75em 0.75em 0; }
-  td.case { padding: 0 0 0 1.5em; }
-  .parties p, .case p { margin: 0 0 0.9em; }
-  .caption-party { text-transform: uppercase; }
-  .caption-role { text-align: right; padding-right: 2em; }
-  .caption-v { padding-left: 3em; }
+  body { font-family: "Times New Roman", Times, Georgia, serif; font-size: 12pt; line-height: 1.15; color: #000; margin: 0 auto; padding: 0; width: 6.5in; max-width: 100%; box-sizing: border-box; }
+  p { margin: 0; }
+  /* The forum's name, then the caption: parties on the left inside an L-shaped rule, case number and title on the right. */
+  .court { text-align: center; font-weight: bold; text-transform: uppercase; margin: 0 0 18pt; }
+  table.caption { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 24pt; }
+  table.caption td { vertical-align: top; padding: 0; }
+  td.parties { width: 3.55in; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 0 0.3in 14pt 0; }
+  td.case { padding: 0 0 0 0.3in; }
+  td.parties p, td.case p { margin: 0 0 12pt; }
+  td.parties p:last-child, td.case p:last-child { margin-bottom: 0; }
+  .caption-role { text-align: right; padding-right: 0.4in; }
+  .caption-v { padding-left: 0.5in; }
   .caption-title { font-weight: bold; text-transform: uppercase; }
-  h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; text-align: center; margin: 1.8em 0 0.6em; page-break-after: avoid; }
-  h3 { font-size: 12pt; font-weight: bold; margin: 1.4em 0 0.4em; page-break-after: avoid; }
-  section > p.cite { font-style: italic; margin: 0 0 0.8em; }
-  /* Numbered allegations: the number at the margin, the text a tab in, wrapped lines back at the margin. */
+  /* Headings centred and set in capitals; the regulation under each in italics. */
+  h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; text-align: center; margin: 24pt 0 8pt; page-break-after: avoid; }
+  h3 { font-size: 12pt; font-weight: bold; margin: 18pt 0 4pt; page-break-after: avoid; }
+  p.cite { font-style: italic; margin: 0 0 10pt; }
+  /* Numbered allegations, double-spaced: the number at the margin, the text a tab in, wrapped lines back at the margin. */
   p.para { line-height: 2; margin: 0; text-align: left; overflow-wrap: anywhere; }
   p.para .n { display: inline-block; width: 0.5in; }
-  p.placeholder { background: #fff3cd; padding: 0.3em 0.5em; line-height: 1.4; margin: 0.5em 0; }
-  .signature { margin: 2.5em 0 0 3.25in; page-break-inside: avoid; }
-  .signature p { margin: 0; }
-  .signature p.lead { margin-bottom: 3em; }
-  .signature p.line { border-top: 1px solid #000; width: 3in; padding-top: 0.2em; }
-  .service { margin-top: 3em; page-break-inside: avoid; }
+  p.placeholder { background: #fff3cd; padding: 4pt 6pt; margin: 6pt 0; }
+  /* The closing: "Dated" at the left margin, the signer's block on the right half, never split across a page. */
+  .closing { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30pt; page-break-inside: avoid; break-inside: avoid; }
+  .closing p.dated { flex: 0 0 auto; }
+  .sigblock { width: 3.25in; flex: 0 0 auto; }
+  .sigblock p { margin: 0; line-height: 1.25; }
+  .sigblock p.lead { margin-bottom: 30pt; }
+  .sigblock p.sigline { border-bottom: 1px solid #000; height: 0; margin: 0 0 4pt; }
+  .service { margin-top: 36pt; page-break-inside: avoid; break-inside: avoid; }
   .service h2 { margin-top: 0; }
-  .service p { margin: 0 0 0.9em; text-align: justify; }
-  .service p.method { text-align: left; margin-top: 1.2em; }
-  .service p.sig { margin: 2.5em 0 0 3.25in; border-top: 1px solid #000; width: 3in; padding-top: 0.2em; }
-  .service p.after { margin: 0 0 0 3.25in; }
+  .service p.text { margin: 0 0 12pt; }
+  .service p.method { margin: 0 0 6pt; }
   @media screen { html { background: #e9e7e2; } body { background: #fff; box-shadow: 0 0 0.5in rgba(0,0,0,0.12); width: 8.5in; padding: clamp(0.5in, 8vw, 1in); margin: 0.5in auto; } }
 </style></head><body>`)
 
@@ -324,19 +342,31 @@ for (const p of captionCls('caption-cite')) html.push(`<p>${esc(p.text)}</p>`)
 html.push(`<p>${esc(cap['caption-date'].text)}</p>`)
 html.push('</td></tr></table>')
 
+// "Dated:" at the left margin, the signer's block on the right.
+const closing = (paras) => {
+  const dated = paras.find((p) => p.cls === 'dated')
+  const block = paras.filter((p) => p.cls !== 'dated').map((p) => (p.cls === 'sigline' ? '<p class="sigline"></p>' : `<p class="${p.cls ?? ''}">${esc(p.text)}</p>`))
+  return `<div class="closing"><p class="dated">${dated ? esc(dated.text) : ''}</p><div class="sigblock">${block.join('')}</div></div>`
+}
 for (const s of doc.sections.slice(1)) {
   const cls = s.cls ?? s.id
   html.push(`<section class="${cls}">`)
   if (s.heading) html.push(`<h2>${esc(s.heading)}</h2>`)
-  s.paragraphs.forEach((p, i) => {
-    if (p.cls === 'subheading') html.push(`<h3>${esc(p.text)}</h3>`)
-    else if (p.cls === 'cite') html.push(`<p class="cite">${esc(p.text)}</p>`)
-    else if (p.cls === 'placeholder') html.push(`<p class="placeholder">${esc(p.text)}</p>`)
-    else if (p.n) html.push(`<p class="para"><span class="n">${p.n}.</span>${esc(p.text)}</p>`)
-    else if (s.id === 'signature') html.push(`<p class="${i === 0 ? 'lead' : i === 1 ? 'line' : ''}">${esc(p.text)}</p>`)
-    else if (s.id === 'service') html.push(`<p class="${i === 1 ? 'method' : i === 2 ? 'sig' : i > 2 ? 'after' : ''}">${esc(p.text)}</p>`)
-    else html.push(`<p>${esc(p.text)}</p>`)
-  })
+  if (s.id === 'signature') {
+    html.push(closing(s.paragraphs))
+  } else if (s.id === 'service') {
+    const first = s.paragraphs.findIndex((p) => p.cls === 'dated')
+    for (const p of s.paragraphs.slice(0, first)) html.push(`<p class="${p.cls ?? 'text'}">${esc(p.text)}</p>`)
+    html.push(closing(s.paragraphs.slice(first)))
+  } else {
+    for (const p of s.paragraphs) {
+      if (p.cls === 'subheading') html.push(`<h3>${esc(p.text)}</h3>`)
+      else if (p.cls === 'cite') html.push(`<p class="cite">${esc(p.text)}</p>`)
+      else if (p.cls === 'placeholder') html.push(`<p class="placeholder">${esc(p.text)}</p>`)
+      else if (p.n) html.push(`<p class="para"><span class="n">${p.n}.</span>${esc(p.text)}</p>`)
+      else html.push(`<p>${esc(p.text)}</p>`)
+    }
+  }
   html.push('</section>')
 }
 html.push('</body></html>')

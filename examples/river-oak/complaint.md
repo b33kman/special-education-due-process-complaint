@@ -80,7 +80,11 @@ Date: April 17, 2026
 
 16. The Parent proposes the following resolution: (a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data; (b) fund an independent educational evaluation in reading and written expression; (c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and (d) implement the IEP as written, with quarterly service logs provided to the Parent.
 
+Dated: ______________________
+
 Respectfully submitted,
+
+______________________________
 
 Dana Rivera
 
@@ -88,20 +92,24 @@ Parent of Jordan Rivera
 
 Self-represented (pro se)
 
-1418 Alder Street, Willow Creek, CA 95833
+1418 Alder Street
+
+Willow Creek, CA 95833
 
 (555) 010-4471
 
 dana.r@example.com
 
-Date: ______________________
-
 ## Certificate of service
 
 The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Office of Administrative Hearings, Special Education Division and the Superintendent of the River Oak Unified School District, by the method indicated below.
 
-Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
+Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
 
-Dana Rivera, self-represented
+Dated: ______________________
 
-Date: ______________________
+______________________________
+
+Dana Rivera
+
+Self-represented (pro se)

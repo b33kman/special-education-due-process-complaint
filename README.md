@@ -110,8 +110,9 @@ Thirty-six tests; each one breaks the worked example in one way and asserts the 
 .claude-plugin/          plugin and marketplace manifests
 skills/dpc-complaint/
   SKILL.md               the procedure Claude follows
-  references/            the exemplar, the drafting rules, the extraction schema, the claims and relief
-                         catalogues, the state research procedure and the 51-state table, the posture
+  references/            the exemplar, the drafting rules, the form of the pleading, the extraction schema,
+                         the claims and relief catalogues, the state research procedure and the 51-state
+                         table, the posture
   scripts/               the gates (Node, one dependency: pdfjs-dist)
   templates/             the shapes of the case files
   evals/                 the eval prompts, their assertions, and the grader that scores a run

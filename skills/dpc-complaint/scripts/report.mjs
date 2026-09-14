@@ -116,7 +116,7 @@ md.push('')
 md.push('## The complaint, paragraph by paragraph', '')
 for (const p of prov.provenance) {
   if (p.section === 'caption' && p.tags.length === 0) continue
-  if (['cite', 'subheading'].includes(p.cls) && p.tags.length === 0) continue
+  if (['cite', 'subheading', 'dated', 'lead', 'sigline', 'method'].includes(p.cls) && p.tags.length === 0) continue
   md.push(`**[${p.section} ${p.index + 1}]** ${p.text}`)
   if (p.tags.length) for (const t of p.tags) md.push(`  - ${describe(t)}`)
   else md.push('  - fixed wording; no factual claim')

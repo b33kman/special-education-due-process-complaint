@@ -9,7 +9,7 @@ Prepared 2026-09-14 for Maya Okafor, North Carolina. Run with claude-fable-5-1 a
 1. **Documents read:** 4, 5 pages; 0 page(s) with no text layer.
 2. **Readings machine-verified on their page:** 112 of 112.
 3. **Confirmed by counsel:** 112 confirmed, 0 edited, 0 rejected. Only confirmed and edited readings reach the complaint.
-4. **Statement of the problems:** 532 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 6.
+4. **Statement of the problems:** 532 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 8.
 
 ```
 2026-09-14T22:37:21.544Z check-draft errors=0 warnings=0 words=532
@@ -18,6 +18,8 @@ Prepared 2026-09-14 for Maya Okafor, North Carolina. Run with claude-fable-5-1 a
 2026-09-14T22:43:47.960Z check-draft errors=0 warnings=0 words=532
 2026-09-14T22:48:25.205Z check-draft errors=0 warnings=0 words=532
 2026-09-14T22:50:28.479Z check-draft errors=0 warnings=0 words=532
+2026-09-14T23:01:16.982Z check-draft errors=0 warnings=0 words=532
+2026-09-14T23:03:14.287Z check-draft errors=0 warnings=0 words=532
 ```
 
 5. **Validation:** 0 blocking, 3 warning(s).
@@ -27,7 +29,7 @@ Prepared 2026-09-14 for Maya Okafor, North Carolina. Run with claude-fable-5-1 a
 
 - Warning [filing-date-past] the planned filing date 2026-06-01 is earlier than today (2026-09-14); the limitations check ran from it — set filingDate to the real date before filing
 - Warning [outside-limitations] event E1 (2025-05-06) is more than 12 months before the filing date 2026-06-01; the window is 12 months (North Carolina’s rule as stated at N.C. Gen. Stat. § 115C-109.6. Impartial due process hearings (North Carolina General Assembly); Notice of Procedural Safeguards — Parent Rights and Responsibilities in Special Education (NC DPI, Updated July 2026)). Exceptions exist; whether one applies is counsel’s judgment.
-- Warning [blank-item] state-required item 1 (County of the student's residence) is left blank on the complaint; fill it in by hand or state why it is blank before filing
+- Warning [blank-item] state-required item 1 (County of the student's residence) is left blank on the complaint — no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition; fill it in by hand before filing
 
 ## How to file in North Carolina
 

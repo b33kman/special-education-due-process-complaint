@@ -60,6 +60,6 @@
     { "id": "E1", "date": "2025-09-08", "what": "what happened, in one sentence", "sources": ["R.."] }
   ],
   "additionalContents": [
-    { "heading": "what the state requires beyond § 300.508(b)", "text": "the value", "sources": ["R..", "S.."] }
+    { "heading": "what the state requires beyond § 300.508(b)", "text": "the value, exactly as it should print — or ____________ if nothing in the file supplies it", "sources": ["R..", "S.."], "note": "optional: why it is blank or what the person should check; reaches the report, never the pleading" }
   ]
 }

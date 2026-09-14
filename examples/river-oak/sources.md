@@ -228,44 +228,41 @@ Checked on 2026-09-14.
   - R36: 03_SAI_Service_Delivery_Log_Sep2025-Feb2026.pdf, p. 1 — serviceLog.missed: “The small-group reading block was discontinued on 10/06/2025 when the reading intervention position became vacant. The position remained unfilled as of 02/27/2026.”
   - R23: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — iep.services: “Specialized Academic Instruction - Reading: 240 minutes per week, delivered in a small-group setting of no more than 4 students by a credentialed special education teacher, in the Special Education Classroom, from 09/08/2025 to 09/07/2026.”
 
-**[signature 1]** Respectfully submitted,
-  - fixed wording; no factual claim
-
-**[signature 2]** Dana Rivera
+**[signature 4]** Dana Rivera
   - R10: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.nameFirst: “Dana”
   - R11: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.nameLast: “Rivera”
 
-**[signature 3]** Parent of Jordan Rivera
+**[signature 5]** Parent of Jordan Rivera
   - fixed wording; no factual claim
 
-**[signature 4]** Self-represented (pro se)
+**[signature 6]** Self-represented (pro se)
   - fixed wording; no factual claim
 
-**[signature 5]** 1418 Alder Street, Willow Creek, CA 95833
+**[signature 7]** 1418 Alder Street
   - R6: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressLine1: “1418 Alder Street”
   - R7: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressCity: “Willow Creek”
   - R8: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressState: “CA”
   - R9: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressPostalCode: “95833”
 
-**[signature 6]** (555) 010-4471
+**[signature 8]** Willow Creek, CA 95833
+  - R6: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressLine1: “1418 Alder Street”
+  - R7: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressCity: “Willow Creek”
+  - R8: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressState: “CA”
+  - R9: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressPostalCode: “95833”
+
+**[signature 9]** (555) 010-4471
   - R12: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.phone: “(555) 010-4471”
 
-**[signature 7]** dana.r@example.com
+**[signature 10]** dana.r@example.com
   - R13: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.email: “dana.r@example.com”
-
-**[signature 8]** Date: ______________________
-  - fixed wording; no factual claim
 
 **[service 1]** The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Office of Administrative Hearings, Special Education Division and the Superintendent of the River Oak Unified School District, by the method indicated below.
   - S1: Office of Administrative Hearings (California DGS) — Request Special Education Due Process Hearing — https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Services/Page-Content/Special-Education-Services-List-Folder/Request-Special-Education-Due-Process-Hearing (accessed 2026-09-14) — “School districts, parents or other authorized parties can request a Special Education due process hearing and/or mediation with the Office of Administrative Hearings (OAH). OAH provides optional forms – Request for Due Process Hearing and Mediation and Proof of Service – which may be found on the Forms page on this website. To request a due process hearing and mediation a party should submit a request to OAH along with a Proof of Service showing that the request was sent to the other party or parties. 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833. OAH will send to the other party and to the party requesting the hearing a Scheduling Order notifying the parties of the dates for prehearing conference, hearing.”
   - S2: Office of Administrative Hearings — Notice of Procedural Safeguards for Special Education Cases — https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Resources/Page-Content/Special-Education-Resources-List-Folder/Notice-of-Procedural-Safeguards (accessed 2026-09-14) — “The request for a due process hearing must be filed within two years from the date you knew or should have known about the alleged action that forms the basis of the due process complaint. A written request must include: Name of the child; Address of the residence of the child; Name of the school the child is attending; [contact information for a homeless child]; A description of the nature of the problem, including facts relating to the problem(s) and a proposed resolution of the problem(s). Federal and state laws require that either party filing for a due process hearing must provide a copy of the written request to the other party. Office of Administrative Hearings, Attention: Special Education Division, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833-4231. Resolution sessions shall be convened within 15 days of receiving notice of the parent's due process hearing request.”
   - S4: California Education Code § 56502 (california.public.law, verified against leginfo.legislature.ca.gov) — https://california.public.law/codes/education_code_section_56502 (accessed 2026-09-14) — “(a) All requests for a due process hearing shall be filed with the Superintendent in accordance with Section 300.508(a) and (b) of Title 34 of the Code of Federal Regulations. (b) The Superintendent shall develop a model form to assist parents and guardians in filing a request for due process. (c)(1) The party, or the attorney representing the party, initiating a due process hearing by filing a written request with the Superintendent shall provide the other party to the hearing with a copy of the request at the same time as the request is filed with the Superintendent. […] the request shall include the following: (A) The name of the child, the address of the residence of the child, or available contact information in the case of a homeless child, and the name of the school the child is attending. […] (C) A description of the nature of the problem of the child relating to the proposed initiation or change, including facts relating to the problem. (D) A proposed resolution of the problem to the extent known and available to the party at the time.”
 
-**[service 2]** Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
+**[service 5]** Dana Rivera
   - fixed wording; no factual claim
 
-**[service 3]** Dana Rivera, self-represented
-  - fixed wording; no factual claim
-
-**[service 4]** Date: ______________________
+**[service 6]** Self-represented (pro se)
   - fixed wording; no factual claim

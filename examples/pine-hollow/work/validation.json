@@ -16,7 +16,7 @@
     {
       "level": "warning",
       "code": "blank-item",
-      "message": "state-required item 1 (County of the student's residence) is left blank on the complaint; fill it in by hand or state why it is blank before filing"
+      "message": "state-required item 1 (County of the student's residence) is left blank on the complaint — no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition; fill it in by hand before filing"
     }
   ]
 }

@@ -320,7 +320,7 @@
       "section": "state-additional",
       "index": 0,
       "cls": null,
-      "text": "County of the student's residence: ____________ (no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition)",
+      "text": "County of the student's residence: ____________",
       "tags": [
         "S1",
         "S7"
@@ -348,64 +348,78 @@
     {
       "section": "signature",
       "index": 0,
-      "cls": null,
-      "text": "Respectfully submitted,",
+      "cls": "dated",
+      "text": "Dated: ______________________",
       "tags": []
     },
     {
       "section": "signature",
       "index": 1,
-      "cls": null,
-      "text": "Renée Castillo",
+      "cls": "lead",
+      "text": "Respectfully submitted,",
       "tags": []
     },
     {
       "section": "signature",
       "index": 2,
-      "cls": null,
-      "text": "Attorney for Petitioner",
+      "cls": "sigline",
+      "text": "______________________________",
       "tags": []
     },
     {
       "section": "signature",
       "index": 3,
       "cls": null,
-      "text": "Bar No. 61042 (North Carolina)",
+      "text": "Renée Castillo",
       "tags": []
     },
     {
       "section": "signature",
       "index": 4,
       "cls": null,
-      "text": "Castillo Education Law PLLC",
+      "text": "Attorney for Petitioner",
       "tags": []
     },
     {
       "section": "signature",
       "index": 5,
       "cls": null,
-      "text": "1200 Example Avenue, Suite 4, Raleigh, NC 27601",
+      "text": "Bar No. 61042 (North Carolina)",
       "tags": []
     },
     {
       "section": "signature",
       "index": 6,
       "cls": null,
-      "text": "(555) 010-6104",
+      "text": "Castillo Education Law PLLC",
       "tags": []
     },
     {
       "section": "signature",
       "index": 7,
       "cls": null,
-      "text": "rcastillo@example.com",
+      "text": "1200 Example Avenue, Suite 4",
       "tags": []
     },
     {
       "section": "signature",
       "index": 8,
       "cls": null,
-      "text": "Date: ______________________",
+      "text": "Raleigh, NC 27601",
+      "tags": []
+    },
+    {
+      "section": "signature",
+      "index": 9,
+      "cls": null,
+      "text": "(555) 010-6104",
+      "tags": []
+    },
+    {
+      "section": "signature",
+      "index": 10,
+      "cls": null,
+      "text": "rcastillo@example.com",
       "tags": []
     },
     {
@@ -422,22 +436,36 @@
     {
       "section": "service",
       "index": 1,
-      "cls": null,
-      "text": "Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing",
+      "cls": "method",
+      "text": "Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing",
       "tags": []
     },
     {
       "section": "service",
       "index": 2,
-      "cls": null,
-      "text": "Renée Castillo, Attorney for Petitioner",
+      "cls": "dated",
+      "text": "Dated: ______________________",
       "tags": []
     },
     {
       "section": "service",
       "index": 3,
+      "cls": "sigline",
+      "text": "______________________________",
+      "tags": []
+    },
+    {
+      "section": "service",
+      "index": 4,
       "cls": null,
-      "text": "Date: ______________________",
+      "text": "Renée Castillo",
+      "tags": []
+    },
+    {
+      "section": "service",
+      "index": 5,
+      "cls": null,
+      "text": "Attorney for Petitioner",
       "tags": []
     }
   ]

@@ -70,13 +70,17 @@ Date: June 1, 2026
 
 ## V. Additional information required in North Carolina
 
-13. County of the student's residence: ____________ (no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition)
+13. County of the student's residence: ____________
 
 14. Student's date of birth: 04/19/2013
 
 15. Basis of the petition, in the categories Form H-06E lists: the evaluation of Student, and the denial of a free appropriate public education
 
+Dated: ______________________
+
 Respectfully submitted,
+
+______________________________
 
 Renée Castillo
 
@@ -86,20 +90,24 @@ Bar No. 61042 (North Carolina)
 
 Castillo Education Law PLLC
 
-1200 Example Avenue, Suite 4, Raleigh, NC 27601
+1200 Example Avenue, Suite 4
+
+Raleigh, NC 27601
 
 (555) 010-6104
 
 rcastillo@example.com
 
-Date: ______________________
-
 ## Certificate of service
 
 Counsel for Petitioner certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of Pine Hollow County Schools and the North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, by the method indicated below.
 
-Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
+Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
 
-Renée Castillo, Attorney for Petitioner
+Dated: ______________________
 
-Date: ______________________
+______________________________
+
+Renée Castillo
+
+Attorney for Petitioner

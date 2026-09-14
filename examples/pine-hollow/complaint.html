@@ -2,35 +2,38 @@
 <style>
   @page { size: letter; margin: 1in; @bottom-center { content: counter(page); font: 11pt "Times New Roman", Times, serif; } }
   html { background: #fff; }
-  body { font-family: "Times New Roman", Times, Georgia, serif; font-size: 12pt; line-height: 1.2; color: #000; margin: 0 auto; padding: 0; width: 6.5in; max-width: 100%; box-sizing: border-box; }
-  .court { text-align: center; font-weight: bold; text-transform: uppercase; margin: 0 0 1.5em; }
-  .court p { margin: 0; }
-  table.caption { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 1.5em; }
-  table.caption td { vertical-align: top; padding: 0; font-size: 12pt; }
-  td.parties { width: 55%; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 0 0.75em 0.75em 0; }
-  td.case { padding: 0 0 0 1.5em; }
-  .parties p, .case p { margin: 0 0 0.9em; }
-  .caption-party { text-transform: uppercase; }
-  .caption-role { text-align: right; padding-right: 2em; }
-  .caption-v { padding-left: 3em; }
+  body { font-family: "Times New Roman", Times, Georgia, serif; font-size: 12pt; line-height: 1.15; color: #000; margin: 0 auto; padding: 0; width: 6.5in; max-width: 100%; box-sizing: border-box; }
+  p { margin: 0; }
+  /* The forum's name, then the caption: parties on the left inside an L-shaped rule, case number and title on the right. */
+  .court { text-align: center; font-weight: bold; text-transform: uppercase; margin: 0 0 18pt; }
+  table.caption { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 24pt; }
+  table.caption td { vertical-align: top; padding: 0; }
+  td.parties { width: 3.55in; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 0 0.3in 14pt 0; }
+  td.case { padding: 0 0 0 0.3in; }
+  td.parties p, td.case p { margin: 0 0 12pt; }
+  td.parties p:last-child, td.case p:last-child { margin-bottom: 0; }
+  .caption-role { text-align: right; padding-right: 0.4in; }
+  .caption-v { padding-left: 0.5in; }
   .caption-title { font-weight: bold; text-transform: uppercase; }
-  h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; text-align: center; margin: 1.8em 0 0.6em; page-break-after: avoid; }
-  h3 { font-size: 12pt; font-weight: bold; margin: 1.4em 0 0.4em; page-break-after: avoid; }
-  section > p.cite { font-style: italic; margin: 0 0 0.8em; }
-  /* Numbered allegations: the number at the margin, the text a tab in, wrapped lines back at the margin. */
+  /* Headings centred and set in capitals; the regulation under each in italics. */
+  h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; text-align: center; margin: 24pt 0 8pt; page-break-after: avoid; }
+  h3 { font-size: 12pt; font-weight: bold; margin: 18pt 0 4pt; page-break-after: avoid; }
+  p.cite { font-style: italic; margin: 0 0 10pt; }
+  /* Numbered allegations, double-spaced: the number at the margin, the text a tab in, wrapped lines back at the margin. */
   p.para { line-height: 2; margin: 0; text-align: left; overflow-wrap: anywhere; }
   p.para .n { display: inline-block; width: 0.5in; }
-  p.placeholder { background: #fff3cd; padding: 0.3em 0.5em; line-height: 1.4; margin: 0.5em 0; }
-  .signature { margin: 2.5em 0 0 3.25in; page-break-inside: avoid; }
-  .signature p { margin: 0; }
-  .signature p.lead { margin-bottom: 3em; }
-  .signature p.line { border-top: 1px solid #000; width: 3in; padding-top: 0.2em; }
-  .service { margin-top: 3em; page-break-inside: avoid; }
+  p.placeholder { background: #fff3cd; padding: 4pt 6pt; margin: 6pt 0; }
+  /* The closing: "Dated" at the left margin, the signer's block on the right half, never split across a page. */
+  .closing { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30pt; page-break-inside: avoid; break-inside: avoid; }
+  .closing p.dated { flex: 0 0 auto; }
+  .sigblock { width: 3.25in; flex: 0 0 auto; }
+  .sigblock p { margin: 0; line-height: 1.25; }
+  .sigblock p.lead { margin-bottom: 30pt; }
+  .sigblock p.sigline { border-bottom: 1px solid #000; height: 0; margin: 0 0 4pt; }
+  .service { margin-top: 36pt; page-break-inside: avoid; break-inside: avoid; }
   .service h2 { margin-top: 0; }
-  .service p { margin: 0 0 0.9em; text-align: justify; }
-  .service p.method { text-align: left; margin-top: 1.2em; }
-  .service p.sig { margin: 2.5em 0 0 3.25in; border-top: 1px solid #000; width: 3in; padding-top: 0.2em; }
-  .service p.after { margin: 0 0 0 3.25in; }
+  .service p.text { margin: 0 0 12pt; }
+  .service p.method { margin: 0 0 6pt; }
   @media screen { html { background: #e9e7e2; } body { background: #fff; box-shadow: 0 0 0.5in rgba(0,0,0,0.12); width: 8.5in; padding: clamp(0.5in, 8vw, 1in); margin: 0.5in auto; } }
 </style></head><body>
 <div class="court">
@@ -83,26 +86,17 @@
 </section>
 <section class="state-additional">
 <h2>V. Additional information required in North Carolina</h2>
-<p class="para"><span class="n">13.</span>County of the student's residence: ____________ (no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition)</p>
+<p class="para"><span class="n">13.</span>County of the student's residence: ____________</p>
 <p class="para"><span class="n">14.</span>Student's date of birth: 04/19/2013</p>
 <p class="para"><span class="n">15.</span>Basis of the petition, in the categories Form H-06E lists: the evaluation of Student, and the denial of a free appropriate public education</p>
 </section>
 <section class="signature">
-<p class="lead">Respectfully submitted,</p>
-<p class="line">Renée Castillo</p>
-<p class="">Attorney for Petitioner</p>
-<p class="">Bar No. 61042 (North Carolina)</p>
-<p class="">Castillo Education Law PLLC</p>
-<p class="">1200 Example Avenue, Suite 4, Raleigh, NC 27601</p>
-<p class="">(555) 010-6104</p>
-<p class="">rcastillo@example.com</p>
-<p class="">Date: ______________________</p>
+<div class="closing"><p class="dated">Dated: ______________________</p><div class="sigblock"><p class="lead">Respectfully submitted,</p><p class="sigline"></p><p class="">Renée Castillo</p><p class="">Attorney for Petitioner</p><p class="">Bar No. 61042 (North Carolina)</p><p class="">Castillo Education Law PLLC</p><p class="">1200 Example Avenue, Suite 4</p><p class="">Raleigh, NC 27601</p><p class="">(555) 010-6104</p><p class="">rcastillo@example.com</p></div></div>
 </section>
 <section class="service">
 <h2>Certificate of service</h2>
-<p class="">Counsel for Petitioner certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of Pine Hollow County Schools and the North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, by the method indicated below.</p>
-<p class="method">Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing</p>
-<p class="sig">Renée Castillo, Attorney for Petitioner</p>
-<p class="after">Date: ______________________</p>
+<p class="text">Counsel for Petitioner certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of Pine Hollow County Schools and the North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, by the method indicated below.</p>
+<p class="method">Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing</p>
+<div class="closing"><p class="dated">Dated: ______________________</p><div class="sigblock"><p class="sigline"></p><p class="">Renée Castillo</p><p class="">Attorney for Petitioner</p></div></div>
 </section>
 </body></html>

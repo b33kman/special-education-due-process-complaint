@@ -349,13 +349,27 @@
     {
       "section": "signature",
       "index": 0,
-      "cls": null,
-      "text": "Respectfully submitted,",
+      "cls": "dated",
+      "text": "Dated: ______________________",
       "tags": []
     },
     {
       "section": "signature",
       "index": 1,
+      "cls": "lead",
+      "text": "Respectfully submitted,",
+      "tags": []
+    },
+    {
+      "section": "signature",
+      "index": 2,
+      "cls": "sigline",
+      "text": "______________________________",
+      "tags": []
+    },
+    {
+      "section": "signature",
+      "index": 3,
       "cls": null,
       "text": "Dana Rivera",
       "tags": [
@@ -365,23 +379,23 @@
     },
     {
       "section": "signature",
-      "index": 2,
+      "index": 4,
       "cls": null,
       "text": "Parent of Jordan Rivera",
       "tags": []
     },
     {
       "section": "signature",
-      "index": 3,
+      "index": 5,
       "cls": null,
       "text": "Self-represented (pro se)",
       "tags": []
     },
     {
       "section": "signature",
-      "index": 4,
+      "index": 6,
       "cls": null,
-      "text": "1418 Alder Street, Willow Creek, CA 95833",
+      "text": "1418 Alder Street",
       "tags": [
         "R6",
         "R7",
@@ -391,7 +405,19 @@
     },
     {
       "section": "signature",
-      "index": 5,
+      "index": 7,
+      "cls": null,
+      "text": "Willow Creek, CA 95833",
+      "tags": [
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ]
+    },
+    {
+      "section": "signature",
+      "index": 8,
       "cls": null,
       "text": "(555) 010-4471",
       "tags": [
@@ -400,19 +426,12 @@
     },
     {
       "section": "signature",
-      "index": 6,
+      "index": 9,
       "cls": null,
       "text": "dana.r@example.com",
       "tags": [
         "R13"
       ]
-    },
-    {
-      "section": "signature",
-      "index": 7,
-      "cls": null,
-      "text": "Date: ______________________",
-      "tags": []
     },
     {
       "section": "service",
@@ -428,22 +447,36 @@
     {
       "section": "service",
       "index": 1,
-      "cls": null,
-      "text": "Method of service: ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing",
+      "cls": "method",
+      "text": "Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing",
       "tags": []
     },
     {
       "section": "service",
       "index": 2,
-      "cls": null,
-      "text": "Dana Rivera, self-represented",
+      "cls": "dated",
+      "text": "Dated: ______________________",
       "tags": []
     },
     {
       "section": "service",
       "index": 3,
+      "cls": "sigline",
+      "text": "______________________________",
+      "tags": []
+    },
+    {
+      "section": "service",
+      "index": 4,
       "cls": null,
-      "text": "Date: ______________________",
+      "text": "Dana Rivera",
+      "tags": []
+    },
+    {
+      "section": "service",
+      "index": 5,
+      "cls": null,
+      "text": "Self-represented (pro se)",
       "tags": []
     }
   ]

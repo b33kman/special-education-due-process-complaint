@@ -55,8 +55,9 @@ function statementOf(text) {
   return { text: end < 0 ? rest : rest.slice(0, end + 20), how: 'the section from the statement heading to the resolution heading' }
 }
 const st = statementOf(body)
-// Regulation lines under the headings are the exemplar's fixed form; the facts are the rest.
-const facts = st.text.split('\n').filter((l) => !/^\s*\*?\s*34 C\.F\.R\./.test(l) && !/^#/.test(l)).join('\n')
+// Regulation lines under the headings are the exemplar's fixed form, and a
+// paragraph number is not a figure about the student; the facts are the rest.
+const facts = st.text.split('\n').filter((l) => !/^\s*\*?\s*34 C\.F\.R\./.test(l) && !/^#/.test(l)).map((l) => l.replace(/^\d+\.\s+/, '')).join('\n')
 const factsNoQuotes = withoutQuotes(facts)
 
 // ─── the documents' text, extracted the same way the skill does ──────────
