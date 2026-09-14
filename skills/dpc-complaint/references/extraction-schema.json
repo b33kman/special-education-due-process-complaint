@@ -1,0 +1,388 @@
+{
+  "_about": "What to read out of each kind of document, and the rules every reading obeys. Field keys are `<kind>.<field>`; `child.*` and `parent.*` are asked of EVERY kind because every document names the student. A reading's value is quoted from the document AS WRITTEN — never summarised, corrected, reformatted or completed — and carries the page it was read from. Ported from the Sped DPC extraction schemas (extraction-model.ts).",
+  "rules": [
+    "Quote each value exactly as the document writes it, including its punctuation, capitalisation and date format. A reading that is not on the page, word for word, is not a reading.",
+    "Record the page number the value sits on. One value, one page. A value that spans pages is two readings.",
+    "Read a field once per document, unless the document genuinely lists several items for it (each IEP service line, each goal a progress report measures): then one reading per item.",
+    "Do not read a field the document does not contain. Absence is the honest answer; leave it out.",
+    "Do not read from a document that is only mentioned, quoted, or attached by reference inside another document — an email that describes the IEP is correspondence, and its description of the IEP is the email's words, read under correspondence.* fields.",
+    "Identity fields: the student's name parts are the tokens on the page (from 'Doe, Johnny D.' first = 'Johnny', middle = 'D.', last = 'Doe'); the parent is the person the document names AS the parent or guardian, never the author, evaluator or district employee who signed it; the home address is the student's HOME address, never a school, clinic, agency or letterhead address; the district is the LEA responsible for the student by the name the document gives it, never the school and never a school code.",
+    "A reading may carry a short `note` (why it might be wrong, or what it is next to). The note is for the person confirming; it is never quoted.",
+    "A value shorter than four characters (a grade, a state code, a short name) carries a `context`: the words on the page around it that contain it (\"Grade: 7\", \"Willow Creek, CA 95833\"). The verifier refuses a short value without one, because such a value is on almost any page.",
+    "Read each identity field once per document. A document that plays two roles (a notice that also refuses an independent evaluation) carries both kinds in documents.json, but each passage is read once, under the kind whose purpose the document serves.",
+    "A long table (a week-by-week service log) is not read row by row. Read its summary lines, the first row where something changes, and the rows the draft may cite; the person can open the page for the rest."
+  ],
+  "identity": [
+    {
+      "key": "child.nameFirst",
+      "describe": "the student's FIRST (given) name, exactly as written and nothing else"
+    },
+    {
+      "key": "child.nameMiddle",
+      "describe": "the student's middle name or initial exactly as written, if the document gives one"
+    },
+    {
+      "key": "child.nameLast",
+      "describe": "the student's LAST (family) name, exactly as written; US forms often print it first or before a comma"
+    },
+    {
+      "key": "child.dob",
+      "describe": "the student's date of birth, as written"
+    },
+    {
+      "key": "child.school",
+      "describe": "the school the student attends — not the office, agency or practice that produced the document"
+    },
+    {
+      "key": "child.district",
+      "describe": "the school district or LEA responsible for the student, by the name the document gives it — not the school, and not a code that identifies the school"
+    },
+    {
+      "key": "child.grade",
+      "describe": "the student's grade level"
+    },
+    {
+      "key": "child.disability",
+      "describe": "the eligibility category or classification, exactly as written"
+    },
+    {
+      "key": "child.eligibleSince",
+      "describe": "the date the student was first found eligible for special education, where the document states it (an IEP's 'Date of Initial Eligibility')"
+    },
+    {
+      "key": "parent.nameFirst",
+      "describe": "the FIRST name of the parent or guardian named as the student's parent"
+    },
+    {
+      "key": "parent.nameLast",
+      "describe": "the LAST name of that same parent or guardian"
+    },
+    {
+      "key": "parent.phone",
+      "describe": "the parent's telephone number, as written, where the document gives one"
+    },
+    {
+      "key": "parent.email",
+      "describe": "the parent's email address, as written, where the document gives one"
+    },
+    {
+      "key": "child.addressLine1",
+      "describe": "the street number and street of the student's HOME address"
+    },
+    {
+      "key": "child.addressLine2",
+      "describe": "the apartment, suite or unit of the home address, if any"
+    },
+    {
+      "key": "child.addressCity",
+      "describe": "the city of the home address"
+    },
+    {
+      "key": "child.addressState",
+      "describe": "the state of the home address, as written (a two-letter code or the name)"
+    },
+    {
+      "key": "child.addressPostalCode",
+      "describe": "the ZIP code of the home address"
+    },
+    {
+      "key": "child.studentId",
+      "describe": "the student identification number the district assigns, as written, where the document gives one"
+    }
+  ],
+  "kinds": {
+    "iep": {
+      "name": "IEP",
+      "dateWord": "dated",
+      "describe": "An Individualized Education Program — the plan itself: present levels, annual goals, and the services, minutes and placement the district will provide. Also an IEP amendment. Not a progress report on its goals, and not a notice inviting the family to an IEP meeting.",
+      "fields": [
+        {
+          "key": "iep.date",
+          "describe": "the date of this IEP (the meeting date or the date the document gives as its own)"
+        },
+        {
+          "key": "iep.presentLevels",
+          "describe": "the present levels of academic achievement and functional performance, as written — the passages, not a summary"
+        },
+        {
+          "key": "iep.services",
+          "describe": "each service with its frequency, duration, group size and location, as written — one reading per service line"
+        },
+        {
+          "key": "iep.goals",
+          "describe": "each annual goal, as written — one reading per goal"
+        },
+        {
+          "key": "iep.placement",
+          "describe": "the placement or setting described, as written"
+        },
+        {
+          "key": "iep.implementation",
+          "describe": "the projected date of implementation and the projected annual review date, as written"
+        },
+        {
+          "key": "iep.teamNotes",
+          "describe": "what the IEP records about the meeting itself — who attended and who did not, what the parent asked for, what the team decided or refused and the reasons it gives, as written"
+        }
+      ]
+    },
+    "evaluation": {
+      "name": "Evaluation",
+      "dateWord": "dated",
+      "describe": "A report of an evaluation or assessment of the student — psychoeducational, speech-language, OT/PT, neuropsychological, functional behavioral, or similar — by the district or a private evaluator, including an independent educational evaluation's report.",
+      "fields": [
+        {
+          "key": "evaluation.date",
+          "describe": "the date of the evaluation (or the dates, as written)"
+        },
+        {
+          "key": "evaluation.evaluator",
+          "describe": "who performed it, as written"
+        },
+        {
+          "key": "evaluation.areas",
+          "describe": "the areas assessed, as written"
+        },
+        {
+          "key": "evaluation.findings",
+          "describe": "the findings and scores the report states, as written — one reading per passage"
+        },
+        {
+          "key": "evaluation.recommendations",
+          "describe": "the recommendations made, as written — one reading per recommendation"
+        }
+      ]
+    },
+    "pwn": {
+      "name": "Prior written notice",
+      "dateWord": "dated",
+      "describe": "A prior written notice — the district telling the family in writing that it proposes or refuses to change the student's identification, evaluation, placement or services, with its reasons. Often titled 'Prior Written Notice', 'Notice of Recommendation' or 'Notice of Refusal'.",
+      "fields": [
+        {
+          "key": "pwn.date",
+          "describe": "the date of the notice"
+        },
+        {
+          "key": "pwn.action",
+          "describe": "the action proposed or refused, as written"
+        },
+        {
+          "key": "pwn.reasons",
+          "describe": "the reasons the district gave, as written"
+        },
+        {
+          "key": "pwn.options",
+          "describe": "the other options the district says it considered and rejected, as written"
+        },
+        {
+          "key": "pwn.recordsReliedOn",
+          "describe": "the evaluation procedures, records and reports the notice says the district relied on, as written"
+        }
+      ]
+    },
+    "progress": {
+      "name": "Progress report",
+      "dateWord": "covering",
+      "describe": "A report of how the student did over a period — an IEP progress report, a report card, or a teacher's anecdotal notes or observation log.",
+      "fields": [
+        {
+          "key": "progress.period",
+          "describe": "the reporting period the report covers, as written"
+        },
+        {
+          "key": "progress.goal",
+          "describe": "each goal the report measures progress on, named as the report names it — one reading per goal"
+        },
+        {
+          "key": "progress.narrative",
+          "describe": "what the report says about progress — the report's own words, one reading per passage, with the measured figures where it gives them"
+        }
+      ]
+    },
+    "service_log": {
+      "name": "Service records",
+      "dateWord": "covering",
+      "describe": "A record of services actually delivered or missed — session logs, service delivery records, or related-services encounter attendance.",
+      "fields": [
+        {
+          "key": "serviceLog.service",
+          "describe": "the service this record is for, as written"
+        },
+        {
+          "key": "serviceLog.mandate",
+          "describe": "the frequency and duration the IEP required, as the record states it"
+        },
+        {
+          "key": "serviceLog.period",
+          "describe": "the period this record covers"
+        },
+        {
+          "key": "serviceLog.delivered",
+          "describe": "how many sessions were delivered, as written, including any total or percentage"
+        },
+        {
+          "key": "serviceLog.missed",
+          "describe": "how many sessions were not delivered and the reason given, as written"
+        },
+        {
+          "key": "serviceLog.provider",
+          "describe": "the provider named on the record, as written"
+        }
+      ]
+    },
+    "meeting": {
+      "name": "Meeting notice or minutes",
+      "dateWord": "held",
+      "describe": "A record of a meeting, or the notice of one — an IEP meeting notice or invitation, minutes, conference notes, or a team meeting summary.",
+      "fields": [
+        {
+          "key": "meeting.date",
+          "describe": "the date of the meeting"
+        },
+        {
+          "key": "meeting.purpose",
+          "describe": "the stated purpose of the meeting, as written"
+        },
+        {
+          "key": "meeting.attendees",
+          "describe": "who attended, as listed, including anyone noted as absent or excused"
+        },
+        {
+          "key": "meeting.decisions",
+          "describe": "what was decided or proposed, as written, including any statement about when the decision was made"
+        },
+        {
+          "key": "meeting.parentInput",
+          "describe": "what the parent said, asked for, or objected to, as written"
+        }
+      ]
+    },
+    "discipline": {
+      "name": "Discipline notice",
+      "dateWord": "dated",
+      "describe": "A record of a suspension, expulsion, removal, or manifestation determination.",
+      "fields": [
+        {
+          "key": "discipline.date",
+          "describe": "the date of the notice or determination"
+        },
+        {
+          "key": "discipline.action",
+          "describe": "the disciplinary action taken or proposed, as written"
+        },
+        {
+          "key": "discipline.days",
+          "describe": "the number of school days of removal, as written, and the dates it covers"
+        },
+        {
+          "key": "discipline.manifestation",
+          "describe": "the manifestation determination, as written, and the basis stated"
+        },
+        {
+          "key": "discipline.reasons",
+          "describe": "the conduct or reasons given for the action, as written"
+        }
+      ]
+    },
+    "eligibility": {
+      "name": "Eligibility determination",
+      "dateWord": "dated",
+      "describe": "An eligibility determination — whether the student qualifies for special education, and under which classification.",
+      "fields": [
+        {
+          "key": "eligibility.date",
+          "describe": "the date of the determination"
+        },
+        {
+          "key": "eligibility.decision",
+          "describe": "the decision, as written — eligible or not eligible, and for what"
+        },
+        {
+          "key": "eligibility.category",
+          "describe": "the disability category or classification named, exactly as written"
+        },
+        {
+          "key": "eligibility.basis",
+          "describe": "the evaluations and findings the decision rests on, as written"
+        }
+      ]
+    },
+    "consent": {
+      "name": "Consent form",
+      "dateWord": "dated",
+      "describe": "A consent form — the family's consent to, or refusal of, an evaluation or services.",
+      "fields": [
+        {
+          "key": "consent.date",
+          "describe": "the date the consent was requested or signed"
+        },
+        {
+          "key": "consent.purpose",
+          "describe": "what consent was sought for, as written"
+        },
+        {
+          "key": "consent.areas",
+          "describe": "the areas or assessments listed, as written"
+        },
+        {
+          "key": "consent.signed",
+          "describe": "whether it was signed, by whom and on what date, as written; or that the signature line is blank"
+        }
+      ]
+    },
+    "iee": {
+      "name": "Independent evaluation request or response",
+      "dateWord": "dated",
+      "describe": "A request for an independent educational evaluation at public expense, or the district's response to that request. The evaluator's own report is an evaluation, not this.",
+      "fields": [
+        {
+          "key": "iee.date",
+          "describe": "the date of the request or of the response"
+        },
+        {
+          "key": "iee.request",
+          "describe": "what independent evaluation the parent asked for, at whose expense, as written"
+        },
+        {
+          "key": "iee.response",
+          "describe": "the district's response, as written — agreed, refused, or that it would request a hearing — and when"
+        },
+        {
+          "key": "iee.criteria",
+          "describe": "any criteria, cost limits or evaluator lists the district stated, as written"
+        }
+      ]
+    },
+    "correspondence": {
+      "name": "Letter or email",
+      "dateWord": "sent",
+      "describe": "A letter or email between the family and the school or district, including a request and the reply to it.",
+      "fields": [
+        {
+          "key": "correspondence.date",
+          "describe": "the date sent, as written"
+        },
+        {
+          "key": "correspondence.from",
+          "describe": "who wrote it, as written"
+        },
+        {
+          "key": "correspondence.to",
+          "describe": "who it was sent to, as written"
+        },
+        {
+          "key": "correspondence.request",
+          "describe": "what was asked for, if anything, as written"
+        },
+        {
+          "key": "correspondence.response",
+          "describe": "what was answered, if anything, as written"
+        },
+        {
+          "key": "correspondence.statement",
+          "describe": "any other statement of fact the writer makes that matters to the complaint, as written — one reading per passage"
+        }
+      ]
+    }
+  }
+}

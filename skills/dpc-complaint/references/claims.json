@@ -1,0 +1,94 @@
+{
+  "_about": "The claims a due process complaint may plead, with the FIXED wording each one prints in. `filingHeading` becomes the lettered subsection heading under III. Statement of the problems; `filingClause` slots into the introduction's 'The District has denied Student a free appropriate public education (\"FAPE\") by ___' sentence; `cfr` is the regulation printed under the heading. `turnsOn` is general information about what the claim is about — it is NOT a test applied to this file. The person drafting chooses the claims; the skill never decides which claim a file supports. A procedural claim (isProcedural) requires an impact statement: 34 C.F.R. § 300.513(a)(2) makes a procedural violation actionable only where it impeded the child's right to FAPE, significantly impeded the parent's participation, or caused a deprivation of educational benefit.",
+  "claims": [
+    {
+      "id": "inadequate-iep",
+      "filingHeading": "Failure to provide an adequate individualized education program",
+      "filingClause": "failing to provide an individualized education program (“IEP”) adequate to Student’s needs",
+      "cfr": "34 C.F.R. §§ 300.320, 300.324",
+      "isProcedural": false,
+      "turnsOn": "The plan as written — whether the goals are measurable and the services match what the evaluations describe."
+    },
+    {
+      "id": "failure-to-implement",
+      "filingHeading": "Failure to implement the services the IEP requires",
+      "filingClause": "failing to implement the services the operative individualized education program (“IEP”) requires",
+      "cfr": "34 C.F.R. § 300.323",
+      "isProcedural": false,
+      "turnsOn": "Delivery rather than content. The IEP itself is not challenged; what was actually provided is."
+    },
+    {
+      "id": "evaluation",
+      "filingHeading": "Failure to evaluate appropriately and on time",
+      "filingClause": "failing to conduct an appropriate and timely evaluation of Student",
+      "cfr": "34 C.F.R. §§ 300.111, 300.301–300.311, 300.502",
+      "isProcedural": false,
+      "turnsOn": "Child find, the areas assessed, the timelines, and a refused request for an independent educational evaluation."
+    },
+    {
+      "id": "procedural",
+      "filingHeading": "Failure to follow required procedures",
+      "filingClause": "failing to follow required procedures, including notice to and participation by the Parent",
+      "cfr": "34 C.F.R. §§ 300.503, 300.322, 300.513(a)(2)",
+      "isProcedural": true,
+      "turnsOn": "A required step was missed — and § 300.513(a)(2) requires the resulting harm to be stated as well."
+    },
+    {
+      "id": "lre",
+      "filingHeading": "Failure to educate Student alongside children without disabilities",
+      "filingClause": "failing to educate Student alongside children without disabilities to the extent appropriate",
+      "cfr": "34 C.F.R. §§ 300.114–300.120",
+      "isProcedural": false,
+      "turnsOn": "Placement on the continuum, and what supplementary aids and services were considered before a more restrictive setting."
+    },
+    {
+      "id": "discipline",
+      "filingHeading": "Removal from school without the required protections",
+      "filingClause": "removing Student from school without the protections required for a child with a disability",
+      "cfr": "34 C.F.R. §§ 300.530–300.536",
+      "isProcedural": false,
+      "turnsOn": "Removals beyond ten school days, the manifestation determination, and the services provided during a removal."
+    },
+    {
+      "id": "related-services",
+      "filingHeading": "Failure to provide required related services",
+      "filingClause": "failing to provide the related services Student requires",
+      "cfr": "34 C.F.R. § 300.34",
+      "isProcedural": false,
+      "turnsOn": "A service the student needs in order to benefit from special education — speech, occupational or physical therapy, counseling, transportation."
+    },
+    {
+      "id": "esy",
+      "filingHeading": "Failure to provide extended school year services",
+      "filingClause": "failing to provide the extended school year services Student requires",
+      "cfr": "34 C.F.R. § 300.106",
+      "isProcedural": false,
+      "turnsOn": "Regression and recoupment over school breaks, and whether the team considered extended school year services at all."
+    },
+    {
+      "id": "assistive-technology",
+      "filingHeading": "Failure to provide required assistive technology",
+      "filingClause": "failing to provide the assistive technology Student requires",
+      "cfr": "34 C.F.R. § 300.105",
+      "isProcedural": false,
+      "turnsOn": "The device, the service that supports it, and the training to use it — and whether the team considered any of them."
+    },
+    {
+      "id": "transition",
+      "filingHeading": "Failure to provide required transition services",
+      "filingClause": "failing to provide the transition services required to prepare Student for life after school",
+      "cfr": "34 C.F.R. §§ 300.43, 300.320(b)",
+      "isProcedural": false,
+      "turnsOn": "Measurable postsecondary goals and the transition services aimed at them, from the first IEP in effect at 16."
+    },
+    {
+      "id": "records-access",
+      "filingHeading": "Failure to provide access to education records",
+      "filingClause": "failing to provide the Parent access to Student’s education records on request",
+      "cfr": "34 C.F.R. §§ 300.613, 300.501(a), 300.513(a)(2)",
+      "isProcedural": true,
+      "turnsOn": "The district's duty to let the parent inspect and review the student's education records without unnecessary delay — in any case within 45 days of the request, and before any IEP meeting or hearing — and what the delay cost the parent's participation."
+    }
+  ],
+  "maxComfortable": 4
+}

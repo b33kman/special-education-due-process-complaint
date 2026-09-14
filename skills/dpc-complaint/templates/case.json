@@ -1,0 +1,65 @@
+{
+  "_about": "The intake for one complaint. Every value that came from a document carries the reading id that supports it; anything the person typed carries \"typed\". student.respondent is optional: the respondent as it should print when it is not the district line as read (a Board of Education, a city-wide agency) — a reading id if a document names it, \"typed\" if the person chose it. Delete this key when you copy the file.",
+  "createdOn": "2026-01-01",
+  "filingDate": "2026-01-01",
+  "state": "CA",
+  "runMeta": { "model": "the model id that ran the skill", "effort": "max" },
+  "privacy": { "initials": false },
+  "student": {
+    "first": { "value": "", "source": "R1" },
+    "middle": null,
+    "last": { "value": "", "source": "R2" },
+    "dob": { "value": "as the document writes it", "source": "R3" },
+    "school": { "value": "", "source": "R4" },
+    "district": { "value": "the district as the documents name it", "source": "R5" },
+    "respondent": null,
+    "disability": { "value": "", "source": "R6" },
+    "eligibleSince": { "value": "as the document writes it", "source": "R7" },
+    "address": {
+      "line1": { "value": "", "source": "R8" },
+      "line2": null,
+      "city": { "value": "", "source": "R9" },
+      "state": { "value": "", "source": "R10" },
+      "postalCode": { "value": "", "source": "R11" }
+    },
+    "homeless": false,
+    "homelessContact": null
+  },
+  "parent": {
+    "first": { "value": "", "source": "R12" },
+    "last": { "value": "", "source": "R13" },
+    "phone": { "value": "", "source": "typed" },
+    "email": { "value": "", "source": "typed" }
+  },
+  "representation": {
+    "type": "counsel",
+    "counsel": {
+      "name": "",
+      "barNumber": "",
+      "barJurisdiction": "",
+      "firmName": "",
+      "firmAddress": "",
+      "firmPhone": "",
+      "firmEmail": ""
+    }
+  },
+  "facts": {
+    "F1": { "question": "What the district did, or failed to do", "answer": "", "proposed": false },
+    "F2": { "question": "How the client learned of it", "answer": "", "proposed": false },
+    "F3": { "question": "Effect on the student", "answer": "", "proposed": false },
+    "F4": { "question": "Relief sought", "answer": "", "proposed": false }
+  },
+  "claims": [
+    { "id": "failure-to-implement", "impact": null },
+    { "id": "procedural", "impact": "How the failure impeded the student's education or the parent's participation, one to three sentences, each ending with its tags. [R..][F3]" }
+  ],
+  "relief": [
+    { "id": "compensatory-services", "detail": "how much, of what, and when", "sources": ["R.."] }
+  ],
+  "events": [
+    { "id": "E1", "date": "2025-09-08", "what": "what happened, in one sentence", "sources": ["R.."] }
+  ],
+  "additionalContents": [
+    { "heading": "what the state requires beyond § 300.508(b)", "text": "the value", "sources": ["R..", "S.."] }
+  ]
+}

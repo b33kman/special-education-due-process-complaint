@@ -1,0 +1,6 @@
+{
+  "_about": "What the person decided at the confirmation gate, keyed by reading id. Written by the skill from what they said, then read by scripts/confirm.mjs --decisions. Delete this key when you copy the file.",
+  "R1": "confirmed",
+  "R2": "rejected",
+  "R3": { "edit": "the corrected value, in the person's words" }
+}

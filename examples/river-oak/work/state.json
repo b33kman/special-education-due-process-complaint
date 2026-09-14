@@ -1,0 +1,90 @@
+{
+  "code": "CA",
+  "name": "California",
+  "checkedOn": "2026-09-14",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Office of Administrative Hearings (California DGS) — Request Special Education Due Process Hearing",
+      "url": "https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Services/Page-Content/Special-Education-Services-List-Folder/Request-Special-Education-Due-Process-Hearing",
+      "accessed": "2026-09-14",
+      "quote": "School districts, parents or other authorized parties can request a Special Education due process hearing and/or mediation with the Office of Administrative Hearings (OAH). OAH provides optional forms – Request for Due Process Hearing and Mediation and Proof of Service – which may be found on the Forms page on this website. To request a due process hearing and mediation a party should submit a request to OAH along with a Proof of Service showing that the request was sent to the other party or parties. 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833. OAH will send to the other party and to the party requesting the hearing a Scheduling Order notifying the parties of the dates for prehearing conference, hearing."
+    },
+    {
+      "id": "S2",
+      "title": "Office of Administrative Hearings — Notice of Procedural Safeguards for Special Education Cases",
+      "url": "https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Resources/Page-Content/Special-Education-Resources-List-Folder/Notice-of-Procedural-Safeguards",
+      "accessed": "2026-09-14",
+      "quote": "The request for a due process hearing must be filed within two years from the date you knew or should have known about the alleged action that forms the basis of the due process complaint. A written request must include: Name of the child; Address of the residence of the child; Name of the school the child is attending; [contact information for a homeless child]; A description of the nature of the problem, including facts relating to the problem(s) and a proposed resolution of the problem(s). Federal and state laws require that either party filing for a due process hearing must provide a copy of the written request to the other party. Office of Administrative Hearings, Attention: Special Education Division, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833-4231. Resolution sessions shall be convened within 15 days of receiving notice of the parent's due process hearing request."
+    },
+    {
+      "id": "S3",
+      "title": "California Department of Education — Dispute Resolution (Special Education)",
+      "url": "https://www.cde.ca.gov/sp/se/disputeresolution.asp",
+      "accessed": "2026-09-14",
+      "quote": "All due process hearings are facilitated by the DGS, OAH under the supervision of the CDE. Submit written complaints to DGS, OAH via fax (916-376-4207), mail, hand delivery, or their Secure e-File Transfer (SFT) System which allows electronic filing with digital signatures. A due process complaint must allege a violation that occurred not more than two years before the date the parent or public agency knew or should have known about the alleged action. The complaint must include: The name of the child; The address of the residence of the child; The name of the school the child is attending; A description of the nature of the problem, including relevant facts; A proposed resolution of the problem to the extent known and available to the party."
+    },
+    {
+      "id": "S4",
+      "title": "California Education Code § 56502 (california.public.law, verified against leginfo.legislature.ca.gov)",
+      "url": "https://california.public.law/codes/education_code_section_56502",
+      "accessed": "2026-09-14",
+      "quote": "(a) All requests for a due process hearing shall be filed with the Superintendent in accordance with Section 300.508(a) and (b) of Title 34 of the Code of Federal Regulations. (b) The Superintendent shall develop a model form to assist parents and guardians in filing a request for due process. (c)(1) The party, or the attorney representing the party, initiating a due process hearing by filing a written request with the Superintendent shall provide the other party to the hearing with a copy of the request at the same time as the request is filed with the Superintendent. […] the request shall include the following: (A) The name of the child, the address of the residence of the child, or available contact information in the case of a homeless child, and the name of the school the child is attending. […] (C) A description of the nature of the problem of the child relating to the proposed initiation or change, including facts relating to the problem. (D) A proposed resolution of the problem to the extent known and available to the party at the time."
+    },
+    {
+      "id": "S5",
+      "title": "California Education Code § 56505(l) (california.public.law, verified against leginfo.legislature.ca.gov)",
+      "url": "https://california.public.law/codes/education_code_section_56505",
+      "accessed": "2026-09-14",
+      "quote": "(l) A request for a due process hearing arising under subdivision (a) of Section 56501 shall be filed within two years from the date the party initiating the request knew or had reason to know of the facts underlying the basis for the request. In accordance with Section 1415(f)(3)(D) of Title 20 of the United States Code, the time period specified in this subdivision does not apply to a parent if the parent was prevented from requesting the due process hearing due to either of the following: (1) Specific misrepresentations by the local educational agency that it had solved the problem forming the basis of the due process hearing request. (2) The withholding of information by the local educational agency from the parent that was required under this part to be provided to the parent."
+    },
+    {
+      "id": "S6",
+      "title": "Office of Administrative Hearings — Special Education Division",
+      "url": "https://www.dgs.ca.gov/oah/case-types/special-education",
+      "accessed": "2026-09-14",
+      "quote": "2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833. (916) 263-0880. Find a Special Education Form Including Requests for Hearing or Mediation. OAH Secure e-File Transfer (SFT) system."
+    }
+  ],
+  "seaName": { "value": "California Department of Education", "sources": ["S3", "S4"] },
+  "captionAgency": {
+    "value": "Office of Administrative Hearings, State of California",
+    "sources": ["S1", "S3"],
+    "note": "Hearings are conducted by the Office of Administrative Hearings, Special Education Division, on behalf of the California Department of Education (S3); the request is filed with OAH (S1, S6). Captioned as OAH's own decisions are: BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS, STATE OF CALIFORNIA."
+  },
+  "filesWith": {
+    "value": "Filed with the Office of Administrative Hearings, Special Education Division, with a copy provided to the school district at the same time, and a Proof of Service showing the request was sent to the other party.",
+    "sources": ["S1", "S2", "S4"]
+  },
+  "filingAddress": {
+    "value": "Office of Administrative Hearings, Attention: Special Education Division, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833-4231.",
+    "sources": ["S2", "S6"]
+  },
+  "channels": {
+    "value": "OAH Secure e-File Transfer (SFT) system (electronic filing with digital signature); mail or hand delivery to the Sacramento address; fax to (916) 376-4207.",
+    "sources": ["S3", "S6"]
+  },
+  "limitationsMonths": {
+    "value": 24,
+    "sources": ["S5", "S2", "S3"],
+    "note": "Two years from the date the parent knew or had reason to know of the facts, with the two exceptions in Education Code § 56505(l)."
+  },
+  "requiredForm": {
+    "value": "No form is required. OAH offers an optional Request for Due Process Hearing and Mediation form and a Proof of Service form on its Forms page; the Proof of Service showing the request was sent to the district accompanies the filing.",
+    "sources": ["S1"]
+  },
+  "additionalContents": {
+    "value": [],
+    "sources": ["S2", "S3", "S4"],
+    "note": "California's required contents (Educ. Code § 56502(c)(1); OAH's procedural safeguards notice) match the federal elements; nothing beyond § 300.508(b) is required in the notice itself. A Proof of Service is filed with it."
+  },
+  "serviceRecipients": {
+    "value": [
+      "the Office of Administrative Hearings, Special Education Division",
+      "the Superintendent of the River Oak Unified School District"
+    ],
+    "sources": ["S1", "S2", "S4"],
+    "note": "The request is filed with OAH; a copy goes to the district at the same time (§ 56502(c)(1)), with a Proof of Service."
+  },
+  "notes": "A resolution session is convened within 15 days of the district's receipt of the request unless the parties agree to mediation or waive it (S2). The district may challenge sufficiency within 15 days (Educ. Code § 56502(d))."
+}

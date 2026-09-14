@@ -1,0 +1,1293 @@
+[
+  {
+    "id": "R1",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.nameFirst",
+    "value": "Maya",
+    "note": "the page writes the name last-first: 'Okafor, Maya'",
+    "verification": {
+      "status": "verified",
+      "snippet": "y schools individualized education program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel cou"
+    }
+  },
+  {
+    "id": "R2",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "ow county schools individualized education program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laur"
+    }
+  },
+  {
+    "id": "R3",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.dob",
+    "value": "04/19/2013",
+    "verification": {
+      "status": "verified",
+      "snippet": "ized education program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 "
+    }
+  },
+  {
+    "id": "R4",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.grade",
+    "value": "7",
+    "context": "Grade: 7",
+    "verification": {
+      "status": "verified",
+      "snippet": "ion program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: g"
+    }
+  },
+  {
+    "id": "R5",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.studentId",
+    "value": "PH-208114",
+    "verification": {
+      "status": "verified",
+      "snippet": "nformation student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (55"
+    }
+  },
+  {
+    "id": "R6",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.addressLine1",
+    "value": "72 Laurel Court",
+    "note": "the 'Address' line in Student information",
+    "verification": {
+      "status": "verified",
+      "snippet": " okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace."
+    }
+  },
+  {
+    "id": "R7",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.addressCity",
+    "value": "Pine Hollow",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools individualized education program student information student: ok"
+    }
+  },
+  {
+    "id": "R8",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.addressState",
+    "value": "NC",
+    "context": "Pine Hollow, NC 27999",
+    "verification": {
+      "status": "verified",
+      "snippet": "e of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com scho"
+    }
+  },
+  {
+    "id": "R9",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.addressPostalCode",
+    "value": "27999",
+    "verification": {
+      "status": "verified",
+      "snippet": "9/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com scho"
+    }
+  },
+  {
+    "id": "R10",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "parent.nameFirst",
+    "value": "Grace",
+    "verification": {
+      "status": "verified",
+      "snippet": "7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com school: cedar ridg"
+    }
+  },
+  {
+    "id": "R11",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "parent.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "ow county schools individualized education program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laur"
+    }
+  },
+  {
+    "id": "R12",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "parent.phone",
+    "value": "(555) 010-2088",
+    "verification": {
+      "status": "verified",
+      "snippet": "114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com school: cedar ridge middle school lea: pine hol"
+    }
+  },
+  {
+    "id": "R13",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "parent.email",
+    "value": "grace.okafor@example.com",
+    "verification": {
+      "status": "verified",
+      "snippet": " court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com school: cedar ridge middle school lea: pine hollow county schools eligibility c"
+    }
+  },
+  {
+    "id": "R14",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.school",
+    "value": "Cedar Ridge Middle School",
+    "verification": {
+      "status": "verified",
+      "snippet": "ent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com school: cedar ridge middle school lea: pine hollow county schools eligibility category: speech or language impair"
+    }
+  },
+  {
+    "id": "R15",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.district",
+    "value": "Pine Hollow County Schools",
+    "note": "the 'LEA' line",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools individualized education program student information student: okafor, maya date"
+    }
+  },
+  {
+    "id": "R16",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.disability",
+    "value": "Speech or Language Impairment",
+    "verification": {
+      "status": "verified",
+      "snippet": "cedar ridge middle school lea: pine hollow county schools eligibility category: speech or language impairment initial eligibility date: 02/14/2020 iep meeting date: 08/21/2025 meeting purpo"
+    }
+  },
+  {
+    "id": "R17",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "child.eligibleSince",
+    "value": "02/14/2020",
+    "note": "'Initial Eligibility Date'",
+    "verification": {
+      "status": "verified",
+      "snippet": "s eligibility category: speech or language impairment initial eligibility date: 02/14/2020 iep meeting date: 08/21/2025 meeting purpose: annual review duration of iep: 08"
+    }
+  },
+  {
+    "id": "R18",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.date",
+    "value": "08/21/2025",
+    "note": "'IEP Meeting Date'; Meeting Purpose: Annual Review",
+    "verification": {
+      "status": "verified",
+      "snippet": "h or language impairment initial eligibility date: 02/14/2020 iep meeting date: 08/21/2025 meeting purpose: annual review duration of iep: 08/21/2025 to 08/20/2026 presen"
+    }
+  },
+  {
+    "id": "R19",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.implementation",
+    "value": "Duration of IEP: 08/21/2025 to 08/20/2026",
+    "verification": {
+      "status": "verified",
+      "snippet": "ty date: 02/14/2020 iep meeting date: 08/21/2025 meeting purpose: annual review duration of iep: 08/21/2025 to 08/20/2026 present level of academic and functional performance speech-language: on the ce"
+    }
+  },
+  {
+    "id": "R20",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.presentLevels",
+    "value": "On the CELF-5 administered 05/06/2025, Maya obtained a Core Language Score of 71 (2nd percentile). Expressive Language Index 68; Receptive Language Index 79.",
+    "note": "Speech-Language present level",
+    "verification": {
+      "status": "verified",
+      "snippet": "8/20/2026 present level of academic and functional performance speech-language: on the celf-5 administered 05/06/2025, maya obtained a core language score of 71 (2nd percentile). expressive language index 68; receptive language index 79. in class, maya produces sentences of four to six words, omits verb tense marker"
+    }
+  },
+  {
+    "id": "R21",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.presentLevels",
+    "value": "In class, Maya produces sentences of four to six words, omits verb tense markers, and does not retell a paragraph-length passage in sequence.",
+    "verification": {
+      "status": "verified",
+      "snippet": "71 (2nd percentile). expressive language index 68; receptive language index 79. in class, maya produces sentences of four to six words, omits verb tense markers, and does not retell a paragraph-length passage in sequence. teacher report: maya does not raise her hand and gives one-word answers when ca"
+    }
+  },
+  {
+    "id": "R22",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.presentLevels",
+    "value": "Teacher report: Maya does not raise her hand and gives one-word answers when called on.",
+    "verification": {
+      "status": "verified",
+      "snippet": "verb tense markers, and does not retell a paragraph-length passage in sequence. teacher report: maya does not raise her hand and gives one-word answers when called on. parent input: the parent reports that maya has become reluctant to speak in cla"
+    }
+  },
+  {
+    "id": "R23",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.presentLevels",
+    "value": "The parent reports that Maya has become reluctant to speak in class and at home about school.",
+    "note": "the 'Parent input' paragraph of the present levels",
+    "verification": {
+      "status": "verified",
+      "snippet": "oes not raise her hand and gives one-word answers when called on. parent input: the parent reports that maya has become reluctant to speak in class and at home about school. the parent asks that speech-language therapy remain at the current level and th"
+    }
+  },
+  {
+    "id": "R24",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.teamNotes",
+    "value": "The parent asks that speech-language therapy remain at the current level and that the district assess written expression, which was not assessed in May 2025.",
+    "note": "the 'Parent input' paragraph of the present levels — what the parent asked for",
+    "verification": {
+      "status": "verified",
+      "snippet": "orts that maya has become reluctant to speak in class and at home about school. the parent asks that speech-language therapy remain at the current level and that the district assess written expression, which was not assessed in may 2025. annual goals goal 1 - expressive language. by 08/20/2026, given a picture seque"
+    }
+  },
+  {
+    "id": "R25",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.goals",
+    "value": "Goal 1 - Expressive Language. By 08/20/2026, given a picture sequence, Maya will retell a four-event narrative using complete sentences with correct past-tense verb forms in 4 of 5 trials, as measured by SLP data collection. Baseline (05/2025): 1 of 5 trials.",
+    "verification": {
+      "status": "verified",
+      "snippet": "ict assess written expression, which was not assessed in may 2025. annual goals goal 1 - expressive language. by 08/20/2026, given a picture sequence, maya will retell a four-event narrative using complete sentences with correct past-tense verb forms in 4 of 5 trials, as measured by slp data collection. baseline (05/2025): 1 of 5 trials. goal 2 - classroom participation. by 08/20/2026, maya will respond to a teacher"
+    }
+  },
+  {
+    "id": "R26",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.goals",
+    "value": "Goal 2 - Classroom Participation. By 08/20/2026, Maya will respond to a teacher question with a complete sentence of five or more words in 8 of 10 opportunities across two class periods, as measured by teacher tally. Baseline: 2 of 10.",
+    "verification": {
+      "status": "verified",
+      "snippet": " trials, as measured by slp data collection. baseline (05/2025): 1 of 5 trials. goal 2 - classroom participation. by 08/20/2026, maya will respond to a teacher question with a complete sentence of five or more words in 8 of 10 opportunities across two class periods, as measured by teacher tally. baseline: 2 of 10. special education and related services speech-language therapy: 60 minutes per "
+    }
+  },
+  {
+    "id": "R27",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.services",
+    "value": "Speech-Language Therapy: 60 minutes per week, individual, provided by a licensed speech-language pathologist in the speech room, 08/21/2025 to 08/20/2026.",
+    "verification": {
+      "status": "verified",
+      "snippet": "red by teacher tally. baseline: 2 of 10. special education and related services speech-language therapy: 60 minutes per week, individual, provided by a licensed speech-language pathologist in the speech room, 08/21/2025 to 08/20/2026. specially designed instruction - written expression: 45 minutes per week, small"
+    }
+  },
+  {
+    "id": "R28",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.services",
+    "value": "Specially Designed Instruction - Written Expression: 45 minutes per week, small group, provided by an EC teacher in the resource room, 08/21/2025 to 08/20/2026.",
+    "verification": {
+      "status": "verified",
+      "snippet": "ensed speech-language pathologist in the speech room, 08/21/2025 to 08/20/2026. specially designed instruction - written expression: 45 minutes per week, small group, provided by an ec teacher in the resource room, 08/21/2025 to 08/20/2026. least restrictive environment maya will be in the regular education setting for"
+    }
+  },
+  {
+    "id": "R29",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 1,
+    "field": "iep.placement",
+    "value": "Maya will be in the regular education setting for 92% of the school day. Removal is limited to speech-language therapy and resource instruction.",
+    "verification": {
+      "status": "verified",
+      "snippet": "r in the resource room, 08/21/2025 to 08/20/2026. least restrictive environment maya will be in the regular education setting for 92% of the school day. removal is limited to speech-language therapy and resource instruction."
+    }
+  },
+  {
+    "id": "R30",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 2,
+    "field": "iep.teamNotes",
+    "value": "Grace Okafor (Parent); Daniel Whitfield (LEA Representative, Assistant Principal); Ana Lucero, M.S., CCC-SLP (Speech-Language Pathologist); Robert Chen (EC Teacher); Kim Aldana (Regular Education Teacher, English Language Arts).",
+    "note": "the 'IEP team' list",
+    "verification": {
+      "status": "verified",
+      "snippet": "iep team grace okafor (parent); daniel whitfield (lea representative, assistant principal); ana lucero, m.s., ccc-slp (speech-language pathologist); robert chen (ec teacher); kim aldana (regular education teacher, english language arts). prior written notice of the iep team decisions the iep team proposes to continu"
+    }
+  },
+  {
+    "id": "R31",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 2,
+    "field": "iep.teamNotes",
+    "value": "The IEP team proposes to continue speech-language therapy at 60 minutes per week and to add 45 minutes per week of specially designed instruction in written expression.",
+    "note": "under 'Prior written notice of the IEP team decisions'",
+    "verification": {
+      "status": "verified",
+      "snippet": "teacher, english language arts). prior written notice of the iep team decisions the iep team proposes to continue speech-language therapy at 60 minutes per week and to add 45 minutes per week of specially designed instruction in written expression. the team declined the parent's request to reevaluate written expression, on the"
+    }
+  },
+  {
+    "id": "R32",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 2,
+    "field": "iep.teamNotes",
+    "value": "The team declined the parent's request to reevaluate written expression, on the basis that the 05/06/2025 evaluation is current and the added instruction addresses the concern.",
+    "note": "under 'Prior written notice of the IEP team decisions'",
+    "verification": {
+      "status": "verified",
+      "snippet": "dd 45 minutes per week of specially designed instruction in written expression. the team declined the parent's request to reevaluate written expression, on the basis that the 05/06/2025 evaluation is current and the added instruction addresses the concern. the parent may request an independent educational evaluation if the parent disa"
+    }
+  },
+  {
+    "id": "R33",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 2,
+    "field": "iep.teamNotes",
+    "value": "The parent may request an independent educational evaluation if the parent disagrees with the district's evaluation.",
+    "note": "under 'Prior written notice of the IEP team decisions'",
+    "verification": {
+      "status": "verified",
+      "snippet": "/06/2025 evaluation is current and the added instruction addresses the concern. the parent may request an independent educational evaluation if the parent disagrees with the district's evaluation. the parent signed the iep on 08/21/2025 and wrote: \"i agree with the services. "
+    }
+  },
+  {
+    "id": "R34",
+    "docId": "01_IEP_Pine_Hollow_2025-08-21",
+    "page": 2,
+    "field": "iep.teamNotes",
+    "value": "The parent signed the IEP on 08/21/2025 and wrote: \"I agree with the services. I still want written expression tested.\"",
+    "verification": {
+      "status": "verified",
+      "snippet": " educational evaluation if the parent disagrees with the district's evaluation. the parent signed the iep on 08/21/2025 and wrote: \"i agree with the services. i still want written expression tested.\""
+    }
+  },
+  {
+    "id": "R35",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "child.nameFirst",
+    "value": "Maya",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools - related service log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: "
+    }
+  },
+  {
+    "id": "R36",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "child.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools - related service log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: 60 minu"
+    }
+  },
+  {
+    "id": "R37",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "child.studentId",
+    "value": "PH-208114",
+    "verification": {
+      "status": "verified",
+      "snippet": "ne hollow county schools - related service log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: 60 minutes per week, individu"
+    }
+  },
+  {
+    "id": "R38",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "child.district",
+    "value": "PINE HOLLOW COUNTY SCHOOLS",
+    "note": "the letterhead, written in capitals",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools - related service log student: maya okafor student id: ph-208114 service: speec"
+    }
+  },
+  {
+    "id": "R39",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.service",
+    "value": "Speech-Language Therapy",
+    "verification": {
+      "status": "verified",
+      "snippet": "hools - related service log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: 60 minutes per week, individual, speech room (iep dated 08/21/"
+    }
+  },
+  {
+    "id": "R40",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.mandate",
+    "value": "IEP requirement: 60 minutes per week, individual, speech room (IEP dated 08/21/2025)",
+    "verification": {
+      "status": "verified",
+      "snippet": "log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: 60 minutes per week, individual, speech room (iep dated 08/21/2025) provider: ana lucero, m.s., ccc-slp log period: 08/25/2025 through 01/30/2026 s"
+    }
+  },
+  {
+    "id": "R41",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.period",
+    "value": "08/25/2025 through 01/30/2026",
+    "note": "'Log period'",
+    "verification": {
+      "status": "verified",
+      "snippet": "ech room (iep dated 08/21/2025) provider: ana lucero, m.s., ccc-slp log period: 08/25/2025 through 01/30/2026 sessions week of 08/25/2025: 60 minutes, individual. week of 09/01/2025: 60 min"
+    }
+  },
+  {
+    "id": "R42",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 08/25/2025: 60 minutes, individual.",
+    "verification": {
+      "status": "verified",
+      "snippet": "r: ana lucero, m.s., ccc-slp log period: 08/25/2025 through 01/30/2026 sessions week of 08/25/2025: 60 minutes, individual. week of 09/01/2025: 60 minutes, individual. week of 09/08/2025: 60 minutes, ind"
+    }
+  },
+  {
+    "id": "R43",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 09/01/2025: 60 minutes, individual.",
+    "verification": {
+      "status": "verified",
+      "snippet": "25/2025 through 01/30/2026 sessions week of 08/25/2025: 60 minutes, individual. week of 09/01/2025: 60 minutes, individual. week of 09/08/2025: 60 minutes, individual. week of 09/15/2025: 60 minutes, ind"
+    }
+  },
+  {
+    "id": "R44",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 09/08/2025: 60 minutes, individual.",
+    "verification": {
+      "status": "verified",
+      "snippet": "08/25/2025: 60 minutes, individual. week of 09/01/2025: 60 minutes, individual. week of 09/08/2025: 60 minutes, individual. week of 09/15/2025: 60 minutes, individual. week of 09/22/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R45",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 09/15/2025: 60 minutes, individual.",
+    "verification": {
+      "status": "verified",
+      "snippet": "09/01/2025: 60 minutes, individual. week of 09/08/2025: 60 minutes, individual. week of 09/15/2025: 60 minutes, individual. week of 09/22/2025: 30 minutes, group of 3 (provider caseload reassigned; indiv"
+    }
+  },
+  {
+    "id": "R46",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 09/22/2025: 30 minutes, group of 3 (provider caseload reassigned; individual slot unavailable).",
+    "verification": {
+      "status": "verified",
+      "snippet": "09/08/2025: 60 minutes, individual. week of 09/15/2025: 60 minutes, individual. week of 09/22/2025: 30 minutes, group of 3 (provider caseload reassigned; individual slot unavailable). week of 09/29/2025: 30 minutes, group of 3. week of 10/06/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R47",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 09/29/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "inutes, group of 3 (provider caseload reassigned; individual slot unavailable). week of 09/29/2025: 30 minutes, group of 3. week of 10/06/2025: 30 minutes, group of 3. week of 10/13/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R48",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 10/06/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "gned; individual slot unavailable). week of 09/29/2025: 30 minutes, group of 3. week of 10/06/2025: 30 minutes, group of 3. week of 10/13/2025: 30 minutes, group of 3. week of 10/20/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R49",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 10/13/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "09/29/2025: 30 minutes, group of 3. week of 10/06/2025: 30 minutes, group of 3. week of 10/13/2025: 30 minutes, group of 3. week of 10/20/2025: 30 minutes, group of 3. week of 10/27/2025: 0 (provider abs"
+    }
+  },
+  {
+    "id": "R50",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 10/20/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "10/06/2025: 30 minutes, group of 3. week of 10/13/2025: 30 minutes, group of 3. week of 10/20/2025: 30 minutes, group of 3. week of 10/27/2025: 0 (provider absent; no make-up scheduled). week of 11/03/20"
+    }
+  },
+  {
+    "id": "R51",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.missed",
+    "value": "Week of 10/27/2025: 0 (provider absent; no make-up scheduled).",
+    "verification": {
+      "status": "verified",
+      "snippet": "10/13/2025: 30 minutes, group of 3. week of 10/20/2025: 30 minutes, group of 3. week of 10/27/2025: 0 (provider absent; no make-up scheduled). week of 11/03/2025: 30 minutes, group of 3. week of 11/10/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R52",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 11/03/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "tes, group of 3. week of 10/27/2025: 0 (provider absent; no make-up scheduled). week of 11/03/2025: 30 minutes, group of 3. week of 11/10/2025: 30 minutes, group of 3. week of 11/17/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R53",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 11/10/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "ider absent; no make-up scheduled). week of 11/03/2025: 30 minutes, group of 3. week of 11/10/2025: 30 minutes, group of 3. week of 11/17/2025: 30 minutes, group of 3. week of 11/24/2025: 0 (holiday week"
+    }
+  },
+  {
+    "id": "R54",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 11/17/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "11/03/2025: 30 minutes, group of 3. week of 11/10/2025: 30 minutes, group of 3. week of 11/17/2025: 30 minutes, group of 3. week of 11/24/2025: 0 (holiday week). week of 12/01/2025: 30 minutes, group of "
+    }
+  },
+  {
+    "id": "R55",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.missed",
+    "value": "Week of 11/24/2025: 0 (holiday week).",
+    "verification": {
+      "status": "verified",
+      "snippet": "11/10/2025: 30 minutes, group of 3. week of 11/17/2025: 30 minutes, group of 3. week of 11/24/2025: 0 (holiday week). week of 12/01/2025: 30 minutes, group of 3. week of 12/08/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R56",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 12/01/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "ek of 11/17/2025: 30 minutes, group of 3. week of 11/24/2025: 0 (holiday week). week of 12/01/2025: 30 minutes, group of 3. week of 12/08/2025: 30 minutes, group of 3. week of 12/15/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R57",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 12/08/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "ek of 11/24/2025: 0 (holiday week). week of 12/01/2025: 30 minutes, group of 3. week of 12/08/2025: 30 minutes, group of 3. week of 12/15/2025: 30 minutes, group of 3. week of 12/22/2025: 30 minutes, gro"
+    }
+  },
+  {
+    "id": "R58",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 12/15/2025: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "12/01/2025: 30 minutes, group of 3. week of 12/08/2025: 30 minutes, group of 3. week of 12/15/2025: 30 minutes, group of 3. week of 12/22/2025: 30 minutes, group of 3 (school in session 12/22-12/23). wee"
+    }
+  },
+  {
+    "id": "R59",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 01/05/2026: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": " 3. week of 12/22/2025: 30 minutes, group of 3 (school in session 12/22-12/23). week of 01/05/2026: 30 minutes, group of 3. week of 01/12/2026: 30 minutes, group of 3. week of 01/19/2026: 0 (provider abs"
+    }
+  },
+  {
+    "id": "R60",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 01/12/2026: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": " 3 (school in session 12/22-12/23). week of 01/05/2026: 30 minutes, group of 3. week of 01/12/2026: 30 minutes, group of 3. week of 01/19/2026: 0 (provider absent; no make-up scheduled). week of 01/26/20"
+    }
+  },
+  {
+    "id": "R61",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.missed",
+    "value": "Week of 01/19/2026: 0 (provider absent; no make-up scheduled).",
+    "verification": {
+      "status": "verified",
+      "snippet": "01/05/2026: 30 minutes, group of 3. week of 01/12/2026: 30 minutes, group of 3. week of 01/19/2026: 0 (provider absent; no make-up scheduled). week of 01/26/2026: 30 minutes, group of 3. summary weeks in period: 22. weeks "
+    }
+  },
+  {
+    "id": "R62",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Week of 01/26/2026: 30 minutes, group of 3.",
+    "verification": {
+      "status": "verified",
+      "snippet": "tes, group of 3. week of 01/19/2026: 0 (provider absent; no make-up scheduled). week of 01/26/2026: 30 minutes, group of 3. summary weeks in period: 22. weeks at 60 minutes individual: 4. weeks at 30 min"
+    }
+  },
+  {
+    "id": "R63",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Weeks in period: 22.",
+    "note": "Summary",
+    "verification": {
+      "status": "verified",
+      "snippet": "ent; no make-up scheduled). week of 01/26/2026: 30 minutes, group of 3. summary weeks in period: 22. weeks at 60 minutes individual: 4. weeks at 30 minutes group: 15. weeks with no"
+    }
+  },
+  {
+    "id": "R64",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Weeks at 60 minutes individual: 4.",
+    "note": "Summary",
+    "verification": {
+      "status": "verified",
+      "snippet": "uled). week of 01/26/2026: 30 minutes, group of 3. summary weeks in period: 22. weeks at 60 minutes individual: 4. weeks at 30 minutes group: 15. weeks with no service: 3. total minutes delivere"
+    }
+  },
+  {
+    "id": "R65",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Weeks at 30 minutes group: 15.",
+    "note": "Summary",
+    "verification": {
+      "status": "verified",
+      "snippet": "es, group of 3. summary weeks in period: 22. weeks at 60 minutes individual: 4. weeks at 30 minutes group: 15. weeks with no service: 3. total minutes delivered: 690. total minutes required "
+    }
+  },
+  {
+    "id": "R66",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.missed",
+    "value": "Weeks with no service: 3.",
+    "note": "Summary",
+    "verification": {
+      "status": "verified",
+      "snippet": "n period: 22. weeks at 60 minutes individual: 4. weeks at 30 minutes group: 15. weeks with no service: 3. total minutes delivered: 690. total minutes required by the iep for 22 weeks: 1"
+    }
+  },
+  {
+    "id": "R67",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.delivered",
+    "value": "Total minutes delivered: 690.",
+    "note": "Summary",
+    "verification": {
+      "status": "verified",
+      "snippet": "minutes individual: 4. weeks at 30 minutes group: 15. weeks with no service: 3. total minutes delivered: 690. total minutes required by the iep for 22 weeks: 1,320. note: individual session"
+    }
+  },
+  {
+    "id": "R68",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.mandate",
+    "value": "Total minutes required by the IEP for 22 weeks: 1,320.",
+    "note": "Summary",
+    "verification": {
+      "status": "verified",
+      "snippet": "t 30 minutes group: 15. weeks with no service: 3. total minutes delivered: 690. total minutes required by the iep for 22 weeks: 1,320. note: individual sessions ended the week of 09/22/2025 when the provider's case"
+    }
+  },
+  {
+    "id": "R69",
+    "docId": "02_Speech_Language_Service_Log_2025-2026",
+    "page": 1,
+    "field": "serviceLog.missed",
+    "value": "Note: Individual sessions ended the week of 09/22/2025 when the provider's caseload was reassigned. The IEP was not amended.",
+    "note": "the log's closing note",
+    "verification": {
+      "status": "verified",
+      "snippet": " minutes delivered: 690. total minutes required by the iep for 22 weeks: 1,320. note: individual sessions ended the week of 09/22/2025 when the provider's caseload was reassigned. the iep was not amended."
+    }
+  },
+  {
+    "id": "R70",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.nameFirst",
+    "value": "Maya",
+    "verification": {
+      "status": "verified",
+      "snippet": "ne hollow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace ok"
+    }
+  },
+  {
+    "id": "R71",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "llow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 7"
+    }
+  },
+  {
+    "id": "R72",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.dob",
+    "value": "04/19/2013",
+    "verification": {
+      "status": "verified",
+      "snippet": "prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollo"
+    }
+  },
+  {
+    "id": "R73",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.school",
+    "value": "Cedar Ridge Middle School",
+    "verification": {
+      "status": "verified",
+      "snippet": "e date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on nove"
+    }
+  },
+  {
+    "id": "R74",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "parent.nameFirst",
+    "value": "Grace",
+    "note": "the 'To:' line",
+    "verification": {
+      "status": "verified",
+      "snippet": "nt: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2"
+    }
+  },
+  {
+    "id": "R75",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "parent.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "llow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 7"
+    }
+  },
+  {
+    "id": "R76",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.addressLine1",
+    "value": "72 Laurel Court",
+    "note": "the parent's mailing address on the 'To:' line; the IEP gives the same street as the student's address",
+    "verification": {
+      "status": "verified",
+      "snippet": "r date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2025 the parent requested"
+    }
+  },
+  {
+    "id": "R77",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.addressCity",
+    "value": "Pine Hollow",
+    "note": "the 'To:' line",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools - prior written notice date: december 4, 2025 student: maya okaf"
+    }
+  },
+  {
+    "id": "R78",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.addressState",
+    "value": "NC",
+    "note": "the 'To:' line",
+    "context": "Pine Hollow, NC 27999",
+    "verification": {
+      "status": "verified",
+      "snippet": "04/19/2013 school: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2025 the parent requested, in writing, an indepe"
+    }
+  },
+  {
+    "id": "R79",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.addressPostalCode",
+    "value": "27999",
+    "note": "the 'To:' line",
+    "verification": {
+      "status": "verified",
+      "snippet": "l: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2025 the parent requested, in writing, an indepe"
+    }
+  },
+  {
+    "id": "R80",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "child.district",
+    "value": "Pine Hollow County Schools",
+    "note": "the signature line, 'for Pine Hollow County Schools'",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birt"
+    }
+  },
+  {
+    "id": "R81",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "pwn.date",
+    "value": "December 4, 2025",
+    "verification": {
+      "status": "verified",
+      "snippet": "pine hollow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle schoo"
+    }
+  },
+  {
+    "id": "R82",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "iee.request",
+    "value": "On November 10, 2025 the parent requested, in writing, an independent educational evaluation in the areas of speech-language and written expression at public expense, stating disagreement with the evaluation dated May 6, 2025.",
+    "note": "the notice's own description of the request, under 'Action refused'",
+    "verification": {
+      "status": "verified",
+      "snippet": " school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2025 the parent requested, in writing, an independent educational evaluation in the areas of speech-language and written expression at public expense, stating disagreement with the evaluation dated may 6, 2025. the district declines to fund an independent educational evaluation. explanatio"
+    }
+  },
+  {
+    "id": "R83",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "pwn.action",
+    "value": "The district declines to fund an independent educational evaluation.",
+    "note": "under 'Action refused'",
+    "verification": {
+      "status": "verified",
+      "snippet": " at public expense, stating disagreement with the evaluation dated may 6, 2025. the district declines to fund an independent educational evaluation. explanation the district considers the may 6, 2025 evaluation to be appropriate"
+    }
+  },
+  {
+    "id": "R84",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "pwn.reasons",
+    "value": "The district considers the May 6, 2025 evaluation to be appropriate. The district will conduct its own assessment of written expression during the spring 2026 reevaluation window.",
+    "note": "under 'Explanation'",
+    "verification": {
+      "status": "verified",
+      "snippet": "he district declines to fund an independent educational evaluation. explanation the district considers the may 6, 2025 evaluation to be appropriate. the district will conduct its own assessment of written expression during the spring 2026 reevaluation window. other options considered funding an independent evaluation in speech-language o"
+    }
+  },
+  {
+    "id": "R85",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "pwn.options",
+    "value": "Funding an independent evaluation in speech-language only. Rejected because the district evaluation in that area is current.",
+    "note": "under 'Other options considered'",
+    "verification": {
+      "status": "verified",
+      "snippet": "expression during the spring 2026 reevaluation window. other options considered funding an independent evaluation in speech-language only. rejected because the district evaluation in that area is current. evaluation procedures, records and reports relied upon speech-language evaluati"
+    }
+  },
+  {
+    "id": "R86",
+    "docId": "03_Prior_Written_Notice_2025-12-04",
+    "page": 1,
+    "field": "pwn.reasons",
+    "value": "Speech-language evaluation dated May 6, 2025 (A. Lucero); IEP dated August 21, 2025; classroom work samples.",
+    "note": "under 'Evaluation procedures, records and reports relied upon' — the list, not a reason",
+    "verification": {
+      "status": "verified",
+      "snippet": "in that area is current. evaluation procedures, records and reports relied upon speech-language evaluation dated may 6, 2025 (a. lucero); iep dated august 21, 2025; classroom work samples. procedural safeguards a copy of the handbook on parents' rights is enclosed. if"
+    }
+  },
+  {
+    "id": "R87",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "child.nameFirst",
+    "value": "Maya",
+    "note": "from the subject lines, 'Maya Okafor'",
+    "verification": {
+      "status": "verified",
+      "snippet": "te: november 10, 2025 subject: request for independent educational evaluation - maya okafor mr. whitfield, i disagree with the district's evaluation of may 6, 2025."
+    }
+  },
+  {
+    "id": "R88",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "child.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: nove"
+    }
+  },
+  {
+    "id": "R89",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "parent.nameFirst",
+    "value": "Grace",
+    "note": "the writer of three of the four emails, who writes as the mother",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for indepe"
+    }
+  },
+  {
+    "id": "R90",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "parent.nameLast",
+    "value": "Okafor",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: nove"
+    }
+  },
+  {
+    "id": "R91",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "child.district",
+    "value": "PINE HOLLOW COUNTY SCHOOLS",
+    "note": "the header, written in capitals",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: reques"
+    }
+  },
+  {
+    "id": "R92",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.date",
+    "value": "November 10, 2025",
+    "note": "email 1 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "afor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent educational evaluation - maya okafor mr. whitf"
+    }
+  },
+  {
+    "id": "R93",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.from",
+    "value": "Grace Okafor",
+    "note": "email 1 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent e"
+    }
+  },
+  {
+    "id": "R94",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.to",
+    "value": "Daniel Whitfield",
+    "note": "email 1 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent educational evaluation"
+    }
+  },
+  {
+    "id": "R95",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.statement",
+    "value": "I disagree with the district's evaluation of May 6, 2025. It did not test written expression, and Maya's language scores do not match what I see at home.",
+    "note": "email 1 of 4, the parent's words",
+    "verification": {
+      "status": "verified",
+      "snippet": "ct: request for independent educational evaluation - maya okafor mr. whitfield, i disagree with the district's evaluation of may 6, 2025. it did not test written expression, and maya's language scores do not match what i see at home. i am requesting an independent educational evaluation in speech-language and wr"
+    }
+  },
+  {
+    "id": "R96",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "iee.request",
+    "value": "I am requesting an independent educational evaluation in speech-language and written expression at public expense.",
+    "note": "email 1 of 4, the parent's words",
+    "verification": {
+      "status": "verified",
+      "snippet": "written expression, and maya's language scores do not match what i see at home. i am requesting an independent educational evaluation in speech-language and written expression at public expense. please let me know the district's criteria and the next steps. grace okafor fro"
+    }
+  },
+  {
+    "id": "R97",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.request",
+    "value": "Please let me know the district's criteria and the next steps.",
+    "note": "email 1 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "ational evaluation in speech-language and written expression at public expense. please let me know the district's criteria and the next steps. grace okafor from: grace okafor to: daniel whitfield date: january 14, 2026 sub"
+    }
+  },
+  {
+    "id": "R98",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.date",
+    "value": "January 14, 2026",
+    "note": "email 2 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": " and the next steps. grace okafor from: grace okafor to: daniel whitfield date: january 14, 2026 subject: speech therapy minutes - maya okafor mr. whitfield, maya tells me her "
+    }
+  },
+  {
+    "id": "R99",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.from",
+    "value": "Grace Okafor",
+    "note": "email 2 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent e"
+    }
+  },
+  {
+    "id": "R100",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.to",
+    "value": "Daniel Whitfield",
+    "note": "email 2 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent educational evaluation"
+    }
+  },
+  {
+    "id": "R101",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.statement",
+    "value": "Maya tells me her speech sessions are now with two other students and are half as long. Her IEP says 60 minutes a week, individual.",
+    "note": "email 2 of 4, the parent's words",
+    "verification": {
+      "status": "verified",
+      "snippet": ": january 14, 2026 subject: speech therapy minutes - maya okafor mr. whitfield, maya tells me her speech sessions are now with two other students and are half as long. her iep says 60 minutes a week, individual. please send me the service log and tell me when individual sessions will resume"
+    }
+  },
+  {
+    "id": "R102",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.request",
+    "value": "Please send me the service log and tell me when individual sessions will resume.",
+    "note": "email 2 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "ther students and are half as long. her iep says 60 minutes a week, individual. please send me the service log and tell me when individual sessions will resume. grace okafor from: daniel whitfield to: grace okafor date: january 21, 2026 sub"
+    }
+  },
+  {
+    "id": "R103",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.date",
+    "value": "January 21, 2026",
+    "note": "email 3 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "essions will resume. grace okafor from: daniel whitfield to: grace okafor date: january 21, 2026 subject: re: speech therapy minutes - maya okafor ms. okafor, the speech-langua"
+    }
+  },
+  {
+    "id": "R104",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.from",
+    "value": "Daniel Whitfield",
+    "note": "email 3 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent educational evaluation"
+    }
+  },
+  {
+    "id": "R105",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.to",
+    "value": "Grace Okafor",
+    "note": "email 3 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent e"
+    }
+  },
+  {
+    "id": "R106",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.response",
+    "value": "the speech-language service log is attached. Ms. Lucero's caseload was reassigned in September and individual sessions have not been available since. We expect to post a second SLP position this spring.",
+    "note": "email 3 of 4, the assistant principal's words",
+    "verification": {
+      "status": "verified",
+      "snippet": " january 21, 2026 subject: re: speech therapy minutes - maya okafor ms. okafor, the speech-language service log is attached. ms. lucero's caseload was reassigned in september and individual sessions have not been available since. we expect to post a second slp position this spring. regards, daniel whitfield from: grace okafor to: daniel whitfield date: februar"
+    }
+  },
+  {
+    "id": "R107",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.date",
+    "value": "February 9, 2026",
+    "note": "email 4 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "spring. regards, daniel whitfield from: grace okafor to: daniel whitfield date: february 9, 2026 subject: re: speech therapy minutes - maya okafor mr. whitfield, the log shows "
+    }
+  },
+  {
+    "id": "R108",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.from",
+    "value": "Grace Okafor",
+    "note": "email 4 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent e"
+    }
+  },
+  {
+    "id": "R109",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.to",
+    "value": "Daniel Whitfield",
+    "note": "email 4 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "correspondence - okafor / pine hollow county schools from: grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent educational evaluation"
+    }
+  },
+  {
+    "id": "R110",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.statement",
+    "value": "the log shows 690 minutes delivered against 1,320 required.",
+    "note": "email 4 of 4, the parent's words",
+    "verification": {
+      "status": "verified",
+      "snippet": "bruary 9, 2026 subject: re: speech therapy minutes - maya okafor mr. whitfield, the log shows 690 minutes delivered against 1,320 required. i am asking the district to make up the missed minutes and to restore individua"
+    }
+  },
+  {
+    "id": "R111",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.request",
+    "value": "I am asking the district to make up the missed minutes and to restore individual sessions now, not in the spring.",
+    "note": "email 4 of 4",
+    "verification": {
+      "status": "verified",
+      "snippet": "afor mr. whitfield, the log shows 690 minutes delivered against 1,320 required. i am asking the district to make up the missed minutes and to restore individual sessions now, not in the spring. i also have not received a response about the independent evaluation beyond the"
+    }
+  },
+  {
+    "id": "R112",
+    "docId": "04_Correspondence_Nov2025-Feb2026",
+    "page": 1,
+    "field": "correspondence.statement",
+    "value": "I also have not received a response about the independent evaluation beyond the December 4 notice.",
+    "note": "email 4 of 4, the parent's words",
+    "verification": {
+      "status": "verified",
+      "snippet": "p the missed minutes and to restore individual sessions now, not in the spring. i also have not received a response about the independent evaluation beyond the december 4 notice. grace okafor"
+    }
+  }
+]

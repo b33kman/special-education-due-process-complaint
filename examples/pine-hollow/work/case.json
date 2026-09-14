@@ -1,0 +1,118 @@
+{
+  "createdOn": "2026-09-14",
+  "filingDate": "2026-06-01",
+  "state": "NC",
+  "runMeta": { "model": "claude-fable-5-1", "effort": "max" },
+  "privacy": { "initials": false },
+  "student": {
+    "first": { "value": "Maya", "source": "R1" },
+    "middle": null,
+    "last": { "value": "Okafor", "source": "R2" },
+    "dob": { "value": "04/19/2013", "source": "R3" },
+    "school": { "value": "Cedar Ridge Middle School", "source": "R14" },
+    "district": { "value": "Pine Hollow County Schools", "source": "R15" },
+    "disability": { "value": "Speech or Language Impairment", "source": "R16" },
+    "eligibleSince": { "value": "02/14/2020", "source": "R17" },
+    "address": {
+      "line1": { "value": "72 Laurel Court", "source": "R6" },
+      "line2": null,
+      "city": { "value": "Pine Hollow", "source": "R7" },
+      "state": { "value": "NC", "source": "R8" },
+      "postalCode": { "value": "27999", "source": "R9" }
+    },
+    "homeless": false,
+    "homelessContact": null
+  },
+  "parent": {
+    "first": { "value": "Grace", "source": "R10" },
+    "last": { "value": "Okafor", "source": "R11" },
+    "phone": { "value": "(555) 010-2088", "source": "R12" },
+    "email": { "value": "grace.okafor@example.com", "source": "R13" }
+  },
+  "representation": {
+    "type": "counsel",
+    "counsel": {
+      "name": "Renée Castillo",
+      "barNumber": "61042",
+      "barJurisdiction": "North Carolina",
+      "firmName": "Castillo Education Law PLLC",
+      "firmAddress": "1200 Example Avenue, Suite 4, Raleigh, NC 27601",
+      "firmPhone": "(555) 010-6104",
+      "firmEmail": "rcastillo@example.com"
+    }
+  },
+  "facts": {
+    "F1": {
+      "question": "What the district did, or failed to do",
+      "answer": "the IEP of August 21, 2025 requires 60 minutes per week of individual speech-language therapy; from the week of September 22, 2025 the district delivered 30 minutes per week in a group of three, with no service in three weeks, for a total of 690 minutes against 1,320 required through January 30, 2026, and did not amend the IEP; the parent requested an independent educational evaluation in writing on November 10, 2025 and the district refused it on December 4, 2025 without filing for a hearing; the district's May 6, 2025 evaluation did not assess written expression.",
+      "proposed": false
+    },
+    "F2": {
+      "question": "How the client learned of it",
+      "answer": "from the service log the district sent on January 21, 2026, from the prior written notice of December 4, 2025, and from the student's own reports.",
+      "proposed": false
+    },
+    "F3": {
+      "question": "Effect on the student",
+      "answer": "her expressive language remains at the 2nd percentile per the May 2025 CELF-5 and she has become reluctant to speak in class, per the IEP's present levels.",
+      "proposed": false
+    },
+    "F4": {
+      "question": "Relief sought",
+      "answer": "compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order; an independent educational evaluation in speech-language and written expression at public expense; and restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.",
+      "proposed": false
+    }
+  },
+  "claims": [
+    { "id": "failure-to-implement", "impact": null },
+    { "id": "evaluation", "impact": null }
+  ],
+  "relief": [
+    {
+      "id": "compensatory-services",
+      "detail": "compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order",
+      "sources": ["F4", "R27", "R46", "R67", "R68", "R69"]
+    },
+    {
+      "id": "iee",
+      "detail": "an independent educational evaluation in speech-language and written expression at public expense",
+      "sources": ["F4", "R82", "R83", "R96"]
+    },
+    {
+      "id": "prospective-services",
+      "detail": "restoration of individual speech-language therapy at 60 minutes per week as the IEP requires",
+      "sources": ["F4", "R27", "R69"]
+    }
+  ],
+  "events": [
+    { "id": "E1", "date": "2025-05-06", "what": "The District's speech-language evaluation of Student, dated May 6, 2025 (A. Lucero); the CELF-5 was administered 05/06/2025.", "sources": ["R86", "R20"] },
+    { "id": "E2", "date": "2025-08-21", "what": "Annual review IEP meeting; the IEP provides speech-language therapy at 60 minutes per week, individual, from 08/21/2025 to 08/20/2026; the team declined the parent's request to reevaluate written expression; the parent signed and wrote that she still wanted written expression tested.", "sources": ["R18", "R27", "R32", "R34"] },
+    { "id": "E3", "date": "2025-09-22", "what": "Week of 09/22/2025: individual speech-language sessions ended when the provider's caseload was reassigned; the log records 30 minutes, group of 3.", "sources": ["R46", "R69"] },
+    { "id": "E4", "date": "2025-10-27", "what": "Week of 10/27/2025: no speech-language service (provider absent; no make-up scheduled).", "sources": ["R51"] },
+    { "id": "E5", "date": "2025-11-10", "what": "The Parent requested in writing an independent educational evaluation in speech-language and written expression at public expense, stating disagreement with the evaluation of May 6, 2025.", "sources": ["R92", "R95", "R96", "R82"] },
+    { "id": "E6", "date": "2025-11-24", "what": "Week of 11/24/2025: no speech-language service (holiday week).", "sources": ["R55"] },
+    { "id": "E7", "date": "2025-12-04", "what": "Prior written notice dated December 4, 2025: the District declined to fund an independent educational evaluation, stating it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window.", "sources": ["R81", "R83", "R84"] },
+    { "id": "E8", "date": "2026-01-14", "what": "The Parent wrote to the District that Student reported her speech sessions were with two other students and half as long, and asked for the service log and when individual sessions would resume.", "sources": ["R98", "R101", "R102"] },
+    { "id": "E9", "date": "2026-01-19", "what": "Week of 01/19/2026: no speech-language service (provider absent; no make-up scheduled).", "sources": ["R61"] },
+    { "id": "E10", "date": "2026-01-21", "what": "The District sent the speech-language service log and wrote that the provider's caseload was reassigned in September and individual sessions have not been available since; it expects to post a second SLP position this spring.", "sources": ["R103", "R106"] },
+    { "id": "E11", "date": "2026-01-30", "what": "End of the service log period (08/25/2025 through 01/30/2026): 22 weeks; 4 weeks at 60 minutes individual; 15 weeks at 30 minutes group; 3 weeks with no service; 690 total minutes delivered against 1,320 required by the IEP for 22 weeks.", "sources": ["R41", "R63", "R64", "R65", "R66", "R67", "R68"] },
+    { "id": "E12", "date": "2026-02-09", "what": "The Parent wrote that the log shows 690 minutes delivered against 1,320 required, asked the District to make up the missed minutes and restore individual sessions now, and noted no response about the independent evaluation beyond the December 4 notice.", "sources": ["R107", "R110", "R111", "R112"] }
+  ],
+  "additionalContents": [
+    {
+      "heading": "County of the student's residence",
+      "text": "____________ (no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition)",
+      "sources": ["S1", "S7"]
+    },
+    {
+      "heading": "Student's date of birth",
+      "text": "04/19/2013",
+      "sources": ["R3", "S1"]
+    },
+    {
+      "heading": "Basis of the petition, in the categories Form H-06E lists",
+      "text": "the evaluation of Student, and the denial of a free appropriate public education",
+      "sources": ["S1"]
+    }
+  ]
+}

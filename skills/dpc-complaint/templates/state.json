@@ -1,0 +1,19 @@
+{
+  "_about": "The filing state's procedure, verified on the web this run. Every field cites entries in `sources`, each with a URL, an access date and the words that support the value. A field with no source keeps the complaint a DRAFT. See references/state-research.md. Delete this key when you copy the file.",
+  "code": "CA",
+  "name": "California",
+  "checkedOn": "2026-01-01",
+  "sources": [
+    { "id": "S1", "title": "the page's own title", "url": "https://", "accessed": "2026-01-01", "quote": "the sentence or two that supports the values citing S1" }
+  ],
+  "seaName": { "value": "", "sources": ["S1"] },
+  "captionAgency": { "value": "the body the complaint is captioned before", "sources": ["S1"] },
+  "filesWith": { "value": "who receives the original and who receives a copy", "sources": ["S1"] },
+  "filingAddress": { "value": "", "sources": ["S1"] },
+  "channels": { "value": "mail / hand delivery / fax / email / portal, with the address, number or URL for each", "sources": ["S1"] },
+  "limitationsMonths": { "value": 24, "sources": ["S1"] },
+  "requiredForm": { "value": "none required, or the form's name and where it is", "sources": ["S1"] },
+  "additionalContents": { "value": [], "sources": ["S1"] },
+  "serviceRecipients": { "value": ["the agency, as it should be named in the certificate", "the Superintendent of the district"], "sources": ["S1"] },
+  "notes": ""
+}

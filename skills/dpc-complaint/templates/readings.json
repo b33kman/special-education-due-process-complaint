@@ -1,0 +1,17 @@
+[
+  {
+    "id": "R1",
+    "docId": "the docId from work/documents.json",
+    "page": 1,
+    "field": "child.nameFirst",
+    "value": "exactly as the page writes it",
+    "note": "optional: why it might be wrong, or what it sits beside"
+  },
+  {
+    "id": "R2",
+    "docId": "the docId from work/documents.json",
+    "page": 10,
+    "field": "iep.services",
+    "value": "Speech-Language Therapy Group (3:1) 2 times per week 30 minutes Separate Location (Therapy Room) 02/24/2026"
+  }
+]
