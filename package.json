@@ -1,6 +1,6 @@
 {
   "name": "dpc-complaint",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "A Claude Code skill that drafts an IDEA due process complaint from school documents, with every sentence traced to its source.",
   "type": "module",

@@ -27,7 +27,7 @@ This example is the with-skill run from the skill's own evaluation (`skills/dpc-
 ## The three warnings, and why they are right
 
 - **`outside-limitations`** — the district's evaluation of May 6, 2025 is more than 12 months before the June 1, 2026 filing date. The validator says so, names North Carolina's rule and its sources, and decides nothing: whether an exception reaches it is counsel's judgment. A skill that assumed the federal two years would have said nothing.
-- **`blank-item`** — the county of residence prints as a blank line under section V because no document states it. The complaint says why it is blank; counsel fills it in.
+- **`blank-item`** — the county of residence prints as a blank line under section V because no document states it. The reason is in the item's `note`, which the warning and the report carry; the pleading shows only the blank, and counsel fills it in.
 - **`filing-date-past`** — the example is dated June 1, 2026 and the gates were last run after that. On a live file the date is set to the real filing date.
 
 ## How it was run

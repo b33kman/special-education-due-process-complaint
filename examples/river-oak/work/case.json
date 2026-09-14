@@ -2,7 +2,7 @@
   "createdOn": "2026-09-14",
   "filingDate": "2026-04-17",
   "state": "CA",
-  "runMeta": { "model": "claude-fable-5-1", "effort": "max", "skill": "dpc-complaint 0.1.0", "note": "Worked example on invented documents. The parent, student, district and school are fictional." },
+  "runMeta": { "model": "claude-fable-5-1", "effort": "max", "skill": "dpc-complaint 1.0.0", "note": "Worked example on invented documents. The parent, student, district and school are fictional." },
   "privacy": { "initials": false },
   "student": {
     "first": { "value": "Jordan", "source": "R1" },

@@ -1,7 +1,7 @@
 {
   "name": "dpc-complaint",
   "description": "Drafts an IDEA due process complaint from a folder of school documents, with every sentence traced to a page or a statement, a human confirmation gate, and the filing state's procedure verified on the web with sources.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": { "name": "Mark Beekman" },
   "homepage": "https://github.com/b33kman/dpc-complaint",
   "repository": "https://github.com/b33kman/dpc-complaint",

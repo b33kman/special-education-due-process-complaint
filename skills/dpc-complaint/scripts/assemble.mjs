@@ -312,7 +312,7 @@ html.push(`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Due
   h3 { font-size: 12pt; font-weight: bold; margin: 18pt 0 4pt; page-break-after: avoid; }
   p.cite { font-style: italic; margin: 0 0 10pt; }
   /* Numbered allegations, double-spaced: the number at the margin, the text a tab in, wrapped lines back at the margin. */
-  p.para { line-height: 2; margin: 0; text-align: left; overflow-wrap: anywhere; }
+  p.para { line-height: 2; margin: 0; text-align: left; overflow-wrap: anywhere; orphans: 2; widows: 2; }
   p.para .n { display: inline-block; width: 0.5in; }
   p.placeholder { background: #fff3cd; padding: 4pt 6pt; margin: 6pt 0; }
   /* The closing: "Dated" at the left margin, the signer's block on the right half, never split across a page. */
