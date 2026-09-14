@@ -46,36 +46,65 @@
       "quote": "2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833. (916) 263-0880. Find a Special Education Form Including Requests for Hearing or Mediation. OAH Secure e-File Transfer (SFT) system."
     }
   ],
-  "seaName": { "value": "California Department of Education", "sources": ["S3", "S4"] },
+  "seaName": {
+    "value": "California Department of Education",
+    "sources": [
+      "S3",
+      "S4"
+    ]
+  },
   "captionAgency": {
-    "value": "Office of Administrative Hearings, State of California",
-    "sources": ["S1", "S3"],
-    "note": "Hearings are conducted by the Office of Administrative Hearings, Special Education Division, on behalf of the California Department of Education (S3); the request is filed with OAH (S1, S6). Captioned as OAH's own decisions are: BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS, STATE OF CALIFORNIA."
+    "value": "Office of Administrative Hearings",
+    "sources": [
+      "S1",
+      "S3"
+    ],
+    "note": "Hearings are conducted by the Office of Administrative Hearings, Special Education Division, on behalf of the California Department of Education (S3); the request is filed with OAH (S1, S6). The caption reads BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS / STATE OF CALIFORNIA, as OAH captions its own decisions."
   },
   "filesWith": {
     "value": "Filed with the Office of Administrative Hearings, Special Education Division, with a copy provided to the school district at the same time, and a Proof of Service showing the request was sent to the other party.",
-    "sources": ["S1", "S2", "S4"]
+    "sources": [
+      "S1",
+      "S2",
+      "S4"
+    ]
   },
   "filingAddress": {
     "value": "Office of Administrative Hearings, Attention: Special Education Division, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833-4231.",
-    "sources": ["S2", "S6"]
+    "sources": [
+      "S2",
+      "S6"
+    ]
   },
   "channels": {
     "value": "OAH Secure e-File Transfer (SFT) system (electronic filing with digital signature); mail or hand delivery to the Sacramento address; fax to (916) 376-4207.",
-    "sources": ["S3", "S6"]
+    "sources": [
+      "S3",
+      "S6"
+    ]
   },
   "limitationsMonths": {
     "value": 24,
-    "sources": ["S5", "S2", "S3"],
+    "sources": [
+      "S5",
+      "S2",
+      "S3"
+    ],
     "note": "Two years from the date the parent knew or had reason to know of the facts, with the two exceptions in Education Code § 56505(l)."
   },
   "requiredForm": {
     "value": "No form is required. OAH offers an optional Request for Due Process Hearing and Mediation form and a Proof of Service form on its Forms page; the Proof of Service showing the request was sent to the district accompanies the filing.",
-    "sources": ["S1"]
+    "sources": [
+      "S1"
+    ]
   },
   "additionalContents": {
     "value": [],
-    "sources": ["S2", "S3", "S4"],
+    "sources": [
+      "S2",
+      "S3",
+      "S4"
+    ],
     "note": "California's required contents (Educ. Code § 56502(c)(1); OAH's procedural safeguards notice) match the federal elements; nothing beyond § 300.508(b) is required in the notice itself. A Proof of Service is filed with it."
   },
   "serviceRecipients": {
@@ -83,7 +112,11 @@
       "the Office of Administrative Hearings, Special Education Division",
       "the Superintendent of the River Oak Unified School District"
     ],
-    "sources": ["S1", "S2", "S4"],
+    "sources": [
+      "S1",
+      "S2",
+      "S4"
+    ],
     "note": "The request is filed with OAH; a copy goes to the district at the same time (§ 56502(c)(1)), with a Proof of Service."
   },
   "notes": "A resolution session is convened within 15 days of the district's receipt of the request unless the parties agree to mediation or waive it (S2). The district may challenge sufficiency within 15 days (Educ. Code § 56502(d))."

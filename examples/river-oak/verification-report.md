@@ -9,7 +9,7 @@ Prepared 2026-09-14 for Jordan Rivera, California. Run with claude-fable-5-1 at 
 1. **Documents read:** 5, 6 pages; 0 page(s) with no text layer.
 2. **Readings machine-verified on their page:** 51 of 51.
 3. **Confirmed by the Parent:** 51 confirmed, 0 edited, 0 rejected. Only confirmed and edited readings reach the complaint.
-4. **Statement of the problems:** 441 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 10.
+4. **Statement of the problems:** 441 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 12.
 
 ```
 2026-09-14T21:56:53.210Z check-draft errors=0 warnings=0 words=441
@@ -22,6 +22,8 @@ Prepared 2026-09-14 for Jordan Rivera, California. Run with claude-fable-5-1 at 
 2026-09-14T22:50:28.081Z check-draft errors=0 warnings=0 words=441
 2026-09-14T23:01:16.556Z check-draft errors=0 warnings=0 words=441
 2026-09-14T23:03:13.889Z check-draft errors=0 warnings=0 words=441
+2026-09-14T23:09:43.201Z check-draft errors=0 warnings=0 words=441
+2026-09-14T23:11:01.488Z check-draft errors=0 warnings=0 words=441
 ```
 
 5. **Validation:** 0 blocking, 1 warning(s).

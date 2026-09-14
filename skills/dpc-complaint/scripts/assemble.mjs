@@ -82,8 +82,13 @@ const doc = { sections: [] }
 const section = (id, heading, paragraphs, opts = {}) => doc.sections.push({ id, heading, paragraphs, ...opts })
 const P = (text, tags = [], cls = null) => ({ text, tags, cls })
 
-const seaCaption = v(state.captionAgency) || v(state.seaName)
 const stateName = state.name || c.state
+// The caption's second line is "STATE OF …", so the agency line must not
+// carry the state's name again ("Office of Administrative Hearings, State
+// of California" prints as "Office of Administrative Hearings").
+const seaCaption = (v(state.captionAgency) || v(state.seaName))
+  .replace(new RegExp(`\\s*(?:,|of|for)?\\s*(?:the\\s+)?state\\s+of\\s+${String(stateName).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`, 'i'), '')
+  .trim()
 
 section('caption', null, [
   P(`BEFORE ${withThe(seaCaption).toUpperCase()}`, state.captionAgency?.sources ?? state.seaName?.sources ?? [], 'caption-court'),
@@ -294,13 +299,13 @@ html.push(`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Due
   /* The forum's name, then the caption: parties on the left inside an L-shaped rule, case number and title on the right. */
   .court { text-align: center; font-weight: bold; text-transform: uppercase; margin: 0 0 18pt; }
   table.caption { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 24pt; }
-  table.caption td { vertical-align: top; padding: 0; }
-  td.parties { width: 3.55in; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 0 0.3in 14pt 0; }
-  td.case { padding: 0 0 0 0.3in; }
-  td.parties p, td.case p { margin: 0 0 12pt; }
-  td.parties p:last-child, td.case p:last-child { margin-bottom: 0; }
-  .caption-role { text-align: right; padding-right: 0.4in; }
-  .caption-v { padding-left: 0.5in; }
+  table.caption td { vertical-align: top; }
+  table.caption td.parties { width: 3.5in; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 0 0.3in 16pt 0; }
+  table.caption td.case { padding: 0 0 0 0.35in; }
+  table.caption td p { margin: 0 0 12pt; }
+  table.caption td p:last-child { margin-bottom: 0; }
+  table.caption p.caption-role { text-align: right; padding-right: 0.4in; }
+  table.caption p.caption-v { padding-left: 0.5in; }
   .caption-title { font-weight: bold; text-transform: uppercase; }
   /* Headings centred and set in capitals; the regulation under each in italics. */
   h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; text-align: center; margin: 24pt 0 8pt; page-break-after: avoid; }
