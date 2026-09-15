@@ -2,6 +2,10 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.7 — 2026-09-15
+
+- Claims and relief are offered as one checkbox question each, never as a typed list: no more than four recommended items — the claims the documents support best, then the remedies that fit the chosen claims — with a last box, "Add another", that shows the rest four at a time.
+
 ## 1.0.6 — 2026-09-15
 
 - More questions up front, kept quick with buttons and checkboxes: who holds the child's education rights (including a student of 18 or older), whether an advocate is helping, and whether an earlier complaint, hearing or settlement covers the same issues.

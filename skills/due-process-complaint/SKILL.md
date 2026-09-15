@@ -49,7 +49,7 @@ Ask these only where the documents point to them:
 - a proposed change of program or school: do they want the current one kept while the case goes on (stay-put, or pendency)?
 - no stable address: the contact information to give instead, as for a homeless child (it goes in `address:`).
 
-Then ask them to choose the claims and the relief, each as checkboxes: a short name and one line of what the documents show, plus a box to write in something else. Keep it to one screen, and don't say which ones the record supports or how strong any of them is.
+Then ask them to choose the claims, and then the relief, each as one checkbox question: the app's multiple-choice question, not a list typed into your message. Recommend no more than four: the claims the documents support best, each named in a few words with its key fact in a few more, and a last box, "Add another". Only if they tick it, offer the rest the same way, four at a time. Offer relief only for the claims they chose — the four remedies that fit them best, with the same last box. Never print a long list, and never ask them to type letters or numbers.
 
 Anything they tell you in their own words — what the district did, how they learned of it, what it has meant for the student, what they want — goes into `<case>/statement.md`, as they said it. That file counts as a source.
 
@@ -80,6 +80,6 @@ Then review the draft for everything a script cannot catch, using `references/re
 
 Set `status: final` and run `render.mjs <case>`. It writes `complaint.pdf` and `complaint.docx` only when the check passes on a final complaint; otherwise it writes `complaint.DRAFT.pdf` and `complaint.DRAFT.docx`, marked DRAFT — NOT FOR FILING. Look at the PDF before handing it over.
 
-Give the person `complaint.pdf`, `complaint.docx` and `filing-instructions.md` to download, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md`. Say that you did not decide which claims the file supports and that you say nothing about how the complaint will fare.
+Give the person `complaint.pdf`, `complaint.docx` and `filing-instructions.md` to download, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md`. Say that they chose the claims and that you say nothing about how the complaint will fare.
 
 Offer a short cover letter to send with it to the hearing office and the district. If they want one, write it as a one-page Word file from the caption and `filing-instructions.md`, with nothing in it the complaint doesn't say.
