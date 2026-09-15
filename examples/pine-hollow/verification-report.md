@@ -9,7 +9,7 @@ Prepared 2026-09-15 for Maya Okafor, North Carolina. Run with claude-fable-5-1 a
 1. **Documents read:** 4, 5 pages; 0 page(s) with no text layer.
 2. **Readings machine-verified on their page:** 112 of 112.
 3. **Confirmed by counsel:** 112 confirmed, 0 edited, 0 rejected. Only confirmed and edited readings reach the complaint.
-4. **Statement of the problems:** 866 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 19.
+4. **Statement of the problems:** 866 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 20.
 
 ```
 2026-09-14T22:37:21.544Z check-draft errors=0 warnings=0 words=532
@@ -31,6 +31,7 @@ Prepared 2026-09-15 for Maya Okafor, North Carolina. Run with claude-fable-5-1 a
 2026-09-15T00:05:37.576Z check-draft errors=0 warnings=0 words=866
 2026-09-15T00:12:45.520Z check-draft errors=0 warnings=0 words=866
 2026-09-15T00:17:01.406Z check-draft errors=0 warnings=0 words=866
+2026-09-15T00:18:00.125Z check-draft errors=0 warnings=0 words=866
 ```
 
 5. **Validation:** 0 blocking, 3 warning(s).

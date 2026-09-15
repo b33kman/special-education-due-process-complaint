@@ -276,7 +276,10 @@ test("a claim outside the catalogue prints the person's heading and regulation, 
   rmSync(dir, { recursive: true, force: true })
   const bare = validateCase((c) => { c.claims.push({ id: 'other' }) })
   saveText(bare, 'statement.annotated.md', text(bare, 'statement.annotated.md') + sectionD)
-  expectBlocking(bare, 'claim-other-incomplete')
+  const r2 = run('run-gates', bare)
+  assert.notEqual(r2.code, 0)
+  assert.match(r2.out, /claim "other" carries no heading/)
+  rmSync(bare, { recursive: true, force: true })
 })
 test('a section missing for a claim is refused', () => {
   expectDraftError(draftCase((s) => s.slice(0, s.indexOf('C.'))), 'sections')

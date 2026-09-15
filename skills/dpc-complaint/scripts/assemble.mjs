@@ -136,9 +136,11 @@ const introTags = [...src(c.student?.first), ...src(c.student?.last), ...parentS
 // regulation the person typed, and nothing the skill composed.
 const ownClaim = (cl) => (cl.id === 'other' && String(cl.heading ?? '').trim() ? { id: 'other', filingHeading: String(cl.heading).trim(), filingClause: String(cl.clause ?? cl.heading).trim(), cfr: String(cl.cfr ?? '').trim(), isProcedural: Boolean(cl.isProcedural) } : null)
 const chosen = (c.claims ?? []).map((cl) => ({ ...cl, ref: claimsRef.find((r) => r.id === cl.id) ?? ownClaim(cl) }))
-const missing = chosen.filter((cl) => !cl.ref).map((cl) => cl.id)
+const missing = chosen.filter((cl) => !cl.ref)
 if (missing.length) {
-  console.error(`unknown claim id(s): ${missing.join(', ')} — see references/claims.json`)
+  for (const cl of missing) {
+    console.error(cl.id === 'other' ? 'claim "other" carries no heading — the person supplies the heading (and, for counsel, the regulation) in case.json' : `unknown claim id "${cl.id}" — see references/claims.json`)
+  }
   process.exit(1)
 }
 const clauses = chosen.map((cl) => cl.ref.filingClause)
