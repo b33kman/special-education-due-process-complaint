@@ -16,18 +16,11 @@ Built for special education attorneys, legal aid organizations, advocates, and p
   <sub>The first page of a finished complaint, from the <a href="examples/river-oak/">California example</a> (invented people and documents).</sub>
 </p>
 
-## Install in three steps
+## Install in two steps
 
 For the **Claude app** — Chat or Cowork, on the web or the desktop app — on a paid Claude plan (Pro, Max, Team or Enterprise). No terminal, nothing to install on your computer.
 
-### 1. Turn on code execution
-
-The plugin runs small programs to read your PDFs and make the finished PDF and Word files.
-
-- **On your own plan (Pro or Max):** open **Settings → Capabilities** and turn on **Code execution and file creation**.
-- **On a Team or Enterprise plan:** your administrator turns on **Code execution and file creation** (and **Skills**) in **Organization settings → Capabilities**, and lets it reach **package managers** — on Enterprise plans network access starts switched off.
-
-### 2. Add the plugin
+### 1. Add the plugin
 
 <p align="center">
   <img src="docs/images/install-steps.svg" alt="In Claude: 1. Open Customize in the left sidebar, then Plugins. 2. Click + and choose Add marketplace, from a repository. 3. Paste https://github.com/b33kman/special-education-due-process-complaint. 4. Find Due Process Complaint Drafter and click Install." width="760">
@@ -43,7 +36,7 @@ The plugin runs small programs to read your PDFs and make the finished PDF and W
 
 4. Click **Browse plugins**, find **Due Process Complaint Drafter**, and click **Install**.
 
-### 3. Turn on updates
+### 2. Turn on updates
 
 In the same **Plugins** screen, turn on automatic updates for this marketplace if the app offers it, so you always have the latest version. See [Updating](#updating).
 
@@ -95,9 +88,9 @@ Until the complaint passes the check and is marked final, it is written as `comp
 
 ## If something goes wrong
 
-- **Claude says it can't run code or create files.** Turn on **Code execution and file creation** (install step 1), start a new chat, and ask again.
-- **Claude says it can't install packages or reach the package registry.** On a Team or Enterprise plan, ask your administrator to allow network access to **package managers** for code execution.
-- **You can't find the plugin in Browse plugins.** Check that the address in step 2 was pasted exactly, then refresh the page or reopen the app.
+- **Claude says it can't run code or create files.** That setting is on by default, but it can be switched off: open **Settings → Capabilities**, turn on **Code execution and file creation**, start a new chat, and ask again. On a Team or Enterprise plan, your administrator controls it.
+- **Claude says it can't install packages or reach the package registry.** Your organization has limited Claude's network access. Ask your administrator to allow **package managers** for code execution (Organization settings → Capabilities).
+- **You can't find the plugin in Browse plugins.** Check that the address in step 1 was pasted exactly, then refresh the page or reopen the app.
 - **A document is a scan or a photo, or isn't a PDF** (an email, a picture of a letter). Attach it anyway and tell Claude; it reads it and types it out word for word so it can be checked like the rest.
 - **Still stuck?** [Open an issue](https://github.com/b33kman/special-education-due-process-complaint/issues) and describe what you see.
 
@@ -169,7 +162,7 @@ No. It drafts from the documents and the facts the person filing confirms, and i
 Special education attorneys and legal aid organizations drafting for clients, advocates helping families, and parents filing on their own (pro se). It asks an attorney the attorney's questions and a parent in plain words; the pleading is the same either way.
 
 **What does it need to run?**
-A paid Claude plan with **Code execution and file creation** turned on, in Chat or Cowork (or Claude Code). It reads PDFs; a scanned page, a photo or an email is read and typed out by Claude so it can be checked too.
+A paid Claude plan, in Chat or Cowork (or Claude Code). The code execution it relies on is on by default. It reads PDFs; a scanned page, a photo or an email is read and typed out by Claude so it can be checked too.
 
 **How does it keep errors out of the complaint?**
 Two ways. A script refuses any date, figure or quotation that is not in the documents or in the person's own statement, a missing required element, and a complaint that does not follow the form. Then the draft is reviewed, by a fresh subagent where possible, for what a script cannot catch — fidelity to the pages, the state's own rules, consistency, legal posture, completeness and the rendered files — and the errors are fixed before the complaint is final. Until then it is written only as `complaint.DRAFT.pdf`.

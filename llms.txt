@@ -2,7 +2,7 @@
 
 > A Claude plugin and skill (for Claude Chat, Cowork and Claude Code) that drafts an IDEA special education due process complaint from a folder of school documents, for any US state and the District of Columbia. It reads the IEPs, evaluations, prior written notices, progress reports, service logs and emails; confirms the facts with the person filing; looks up the state's filing procedure on its official pages; drafts the complaint as a pleading; checks that every date, figure and quotation is in the documents or the person's own words and that every element 34 C.F.R. § 300.508(b) requires is there; reviews the draft for errors; and delivers it as a PDF to file and a Word file to edit. It is for special education attorneys, legal aid organizations, advocates and parents. It is not legal advice and says nothing about how a complaint will fare.
 
-Install in Claude (web or desktop app): Customize → Plugins → + → Add marketplace → add from repository https://github.com/b33kman/special-education-due-process-complaint → install Due Process Complaint Drafter. Requires a paid plan with Code execution and file creation turned on. In Claude Code: `/plugin marketplace add b33kman/special-education-due-process-complaint`, then `/plugin install due-process-complaint@due-process-complaint`.
+Install in Claude (web or desktop app): Customize → Plugins → + → Add marketplace → add from repository https://github.com/b33kman/special-education-due-process-complaint → install Due Process Complaint Drafter. Requires a paid plan (code execution, on by default). In Claude Code: `/plugin marketplace add b33kman/special-education-due-process-complaint`, then `/plugin install due-process-complaint@due-process-complaint`.
 
 ## Docs
 
