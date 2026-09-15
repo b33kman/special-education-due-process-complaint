@@ -134,6 +134,22 @@ test('a claim points to its facts by label, and the label prints as that paragra
   rmSync(dir, { recursive: true, force: true })
 })
 
+test('a claim that only lists the paragraphs that bear on it is refused', () => {
+  const claim = /## Statement of the problems[\s\S]*?(?=### B\.)/
+  refused((md) => {
+    const [a] = md.match(claim)
+    return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide an adequate individualized education program\n\n*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraphs [#goal] and [#progress] bear on this problem.\n\n`)
+  }, /says only which paragraphs bear on the problem/)
+  // The same claim with its facts said in its own words, pointing to the chronology, passes.
+  const dir = copy(examples.proSe, (md) => {
+    const [a] = md.match(claim)
+    return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide an adequate individualized education program\n\n*34 C.F.R. §§ 300.320, 300.324.*\n\n[#goal] On September 8, 2025, the IEP team adopted an annual reading fluency goal of 60 words per minute, and the progress reports dated November 14, 2025, January 23, 2026 and March 6, 2026 recorded 21, 24 and 23 words per minute. On March 12, 2026, the IEP team declined to revise the goal (paragraph [#goal]).\n\n`)
+  })
+  const r = run('check', dir)
+  assert.equal(r.code, 0, r.out)
+  rmSync(dir, { recursive: true, force: true })
+})
+
 test('a label that points nowhere, starts two paragraphs, or is not lowercase words is refused', () => {
   refused(once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraph [#nothing] bear on this problem.'), /“\[#nothing\]” points to no paragraph/)
   refused((md) => once('On November 14, 2025, the District’s progress report', '[#goal] On November 14, 2025, the District’s progress report')(once('On September 8, 2025, the IEP team adopted the annual', '[#goal] On September 8, 2025, the IEP team adopted the annual')(md)), /“\[#goal\]” starts two paragraphs/)

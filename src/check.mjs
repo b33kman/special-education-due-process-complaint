@@ -7,7 +7,8 @@
 //   - the required elements are there: the child's name, the address of
 //     residence, the school, the problems with their facts, a resolution;
 //   - the sections follow the form in references/exemplar.md, in order;
-//   - every [#label] points to a paragraph that starts with that label.
+//   - every [#label] points to a paragraph that starts with that label, and each
+//     claim says what its problem is rather than only listing paragraph numbers.
 //
 //   node scripts/check.mjs <case folder>
 //
@@ -178,6 +179,22 @@ export function checkComplaint(dir) {
         if (!labels.has(m[1])) errors.push(`${s.heading}: “[#${m[1]}]” points to no paragraph — start the paragraph it means with [#${m[1]}]`)
       }
     }
+  }
+
+  // A claim says what the problem is; a list of paragraph numbers is not a claim.
+  const problems = sections.find((s) => s.key === 'problems')
+  if (problems) {
+    let claim = null
+    let words = 0
+    const claimDone = () => {
+      if (claim && words < 25) errors.push(`“${claim}” says only which paragraphs bear on the problem — say what the problem is, with its key dates and figures`)
+    }
+    for (const block of problems.blocks) {
+      if (block.startsWith('###')) { claimDone(); claim = block.replace(/^#+\s*/, '').trim(); words = 0; continue }
+      if (/^\*.*\*$/.test(block)) continue
+      words += block.replace(/\[#[^\]]*\]/g, ' ').split(/\s+/).filter(Boolean).length
+    }
+    claimDone()
   }
 
   // Every date, figure and quotation in the body, against the sources.

@@ -62,13 +62,13 @@ Student was born on February 9, 2016, resides with the Parent at 220 Birch Lane,
 
 *34 C.F.R. §§ 300.320, 300.324.*
 
-The facts at paragraphs [#goal] and [#progress] bear on this problem.
+The September 15, 2025 IEP sets an annual math goal of 80% accuracy on grade-level multi-step word problems, from present levels of 38% accuracy on the same measure. The District's progress reports of November 21, 2025 and January 30, 2026 recorded 40% and 42% accuracy, and the January 30, 2026 report states that Student was “not on track” to meet the goal. The District has not revised the goal or the services since (paragraphs [#goal] and [#progress]).
 
 ### B. Failure to implement the services the IEP requires
 
 *34 C.F.R. § 300.323.*
 
-The facts at paragraphs [#services], [#leave] and [#log] bear on this problem.
+The September 15, 2025 IEP provides 150 minutes per week of specialized academic instruction in math. The District's service log for September 15, 2025 to January 30, 2026 records 18 instructional weeks and 9 weeks with no specialized academic instruction in math, including the week of October 20, 2025, for which it notes “teacher on leave; no substitute” (paragraphs [#services], [#leave] and [#log]).
 
 ## Proposed resolution
 
@@ -116,7 +116,7 @@ Self-represented (pro se)
 
 ## What to notice
 
-- **Each fact is stated once, in the statement of facts; each claim points to the paragraphs that bear on it.** Every fact paragraph is a fact with a date, a figure, a document or a specific act. Nothing is characterised and nothing is computed: not "9 of 18 weeks — half the time", not "no measurable progress", not an age worked out from the date of birth. State the figures the documents give.
+- **Each fact is stated once, in the statement of facts; each claim says what the problem is and points to the paragraphs that carry the rest.** A claim is a short account of what went wrong, in its own terms, with the dates and figures that make it — never a bare list of paragraph numbers, and never the whole chronology again. Every fact paragraph is a fact with a date, a figure, a document or a specific act. Nothing is characterised and nothing is computed: not "9 of 18 weeks — half the time", not "no measurable progress", not an age worked out from the date of birth. State the figures the documents give.
 - **Documents are named and dated in the prose** ("The District's progress reports dated November 21, 2025 and January 30, 2026"). No page cites on the complaint.
 - **Quotations are short and exact**, only where the document's own words are the fact.
 - **Nothing concludes inside the facts.** The introduction's one sentence names the claims; the regulation under each heading does the rest.

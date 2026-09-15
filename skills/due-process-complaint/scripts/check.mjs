@@ -141,6 +141,25 @@ ${statement}`;
       }
     }
   }
+  const problems = sections.find((s) => s.key === "problems");
+  if (problems) {
+    let claim = null;
+    let words = 0;
+    const claimDone = () => {
+      if (claim && words < 25) errors.push(`\u201C${claim}\u201D says only which paragraphs bear on the problem \u2014 say what the problem is, with its key dates and figures`);
+    };
+    for (const block of problems.blocks) {
+      if (block.startsWith("###")) {
+        claimDone();
+        claim = block.replace(/^#+\s*/, "").trim();
+        words = 0;
+        continue;
+      }
+      if (/^\*.*\*$/.test(block)) continue;
+      words += block.replace(/\[#[^\]]*\]/g, " ").split(/\s+/).filter(Boolean).length;
+    }
+    claimDone();
+  }
   const docDates = datesIn(documents), stmtDates = datesIn(statement);
   const docMonths = monthsIn(documents), stmtMonths = monthsIn(statement);
   for (const s of body) {
