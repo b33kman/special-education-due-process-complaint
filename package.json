@@ -1,15 +1,42 @@
 {
-  "name": "dpc-complaint",
+  "name": "special-education-due-process-complaint",
   "version": "1.0.0",
   "private": true,
-  "description": "A Claude Code skill that drafts an IDEA due process complaint from school documents, with every sentence traced to its source.",
+  "description": "Due Process Complaint Drafter — a Claude Code plugin and skill that drafts an IDEA special education due process complaint from school documents, checks every date, figure and quotation against them, and delivers a PDF to file and a Word file to edit.",
+  "keywords": [
+    "special-education",
+    "due-process-complaint",
+    "due-process-hearing",
+    "idea",
+    "individuals-with-disabilities-education-act",
+    "iep",
+    "special-education-law",
+    "legal-drafting",
+    "legal-tech",
+    "parent-advocacy",
+    "disability-rights",
+    "pdf",
+    "docx"
+  ],
+  "homepage": "https://github.com/b33kman/special-education-due-process-complaint#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b33kman/special-education-due-process-complaint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b33kman/special-education-due-process-complaint/issues"
+  },
+  "author": "Mark Beekman (https://github.com/b33kman)",
   "type": "module",
   "scripts": {
-    "setup": "cd skills/dpc-complaint/scripts && npm install",
-    "test": "node --test tests/*.test.mjs",
-    "example": "node -e \"const fs=require(\\\"fs\\\"),os=require(\\\"os\\\"),path=require(\\\"path\\\");const d=fs.mkdtempSync(path.join(os.tmpdir(),\\\"dpc-example-\\\"));fs.cpSync(\\\"examples/river-oak\\\",d,{recursive:true});console.log(\\\"running on a copy: \\\"+d);process.exitCode=require(\\\"child_process\\\").spawnSync(process.execPath,[\\\"skills/dpc-complaint/scripts/run-gates.mjs\\\",d],{stdio:\\\"inherit\\\"}).status\""
+    "test": "node --test tests/*.test.mjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "docx": "9.7.1",
+    "pdf-lib": "1.17.1",
+    "pdfjs-dist": "4.10.38"
   }
 }

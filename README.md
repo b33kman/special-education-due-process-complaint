@@ -1,71 +1,57 @@
-# dpc-complaint
+# Due Process Complaint Drafter
 
-A Claude Code skill that drafts an IDEA special-education **due process complaint** from a folder of school documents — IEPs, evaluations, prior written notices, progress reports, service logs, emails — for any US state, with every sentence traced to a page in those documents or to a statement the person filing made. It delivers the complaint as a **PDF to file** and a **Word file to edit**, in the form of a pleading a lawyer files.
+**A Claude Code plugin that drafts an IDEA special education due process complaint from a folder of school documents** — IEPs, evaluations, prior written notices, progress reports, service logs, emails — for any US state and the District of Columbia.
 
-It is built for the people who actually file these: special-education attorneys, legal-aid organizations, advocates, and parents. It is not legal advice and it does not decide which claims a file supports. It reads, verifies, drafts from what was confirmed, and shows its sources.
+Claude reads every page, confirms the facts with the person filing, looks up the state's filing procedure on its official pages, and drafts a complaint in the form of a pleading. A script checks that every date, figure and quotation in it is in the documents or in the person's own words; a fresh reviewer checks the rest. The result is a **PDF to file** and a **Word file to edit**, with filing instructions for the state.
+
+It is built for the people who file these: special education attorneys, legal aid organizations, advocates, and parents filing on their own. It is not legal advice, it does not decide which claims a file supports, and it says nothing about how a complaint will fare.
 
 ## What you get
 
-For a case folder holding the documents, the skill produces:
+For a case folder holding the documents:
 
 | File | What it is |
 |---|---|
-| `complaint.pdf` | The complaint, to file: the forum's name over a bracketed caption, then consecutively numbered double-spaced paragraphs — introduction, contact and residence information (name, date of birth, address, school), the statement of facts (the confirmed chronology, oldest first), the statement of the problems (one lettered section per claim, the regulation under each heading), the proposed resolution (each remedy its own lettered sub-paragraph, counsel's fees reservation after them), any requests concerning the hearing, any state-required items — then the signature block and the certificate of service. Letter, one-inch margins, Times 12, page numbers. |
-| `complaint.docx` | The same document as a Word file, for any editing the signer wants before filing. |
-| `complaint.md` | The same text, plain. |
-| `sources.md` | Every paragraph of the complaint, keyed by its number, with what it rests on: the document, page and verbatim words for each reading; the person's own statements; the web page, quotation and access date for each fact about the state's procedure — and a list of every sentence, date or figure that rests on the person's statement and on no document. |
-| `verification-report.md` | What was checked and what passed: readings verified on their page, confirmations, the draft gate's rounds, the state quotations checked against their pages, the validator's findings, a *How to file* section for the state (where the original goes, who is served and whether service comes first, the channels, the form, the window), and a status line — **FINAL** or **DRAFT — NOT FOR FILING**. |
+| `complaint.pdf` | The complaint, to file: the forum's name over a bracketed caption, then consecutively numbered, double-spaced paragraphs — introduction, contact and residence information, statement of facts, statement of the problems (one lettered section per claim, the regulation under each heading), proposed resolution — the signature block and the certificate of service. Letter, one-inch margins, Times 12, page numbers. |
+| `complaint.docx` | The same document as a Word file, to edit before filing. |
+| `complaint.md` | The complaint's source text: what Claude drafted and the script checked. |
+| `filing-instructions.md` | How to file in that state — where the complaint goes, how it may be sent, who is served and when, the time limit — each point with the official page it came from. |
+| `statement.md` | The person's own account, in their words. |
 
-While anything blocks FINAL, all three copies of the complaint carry **DRAFT — NOT FOR FILING** at their head, so a draft cannot be filed by mistake.
+Until the complaint passes the check and is marked final, it is written as `complaint.DRAFT.pdf` and `complaint.DRAFT.docx` with **DRAFT — NOT FOR FILING** at the top, so a draft cannot be filed by mistake.
 
-## How it keeps facts honest
+## How it works
 
-The skill is a procedure plus eleven small scripts and a shared helper, and the scripts are the part that cannot be talked out of a rule:
-
-1. **Read.** `pdf-text.mjs` turns each PDF into per-page text and keeps the inventory the model fills in (kind, date, title).
-2. **Extract, verbatim.** The model reads each document against a schema (`references/extraction-schema.json`) and records each value exactly as the page writes it, with the page number.
-3. **Verify.** `verify-readings.mjs` checks every reading against the page text. A paraphrase, a "corrected" date, a wrong page number, or a figure that is only the tail of the page's figure is refused; a value too short to prove anything on its own ("7", "NC", "2025", a ZIP code) must come with the words around it.
-4. **Confirm.** The person decides each reading — confirm, correct, or reject. `confirm.mjs` records it. A correction is allowed only to a reading the verifier found on its page. Nothing unconfirmed can be cited.
-5. **Verify the state's procedure.** Which body the complaint is captioned before, who gets the original and the copy, whether service comes before filing, the filing channels, the limitations window, whether the state requires a form or extra contents — each verified on the web during the run and recorded with its URL, access date and a quotation of the page's own words (`references/state-research.md`; `fetch-text.mjs` reads a page or a PDF into text). Then `verify-state.mjs` checks every quotation against the page it cites, exactly as readings are checked: a "quotation" that is not on the page supports nothing. A 51-state research table ships as the starting point; it is never the authority.
-6. **Draft, tagged.** Every sentence of the statement of the problems ends with the ids of the sources it rests on. `check-draft.mjs` refuses any sentence whose dates, figures or quotations are not in the sources it cites, and enforces the pleading rules: third person, no legal conclusions, no citations in the facts, no advice, no outcome language, no given names, no arithmetic in digits or in words, no repetition. The same gate holds the chronology — each event's date must be written in a source the event names — and the remedies, in the person's own words, to the same rules, and it names every sentence that rests on the person's statement alone.
-7. **Assemble, validate, render, report.** `run-gates.mjs` composes the complaint from fixed wording and confirmed data, checks every element 34 C.F.R. § 300.508(b) requires, checks that every caption fact prints its confirmed reading, that every state-required item has an entry, and that the state block and its quotations verified, checks the limitations window, renders the PDF and the Word file, and writes the files above. The deliverables of the previous run are removed first, so nothing stale survives a run that stops.
-
-The gates are tested by breaking them: `tests/gates.test.mjs` copies the worked examples, changes one thing a model could plausibly get wrong (an invented date, a date in the wrong form, a paraphrased reading, a first-person remedy, a missing ZIP code, an unsourced limitations window, a state quotation that is not on its page, an event whose date no source states), and asserts the script refuses it with an error rather than a warning; a few pin the printed form, and the PDF and Word files are read back.
+1. **Ask** who is filing (a parent, or an attorney), the state and the filing date.
+2. **Read** every PDF page by page (`pdf-text.mjs`).
+3. **Confirm** the facts the complaint will rest on with the person — names, address, school, events and dates, each with its page — and take their own account in their words.
+4. **Look up the state's procedure** on its official due process filing page, listed for all 51 jurisdictions in `references/state-rules.json`.
+5. **Draft** `complaint.md` in the form of `references/exemplar.md`.
+6. **Check** it (`check.mjs`): every date, figure and quotation must be in the documents or the person's statement; the required elements must be there; the sections must follow the form. Then **review** it for everything else (`references/review.md`) and fix what is found.
+7. **Render** the PDF and the Word file (`render.mjs`) and hand them over with the filing instructions.
 
 ## Install
 
 Requires [Claude Code](https://claude.com/claude-code) and Node 20 or later.
 
-**As a plugin (the simplest route).** In Claude Code:
+**As a plugin.** In Claude Code:
 
 ```
-/plugin marketplace add b33kman/dpc-complaint
-/plugin install dpc-complaint@dpc-complaint
+/plugin marketplace add b33kman/special-education-due-process-complaint
+/plugin install due-process-complaint@due-process-complaint
 ```
 
-Then install the three script dependencies once. Claude Code keeps a copy of each installed plugin version under `~/.claude/plugins/`; this installs into every copy it finds, and has to be run again after a plugin update (each version is a new copy):
+Claude Code installs the three script dependencies (`pdfjs-dist`, `docx`, `pdf-lib`) with the plugin.
+
+**As a personal skill, from a clone:**
 
 ```bash
-for d in $(find ~/.claude/plugins -type d -path '*/skills/dpc-complaint/scripts' -not -path '*/node_modules/*'); do (cd "$d" && npm install); done
+git clone https://github.com/b33kman/special-education-due-process-complaint.git
+cd special-education-due-process-complaint && npm install
+ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint
 ```
 
-**As a personal skill (all your projects), from a clone:**
-
-```bash
-git clone https://github.com/b33kman/dpc-complaint.git
-cd dpc-complaint && npm run setup
-ln -s "$(pwd)/skills/dpc-complaint" ~/.claude/skills/dpc-complaint
-```
-
-**As a project skill:** copy or link `skills/dpc-complaint` into your project's `.claude/skills/` and run `npm install` in its `scripts/` folder.
-
-Then, in Claude Code, ask for a due process complaint from a folder of PDFs. The skill triggers on that request; you can also invoke it directly — `/dpc-complaint:dpc-complaint` when installed as a plugin (plugin skills carry the plugin's name), `/dpc-complaint` when installed as a personal or project skill.
-
-## Which model to run it with
-
-Extraction and drafting are where the quality lives. Run this skill with **the most capable Claude model available to you, at the highest effort setting** — as of this writing (September 2026) that is Claude Fable 5.1, or Opus 5. Do not run it on a small or fast model: a reading the verifier refuses and a draft the gate refuses cost more in rounds than a stronger model costs in tokens. Check the current model lineup in your Claude Code settings; names move.
-
-A run is not quick. Reading every page verbatim and verifying the state's procedure on the web are the long parts; the gates themselves take seconds.
+Then ask Claude Code for a due process complaint from a folder of PDFs. The skill starts on that request; you can also call it directly — `/due-process-complaint:due-process-complaint` as a plugin, `/due-process-complaint` as a personal skill. Run it with the most capable Claude model available to you, at the highest effort setting: reading and drafting are where the quality is.
 
 ## Using it
 
@@ -79,60 +65,74 @@ my-case/
     ...
 ```
 
-Then, in Claude Code: *"Draft a due process complaint from the documents in `my-case/`. The state is California and I'm filing pro se."* The skill asks what it needs in short screens — one purpose each, never more than three questions, buttons for the closed choices — first before reading (who is filing, the state and the filing date, the signer's details, mediation, an interpreter) and again once the readings are confirmed (who the documents name and whether that is who is filing, the four statements of fact, the claims, the relief and its quantities, the chronology). It asks a parent in plain words and an attorney in the terms of art, and it asks an attorney the attorney's questions: whether to reserve attorneys' fees and costs under 20 U.S.C. § 1415(i)(3)(B) (a court awards them, so the complaint reserves the right in its own paragraph after the remedies), how the respondent should be captioned where the state's form names a board, whether a claim outside the catalogue needs its own heading and regulation or a catalogue heading needs rewording, whether a discipline case should ask for an expedited hearing. Anything you answer up front — including "confirm every reading that checks out against the page; I'll review the sources" — is taken and not asked again, so an attorney who supplies everything in the first message gets a complete run with no questions. The output is the PDF and the Word file, every run; there is nothing to choose.
+Then: *"Draft a due process complaint from the documents in `my-case/`. The state is California and I'm filing pro se."*
 
-Two worked examples ship, each a complete run on invented documents — the PDFs, every intermediate file in `work/` (the readings, the state pages as fetched, the checks), and the deliverables. `examples/river-oak/` is a parent filing pro se in California; `examples/pine-hollow/` is an attorney filing in North Carolina, where the window is one year, the form puts the county in the caption and names a Board of Education as respondent, and a copy goes to the state agency. Each has a README that walks through the run. To regenerate either set of PDFs from its source: `cd examples/<name> && npm install --no-save --no-package-lock pdf-lib && node make-documents.mjs` (the PDFs change byte for byte; their text does not).
+Two worked examples ship, each on invented documents: `examples/river-oak/` (California, a parent filing pro se) and `examples/pine-hollow/` (North Carolina, an attorney filing, with the county in the caption and a one-year time limit).
 
 ## What it will not do
 
-- It will not choose your claims. It lists what a complaint of this kind may plead and one sentence on what each turns on; you choose.
-- It will not say how the complaint will fare, in the document or in chat.
-- It will not fill a gap in the record. If no document and no statement of yours supports a fact, the complaint says less — and it tells you which sentences rest on your statement alone.
-- It will not take a filing address, a limitations period or a forum from memory, and it will not quote a state's page it has not checked. Each is verified on the web during the run, and if it cannot be, the complaint stays a DRAFT and the report says which item.
-- It does not read scans well. A page with no text layer must be read by eye, and readings from it are marked unverifiable in the report.
-- It signs for two kinds of filer: an attorney, or the parent pro se. A lay advocate who helps a parent is not a signer and is not named on the pleading. It captions an adult student without "a minor" and says that IDEA rights may have transferred; who the petitioner is then is the signer's decision.
+- Choose the claims or the relief. The person filing decides.
+- Say how the complaint will fare, in the document or in chat.
+- Fill a gap in the record. If no document and no statement supports a fact, the complaint says less.
+- Take a filing address or a time limit from memory. They come from the state's official pages, every run.
 
 ## Confidentiality
 
-The documents stay on the machine running the skill. What leaves it is the model provider's normal traffic and the state-procedure web requests, which carry only the page's URL and name no student. Anyone using this on a client's file should be satisfied that their model provider's terms fit their confidentiality obligations. That judgment is theirs.
+The documents stay on the machine running the skill; what leaves it is the model provider's normal traffic and the state-procedure web requests, which name no student. Anyone using this on a client's file should be satisfied that their model provider's terms fit their confidentiality obligations. **Never commit a real case folder**: the `.gitignore` excludes every `work/` folder and every PDF outside `examples/`. The examples are fiction.
 
-**Never commit a real case folder.** The `.gitignore` excludes every `work/` folder and every PDF anywhere in the repository except under `examples/`; keep live case folders outside the repository altogether. The examples are fiction.
+## Frequently asked questions
+
+**What is a special education due process complaint?**
+A written complaint that starts a due process hearing under the Individuals with Disabilities Education Act (IDEA). A parent or a public agency may file one on any matter relating to a child's identification, evaluation or educational placement, or the provision of a free appropriate public education (34 C.F.R. § 300.507(a)). The hearing officer decides the dispute after a hearing; the complaint sets out what the hearing is about.
+
+**What must a due process complaint contain?**
+Six things, under 34 C.F.R. § 300.508(b): the child's name; the address of the child's residence; the name of the child's school; for a homeless child, available contact information and the school; a description of the problem, including the facts relating to it; and a proposed resolution to the extent known. Some states require more. This skill will not render a complaint as final while one is missing.
+
+**How long does a family have to file?**
+Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own explicit time limit. A few states do: the research table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The skill looks up the filing state's window on its official pages every run and points out events older than it; whether an exception applies is the signer's judgment.
+
+**Where is a due process complaint filed?**
+It depends on the state: with the state education agency in most, and with a separate hearings office in others — California, Indiana, Maryland, Massachusetts, North Carolina, Pennsylvania and Washington, in the bundled research. The other party gets a copy (34 C.F.R. § 300.508(a)), and some offices accept a complaint only after the district has been served — California's does. The skill starts from each state's official due process filing page and writes filing instructions — where the complaint goes, how it may be sent, who is served and when — with the source of each.
+
+**Is it legal advice? Will it tell me whether the case is strong?**
+No. It drafts from the documents and the facts the person filing confirms, and it does not choose claims or predict outcomes. The person who signs the complaint is responsible for it.
+
+**Who is it for?**
+Special education attorneys and legal aid organizations drafting for clients, advocates helping families, and parents filing on their own (pro se). It asks an attorney the attorney's questions and a parent in plain words; the pleading is the same either way.
+
+**What does it need to run?**
+Claude Code, Node 20 or later, and web access for the state procedure step. It works on PDFs with a text layer; a scanned page with no text layer has to be read by eye.
+
+**How does it keep errors out of the complaint?**
+Two ways. A script refuses any date, figure or quotation that is not in the documents or in the person's own statement, a missing required element, and a complaint that does not follow the form. Then the draft is reviewed, by a fresh subagent where possible, for what a script cannot catch — fidelity to the pages, the state's own rules, consistency, legal posture, completeness and the rendered files — and the errors are fixed before the complaint is final. Until then it is written only as `complaint.DRAFT.pdf`.
 
 ## Testing
 
 ```bash
-cd skills/dpc-complaint/scripts && npm install
-cd ../../.. && node --test tests/*.test.mjs
+npm install && npm test
 ```
 
-Each test breaks a worked example in one way and asserts the gate refuses it with an error (or warns, where a warning is the right answer); the run prints the count. Both examples are exercised, the grader is run over both, and the PDF and Word files are read back. All pass on Node 22.
-
-**Evaluation.** `skills/dpc-complaint/evals/` holds two end-to-end prompts (the two worked examples, with every answer supplied up front) and a grader (`grade.mjs`) that scores a run on fourteen checks: every date and figure in the statement is in the documents or the person's own statement, third person, no given name, no citations or conclusions in the facts, no outcome language, the forum right for the state, the state's procedure sourced to official pages with access dates, the North Carolina one-year window found and the out-of-window event flagged. On 2026-09-14, with Claude Fable 5.1 at the highest effort, two runs with the skill scored 14/14 and 14/14 and reached FINAL; the same prompts with no skill scored 8/14 and 11/14 (re-scored with the current grader after a section-heading regex in it was corrected). What the no-skill runs got wrong is instructive: they verified state law from primary sources on their own and wrote careful complaints, but computed figures the documents do not state (a 2,935-minute shortfall), wrote a computed deadline as a date, put regulation and case citations and legal conclusions inside the facts, and used the student's name in the body — the pleading conventions the gates exist to hold. The gates spend about a third more tokens than an unassisted run and finish sooner. The four grading files are in `skills/dpc-complaint/evals/results/`.
+Each test breaks a worked example in one way — an invented date, a figure that is only the tail of the real one, a quotation not on the page, a missing school, a section out of order — and asserts the check refuses it, and that a draft is never rendered under the name of the file to file.
 
 ## Layout
 
 ```
 .claude-plugin/          plugin and marketplace manifests
-skills/dpc-complaint/
+skills/due-process-complaint/
   SKILL.md               the procedure Claude follows
-  references/            the exemplar, the drafting rules, the form of the pleading, the extraction schema,
-                         the claims and relief catalogues, the state research procedure and the 51-state
-                         table, the posture
-  scripts/               the gates and the renderer (Node; three dependencies: pdfjs-dist, docx, pdf-lib)
-  templates/             the shapes of the case files, each field explained
-  evals/                 the eval prompts, their assertions, the grader, and the graded results
-examples/river-oak/      a complete worked example on invented documents (California, pro se)
-examples/pine-hollow/    a second complete worked example (North Carolina, counsel); both are also the evals' fixtures
-tests/                   the gate tests
+  references/            the exemplar (form and voice), the review checklist, the 51-state table
+  scripts/               pdf-text.mjs, check.mjs, render.mjs
+examples/                two complete worked examples on invented documents
+tests/                   the tests
 ```
 
 ## Provenance
 
-The exemplar, the drafting rules, the extraction schema, the claims and relief catalogues, and the state research table are derived from Sped DPC, a due-process drafting product built by Beekman One LLC, released here so that the procedure can be used and inspected on its own.
+The exemplar and the state research table are derived from Sped DPC, a due process drafting product built by Beekman One LLC, released here so the procedure can be used and inspected on its own.
 
 ## License
 
-*(To be chosen by the author before publication.)*
+*(To be chosen by the author.)*
 
 ## Disclaimer
 

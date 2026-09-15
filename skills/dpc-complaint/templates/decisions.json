@@ -1,9 +1,0 @@
-{
-  "_about": {
-    "what": "What the person decided at the confirmation gate, keyed by reading id, written by the skill from what they said and read by scripts/confirm.mjs --decisions. Every key other than _about is a decision; there are no sample rows because a sample row would be applied.",
-    "confirmed": "\"R1\": \"confirmed\" — the reading is right as read.",
-    "rejected": "\"R2\": \"rejected\" — the reading is not used; nothing may cite it.",
-    "edited": "\"R3\": { \"edit\": \"the corrected value, in the person's words\" } — the reading is on the page but the person corrects the value; both the original and the correction are kept, and the correction is what the draft may cite. Only a reading the verifier found on its page can be edited: a reading that is not there is deleted from readings.json, or its value is entered in case.json as \"typed\".",
-    "folded rows": "When identical readings from several documents were shown as one row, the decision is recorded for each of their ids."
-  }
-}

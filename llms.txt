@@ -1,0 +1,21 @@
+# Special Education Due Process Complaint Drafter
+
+> A Claude Code plugin and skill that drafts an IDEA special education due process complaint from a folder of school documents, for any US state and the District of Columbia. It reads the IEPs, evaluations, prior written notices, progress reports, service logs and emails; confirms the facts with the person filing; looks up the state's filing procedure on its official pages; drafts the complaint as a pleading; checks that every date, figure and quotation is in the documents or the person's own words and that every element 34 C.F.R. § 300.508(b) requires is there; reviews the draft for errors; and delivers it as a PDF to file and a Word file to edit. It is for special education attorneys, legal aid organizations, advocates and parents. It is not legal advice and says nothing about how a complaint will fare.
+
+Install in Claude Code: `/plugin marketplace add b33kman/special-education-due-process-complaint`, then `/plugin install due-process-complaint@due-process-complaint`. Claude Code installs the script dependencies with the plugin. Requires Node 20 or later and web access.
+
+## Docs
+
+- [README](https://github.com/b33kman/special-education-due-process-complaint/blob/main/README.md): what it produces, how it keeps facts honest, installation, frequently asked questions
+- [The skill's procedure](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/SKILL.md): the steps Claude follows, from reading the documents to handing over the complaint
+- [The form of the complaint](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/exemplar.md): caption, introduction, contact and residence information, statement of facts, statement of the problems, proposed resolution, signature, certificate of service
+- [The review before delivery](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/review.md): what is checked that a script cannot catch
+
+## Examples
+
+- [California, filed by a parent pro se](https://github.com/b33kman/special-education-due-process-complaint/tree/main/examples/river-oak): a complete run on invented documents
+- [North Carolina, filed by an attorney](https://github.com/b33kman/special-education-due-process-complaint/tree/main/examples/pine-hollow): a complete run on invented documents, with a one-year filing window and the state's petition form
+
+## Optional
+
+- [51-state filing research](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/state-rules.json): each state's official due process filing page (filingUrl), with the address, fax, email and portal as researched in 2026; looked up again every run

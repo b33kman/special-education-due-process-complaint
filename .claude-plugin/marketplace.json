@@ -1,18 +1,46 @@
 {
-  "name": "dpc-complaint",
-  "description": "A Claude Code skill that drafts an IDEA due process complaint from school documents, with every sentence traced to its source.",
-  "owner": { "name": "Mark Beekman" },
+  "name": "due-process-complaint",
+  "description": "The Due Process Complaint Drafter: a Claude Code plugin that drafts IDEA special education due process complaints from school documents, with every fact traced to its source.",
+  "owner": {
+    "name": "Mark Beekman",
+    "url": "https://github.com/b33kman"
+  },
   "plugins": [
     {
-      "name": "dpc-complaint",
-      "description": "Drafts an IDEA due process complaint from a folder of school documents, with every sentence traced to a page or a statement, a human confirmation gate, and the filing state's procedure verified on the web with sources.",
-      "version": "1.0.0",
+      "name": "due-process-complaint",
+      "displayName": "Due Process Complaint Drafter",
       "source": "./",
-      "author": { "name": "Mark Beekman" },
-      "homepage": "https://github.com/b33kman/dpc-complaint",
-      "repository": "https://github.com/b33kman/dpc-complaint",
-      "keywords": ["special-education", "idea", "due-process", "complaint", "legal-drafting"],
-      "category": "legal"
+      "description": "Drafts an IDEA special education due process complaint from a folder of school documents (IEPs, evaluations, prior written notices, progress reports, service logs, emails) for any US state: facts confirmed with the person filing, the state’s filing procedure looked up on its official pages, every date, figure and quotation checked against the documents, the draft reviewed for errors, delivered as a PDF to file and a Word file to edit.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Mark Beekman",
+        "url": "https://github.com/b33kman"
+      },
+      "homepage": "https://github.com/b33kman/special-education-due-process-complaint",
+      "repository": "https://github.com/b33kman/special-education-due-process-complaint",
+      "keywords": [
+        "special-education",
+        "due-process-complaint",
+        "due-process-hearing",
+        "idea",
+        "individuals-with-disabilities-education-act",
+        "iep",
+        "special-education-law",
+        "legal-drafting",
+        "legal-tech",
+        "parent-advocacy",
+        "disability-rights",
+        "pdf",
+        "docx"
+      ],
+      "category": "legal",
+      "tags": [
+        "special-education",
+        "due-process",
+        "idea",
+        "iep",
+        "legal-drafting"
+      ]
     }
   ]
 }
