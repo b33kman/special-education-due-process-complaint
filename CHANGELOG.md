@@ -2,6 +2,10 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.12 — 2026-09-15
+
+- **Fixed: each claim was reduced to a list of paragraph numbers.** 1.0.11 told the AI to point at the facts instead of repeating them, and it pointed without saying anything. A claim now says what the problem is — what the district did or failed to do, with its dates, figures and quoted words — and ends by pointing to the chronology paragraphs that carry the rest. The check refuses a claim that only lists numbers.
+
 ## 1.0.11 — 2026-09-15
 
 - **Works in ChatGPT.** Tested in the ChatGPT desktop app; the README has an "Install in ChatGPT" section, and a `.codex-plugin/plugin.json` gives ChatGPT the plugin's name and description. The skill's instructions no longer assume Claude.
