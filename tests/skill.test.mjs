@@ -2,7 +2,7 @@
 // one thing a model could plausibly get wrong, and asserts check.mjs refuses
 // it — or that render.mjs will not name the result for filing.
 //
-//   npm install && npm test
+//   npm install && npm test   (after editing src/, npm run build first)
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
@@ -95,14 +95,66 @@ test('a period inside the closing quotation mark is the writer’s, and a figure
   rmSync(dir, { recursive: true, force: true })
 })
 
-test('a long forum name wraps inside the margins of the caption', async () => {
-  const dir = copy(examples.proSe, once('forum: Office of Administrative Hearings', 'forum: Office of Administrative Hearings, Special Education Division, Department of General Services'))
+test('nothing runs outside the margins: a long forum name, claim heading, regulation line or signature line wraps', async () => {
+  const dir = copy(examples.proSe, (md) => [
+    once('forum: Office of Administrative Hearings', 'forum: Office of Administrative Hearings, Special Education Division, Department of General Services'),
+    once('### A. Failure to provide an adequate individualized education program', '### A. Failure to provide an adequate individualized education program and to revise it when the progress reports recorded no progress toward the annual reading fluency goal'),
+    once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.101, 300.300, 300.301, 300.303, 300.304, 300.305, 300.306, 300.320, 300.321, 300.323, 300.324, 300.503.*'),
+    once('dana.r@example.com', 'dana.r@example.com\n\nBar number and jurisdiction: ______________________'),
+  ].reduce((m, edit) => edit(m), md))
   assert.equal(run('render', dir).code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
-  for (const item of (await (await doc.getPage(1)).getTextContent()).items) {
-    if (!item.str.trim()) continue
-    assert.ok(item.transform[4] >= 71 && item.transform[4] + item.width <= 541, `“${item.str}” runs outside the margins`)
+  for (let n = 1; n <= doc.numPages; n++) {
+    for (const item of (await (await doc.getPage(n)).getTextContent()).items) {
+      if (!item.str.trim()) continue
+      assert.ok(item.transform[4] >= 71 && item.transform[4] + item.width <= 541, `page ${n}: “${item.str}” runs outside the margins`)
+    }
   }
+  rmSync(dir, { recursive: true, force: true })
+})
+
+test('a claim points to its facts by label, and the label prints as that paragraph’s number', async () => {
+  const dir = copy(examples.proSe, (md) => [
+    once('On September 8, 2025, the IEP team adopted the annual', '[#goal] On September 8, 2025, the IEP team adopted the annual'),
+    once('On November 14, 2025, the District’s progress report', '[#progress-nov] On November 14, 2025, the District’s progress report'),
+    once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraphs [#goal] and [#progress-nov] bear on this problem.'),
+  ].reduce((m, edit) => edit(m), md))
+  const c = run('check', dir)
+  assert.equal(c.code, 0, c.out)
+  assert.equal(run('render', dir).code, 0)
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
+  let text = ''
+  for (let n = 1; n <= doc.numPages; n++) text += ' ' + (await (await doc.getPage(n)).getTextContent()).items.map((i) => i.str).join(' ')
+  text = text.replace(/\s+/g, ' ')
+  const goal = text.match(/(\d+)\. On September 8, 2025, the IEP team adopted the annual/)?.[1]
+  const progress = text.match(/(\d+)\. On November 14, 2025, the District.s progress report/)?.[1]
+  assert.ok(goal && progress, 'the labelled facts are numbered paragraphs')
+  assert.match(text, new RegExp(`The facts at paragraphs ${goal} and ${progress} bear on this problem\\.`))
+  assert.doesNotMatch(text, /\[#/)
+  rmSync(dir, { recursive: true, force: true })
+})
+
+test('a label that points nowhere, starts two paragraphs, or is not lowercase words is refused', () => {
+  refused(once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraph [#nothing] bear on this problem.'), /“\[#nothing\]” points to no paragraph/)
+  refused((md) => once('On November 14, 2025, the District’s progress report', '[#goal] On November 14, 2025, the District’s progress report')(once('On September 8, 2025, the IEP team adopted the annual', '[#goal] On September 8, 2025, the IEP team adopted the annual')(md)), /“\[#goal\]” starts two paragraphs/)
+  refused(once('On September 8, 2025, the IEP team adopted the annual', '[#Goal] On September 8, 2025, the IEP team adopted the annual'), /“\[#Goal\]” must be lowercase letters and hyphens/)
+})
+
+test('the scripts run with nothing installed, and are built from src/ unchanged', () => {
+  const out = mkdtempSync(join(tmpdir(), 'due-process-build-'))
+  const b = spawnSync(process.execPath, [join(root, 'build.mjs'), out], { encoding: 'utf8' })
+  assert.equal(b.status, 0, b.stderr)
+  for (const f of ['pdf-text.mjs', 'check.mjs', 'render.mjs']) assert.ok(readFileSync(join(out, f)).equals(readFileSync(join(scripts, f))), `${f} is not the build of src/ — run npm run build`)
+  // A folder with no node_modules anywhere above it: the scripts must bring everything they use.
+  const dir = mkdtempSync(join(tmpdir(), 'due-process-bare-'))
+  for (const f of ['documents', 'complaint.md', 'statement.md']) cpSync(join(examples.proSe, f), join(dir, f), { recursive: true })
+  for (const s of ['pdf-text', 'check', 'render']) {
+    const r = spawnSync(process.execPath, [join(out, `${s}.mjs`), dir], { encoding: 'utf8' })
+    assert.equal(r.status, 0, `${s}: ${r.stdout}${r.stderr}`)
+    assert.doesNotMatch(r.stdout + r.stderr, /Warning|Cannot find/, `${s} printed a warning`)
+  }
+  assert.ok(existsSync(join(dir, 'complaint.pdf')) && !existsSync(join(scripts, 'package.json')))
+  rmSync(out, { recursive: true, force: true })
   rmSync(dir, { recursive: true, force: true })
 })
 
