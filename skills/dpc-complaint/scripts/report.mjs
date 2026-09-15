@@ -31,9 +31,10 @@ const q = (s) => String(s ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ')
 // filing, the Parent on a pro se one. The files she is told to read must not
 // call her "counsel".
 const counsel = c.representation?.type === 'counsel'
-const who = counsel ? 'counsel' : 'the Parent'
-const whose = counsel ? 'counsel’s' : 'the Parent’s'
-const Whose = counsel ? 'Counsel’s' : 'The Parent’s'
+const twoParents = Boolean(c.parent?.second && (c.parent.second.first?.value || c.parent.second.last?.value))
+const who = counsel ? 'counsel' : twoParents ? 'the Parents' : 'the Parent'
+const whose = counsel ? 'counsel’s' : twoParents ? 'the Parents’' : 'the Parent’s'
+const Whose = counsel ? 'Counsel’s' : twoParents ? 'The Parents’' : 'The Parent’s'
 
 const describe = (tag) => {
   if (/^R\d+$/.test(tag)) {

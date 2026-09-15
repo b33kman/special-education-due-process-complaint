@@ -74,6 +74,10 @@ traced(c.student?.disability, 'the eligibility category', null, false)
 traced(c.student?.eligibleSince, 'the eligibility date', null, false)
 traced(c.parent?.first, 'the parent’s first name', null)
 traced(c.parent?.last, 'the parent’s last name', null)
+traced(c.parent?.second?.first, 'the second parent’s first name', null, false)
+traced(c.parent?.second?.last, 'the second parent’s last name', null, false)
+traced(c.hearing?.interpreter, 'the interpreter language', null, false)
+traced(c.hearing?.accommodations, 'the hearing accommodations', null, false)
 traced(c.parent?.phone, 'the parent’s telephone', null, false)
 traced(c.parent?.email, 'the parent’s email', null, false)
 
@@ -99,7 +103,8 @@ const claims = c.claims ?? []
 if (claims.length === 0) add('blocking', 'no-claims', 'no claim is pleaded', '34 C.F.R. § 300.508(b)(5)')
 let anyDated = false
 claims.forEach((cl, i) => {
-  const ref = claimsRef.find((r) => r.id === cl.id)
+  const ref = claimsRef.find((r) => r.id === cl.id) ?? (cl.id === 'other' ? { filingHeading: String(cl.heading ?? '').trim(), isProcedural: Boolean(cl.isProcedural) } : undefined)
+  if (cl.id === 'other' && !ref.filingHeading) add('blocking', 'claim-other-incomplete', `claim ${i + 1} is "other" but carries no heading — the person supplies the heading (and, for counsel, the regulation)`)
   const letter = String.fromCharCode(65 + i)
   const start = statement.findIndex((p) => p.cls === 'subheading' && p.text.startsWith(`${letter}. `))
   const next = statement.findIndex((p, j) => j > start && p.cls === 'subheading')
@@ -123,7 +128,10 @@ if (resolution.some((p) => p.cls === 'placeholder') || resolution.length === 0) 
 for (const r of c.relief ?? []) {
   const ref = reliefRef.find((o) => o.id === r.id)
   if (ref?.outsideAuthority) add('warning', 'relief-outside-authority', `"${ref.filingLabel}" is generally beyond what a hearing officer can order`)
+  if (ref?.counselOnly && c.representation?.type !== 'counsel') add('warning', 'relief-counsel-only', `"${ref.filingLabel}" belongs on a represented filing; a self-represented parent cannot recover attorneys’ fees`)
 }
+if (c.expedited === true && !claims.some((cl) => cl.id === 'discipline')) add('warning', 'expedited-without-discipline', 'an expedited hearing is requested, but no discipline claim is pleaded — § 300.532(c) provides it for disciplinary placement disputes')
+if (c.mediation && !['requested', 'declined'].includes(c.mediation)) add('warning', 'mediation-unset', `mediation is "${c.mediation}"; use "requested" or "declined", or leave it null`)
 
 // ─── Who signs ────────────────────────────────────────────────────────
 if (c.representation?.type === 'counsel') {

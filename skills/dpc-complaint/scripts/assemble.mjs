@@ -43,6 +43,18 @@ const fullStudent = [v(c.student?.first), v(c.student?.middle), v(c.student?.las
 const fullParent = [v(c.parent?.first), v(c.parent?.last)].filter(Boolean).join(' ')
 const studentName = asInitials ? [initial(v(c.student?.first)), initial(v(c.student?.last))].filter(Boolean).join('') : fullStudent
 const parentName = asInitials ? [initial(v(c.parent?.first)), initial(v(c.parent?.last))].filter(Boolean).join('') : fullParent
+// Two parents may file together (`parent.second`): the caption, the defined
+// term, the verbs and the pro se signature block all follow.
+const second = c.parent?.second
+const fullSecond = second ? [v(second.first), v(second.last)].filter(Boolean).join(' ') : ''
+const secondName = fullSecond ? (asInitials ? [initial(v(second.first)), initial(v(second.last))].filter(Boolean).join('') : fullSecond) : ''
+const twoParents = Boolean(secondName)
+const parentsNames = twoParents ? `${parentName} and ${secondName}` : parentName
+const Parent = twoParents ? 'Parents' : 'Parent' // the defined term
+const theParent = twoParents ? 'the Parents' : 'the Parent'
+const TheParent = twoParents ? 'The Parents' : 'The Parent'
+const s3 = twoParents ? '' : 's' // "request" / "requests"
+const parentSrc = [...src(c.parent?.first), ...src(c.parent?.last), ...(second ? [...src(second.first), ...src(second.last)] : [])]
 const district = v(c.student?.district)
 // The respondent is the district as the documents name it unless the person
 // chose otherwise — a Board of Education, a city-wide agency, a county
@@ -98,7 +110,7 @@ section('caption', null, [
   P(`BEFORE ${withThe(seaCaption).toUpperCase()}`, state.captionAgency?.sources ?? state.seaName?.sources ?? [], 'caption-court'),
   P(`STATE OF ${String(stateName).toUpperCase()}`, [], 'caption-court'),
   P('In the Matter of:', [], 'caption-label'),
-  P(`${studentName.toUpperCase()}, a minor, by and through the parent, ${parentName.toUpperCase()},`, [...src(c.student?.first), ...src(c.student?.last), ...src(c.parent?.first), ...src(c.parent?.last)], 'caption-party'),
+  P(`${studentName.toUpperCase()}, a minor, by and through the ${twoParents ? 'parents' : 'parent'}, ${parentsNames.toUpperCase()},`, [...src(c.student?.first), ...src(c.student?.last), ...parentSrc], 'caption-party'),
   P('Petitioner,', [], 'caption-role'),
   P('v.', [], 'caption-v'),
   P(`${respondent.toUpperCase()},`, respondentSrc, 'caption-party'),
@@ -117,10 +129,13 @@ const since = v(c.student?.eligibleSince)
 let intro = `Petitioner ${studentName} (“Student”) is ${age !== null ? `${article(age)} ${age}-year-old student` : 'a student'}`
 const sinceText = since ? (isoDate(since) ? longDate(isoDate(since)) : since) : ''
 if (disability) intro += ` who has been eligible for special education and related services under the category of ${disability}${sinceText ? ` since ${sinceText}` : ''}, and`
-intro += ` who attends ${school} in ${withThe(district)}${respondent !== district ? `, for which ${withThe(respondent)} is the responsible local educational agency and the respondent here` : ''} (“District”). This due process complaint is brought on Student’s behalf by the parent, ${parentName} (“Parent”), who is ${counsel ? `represented by ${counsel.name} of ${counsel.firmName}` : 'self-represented'}.`
-const introTags = [...src(c.student?.first), ...src(c.student?.last), ...src(c.student?.dob), ...src(c.student?.disability), ...src(c.student?.eligibleSince), ...src(c.student?.school), ...src(c.student?.district), ...(respondent !== district ? respondentSrc : [])]
+intro += ` who attends ${school} in ${withThe(district)}${respondent !== district ? `, for which ${withThe(respondent)} is the responsible local educational agency and the respondent here` : ''} (“District”). This due process complaint is brought on Student’s behalf by the ${twoParents ? 'parents' : 'parent'}, ${parentsNames} (“${Parent}”), who ${twoParents ? 'are' : 'is'} ${counsel ? `represented by ${counsel.name} of ${counsel.firmName}` : 'self-represented'}.`
+const introTags = [...src(c.student?.first), ...src(c.student?.last), ...parentSrc, ...src(c.student?.dob), ...src(c.student?.disability), ...src(c.student?.eligibleSince), ...src(c.student?.school), ...src(c.student?.district), ...(respondent !== district ? respondentSrc : [])]
 
-const chosen = (c.claims ?? []).map((cl) => ({ ...cl, ref: claimsRef.find((r) => r.id === cl.id) }))
+// A claim outside the catalogue ("other") prints the heading, clause and
+// regulation the person typed, and nothing the skill composed.
+const ownClaim = (cl) => (cl.id === 'other' && String(cl.heading ?? '').trim() ? { id: 'other', filingHeading: String(cl.heading).trim(), filingClause: String(cl.clause ?? cl.heading).trim(), cfr: String(cl.cfr ?? '').trim(), isProcedural: Boolean(cl.isProcedural) } : null)
+const chosen = (c.claims ?? []).map((cl) => ({ ...cl, ref: claimsRef.find((r) => r.id === cl.id) ?? ownClaim(cl) }))
 const missing = chosen.filter((cl) => !cl.ref).map((cl) => cl.id)
 if (missing.length) {
   console.error(`unknown claim id(s): ${missing.join(', ')} — see references/claims.json`)
@@ -145,8 +160,8 @@ const parties = [
   P(`34 C.F.R. § 300.508(b)(1)–(2).`, [], 'cite'),
   P(
     c.student?.homeless
-      ? `Student${born} does not have a fixed address, and is enrolled at ${school}. The Parent may be reached at ${v(c.student?.homelessContact)}.`
-      : `Student${born} resides with the Parent at ${addressOneLine}, and is enrolled at ${school}.${contact.length ? ` The Parent may be reached at ${contact.join(' and ')}.` : ''}`,
+      ? `Student${born} does not have a fixed address, and is enrolled at ${school}. ${TheParent} may be reached at ${v(c.student?.homelessContact)}.`
+      : `Student${born} resides with ${theParent} at ${addressOneLine}, and is enrolled at ${school}.${contact.length ? ` ${TheParent} may be reached at ${contact.join(' and ')}.` : ''}`,
     [...src(c.student?.dob), ...addressSources, ...src(c.student?.school), ...src(c.parent?.email), ...src(c.parent?.phone), ...src(c.student?.homelessContact)],
   ),
 ]
@@ -178,7 +193,7 @@ chosen.forEach((cl, i) => {
   const letter = String.fromCharCode(65 + i)
   const s = sections.find((x) => x.letter === letter)
   statementParagraphs.push(P(`${letter}. ${cl.ref.filingHeading}`, [`claim:${cl.id}`], 'subheading'))
-  statementParagraphs.push(P(cl.ref.cfr + '.', [], 'cite'))
+  if (cl.ref.cfr) statementParagraphs.push(P(cl.ref.cfr + '.', [], 'cite'))
   if (!s || s.paragraphs.length === 0) {
     statementParagraphs.push(P('[No facts were entered under this heading. Enter them or remove the claim before filing.]', [], 'placeholder'))
     return
@@ -213,9 +228,9 @@ const reliefParagraphs =
   reliefClauses.length === 0
     ? [P('[No relief has been entered. Enter the proposed resolution before filing.]', [], 'placeholder')]
     : reliefClauses.length === 1
-      ? [P(`The Parent proposes the following resolution: ${reliefClauses[0].text}.`, reliefClauses[0].tags)]
+      ? [P(`${TheParent} propose${s3} the following resolution: ${reliefClauses[0].text}.`, reliefClauses[0].tags)]
       : [
-          P('The Parent proposes the following resolution:', []),
+          P(`${TheParent} propose${s3} the following resolution:`, []),
           ...reliefClauses.map((cl, i, all) => {
             const last = i === all.length - 1
             const punctuation = last ? '.' : i === all.length - 2 ? '; and' : ';'
@@ -223,6 +238,16 @@ const reliefParagraphs =
           }),
         ]
 section('resolution', numbered('Proposed resolution'), [P('34 C.F.R. § 300.508(b)(6).', [], 'cite'), ...reliefParagraphs])
+
+// Requests concerning the hearing — mediation, an expedited hearing, an
+// interpreter or accommodations — only where the person asked for them.
+const hearing = []
+if (c.mediation === 'requested') hearing.push(P(`${TheParent} request${s3} mediation under 34 C.F.R. § 300.506 concurrently with this due process complaint.`, []))
+else if (c.mediation === 'declined') hearing.push(P(`${TheParent} do${twoParents ? '' : 'es'} not request mediation at this time.`, []))
+if (c.expedited === true) hearing.push(P(`${TheParent} request${s3} an expedited due process hearing under 34 C.F.R. § 300.532(c).`, []))
+if (v(c.hearing?.interpreter)) hearing.push(P(`${TheParent} require${s3} an interpreter for the hearing (${v(c.hearing.interpreter)}).`, src(c.hearing.interpreter)))
+if (v(c.hearing?.accommodations)) hearing.push(P(`${TheParent} request${s3} the following accommodations for the hearing: ${v(c.hearing.accommodations).replace(/[.]+$/, '')}.`, src(c.hearing.accommodations)))
+if (hearing.length) section('hearing', numbered('Requests concerning the hearing'), hearing)
 
 // V. Anything the state requires beyond the federal six
 const extra = c.additionalContents ?? []
@@ -261,6 +286,7 @@ const signature = counsel
       P(SIGLINE, [], 'sigline'),
       P(parentName, [...src(c.parent?.first), ...src(c.parent?.last)]),
       P(`Parent of ${studentName}`, []),
+      ...(twoParents ? [P(SIGLINE, [], 'sigline'), P(secondName, [...src(second.first), ...src(second.last)]), P(`Parent of ${studentName}`, [])] : []),
       P('Self-represented (pro se)', []),
       ...(c.student?.homeless ? [] : addressLines.map((line) => P(line, addressSources))),
       ...(v(c.parent?.phone) ? [P(v(c.parent?.phone), src(c.parent?.phone))] : []),
@@ -274,13 +300,13 @@ const recipientText =
   recipients.length === 1 ? recipients[0] : recipients.length === 2 ? `${recipients[0]} and ${recipients[1]}` : `${recipients.slice(0, -1).join(', ')}, and ${recipients.at(-1)}`
 section('service', 'Certificate of service', [
   P(
-    `${counsel ? 'Counsel for Petitioner' : 'The Parent'} certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on ${recipientText}, by the method indicated below.`,
+    `${counsel ? 'Counsel for Petitioner certifies' : `${TheParent} certif${twoParents ? 'y' : 'ies'}`} that on the date written below a true and complete copy of this Due Process Complaint Notice was served on ${recipientText}, by the method indicated below.`,
     state.serviceRecipients?.sources ?? [],
   ),
   P('Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing', [], 'method'),
   P(DATED, [], 'dated'),
   P(SIGLINE, [], 'sigline'),
-  P(counsel ? counsel.name : parentName, []),
+  P(counsel ? counsel.name : parentsNames, []),
   P(counsel ? 'Attorney for Petitioner' : 'Self-represented (pro se)', []),
 ])
 
@@ -291,7 +317,7 @@ section('service', 'Certificate of service', [
 // certificate carry no number.
 let n = 0
 for (const s of doc.sections) {
-  if (!['introduction', 'parties', 'facts', 'statement', 'resolution', 'state-additional'].includes(s.id)) continue
+  if (!['introduction', 'parties', 'facts', 'statement', 'resolution', 'hearing', 'state-additional'].includes(s.id)) continue
   for (const p of s.paragraphs) if (!p.cls) p.n = ++n
 }
 

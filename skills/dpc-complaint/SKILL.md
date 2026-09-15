@@ -7,7 +7,7 @@ description: Use when someone wants an IDEA special-education due process compla
 
 ## What this skill produces, and the one rule under it
 
-A complete due process complaint notice under 34 C.F.R. § 300.508(b), captioned for the right forum in the filing state, with a statement of the problems in which **every sentence is traced to a page in the documents or to a statement the person drafting made**, plus a `sources.md` that lists those traces and a `verification-report.md` that says what was checked. The person who signs reads both and files.
+A complete due process complaint notice under 34 C.F.R. § 300.508(b), captioned for the right forum in the filing state, with a statement of facts and a statement of the problems in which **every sentence is traced to a page in the documents or to a statement the person drafting made**, plus a `sources.md` that lists those traces and a `verification-report.md` that says what was checked. The person who signs reads both and files.
 
 The rule: **nothing reaches the complaint that was not either read off a page and confirmed by the person, or typed by the person.** Not a date, not a figure, not a quotation, not a filing address. The scripts in `scripts/` enforce this; the steps below exist to feed them. If a fact is not in the sources, the complaint says less. That is the correct outcome, not a failure.
 
@@ -34,7 +34,7 @@ Every script takes the case folder as its argument and explains itself with no a
     decisions.json       the person's decision per reading, when they decided reading by reading (you write this from what they said)
     confirmed.json       the confirmation record (confirm.mjs)
     state.json           the filing state's procedure, each fact with its web source (you write this)
-    case.json            the intake: names, address, who signs, facts, claims, relief, chronology
+    case.json            the intake: names, address, who signs, facts, claims, relief, chronology, hearing requests
     statement.annotated.md  the statement of the problems, every sentence tagged
     check-draft.json, provenance.json, validation.json, gates.log
   complaint.md, complaint.html, sources.md, verification-report.md   the deliverables
@@ -42,20 +42,32 @@ Every script takes the case folder as its argument and explains itself with no a
 
 Shapes for `readings.json`, `decisions.json`, `case.json` and `state.json` are in `templates/`. Copy, do not improvise.
 
+## The conversation
+
+The person is a parent filing alone or an attorney filing for one. The first screen establishes which, and from then on speak to them as who they are: plain words and a one-phrase gloss on each term of art for a parent ("prior written notice — the district's written reasons for what it decided"), the terms themselves for counsel. The pleading does not change register — it is the same document either way; the signature block, certificate and introduction tell the forum who filed it.
+
+Ask in **short screens, one purpose each, never more than three questions at once.** A wall of ten questions is where people give up or answer the wrong one. Use the `AskUserQuestion` tool for closed choices — it draws the options as buttons — and a plain message for anything typed. Every choice has a default, stated. **Skip every question already answered**, in any order: an attorney's opening message often carries the state, who signs, the claims, the relief and "confirm every reading that verifies", and then there is no round one at all. An authorisation given up front counts for the whole run.
+
 ## The steps
 
-Two rounds of questions, both batched into one message each, so the person answers once at the start and once when the readings are on the table. The person is a parent filing alone or an attorney filing for one; round one establishes which, and from then on speak to them as who they are — plain words and a gloss on every term of art for a parent ("prior written notice — the district's written reasons"), the terms themselves for counsel. The document itself does not change register: it is the same pleading either way, with the signature block, certificate and introduction telling the forum who filed it. **Many people answer before being asked** — an attorney's opening message often carries the state, who signs, the claims, the relief and "confirm every reading that verifies". Take what is there, ask only for what is still missing, and never re-ask something already answered; an authorisation given up front counts for the whole run.
+### 0. Round one — before anything is read
 
-### 0. Round one: ask everything the documents cannot answer
+**Screen 1 — who is filing, and where.**
+- Who signs and files: *the parent, without a lawyer* or *an attorney for the parent* (buttons).
+- The state the complaint is filed in. If the student lives in a large city district with its own hearing office, say so.
+- Where the documents are, and whether any are photographed scans (no text layer).
 
-One message, all of these (or whichever the person has not already answered):
+**Screen 2 — the signer.**
+- Counsel: name, bar number and jurisdiction, firm, firm address, phone, email — one message, one line each. Then one choice: reserve the right to seek attorneys' fees and costs under 20 U.S.C. § 1415(i)(3)(B)? (Fees are awarded by a court to a prevailing parent, not by the hearing officer, so the complaint reserves the right rather than asking for an award. Default: yes; the standard wording prints as the last remedy unless they give their own.)
+- A parent: nothing about names or address yet — the documents supply them and step 5 confirms them. Ask only whether a second parent will sign as well (then that parent's name), and whether the family has a fixed address (if not, the contact information to use, and the school).
 
-1. Where the documents are (a folder of PDFs), and whether any are scans (photographed pages with no text layer).
-2. The state the complaint is filed in, and — if the student lives in a large city district with its own hearing office — the district's name as it should appear.
-3. Who signs and files: an attorney (name, bar number and jurisdiction, firm, firm address, phone, email) or the parent pro se (the parent's contact details).
-4. The student's and parent's names as they should print, if the documents might write them differently.
-5. The planned filing date (default: today) — the limitations check runs from it, and a date already past is reported as a warning so it is not filed with a stale date.
-6. Whether any of the drafting decisions are already made: the claims, the relief, the four statements of fact. If so, take them now and round two shrinks.
+**Screen 3 — choices about the filing, each with a default.**
+- The planned filing date (default: today; a date already past is reported as a warning so it is not filed stale).
+- Whether the student's name prints in full or as initials (default: full; some hearing offices publish decisions with initials — counsel's call).
+- Whether to request mediation with the hearing request (§ 300.506) — some states' forms ask; the state block will say. Default: not stated.
+- Whether an interpreter or an accommodation is needed for the hearing, and in what language (parents especially; default: none).
+
+Then anything they have already decided — the claims, the relief, the four facts — take it now, and round two shrinks.
 
 Write the answers into `work/case.json` as you go (`templates/case.json`). Anything typed by the person carries `"source": "typed"`; anything from a document carries the reading id.
 
@@ -73,6 +85,7 @@ For each document, open its text (`work/text/<doc>.json`) and:
 - The `note` field is not a source. If a phrase may be cited in the draft, it goes in the `value`.
 - Read what matters to a complaint: the operative documents' dates, services, goals and placement; what was requested, when, and what was answered; what was delivered against what was required; the evaluations' findings and recommendations; the parent's stated concerns and the district's stated reasons. Skip boilerplate.
 - Do not read from a document that is only described inside another document. An email that says what the IEP provides is correspondence; its words are the email's.
+- If the identity readings disagree across documents — two students' names, two dates of birth — stop and ask which file this is before going on.
 
 Write `work/readings.json` (`templates/readings.json`). Ids are `R1`, `R2`, … and never reused.
 
@@ -80,7 +93,7 @@ Then `node scripts/verify-readings.mjs <case>`. Fix or delete every reading it r
 
 ### 3. The confirmation gate — the person decides, reading by reading
 
-Show the person the verified readings as a table: id, document, page, field, value, and the note if any. Group by document, and fold identical readings — the same field with the same value across documents — into one row ("in 4 documents") so a ten-document file does not become a two-hundred-row table. Ask them to confirm, correct or reject each; offer "confirm all that were verified on the page" as one answer, and take it only if they say it — including when they said it in their opening message. Record what they said in `work/decisions.json` and run:
+One screen first: "*N* readings verified on their pages. Confirm them all, or go through them document by document?" (buttons). Take "all" only if they choose it — including when they chose it in their opening message. Otherwise one document per screen: a table of id, page, field, value, and the note if any, with identical readings across documents folded into one row ("in 4 documents") so a ten-document file does not become a two-hundred-row table; they confirm, correct or reject each. Record what they said in `work/decisions.json` and run:
 
 - `node scripts/confirm.mjs <case> --decisions`, or
 - `node scripts/confirm.mjs <case> --all-verified --by "<their name>"` when they said to confirm all verified readings. Tell them where the table they are vouching for is: `sources.md` → *Confirmed readings*, written at step 8.
@@ -89,7 +102,7 @@ This is the one step that cannot be automated away. A reading the person did not
 
 ### 4. The filing state: verify the procedure on the web, with sources
 
-Follow `references/state-research.md` exactly. Start from the bundled row in `references/state-rules.json`, open its source and the state agency's current pages, and write `work/state.json` (`templates/state.json`): nine fields, each with `sources` pointing at entries that carry a URL, an access date and a quotation. Where the state requires anything beyond the six federal elements — a student ID, a birth date, a request for mediation, an interpreter — record it under `additionalContents` and put each item, sourced, into `case.json` → `additionalContents`. An item no document can fill (a county of residence) may be left blank; the validator reports it as a warning so the person fills it by hand before filing.
+Follow `references/state-research.md` exactly. Start from the bundled row in `references/state-rules.json`, open its source and the state agency's current pages, and write `work/state.json` (`templates/state.json`): nine fields, each with `sources` pointing at entries that carry a URL, an access date and a quotation. Where the state requires anything beyond the six federal elements — a student ID, a birth date, a request for mediation, an interpreter — record it under `additionalContents` and put each item, sourced, into `case.json` → `additionalContents`. An item no document can fill (a county of residence) may be left blank; the validator reports it as a warning so the person fills it by hand before filing. What prints is the item's `text`; the reason it is blank goes in its `note`.
 
 The quotations have to be the page's own words. A browsing tool that summarises cannot give you them: run `node scripts/fetch-text.mjs <url>` and quote from its output — it reads HTML and PDF alike (`--insecure` if the sandbox's certificate store cannot verify a state site). A form served as a Word file is converted with whatever the machine has (`textutil -convert txt` on a Mac).
 
@@ -97,17 +110,19 @@ Never take a filing address, a limitations window, a required form, or the forum
 
 ### 5. Caption facts, from confirmed readings
 
-Fill `case.json` → `student` and `parent` from confirmed identity readings: name parts, date of birth, the five address parts, school, district, eligibility category and date, the parent's phone and email. Each value cites its reading. Where two documents disagree, show both and let the person choose. Where the respondent should print as something other than the district line the documents carry — a Board of Education, a city-wide agency, a county office — record `student.respondent` with its source: a reading if a document names it, `"typed"` if the person chose it; the assembler prints it in the caption and names it in the introduction. An incomplete address is a blocking finding: ask for what is missing rather than guessing a ZIP code.
+Fill `case.json` → `student` and `parent` from confirmed identity readings: name parts, date of birth, the five address parts, school, district, eligibility category and date, the parent's phone and email; a second parent's name under `parent.second`. Each value cites its reading. Where two documents disagree, show both and let the person choose. Where the respondent should print as something other than the district line the documents carry — a Board of Education, a city-wide agency, a county office — record `student.respondent` with its source: a reading if a document names it, `"typed"` if the person chose it; the assembler prints it in the caption and names it in the introduction. Ask counsel; for a parent, default to the district as the documents name it. An incomplete address is a blocking finding: ask for what is missing rather than guessing a ZIP code.
 
-### 6. Round two: the drafting decisions, with the readings on the table
+### 6. Round two — the drafting decisions, with the readings on the table
 
-One message, all of these, each with the confirmed readings that bear on it listed beneath:
+**Screen 4 — the four facts, in the person's own words.** *What the district did, or failed to do* · *How the Parent learned of it* · *Effect on the student* · *Relief sought*. Ask them in the reader's voice — a parent: "How did you learn of it?", "What has this meant for your child?"; counsel: "How did the client learn of it?" — one message, four short prompts, and store the answers under the neutral labels in `templates/case.json`. Offer to propose each from the confirmed readings for them to edit and approve ("I can draft these four from the documents; you edit, and nothing goes in that you have not approved"); if they accept a proposal, keep the reading ids in the text and mark the fact `"proposed": true`. Their answers are sources for the draft, so a date in them may be written into the complaint on their authority — the report says which facts rest on their statement alone.
 
-1. **The four facts, in the person's own words** — *What the district did, or failed to do* · *How the Parent learned of it* · *Effect on the student* · *Relief sought*. Ask them in the reader's voice — a parent: "How did you learn of it?", "What has this meant for your child?"; counsel: "How did the client learn of it?" — and store them under the neutral labels in `templates/case.json`. Offer to propose each from confirmed readings (every sentence with its reading id) for them to edit and approve; if they accept a proposal, keep the ids in the text and mark the fact `"proposed": true`. Their answers are sources for the draft, so a date in them may be written into the complaint on their authority — the report says which facts rest on their statement alone.
-2. **The claims** — list `references/claims.json` with each claim's `turnsOn` sentence. They choose; you never recommend. For a procedural claim, ask for the impact statement (how the failure impeded the student's education or the parent's participation) and take it with its reading ids.
-3. **The relief** — list `references/relief.json`; they choose and supply the quantity or specification for each. Two options are marked as beyond a hearing officer's usual authority; say so if they pick one, and keep it only if they insist.
-4. **The chronology** — propose the dated events from confirmed date readings and their requests and responses; they confirm, edit or add, each with its sources. It prints as the Statement of Facts, one numbered paragraph per event, oldest first, so write each event as a sentence that reads after "On <date>," ("the IEP team adopted an annual reading goal of 60 words per minute", "the District's progress report recorded 21 words per minute") with its sources in `sources`. The draft gate holds each to the same rules as the statement — its dates and figures in its sources, no conclusions — and the limitations check runs over these.
-5. Any state-required item from step 4 that needs a value.
+**Screen 5 — the claims.** `references/claims.json` as a numbered list, each with its `turnsOn` sentence (for a parent, in plain words); they reply with numbers. They choose; you never recommend, and "which should I pick?" gets the list and what each turns on. A problem not on the list: they give its heading (and counsel the regulation), stored as `{ "id": "other", "heading", "clause", "cfr" }`. If `discipline` is chosen, ask whether to request an expedited hearing (§ 300.532(c); default: no). For a procedural claim, ask for the impact statement — how the failure impeded the student's education or the parent's participation — with its reading ids.
+
+**Screen 6 — the relief.** `references/relief.json` as a numbered list; they reply with numbers. Then one screen listing what they chose, with a blank for each quantity or specification (the fees reservation, if counsel chose it at screen 2, needs nothing more). Two options are marked as beyond a hearing officer's usual authority; say so if they pick one, and keep it only if they insist.
+
+**Screen 7 — the chronology.** Propose the dated events from confirmed date readings and their requests and responses, as a list; they confirm, edit or add, each with its sources. It prints as the Statement of Facts, one numbered paragraph per event, oldest first, so write each event as a sentence that reads after "On <date>," ("the IEP team adopted an annual reading goal of 60 words per minute", "the District's progress report recorded 21 words per minute"). The draft gate holds each to the same rules as the statement — its dates and figures in its sources, no conclusions — and the limitations check runs over these.
+
+**Screen 8** — any state-required item from step 4 that needs a value.
 
 Write it all into `case.json`.
 
@@ -131,11 +146,11 @@ node scripts/run-gates.mjs <case>
 
 It runs the draft gate, assembles the complaint from `case.json` and the fixed wording, validates every § 300.508(b) element and every caption fact's source, checks the state block and the limitations window, and writes `complaint.md`, `complaint.html`, `sources.md` and `verification-report.md`. The last line is `FINAL` or `DRAFT — NOT FOR FILING`. If DRAFT, read `verification-report.md`, fix what it names (usually a missing caption fact, an unsourced state field, or a claim with no facts under it), and run it again.
 
-The complaint's form is fixed — a pleading with a bracketed caption and numbered double-spaced paragraphs: introduction, contact and residence information (with the date of birth), the statement of facts (the chronology), the statement of the problems (one section per claim), the proposed resolution, any state-required items, the signature block and the certificate of service — and is described in `references/format.md`. The assembler produces it; do not restyle or reorder it by hand, and do not put tags, page cites or explanations into the pleading's text (an item's reason for being blank goes in its `note`).
+The complaint's form is fixed — a pleading with a bracketed caption and numbered double-spaced paragraphs: introduction, contact and residence information (with the date of birth), the statement of facts (the chronology), the statement of the problems (one section per claim), the proposed resolution (each remedy its own lettered sub-paragraph), any requests concerning the hearing, any state-required items, the signature block and the certificate of service — and is described in `references/format.md`. The assembler produces it; do not restyle or reorder it by hand, and do not put tags, page cites or explanations into the pleading's text.
 
 ### 9. Hand it over, honestly
 
-Tell the person: the status; where the four files are; how many readings were confirmed and how many the draft cites; which facts rest on their own statement rather than a document; every warning the validator raised (an event outside the limitations window, a filing date already past, an item left blank, a procedural claim without an impact statement, relief outside the usual authority); and the filing instructions, which `verification-report.md` sets out under *How to file* (where the original goes, where the copy goes, the channels, any form). Say what the skill did not do: it did not decide which claims the file supports and it says nothing about how the complaint will fare.
+Tell the person: the status; where the four files are; how many readings were confirmed and how many the draft cites; which facts rest on their own statement rather than a document; every warning the validator raised (an event outside the limitations window, a filing date already past, an item left blank, a procedural claim without an impact statement, relief outside the usual authority); and the filing instructions, which `verification-report.md` sets out under *How to file* (where the original goes, where the copy goes, the channels, any form). For a parent, add what happens after filing as the state's own sources describe it — the resolution session, the district's window to challenge sufficiency — in plain words and with no prediction. Say what the skill did not do: it did not decide which claims the file supports and it says nothing about how the complaint will fare.
 
 ## What not to do, and why
 
@@ -149,6 +164,7 @@ Tell the person: the status; where the four files are; how many readings were co
 | Say the complaint is strong, or what a hearing officer will do | Outcome language is refused by the gate and is not the skill's to say anywhere, including in chat. |
 | Caption "BEFORE THE [STATE EDUCATION AGENCY]" in every state | In some states the forum is a hearings office or the district itself. Step 4 decides from sources. |
 | Skip the confirmation because the person is in a hurry | It is the only step that turns a reading into evidence. Offer the one-answer "confirm all verified" instead. |
+| Ask ten questions in one message | People stop answering, or answer the wrong one. One purpose per screen, three questions at most, defaults stated. |
 
 ## Quick reference
 

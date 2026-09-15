@@ -1,5 +1,5 @@
 {
-  "_about": "The intake for one complaint. Every value that came from a document carries the reading id that supports it; anything the person typed carries \"typed\". student.respondent is optional: the respondent as it should print when it is not the district line as read (a Board of Education, a city-wide agency) — a reading id if a document names it, \"typed\" if the person chose it. Delete this key when you copy the file.",
+  "_about": "The intake for one complaint. Every value that came from a document carries the reading id that supports it; anything the person typed carries \"typed\". Optional: student.respondent (the respondent as it should print when it is not the district line as read — a Board of Education, a city-wide agency); parent.second ({ first, last } with sources) when two parents file together; mediation (\"requested\" | \"declined\" | null); expedited (true only with a discipline claim, § 300.532(c)); hearing.interpreter and hearing.accommodations ({ value, source: \"typed\" }); a claim of the person's own as { id: \"other\", heading, clause, cfr, isProcedural }. Delete this key when you copy the file.",
   "createdOn": "2026-01-01",
   "filingDate": "2026-01-01",
   "state": "CA",
@@ -29,8 +29,12 @@
     "first": { "value": "", "source": "R12" },
     "last": { "value": "", "source": "R13" },
     "phone": { "value": "", "source": "typed" },
-    "email": { "value": "", "source": "typed" }
+    "email": { "value": "", "source": "typed" },
+    "second": null
   },
+  "mediation": null,
+  "expedited": false,
+  "hearing": { "interpreter": null, "accommodations": null },
   "representation": {
     "type": "counsel",
     "counsel": {

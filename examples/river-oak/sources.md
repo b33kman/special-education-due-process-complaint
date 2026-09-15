@@ -137,6 +137,8 @@ Checked on 2026-09-14.
 **[introduction 1]** Petitioner Jordan Rivera (“Student”) is an 8-year-old student who has been eligible for special education and related services under the category of Autism since March 11, 2024, and who attends Willow Creek Elementary School in the River Oak Unified School District (“District”). This due process complaint is brought on Student’s behalf by the parent, Dana Rivera (“Parent”), who is self-represented.
   - R1: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.nameFirst: “Jordan”
   - R2: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.nameLast: “Rivera”
+  - R10: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.nameFirst: “Dana”
+  - R11: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.nameLast: “Rivera”
   - R3: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.dob: “11/03/2017”
   - R16: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.disability: “Autism”
   - R17: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.eligibleSince: “03/11/2024”
