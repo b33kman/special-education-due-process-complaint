@@ -2,6 +2,12 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.5 — 2026-09-15
+
+- When Claude offers claims to choose from, it shows what the documents say for each and no longer says which ones the record supports.
+- An attorney is asked whether to reserve the right to seek attorneys' fees and costs, instead of the paragraph being added automatically.
+- README: install steps with pictures of each screen in the Claude app; the examples open the finished complaint PDF.
+
 ## 1.0.4 — 2026-09-15
 
 - Works in Claude's Chat and Cowork, not only Claude Code: the skill sets itself up in the sandbox (copies its scripts, installs their three packages), uses the documents attached to the chat, and hands back the finished files to download.

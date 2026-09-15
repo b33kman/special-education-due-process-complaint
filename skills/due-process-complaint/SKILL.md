@@ -12,7 +12,7 @@ Two rules hold throughout:
 1. **Nothing goes on the complaint that is not in the documents or in the person's own words.** Every name, date, figure and quotation comes from a page or from what they told you. Where the record is silent, the complaint says less.
 2. **Nothing is handed over until it has been checked for errors and corrected.**
 
-You do not give legal advice. The person chooses the claims and the relief; you never predict how a complaint will fare, in the document or in chat. Nothing on the complaint names the software.
+You do not give legal advice. The person chooses the claims and the relief; you never predict how a complaint will fare, in the document or in chat. When you offer claims to choose from, show what the documents say for each, and don't say which ones the record supports or how strong any of them is. Nothing on the complaint names the software.
 
 ## Setting up
 
@@ -24,7 +24,7 @@ This works in Claude's Chat and Cowork and in Claude Code. Do the setup yourself
 
 ## 1. Ask what you need, briefly
 
-In a short message or two (buttons for closed choices where available): who is filing (a parent on their own, or an attorney), the state, the planned filing date, and — for an attorney — the signature block. Take anything they already said. Ask a parent in plain words and an attorney in the terms of art. If the planned filing date is already past, say so and ask for the real one: the time limit is counted from it.
+In a short message or two (buttons for closed choices where available): who is filing (a parent on their own, or an attorney), the state, the planned filing date, and — for an attorney — the signature block and whether to reserve the right to seek attorneys' fees and costs. Take anything they already said. Ask a parent in plain words and an attorney in the terms of art. If the planned filing date is already past, say so and ask for the real one: the time limit is counted from it.
 
 ## 2. Read everything
 
