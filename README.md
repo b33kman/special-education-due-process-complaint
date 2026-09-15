@@ -53,6 +53,16 @@ ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complai
 
 Then ask Claude Code for a due process complaint from a folder of PDFs. The skill starts on that request; you can also call it directly — `/due-process-complaint:due-process-complaint` as a plugin, `/due-process-complaint` as a personal skill. Run it with the most capable Claude model available to you, at the highest effort setting: reading and drafting are where the quality is.
 
+## Updating
+
+**If you installed the plugin**, turn on automatic updates once: run `/plugin`, open **Marketplaces**, choose `due-process-complaint`, and select **Enable auto-update**. Claude Code then checks for a new version in the background after it starts; run `/reload-plugins` when it tells you an update is ready, or it loads the next time you start Claude Code. Automatic updates are off by default for marketplaces outside Anthropic's own.
+
+To update by hand instead, run `/plugin marketplace update due-process-complaint`, then install the plugin again.
+
+**If you installed from a clone**, run `git pull` in the repository folder, then `npm install`.
+
+What changed in each version is in [CHANGELOG.md](CHANGELOG.md); each version is also published as a [GitHub release](https://github.com/b33kman/special-education-due-process-complaint/releases), so watching the repository for releases tells you when there is a new one.
+
 ## Using it
 
 Put the documents in a folder:
