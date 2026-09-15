@@ -27,7 +27,7 @@ It is for parents filing on their own (pro se), advocates, special education att
 One of these:
 
 - **Claude:** the Claude app on a paid plan (Pro, Max, Team or Enterprise). [Install in Claude](#install-in-claude)
-- **ChatGPT:** the ChatGPT desktop app. Plugins worked on a free ChatGPT account when we tested in September 2026. [Install in ChatGPT](#install-in-chatgpt)
+- **ChatGPT:** the ChatGPT desktop app, which allowed plugins on a free account as of September 2026. [Install in ChatGPT](#install-in-chatgpt)
 
 ## Install in Claude
 
@@ -166,7 +166,7 @@ The documents you attach go to Claude or ChatGPT like any other attachment, unde
 ## Frequently asked questions
 
 ### How does it save me time?
-It does the slow parts for you. It reads every page of every document, pulls out the dates, figures and quotations that matter, and lays them out as a dated chronology with the page each came from. It suggests the claims your documents support best, finds your state's filing office, address and time limit, and sets the complaint out as a legal pleading, ready as a PDF to file and a Word file to edit. In one test with seven school documents, the reading, drafting, checking and formatting took about six minutes.
+It does the slow parts for you. It reads every page of every document, pulls out the dates, figures and quotations that matter, and lays them out as a dated chronology with the page each came from. It suggests the claims your documents support best, finds your state's filing office, address and time limit, and sets the complaint out as a legal pleading, ready as a PDF to file and a Word file to edit. For a folder of seven school documents, the reading, drafting, checking and formatting takes roughly fifteen minutes, plus the time you take answering its questions.
 
 ### How is this different from asking a regular AI chat?
 A regular chat writes what sounds right. This plugin follows a set procedure built for due process complaints:
@@ -215,7 +215,7 @@ Whatever you have: IEPs (current and past), school and private evaluations, prio
 Parents filing on their own (pro se), advocates helping families, and special education attorneys and legal aid organizations drafting for clients. It asks a parent in plain words and an attorney in legal terms; the complaint follows the same form either way.
 
 ### Is it free?
-The plugin is free and open source (MIT license). In Claude you need a paid plan to use plugins: Pro, Max, Team or Enterprise. In ChatGPT, the desktop app's plugins worked on a free account when we tested in September 2026.
+The plugin is free and open source (MIT license). In Claude you need a paid plan to use plugins: Pro, Max, Team or Enterprise. In ChatGPT, the desktop app allowed plugins on a free account as of September 2026.
 
 ### What is a special education due process complaint?
 A written complaint that starts a due process hearing under the Individuals with Disabilities Education Act (IDEA). A parent or a public agency may file one on any matter relating to a child's identification, evaluation or educational placement, or the provision of a free appropriate public education (34 C.F.R. § 300.507(a)). A hearing officer decides the dispute after a hearing; the complaint sets out what the hearing is about.

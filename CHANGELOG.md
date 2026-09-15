@@ -2,6 +2,13 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.13 — 2026-09-15
+
+- **The District's own words are quoted.** Where a refusal, an admission or a description of what happened is in an email, a prior written notice, a service log or a teacher's note, the complaint quotes it, short and word for word, with the document named. One run produced a complaint with no quotations at all.
+- **The facts are confirmed in short groups**, six events at a time, each with its document and page, with a pause after each — instead of one block of facts that gets a glance and a "confirm". What happened that was never written down is asked on its own.
+- **A remedy names its own figures** (the 24 sessions owed, the 150 minutes a week), and never points the reader to a paragraph number. Paragraph pointers belong to the claims.
+- The page's time estimate is roughly fifteen minutes for a folder of seven documents.
+
 ## 1.0.12 — 2026-09-15
 
 - **Fixed: each claim was reduced to a list of paragraph numbers.** 1.0.11 told the AI to point at the facts instead of repeating them, and it pointed without saying anything. A claim now says what the problem is — what the district did or failed to do, with its dates, figures and quoted words — and ends by pointing to the chronology paragraphs that carry the rest. The check refuses a claim that only lists numbers.

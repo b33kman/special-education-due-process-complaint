@@ -78,7 +78,7 @@ The Parent proposes the following resolution:
 
 (a) convene an IEP team meeting within 30 days to revise the math goal based on current assessment data;
 
-(b) provide compensatory specialized academic instruction in math for the weeks the service log records with no instruction; and
+(b) provide compensatory specialized academic instruction in math for the 9 weeks the District's service log for September 15, 2025 to January 30, 2026 records with no specialized academic instruction; and
 
 (c) provide the Parent the service log each month.
 
@@ -118,7 +118,8 @@ Self-represented (pro se)
 
 - **Each fact is stated once, in the statement of facts; each claim says what the problem is and points to the paragraphs that carry the rest.** A claim is a short account of what went wrong, in its own terms, with the dates and figures that make it — never a bare list of paragraph numbers, and never the whole chronology again. Every fact paragraph is a fact with a date, a figure, a document or a specific act. Nothing is characterised and nothing is computed: not "9 of 18 weeks — half the time", not "no measurable progress", not an age worked out from the date of birth. State the figures the documents give.
 - **Documents are named and dated in the prose** ("The District's progress reports dated November 21, 2025 and January 30, 2026"). No page cites on the complaint.
-- **Quotations are short and exact**, only where the document's own words are the fact.
+- **The District's own words are quoted** wherever they are the evidence — a refusal, an admission, an instruction, a description of what happened — short, exact, and with the document named. Everything else is stated plainly.
+- **A remedy names its own figures** ("the 9 weeks the service log records with no instruction"). The paragraph pointers belong to the statement of the problems, never to the relief.
 - **Nothing concludes inside the facts.** The introduction's one sentence names the claims; the regulation under each heading does the rest.
 - **A week is pleaded as a week** ("In the week of September 22, 2025"), a month as a month ("In November 2025").
 - **When counsel files**: the introduction ends "Petitioner and the Parent are represented by [name] of [firm]."; the signature block carries the attorney's name, "Attorney for Petitioner and the Parent", the bar number and jurisdiction, the firm, its address, telephone and email; if counsel asked for it, a reservation of the right to seek attorneys' fees and costs under 20 U.S.C. § 1415(i)(3)(B) follows the lettered remedies as its own paragraph; "Counsel for Petitioner and the Parent certifies" opens the certificate.
