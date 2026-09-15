@@ -1,5 +1,5 @@
 {
-  "_about": "Research output compiled from official state pages on 2026-08-17 by the Sped DPC project (docs/research/state-filing-rules.md). NOT verified filing data except where verifiedNote says so. The skill must re-verify every field it uses for the chosen state on the web, at run time, and record the sources (see references/state-research.md). limitationsMonths null = the state takes 34 C.F.R. § 300.507(a)(2)'s two years, as far as the research found.",
+  "_about": "Research output compiled from official state pages on 2026-08-17 by the Sped DPC project. NOT verified filing data except where verifiedNote says so. The skill must re-verify every field it uses for the chosen state on the web, at run time, and record the sources (see references/state-research.md). limitationsMonths null = the state takes 34 C.F.R. § 300.507(a)(2)'s two years, as far as the research found.",
   "states": [
     {
       "code": "AK",
@@ -314,7 +314,7 @@
       "sourceUrl": "https://www.isbe.net/Documents/dp_parental_19-86a.pdf",
       "sourceQuote": "ILLINOIS STATE BOARD OF EDUCATION Special Education Services Division 100 North First Street, N-243 Springfield, Illinois 62777-0001",
       "researchConfidence": "high",
-      "verifiedNote": "Route and window verified against 105 ILCS 5/14-8.02a(f) and the current ISBE form on 2026-09-10 (Sped DPC D-379). Re-check at run time all the same."
+      "verifiedNote": "Route and window verified against 105 ILCS 5/14-8.02a(f) and the current ISBE form on 2026-09-10. Re-check at run time all the same."
     },
     {
       "code": "IN",

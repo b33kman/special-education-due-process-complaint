@@ -2,6 +2,8 @@ BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS
 
 STATE OF NORTH CAROLINA
 
+COUNTY OF PINE HOLLOW
+
 In the Matter of:
 
 MAYA OKAFOR, a minor, by and through the parent, GRACE OKAFOR,
@@ -10,7 +12,7 @@ Petitioner,
 
 v.
 
-PINE HOLLOW COUNTY SCHOOLS,
+PINE HOLLOW COUNTY BOARD OF EDUCATION,
 
 Respondent.
 
@@ -26,13 +28,13 @@ Date: June 1, 2026
 
 ## I. Introduction
 
-1. Petitioner Maya Okafor (“Student”) is a 13-year-old student who has been eligible for special education and related services under the category of Speech or Language Impairment since February 14, 2020, and who attends Cedar Ridge Middle School in the Pine Hollow County Schools (“District”). This due process complaint is brought on Student’s behalf by the parent, Grace Okafor (“Parent”), who is represented by Renée Castillo of Castillo Education Law PLLC.
+1. Petitioner Maya Okafor (“Student”) is a 13-year-old student who has been eligible for special education and related services under the category of Speech or Language Impairment since February 14, 2020, and who attends Cedar Ridge Middle School in the Pine Hollow County Schools, for which the Pine Hollow County Board of Education is the responsible local educational agency and the respondent here (“District”). This due process complaint is brought on Student’s behalf by the parent, Grace Okafor (“Parent”), who is represented by Renée Castillo of Castillo Education Law PLLC.
 
-2. The District has denied Student a free appropriate public education (“FAPE”) by failing to implement the services the operative individualized education program (“IEP”) requires; and by failing to conduct an appropriate and timely evaluation of Student.
+2. The District has denied Student a free appropriate public education (“FAPE”) by failing to implement the services the operative individualized education program (“IEP”) requires; and by failing to evaluate Student appropriately.
 
 ## II. Contact and residence information
 
-*34 C.F.R. § 300.508(b)(1)–(2).*
+*34 C.F.R. § 300.508(b)(1)–(3).*
 
 3. Student was born on April 19, 2013, resides with the Parent at 72 Laurel Court, Pine Hollow, NC 27999, and is enrolled at Cedar Ridge Middle School. The Parent may be reached at grace.okafor@example.com and (555) 010-2088.
 
@@ -76,9 +78,9 @@ Date: June 1, 2026
 
 19. On January 14, 2026, after Student reported that her speech sessions were now with two other students and half as long, the Parent asked the District for the service log and when individual sessions would resume. On January 21, 2026 the District sent the log and wrote that the pathologist's caseload "was reassigned in September and individual sessions have not been available since". On February 9, 2026 the Parent asked in writing that the District make up the missed minutes and restore individual sessions.
 
-### B. Failure to evaluate appropriately and on time
+### B. Failure to evaluate Student appropriately
 
-*34 C.F.R. §§ 300.301–300.311, 300.502.*
+*34 C.F.R. §§ 300.301–300.311.*
 
 20. The District's speech-language evaluation is dated May 6, 2025; on the CELF-5 administered that day Student obtained a Core Language Score of 71 (2nd percentile), an Expressive Language Index of 68 and a Receptive Language Index of 79.
 
@@ -100,13 +102,11 @@ Date: June 1, 2026
 
 &nbsp;&nbsp;&nbsp;&nbsp;(c) restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.
 
+25. The Parent reserves the right to seek reasonable attorneys’ fees and costs under 20 U.S.C. § 1415(i)(3)(B).
+
 ## VI. Additional information required in North Carolina
 
-25. County of the student's residence: ____________
-
-26. Student's date of birth: 04/19/2013
-
-27. Basis of the petition, in the categories Form H-06E lists: the evaluation of Student, and the denial of a free appropriate public education
+26. Basis of the petition, in the categories Form H-06E lists: the evaluation of Student, and the denial of a free appropriate public education
 
 Dated: ______________________
 
@@ -132,9 +132,9 @@ rcastillo@example.com
 
 ## Certificate of service
 
-Counsel for Petitioner certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of Pine Hollow County Schools and the North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, by the method indicated below.
+Counsel for Petitioner certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of the Pine Hollow County Board of Education and the North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, by the method indicated below.
 
-Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
+Method of service:   [  ] U.S. mail   [  ] Hand delivery   [  ] Other: ____________________
 
 Dated: ______________________
 

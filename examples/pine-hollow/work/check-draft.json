@@ -1,5 +1,13 @@
 {
   "checkedOn": "2026-09-15",
-  "wordCount": 866,
-  "findings": []
+  "wordCount": 913,
+  "inputsSha": "ff725a16984a15a102e9e590baf83810c1c68e069da053344b5c4b3edcf278b8",
+  "findings": [
+    {
+      "level": "warning",
+      "code": "rests-on-statement",
+      "message": "rests on the person's own statement alone (fact F1) — no document is cited; the report will say so",
+      "where": "B: “The District did not file for a hearing.”"
+    }
+  ]
 }

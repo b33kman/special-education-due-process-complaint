@@ -5,7 +5,8 @@
     "page": 1,
     "field": "child.nameFirst",
     "value": "Maya",
-    "note": "the page writes the name last-first: 'Okafor, Maya'"
+    "note": "the page writes the name last-first: 'Okafor, Maya'",
+    "context": "Student: Okafor, Maya"
   },
   {
     "id": "R2",
@@ -64,7 +65,8 @@
     "docId": "01_IEP_Pine_Hollow_2025-08-21",
     "page": 1,
     "field": "child.addressPostalCode",
-    "value": "27999"
+    "value": "27999",
+    "context": "Pine Hollow, NC 27999"
   },
   {
     "id": "R10",
@@ -256,7 +258,8 @@
     "docId": "02_Speech_Language_Service_Log_2025-2026",
     "page": 1,
     "field": "child.nameFirst",
-    "value": "Maya"
+    "value": "Maya",
+    "context": "Student: Maya Okafor"
   },
   {
     "id": "R36",
@@ -510,7 +513,8 @@
     "docId": "03_Prior_Written_Notice_2025-12-04",
     "page": 1,
     "field": "child.nameFirst",
-    "value": "Maya"
+    "value": "Maya",
+    "context": "Student: Maya Okafor"
   },
   {
     "id": "R71",
@@ -579,7 +583,8 @@
     "page": 1,
     "field": "child.addressPostalCode",
     "value": "27999",
-    "note": "the 'To:' line"
+    "note": "the 'To:' line",
+    "context": "Pine Hollow, NC 27999"
   },
   {
     "id": "R80",
@@ -642,7 +647,8 @@
     "page": 1,
     "field": "child.nameFirst",
     "value": "Maya",
-    "note": "from the subject lines, 'Maya Okafor'"
+    "note": "from the subject lines, 'Maya Okafor'",
+    "context": "independent educational evaluation - Maya Okafor"
   },
   {
     "id": "R88",

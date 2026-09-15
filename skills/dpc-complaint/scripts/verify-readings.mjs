@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url'
 import { caseDir, hasFlag, readJson, writeJson, containsText, snippetAround, isoDate } from './lib.mjs'
 
 const argv = process.argv.slice(2)
-const dir = caseDir(argv)
+const dir = caseDir(argv, 'node scripts/verify-readings.mjs <case folder> [--allow-image-pages]   — every reading in work/readings.json checked on its page, word for word')
 const work = join(dir, 'work')
 const allowImage = hasFlag(argv, 'allow-image-pages')
 
@@ -76,11 +76,13 @@ for (const r of readings) {
   }
 
   const page = pages[r.page - 1]
-  // A short value ("7", "NC", "Maya") is somewhere on almost any page, so
-  // finding it proves nothing. It has to come with the words around it.
-  const short = r.value.trim().length < 4
+  // A short value ("7", "NC", "Maya") is somewhere on almost any page, and
+  // so is a bare number ("2025", "95833"), so finding it proves nothing. It
+  // has to come with the words around it.
+  const value = r.value.trim()
+  const short = value.length < 5 || (/^[\d\s.,/-]+$/.test(value) && value.length < 8)
   if (short && (typeof r.context !== 'string' || !containsText(r.context, r.value))) {
-    result.verification = { status: 'invalid', problems: [`a value of fewer than 4 characters needs a "context": the words on the page around it, containing the value — the label and the value ("Grade: 7"), or the line it sits in ("Willow Creek, CA 95833")`] }
+    result.verification = { status: 'invalid', problems: [`a value of fewer than 5 characters, or a bare number of fewer than 8, needs a "context": the words on the page around it, containing the value — the label and the value ("Grade: 7", "DOB: 04/19/2013"), or the line it sits in ("Willow Creek, CA 95833")`] }
     failed++
     out.push(result)
     continue

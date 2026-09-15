@@ -14,40 +14,65 @@
 // and appended to work/gates.log for the report.
 
 import { appendFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { createHash } from 'node:crypto'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import {
-  caseDir, readJson, writeJson, readText, parseAnnotated, splitSentences, datesIn, monthsIn, draftDates, draftMonths,
-  numbersIn, numberAppearsIn, quotedSpans, withoutQuotes, containsText, longDate, wordSet, containment,
+  caseDir, readJson, writeJson, readText, parseAnnotated, splitSentences, datesIn, monthsIn, draftDates, draftMonths, oddDates,
+  numbersIn, numberAppearsIn, quotedSpans, withoutQuotes, containsExact, longDate, isoDate, wordSet, containment, MONTHS,
   printFindings, today,
 } from './lib.mjs'
 
-const dir = caseDir(process.argv.slice(2))
+const here = dirname(fileURLToPath(import.meta.url))
+const dir = caseDir(process.argv.slice(2), 'node scripts/check-draft.mjs <case folder>   — the statement gate: every sentence tagged; every date, figure and quotation in the sources it cites; the pleading rules')
 const work = join(dir, 'work')
 
 const draft = readText(join(work, 'statement.annotated.md'))
 const confirmed = readJson(join(work, 'confirmed.json'))
 const caseFile = readJson(join(work, 'case.json'))
 const state = readJson(join(work, 'state.json'), null)
+const reliefRef = readJson(join(here, '..', 'references', 'relief.json')).options
+const v = (x) => (x && typeof x === 'object' && 'value' in x ? String(x.value ?? '').trim() : String(x ?? '').trim())
 
 // ─── Sources by tag ───────────────────────────────────────────────────
+// `text` is what a sentence may take a date, figure or quotation from;
+// `docText` is the part of that which a document or an official page states,
+// so a sentence resting on the person's own statement alone can be named.
+// A reading is usable only if the person confirmed it AND the verifier found
+// it on its page (or the page is a scan the person read by eye).
+const MACHINE_OK = new Set(['verified', 'unverifiable-image'])
 const sources = new Map()
 for (const r of confirmed) {
-  const usable = r.status === 'confirmed' || r.status === 'edited'
-  const text = r.status === 'edited' ? r.editedValue : r.value
-  sources.set(r.id, { kind: 'reading', usable, text: String(text ?? ''), label: `${r.docId} p.${r.page} ${r.field}` })
+  const usable = (r.status === 'confirmed' || r.status === 'edited') && MACHINE_OK.has(r.verification)
+  const text = String((r.status === 'edited' ? r.editedValue : r.value) ?? '')
+  sources.set(r.id, { kind: 'reading', usable, text, docText: text, label: `${r.docId} p.${r.page} ${r.field}${MACHINE_OK.has(r.verification) ? '' : `, verification ${r.verification}`}` })
 }
 for (const [id, f] of Object.entries(caseFile.facts ?? {})) {
-  sources.set(id, { kind: 'fact', usable: Boolean(f.answer?.trim()), text: String(f.answer ?? ''), label: `fact ${id}` })
-}
-for (const e of caseFile.events ?? []) {
-  const iso = e.date
-  sources.set(e.id, { kind: 'event', usable: Boolean(e.what), text: `${iso} ${longDate(iso)} ${e.what}`, label: `event ${e.id}` })
+  sources.set(id, { kind: 'fact', usable: Boolean(f.answer?.trim()), text: String(f.answer ?? ''), docText: '', label: `fact ${id}` })
 }
 for (const s of state?.sources ?? []) {
-  sources.set(s.id, { kind: 'state', usable: Boolean(s.url), text: `${s.title ?? ''} ${s.quote ?? ''}`, label: `state source ${s.id}` })
+  const text = `${s.title ?? ''} ${s.quote ?? ''}`
+  sources.set(s.id, { kind: 'state', usable: Boolean(s.url), text, docText: text, label: `state source ${s.id}` })
+}
+// An event's date prints at the head of its paragraph ("On March 12, 2026,"),
+// so it is checked like any other date: it must be written in a reading or a
+// fact the event names. Only then does the event lend its date to a sentence
+// of the statement that cites it.
+const eventDate = new Map() // id → { ok: true | false | null (no date to check), iso }
+for (const e of caseFile.events ?? []) {
+  const iso = isoDate(e.date)
+  const own = (e.sources ?? []).map((t) => sources.get(t)).filter((s) => s && s.usable && (s.kind === 'reading' || s.kind === 'fact'))
+  const ownText = own.map((s) => s.text).join('\n')
+  let ok = null
+  if (iso && iso.length === 10) { const [y, m, d] = iso.split('-'); ok = datesIn(ownText).has(`${Number(m)}/${Number(d)}/${y}`) }
+  else if (iso) { const [y, m] = iso.split('-'); ok = monthsIn(ownText).has(`${Number(m)}/${y}`) }
+  eventDate.set(e.id, { ok, iso })
+  const dateWords = ok ? `${iso} ${longDate(iso)}` : ''
+  const documentary = own.length > 0 && own.every((s) => s.kind === 'reading')
+  sources.set(e.id, { kind: 'event', usable: Boolean(e.what), text: `${dateWords} ${e.what ?? ''}`.trim(), docText: documentary ? `${dateWords} ${e.what ?? ''}`.trim() : dateWords, label: `event ${e.id}` })
 }
 
-// ─── The forbidden patterns (ported from Sped DPC drafting-guardrails.ts) ─
+// ─── The forbidden patterns (ported from Sped DPC) ─
 const w = (s) => s.split(' ').join('\\s+')
 const RULES = [
   {
@@ -140,6 +165,16 @@ const RULES = [
       /\b(?:egregious(?:ly)?|outrageous(?:ly)?|blatant(?:ly)?|flagrant(?:ly)?|shocking(?:ly)?|callous(?:ly)?|deliberately|knowingly|willful(?:ly)?|wilful(?:ly)?|intentionally ignored)\b/i,
     ],
   },
+  {
+    rule: 'arithmetic-in-words',
+    why: 'a fraction or a judgment about the figures — state the figures the sources give and let the reader compare',
+    patterns: [
+      /\bno (?:measurable|meaningful|appreciable|significant|discernible) (?:progress|gain|gains|growth|improvement)\b/i,
+      /\bmade no progress\b/i,
+      /\bshortfall of (?:more|less) than\b/i,
+      /\b(?:roughly|about|nearly|almost|approximately|around|over|under|more than|less than) (?:a |one[- ])?(?:half|third|quarter|fifth|two[- ]thirds|three[- ]quarters) (?:of|the)\b/i,
+    ],
+  },
 ]
 
 // ─── Walk the draft ───────────────────────────────────────────────────
@@ -157,10 +192,18 @@ for (const s of sections) {
   if (s.headingText) add('warning', 'heading-text', `section ${s.letter}: heading text is ignored — the claim's fixed filing heading prints instead`, s.headingText)
   if (s.paragraphs.length === 0) add('warning', 'empty-section', `section ${s.letter} has no paragraphs; the complaint will carry a placeholder there until facts are entered or the claim is removed`)
 }
+// The same claim twice prints the same heading twice and repeats the clause
+// in the introduction; the same event id twice prints the event twice.
+const claimIds = claims.map((cl) => cl.id).filter((id) => id !== 'other')
+for (const id of new Set(claimIds.filter((id, i) => claimIds.indexOf(id) !== i))) add('error', 'duplicate-claim', `claim "${id}" is listed twice in case.json`)
+const eventIds = (caseFile.events ?? []).map((e) => e.id)
+for (const id of new Set(eventIds.filter((id, i) => eventIds.indexOf(id) !== i))) add('error', 'duplicate-event', `event ${id} appears twice in case.json`)
 
 const studentFirst = caseFile.student?.first?.value?.trim()
 const parentFirst = caseFile.parent?.first?.value?.trim()
-const nameRe = (name) => new RegExp(`(?<![\\w'’])${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w'’])`)
+// A child named May or June is not named by "May 6, 2025"; "Jordan's IEP"
+// names Jordan.
+const nameRe = (name) => new RegExp(`(?<![\\w'’])${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?!\\w)${MONTHS.includes(name.toLowerCase()) ? '(?!\\.?,?\\s+\\d)' : ''}`)
 
 const allSentences = []
 let wordCount = 0
@@ -173,11 +216,33 @@ const impacts = claims
 /* The chronology (case.json → events) prints as the statement of facts, one
    numbered paragraph per event, so each event's sentence is held to the
    same rules: its dates, figures and quotations in the sources it names. */
+const finished = (t) => (/[.!?…]["”)]*$/.test(t) ? t : `${t}.`)
 const chronology = (caseFile.events ?? [])
-  .map((e) => ({ letter: `Facts (${e.id})`, text: `${String(e.what ?? '').trim()} ${(e.sources ?? []).map((t) => `[${t}]`).join('')}`.trim() }))
+  .map((e) => ({ id: e.id, letter: `Facts (${e.id})`, text: String(e.what ?? '').trim() ? `${finished(String(e.what).trim())} ${(e.sources ?? []).map((t) => `[${t}]`).join('')}`.trim() : '' }))
   .filter((x) => x.text)
-  .map((x) => ({ letter: x.letter, paragraphs: [splitSentences(x.text)] }))
-for (const s of [...sections, ...impacts, ...chronology]) {
+  .map((x) => ({ id: x.id, letter: x.letter, paragraphs: [splitSentences(x.text)] }))
+/* The proposed resolution prints each remedy in the person's own words
+   (case.json → relief[].detail), so each is held to the same rules and to
+   the sources it names — the person's fourth statement of fact (F4) among
+   them. A reservation of attorneys' fees in counsel's own wording is checked
+   for the pleading rules only; it asserts no fact. */
+const typedPassages = []
+const relief = []
+for (const r of caseFile.relief ?? []) {
+  const ref = reliefRef.find((o) => o.id === r.id)
+  const detail = String(r.detail ?? '').trim()
+  if (!detail) continue
+  // A fees reservation names the statute it reserves rights under.
+  if (ref?.reservation) typedPassages.push([`Relief (${r.id})`, detail, { citation: true }])
+  else relief.push({ letter: `Relief (${r.id})`, paragraphs: [splitSentences(`${finished(detail)} ${(r.sources ?? []).map((t) => `[${t}]`).join('')}`.trim())] })
+}
+if (v(caseFile.hearing?.accommodations)) typedPassages.push(['Hearing (accommodations)', v(caseFile.hearing?.accommodations), {}])
+if (v(caseFile.hearing?.interpreter)) typedPassages.push(['Hearing (interpreter)', v(caseFile.hearing?.interpreter), {}])
+for (const s of [...sections, ...impacts, ...chronology, ...relief]) {
+  if (s.id && eventDate.get(s.id)?.ok === false) {
+    const e = caseFile.events.find((x) => x.id === s.id)
+    add('error', 'event-date-not-in-sources', `the event's date ${e.date} is not written in the sources it names (${(e.sources ?? []).join(', ')}) — it prints as "On ${longDate(eventDate.get(s.id).iso)},"`, `${s.letter}: “${String(e.what ?? '').slice(0, 90)}”`)
+  }
   for (const paragraph of s.paragraphs) {
     for (const sentence of paragraph) {
       const where = `${s.letter ?? '?'}: “${sentence.text.slice(0, 90)}${sentence.text.length > 90 ? '…' : ''}”`
@@ -198,19 +263,36 @@ for (const s of [...sections, ...impacts, ...chronology]) {
       const citedText = cited.map((c) => c.text).join('\n')
       const citedDates = datesIn(citedText)
       const citedMonths = monthsIn(citedText)
+      const docText = cited.map((c) => c.docText).join('\n')
+      const docDates = datesIn(docText)
+      const docMonths = monthsIn(docText)
+      const onlyStatement = []
 
+      for (const od of oddDates(sentence.text)) add('error', 'date-form', `"${od}" — write the date in full, as Month D, YYYY, so it is checked as a date`, where)
       for (const d of draftDates(sentence.text)) {
         if (!citedDates.has(d.key)) add('error', 'date-not-in-sources', `"${d.text}" is not written in the sources this sentence cites`, where)
+        else if (!docDates.has(d.key)) onlyStatement.push(d.text)
       }
       for (const m of draftMonths(sentence.text)) {
         if (!citedMonths.has(m.key)) add('error', 'month-not-in-sources', `"${m.text}" is not written in the sources this sentence cites`, where)
+        else if (!docMonths.has(m.key)) onlyStatement.push(m.text)
       }
       for (const n of numbersIn(sentence.text)) {
         if (!numberAppearsIn(n, citedText)) add('error', 'number-not-in-sources', `the figure "${n}" is not in the sources this sentence cites`, where)
+        else if (!numberAppearsIn(n, docText)) onlyStatement.push(n)
       }
       for (const q of quotedSpans(sentence.text)) {
-        const inSource = cited.some((c) => (c.kind === 'reading' || c.kind === 'fact') && containsText(c.text, q))
+        const inSource = cited.some((c) => (c.kind === 'reading' || c.kind === 'fact') && containsExact(c.text, q))
         if (!inSource) add('error', 'quote-not-in-sources', `the quotation “${q.slice(0, 60)}${q.length > 60 ? '…' : ''}” is not word for word in a cited reading`, where)
+      }
+      // A sentence may rest on what the person typed — that is allowed, and
+      // the report names it so the signer knows which sentences no document
+      // supports.
+      const factsCited = cited.filter((c) => c.kind === 'fact').map((c) => c.label)
+      if (cited.length && cited.every((c) => c.kind === 'fact')) {
+        add('warning', 'rests-on-statement', `rests on the person's own statement alone (${factsCited.join(', ')}) — no document is cited; the report will say so`, where)
+      } else if (onlyStatement.length) {
+        add('warning', 'rests-on-statement', `${[...new Set(onlyStatement)].map((x) => `"${x}"`).join(', ')} — in no cited reading; from the person's own statement (${factsCited.join(', ') || 'none cited'}); the report will say so`, where)
       }
 
       const outside = withoutQuotes(sentence.text)
@@ -229,13 +311,27 @@ for (const s of [...sections, ...impacts, ...chronology]) {
     }
   }
 }
+// Text the person typed that prints as their own words — hearing requests,
+// a fees reservation in counsel's wording — asserts no fact to check
+// against a source, but it is on the pleading and speaks in its voice.
+for (const [label, passage, allow] of typedPassages) {
+  const where = `${label}: “${passage.slice(0, 90)}${passage.length > 90 ? '…' : ''}”`
+  const outside = withoutQuotes(passage)
+  for (const rule of RULES) {
+    if (allow[rule.rule]) continue
+    const m = rule.patterns.map((p) => outside.match(p)).find(Boolean)
+    if (m) add('error', rule.rule, `"${m[0].trim()}" — ${rule.why}`, where)
+  }
+  if (studentFirst && nameRe(studentFirst).test(outside)) add('error', 'named', `the student's given name "${studentFirst}" appears; the pleading says Student`, where)
+}
 
 // ─── Repetition ───────────────────────────────────────────────────────
 // Within the statement only. The chronology states each event once by its
-// date, and an issue's section restating a dated fact from it is the form
-// of a pleading, not padding.
+// date, an issue's section restating a dated fact from it is the form of a
+// pleading, and a remedy restates what was asked for — none of that is
+// padding.
 const OVERLAP = 0.7
-const statementSentences = allSentences.filter((s) => !s.where.startsWith('Facts ('))
+const statementSentences = allSentences.filter((s) => !/^(Facts|Relief) \(/.test(s.where))
 for (let i = 0; i < statementSentences.length; i++) {
   const a = statementSentences[i]
   const wa = wordSet(a.text)
@@ -257,7 +353,13 @@ if (wordCount > 1200) add('warning', 'long', `the statement runs ${wordCount} wo
 if (sections.length && wordCount === 0) add('error', 'empty', 'the statement has no sentences')
 
 // ─── Report ───────────────────────────────────────────────────────────
-writeJson(join(work, 'check-draft.json'), { checkedOn: today(), wordCount, findings })
+// A fingerprint of what was checked, so validate.mjs can tell a pass on this
+// statement and this case file from a pass on an earlier version of either.
+const inputsSha = createHash('sha256')
+  .update(draft)
+  .update(JSON.stringify([caseFile.events ?? [], caseFile.facts ?? {}, caseFile.claims ?? [], caseFile.relief ?? [], caseFile.hearing ?? null]))
+  .digest('hex')
+writeJson(join(work, 'check-draft.json'), { checkedOn: today(), wordCount, inputsSha, findings })
 const errors = printFindings('check-draft', findings)
 appendFileSync(join(work, 'gates.log'), `${new Date().toISOString()} check-draft errors=${errors} warnings=${findings.length - errors} words=${wordCount}\n`)
 if (errors > 0) {

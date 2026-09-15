@@ -11,12 +11,7 @@
     {
       "level": "warning",
       "code": "outside-limitations",
-      "message": "event E1 (2025-05-06) is more than 12 months before the filing date 2026-06-01; the window is 12 months (North Carolina’s rule as stated at N.C. Gen. Stat. § 115C-109.6. Impartial due process hearings (North Carolina General Assembly); Notice of Procedural Safeguards — Parent Rights and Responsibilities in Special Education (NC DPI, Updated July 2026)). Exceptions exist; whether one applies is counsel’s judgment."
-    },
-    {
-      "level": "warning",
-      "code": "blank-item",
-      "message": "state-required item 1 (County of the student's residence) is left blank on the complaint — no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition; fill it in by hand before filing"
+      "message": "event E1 (2025-05-06) is more than 12 months before the filing date 2026-06-01; the window is 12 months (North Carolina’s rule as stated at N.C. Gen. Stat. § 115C-109.6. Impartial due process hearings (North Carolina General Assembly); Notice of Procedural Safeguards — Parent Rights and Responsibilities in Special Education (NC DPI, Updated July 2026)). Exceptions exist, and the window runs from when the Parent knew or should have known; if the Parent learned of it later, the chronology should say when. Whether an exception applies is counsel’s judgment."
     }
   ]
 }

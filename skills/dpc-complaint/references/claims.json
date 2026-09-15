@@ -1,5 +1,5 @@
 {
-  "_about": "The claims a due process complaint may plead, with the FIXED wording each one prints in. `filingHeading` becomes the lettered subsection heading under III. Statement of the problems; `filingClause` slots into the introduction's 'The District has denied Student a free appropriate public education (\"FAPE\") by ___' sentence; `cfr` is the regulation printed under the heading. `turnsOn` is general information about what the claim is about — it is NOT a test applied to this file. The person drafting chooses the claims; the skill never decides which claim a file supports. A procedural claim (isProcedural) requires an impact statement: 34 C.F.R. § 300.513(a)(2) makes a procedural violation actionable only where it impeded the child's right to FAPE, significantly impeded the parent's participation, or caused a deprivation of educational benefit.",
+  "_about": "The claims a due process complaint may plead, with the FIXED wording each one prints in. `filingHeading` becomes the lettered subsection heading under IV. Statement of the problems; `filingClause` slots into the introduction's 'The District has denied Student a free appropriate public education (\"FAPE\") by ___' sentence; `cfr` is the regulation printed under the heading. `turnsOn` is general information about what the claim is about — it is NOT a test applied to this file. The person drafting chooses the claims; the skill never decides which claim a file supports. A claim may be reworded by the person: `heading`, `clause` or `cfr` given on the claim in case.json print in place of the catalogue's, marked as typed in sources.md. A claim outside the catalogue is { \"id\": \"other\", \"heading\", \"clause\", \"cfr\", \"isProcedural\" }. A procedural claim (isProcedural) requires an impact statement: 34 C.F.R. § 300.513(a)(2) makes a procedural violation actionable only where it impeded the child's right to FAPE, significantly impeded the parent's participation, or caused a deprivation of educational benefit. Each procedural limb is its own claim so that a section pleads only the step that was missed.",
   "claims": [
     {
       "id": "inadequate-iep",
@@ -27,19 +27,51 @@
     },
     {
       "id": "evaluation",
-      "filingHeading": "Failure to evaluate appropriately and on time",
-      "filingClause": "failing to conduct an appropriate and timely evaluation of Student",
-      "cfr": "34 C.F.R. §§ 300.301–300.311, 300.502",
+      "filingHeading": "Failure to evaluate Student appropriately",
+      "filingClause": "failing to evaluate Student appropriately",
+      "cfr": "34 C.F.R. §§ 300.301–300.311",
       "isProcedural": false,
-      "turnsOn": "The areas assessed, the instruments, the timelines, a reevaluation not done when requested, and a refused request for an independent educational evaluation."
+      "turnsOn": "The areas assessed, the instruments, the timelines, and a reevaluation not done when requested or when due. A refused request for an independent educational evaluation is its own claim (below)."
     },
     {
-      "id": "procedural",
-      "filingHeading": "Failure to follow required procedures",
-      "filingClause": "failing to follow required procedures, including notice to, consent from, and participation by the Parent",
-      "cfr": "34 C.F.R. §§ 300.300, 300.322, 300.503, 300.513(a)(2)",
+      "id": "iee",
+      "filingHeading": "Refusal to fund an independent educational evaluation",
+      "filingClause": "refusing to fund an independent educational evaluation at public expense without filing its own due process complaint",
+      "cfr": "34 C.F.R. § 300.502(b)",
+      "isProcedural": false,
+      "turnsOn": "A request for an independent educational evaluation at public expense after a disagreement with the District’s evaluation, and what the District did next: it must, without unnecessary delay, either fund the evaluation or file its own due process complaint to show its evaluation was appropriate."
+    },
+    {
+      "id": "eligibility",
+      "filingHeading": "Wrongful determination of eligibility",
+      "filingClause": "finding Student ineligible for special education, or ending Student’s eligibility, without the evaluation and determination the regulations require",
+      "cfr": "34 C.F.R. §§ 300.305(e), 300.306",
+      "isProcedural": false,
+      "turnsOn": "A finding that the student is not, or is no longer, a child with a disability — the data considered, who decided, and whether a reevaluation preceded an exit from services."
+    },
+    {
+      "id": "no-prior-written-notice",
+      "filingHeading": "Failure to provide prior written notice",
+      "filingClause": "failing to provide prior written notice of the actions it proposed or refused",
+      "cfr": "34 C.F.R. §§ 300.503, 300.513(a)(2)",
       "isProcedural": true,
-      "turnsOn": "A required step was missed — prior written notice, parental consent, a meeting the Parent could attend — and § 300.513(a)(2) requires the resulting harm to be stated as well."
+      "turnsOn": "A proposal or a refusal to change the student’s identification, evaluation, placement or services without written notice of what was decided and why — and, under § 300.513(a)(2), what the missing notice cost the Parent’s participation or the student."
+    },
+    {
+      "id": "consent",
+      "filingHeading": "Action without parental consent",
+      "filingClause": "evaluating or providing services to Student without the Parent’s informed consent",
+      "cfr": "34 C.F.R. §§ 300.300, 300.513(a)(2)",
+      "isProcedural": true,
+      "turnsOn": "An initial evaluation, a reevaluation or initial services without the consent § 300.300 requires, or a consent given without the information the Parent needed — and what it cost."
+    },
+    {
+      "id": "parent-participation",
+      "filingHeading": "Failure to ensure the Parent’s participation in decisions about Student",
+      "filingClause": "failing to ensure the Parent’s participation in decisions about Student’s program and placement",
+      "cfr": "34 C.F.R. §§ 300.322, 300.501, 300.513(a)(2)",
+      "isProcedural": true,
+      "turnsOn": "A meeting the Parent was not notified of or could not attend, a decision made before the meeting, or a placement decided without the Parent — and, under § 300.513(a)(2), how it impeded the Parent’s participation."
     },
     {
       "id": "placement",
@@ -63,15 +95,15 @@
       "filingClause": "removing Student from school without the protections required for a child with a disability",
       "cfr": "34 C.F.R. §§ 300.530–300.536",
       "isProcedural": false,
-      "turnsOn": "Removals beyond ten school days, the manifestation determination, and the services provided during a removal."
+      "turnsOn": "Removals beyond ten school days, the manifestation determination, and the services provided during a removal. A discipline claim may ask for an expedited hearing (§ 300.532(c))."
     },
     {
       "id": "related-services",
       "filingHeading": "Failure to provide required related services",
       "filingClause": "failing to provide the related services Student requires",
-      "cfr": "34 C.F.R. § 300.34",
+      "cfr": "34 C.F.R. §§ 300.320(a)(4), 300.323(c)(2), 300.34",
       "isProcedural": false,
-      "turnsOn": "A service the student needs in order to benefit from special education — speech, occupational or physical therapy, counseling, transportation."
+      "turnsOn": "A service the student needs in order to benefit from special education — speech, occupational or physical therapy, counseling, transportation — that the IEP does not provide or that was not delivered."
     },
     {
       "id": "esy",
@@ -103,8 +135,7 @@
       "filingClause": "failing to provide the Parent access to Student’s education records on request",
       "cfr": "34 C.F.R. §§ 300.613, 300.501(a), 300.513(a)(2)",
       "isProcedural": true,
-      "turnsOn": "The district's duty to let the parent inspect and review the student's education records without unnecessary delay — in any case within 45 days of the request, and before any IEP meeting or hearing — and what the delay cost the parent's participation."
+      "turnsOn": "The district’s duty to let the parent inspect and review the student’s education records without unnecessary delay — in any case within 45 days of the request, and before any IEP meeting or hearing. A records dispute on its own is usually a state complaint (34 C.F.R. §§ 300.151–300.153); as a due process claim it stands only where the delay significantly impeded the Parent’s participation in decisions about Student (§ 300.513(a)(2)(ii)), which the impact statement must say."
     }
-  ],
-  "maxComfortable": 4
+  ]
 }

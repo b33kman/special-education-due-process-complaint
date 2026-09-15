@@ -96,9 +96,10 @@
     "page": 1,
     "field": "child.addressPostalCode",
     "value": "95833",
+    "context": "Willow Creek, CA 95833",
     "verification": {
       "status": "verified",
-      "snippet": "rade: 3 student id: 4471-0093 home address: 1418 alder street, willow creek, ca 95833 parent/guardian: dana rivera (mother) phone: (555) 010-4471 email: dana.r@examp"
+      "snippet": "rth: 11/03/2017 grade: 3 student id: 4471-0093 home address: 1418 alder street, willow creek, ca 95833 parent/guardian: dana rivera (mother) phone: (555) 010-4471 email: dana.r@examp"
     }
   },
   {
@@ -108,9 +109,10 @@
     "field": "parent.nameFirst",
     "value": "Dana",
     "note": "from 'Parent/Guardian: Dana Rivera (Mother)'",
+    "context": "Parent/Guardian: Dana Rivera",
     "verification": {
       "status": "verified",
-      "snippet": "1-0093 home address: 1418 alder street, willow creek, ca 95833 parent/guardian: dana rivera (mother) phone: (555) 010-4471 email: dana.r@example.com school of atten"
+      "snippet": "3 student id: 4471-0093 home address: 1418 alder street, willow creek, ca 95833 parent/guardian: dana rivera (mother) phone: (555) 010-4471 email: dana.r@example.com school of attendance: "
     }
   },
   {

@@ -1,0 +1,61 @@
+{
+  "checkedOn": "2026-09-15",
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Services/Page-Content/Special-Education-Services-List-Folder/Request-Special-Education-Due-Process-Hearing",
+      "file": "work/state-text/S1.txt",
+      "quoteSha": "ccec7c662e93c72a4cb7138e86cc4479f1b53ae8ad06944b32e5544a3ced62d7",
+      "status": "verified",
+      "snippet": "t special education due process hearing school districts, parents or other authorized parties can request a special education due process hearing and/or mediation with the office of administrative hearings (oah). either a district or parent may file wi"
+    },
+    {
+      "id": "S2",
+      "url": "https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Resources/Page-Content/Special-Education-Resources-List-Folder/Notice-of-Procedural-Safeguards",
+      "file": "work/state-text/S2.txt",
+      "quoteSha": "0676d4137ca0dd0faaab5314e6d97d76d5fecd9a70e07440c4a441aefaea1ccb",
+      "status": "verified",
+      "snippet": "of your child or the provision of fape. the request for a due process hearing must be filed within two years from the date you knew or should have known about the alleged action that forms the basis of the due process complaint. (20 usc section 1415[b][6]; 34 cfr sect"
+    },
+    {
+      "id": "S3",
+      "url": "https://www.cde.ca.gov/sp/se/disputeresolution.asp",
+      "file": "work/state-text/S3.txt",
+      "quoteSha": "9d05e4315373edf906c8fb4f3bfdf7e28b52b2de2f98756a3a3c0d19bc6f211f",
+      "status": "verified",
+      "snippet": "or due process complaints and hearings. all due process hearings are facilitated by the dgs, oah under the supervision of the cde [34 cfr section 300.511(b)]. during a due process hearing, all parti"
+    },
+    {
+      "id": "S4",
+      "url": "https://california.public.law/codes/education_code_section_56502",
+      "file": "work/state-text/S4.txt",
+      "quoteSha": "41134580bf23749f99198aa4fd58cb937240dc8a37c79a65d56cb0fa6913f881",
+      "status": "verified",
+      "snippet": null
+    },
+    {
+      "id": "S5",
+      "url": "https://california.public.law/codes/education_code_section_56505",
+      "file": "work/state-text/S5.txt",
+      "quoteSha": "f4c6f6d228af1ff445d46a0349ae140a697b06d93b1a51ecae310f7a8ae2fb5e",
+      "status": "verified",
+      "snippet": " 34 of the code of federal regulations. (l) a request for a due process hearing arising under subdivision (a) of section 56501 shall be filed within two years from the date the party initiating the request knew or had reason to know of the facts underlying the basis for the request. in accordance with section 1415(f)(3)(d) of title 20 of the united states code, the time period specified in this subdivision does not apply to a parent if the parent was prevented from requesting the due process hearing due to either of the following: (1) specific misrepresentations by the local educational agency that it had solved the problem forming the basis of the due process hearing request. (2) the withholding of information by the local educational agency from the parent that was required under this part to be provided to the parent. (m) pursuant to section 300.511(c) of t"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.dgs.ca.gov/oah/case-types/special-education",
+      "file": "work/state-text/S6.txt",
+      "quoteSha": "25759325a02385323b2671aa543ff5624359356f2697e9a6c1624c55649759eb",
+      "status": "verified",
+      "snippet": "and orders. search decisions and orders oah secure e-file transfer system the oah secure e-file transfer (sft) system allows users to send to oah, and receive from oah, electronic documents. secure e-file transfer (sft) system spe"
+    },
+    {
+      "id": "S7",
+      "url": "https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Self-Help/Filing-and-Serving-Documents",
+      "file": "work/state-text/S7.txt",
+      "quoteSha": "3753fc90146dc3349ab6f6c506d537fb54e81d18124f4237ff39da25072f4c60",
+      "status": "verified",
+      "snippet": "the other party or parties in the case. all parties must be served before a document is filed with oah because oah will only accept a document that has been served on the other parties. proof of serving a document on the othe"
+    }
+  ]
+}

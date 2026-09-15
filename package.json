@@ -7,7 +7,9 @@
   "scripts": {
     "setup": "cd skills/dpc-complaint/scripts && npm install",
     "test": "node --test tests/*.test.mjs",
-    "example": "node skills/dpc-complaint/scripts/run-gates.mjs examples/river-oak"
+    "example": "node -e \"const fs=require(\\\"fs\\\"),os=require(\\\"os\\\"),path=require(\\\"path\\\");const d=fs.mkdtempSync(path.join(os.tmpdir(),\\\"dpc-example-\\\"));fs.cpSync(\\\"examples/river-oak\\\",d,{recursive:true});console.log(\\\"running on a copy: \\\"+d);process.exitCode=require(\\\"child_process\\\").spawnSync(process.execPath,[\\\"skills/dpc-complaint/scripts/run-gates.mjs\\\",d],{stdio:\\\"inherit\\\"}).status\""
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }

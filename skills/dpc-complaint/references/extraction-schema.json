@@ -1,5 +1,5 @@
 {
-  "_about": "What to read out of each kind of document, and the rules every reading obeys. Field keys are `<kind>.<field>`; `child.*` and `parent.*` are asked of EVERY kind because every document names the student. A reading's value is quoted from the document AS WRITTEN — never summarised, corrected, reformatted or completed — and carries the page it was read from. Ported from the Sped DPC extraction schemas (extraction-model.ts).",
+  "_about": "What to read out of each kind of document, and the rules every reading obeys. Field keys are `<kind>.<field>`; `child.*` and `parent.*` are asked of EVERY kind because every document names the student. A reading's value is quoted from the document AS WRITTEN — never summarised, corrected, reformatted or completed — and carries the page it was read from. Ported from the Sped DPC extraction schemas.",
   "rules": [
     "Quote each value exactly as the document writes it, including its punctuation, capitalisation and date format. A reading that is not on the page, word for word, is not a reading.",
     "Record the page number the value sits on. One value, one page. A value that spans pages is two readings.",

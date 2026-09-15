@@ -5,9 +5,11 @@
     "bytes": 4234,
     "pages": 2,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "iep"
+    ],
+    "documentDate": "08/21/2025",
+    "title": "Individualized Education Program, annual review of August 21, 2025"
   },
   {
     "docId": "02_Speech_Language_Service_Log_2025-2026",
@@ -15,9 +17,11 @@
     "bytes": 2139,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "service_log"
+    ],
+    "documentDate": "08/25/2025 – 01/30/2026",
+    "title": "Speech-language related service log"
   },
   {
     "docId": "03_Prior_Written_Notice_2025-12-04",
@@ -25,9 +29,12 @@
     "bytes": 2307,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "pwn",
+      "iee"
+    ],
+    "documentDate": "December 4, 2025",
+    "title": "Prior written notice refusing an independent educational evaluation at public expense"
   },
   {
     "docId": "04_Correspondence_Nov2025-Feb2026",
@@ -35,8 +42,11 @@
     "bytes": 2324,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "correspondence",
+      "iee"
+    ],
+    "documentDate": "November 10, 2025 – February 9, 2026",
+    "title": "Emails between the Parent and the District: the IEE request, the service log, the missed minutes"
   }
 ]

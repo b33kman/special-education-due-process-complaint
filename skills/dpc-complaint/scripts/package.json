@@ -2,9 +2,13 @@
   "name": "dpc-complaint-scripts",
   "private": true,
   "type": "module",
-  "description": "Deterministic checks for the dpc-complaint skill: PDF text, reading verification, draft gates, assembly, validation, provenance report.",
-  "engines": { "node": ">=20" },
+  "description": "Deterministic checks for the dpc-complaint skill: PDF text, reading and state-source verification, draft gates, assembly, validation, rendering to Word and PDF, provenance report.",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
+    "docx": "9.7.1",
+    "pdf-lib": "1.17.1",
     "pdfjs-dist": "4.10.38"
   }
 }

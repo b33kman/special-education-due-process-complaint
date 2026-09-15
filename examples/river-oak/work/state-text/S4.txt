@@ -1,0 +1,240 @@
+# https://california.public.law/codes/education_code_section_56502
+# fetched 2026-09-15 (text/html)
+
+California.Public.Law
+
+California Codes
+
+Remove ads
+
+Login
+
+Codes
+
+Education Code
+
+Title 2
+
+Div. 4
+
+Part 30
+
+Procedural Safeguards
+
+§ 56502
+
+Education Code section 56502
+
+(a)
+All requests for a due process hearing shall be filed with the Superintendent in accordance with Section 300.508(a) and (b) of Title 34 of the Code of Federal Regulations.
+
+(b)
+The Superintendent shall develop a model form to assist parents and guardians in filing a request for due process that is in accordance with Section 300.509 of Title 34 of the Code of Federal Regulations.
+
+(c)
+(1)The party, or the attorney representing the party, initiating a due process hearing by filing a written request with the Superintendent shall provide the other party to the hearing with a copy of the request at the same time as the request is filed with the Superintendent. The due process hearing request notice shall remain confidential. In accordance with Section 1415(b)(7)(A) of Title 20 of the United States Code, the request shall include the following:
+
+(A)
+The name of the child, the address of the residence of the child, or available contact information in the case of a homeless child, and the name of the school the child is attending.
+
+(B)
+In the case of a homeless child or youth within the meaning of paragraph (2) of Section 725 of the federal McKinney-Vento Homeless Assistance Act (42 U.S.C. Sec. 11434a(2)), available contact information for the child and the name of the school the child is attending.
+
+(C)
+A description of the nature of the problem of the child relating to the proposed initiation or change, including facts relating to the problem.
+
+(D)
+A proposed resolution of the problem to the extent known and available to the party at the time.
+
+(2)
+A party may not have a due process hearing until the party, or the attorney representing the party, files a request that meets the requirements listed in this subdivision.
+
+(d)
+(1)The due process hearing request notice required by Section 1415(b)(7)(A) of Title 20 of the United States Code shall be deemed to be sufficient unless the party receiving the notice notifies the due process hearing officer and the other party in writing that the receiving party believes the due process hearing request notice has not met the notice requirements. The party providing a hearing officer notification shall provide the notification within 15 days of receiving the due process hearing request notice. Within five days of receipt of the notification, the hearing officer shall make a determination on the face of the notice of whether the notification meets the requirements of Section 1415(b)(7)(A) of Title 20 of the United States Code, and shall immediately notify the parties in writing of the determination.
+
+(2)
+(A)The response to the due process hearing request notice shall be made within 10 days of receiving the request notice in accordance with Section 1415(c)(2)(B) of Title 20 of the United States Code.
+
+(B)
+In accordance with Section 300.508(e)(1) of Title 34 of the Code of Federal Regulations, if the local educational agency has not sent a prior written notice under Section 56500.4 and Section 300.503 of Title 34 of the Code of Federal Regulations to the parent regarding the subject matter contained in the due process hearing request of the parent, the response from the local educational agency to the parent shall include all of the following:
+
+(i)
+An explanation of why the agency proposed or refused to take the action raised in the due process hearing request.
+
+(ii)
+A description of other options that the individualized education program team considered and the reasons why those options were rejected.
+
+(iii)A description of each assessment procedure, assessment, record, or report the agency used as the basis for the proposed or refused action.
+
+(iv)
+A description of other factors that are relevant to the proposed or refused action of the agency.
+
+(C)
+A response by a local educational agency under subparagraph (B) shall not be construed to preclude the local educational agency from asserting that the due process request of the parent was insufficient, where appropriate.
+
+(D)
+Except as provided under subparagraph (B), the party receiving a due process hearing request notice, within 10 days of receiving the notice, shall send to the other party, in accordance with Section 300.508(f) of Title 34 of the Code of Federal Regulations, a response that specifically addresses the issues raised in the due process hearing request notice.
+
+(e)
+A party may amend a due process hearing request notice only if the other party consents in writing to the amendment and is given the opportunity to resolve the hearing issue through a meeting held pursuant to Section 1415(f)(1)(B) of Title 20 of the United States Code, or the due process hearing officer grants permission, except that the hearing officer may only grant permission at any time not later than five days before a due process hearing occurs. The applicable timeline for a due process hearing under this chapter shall recommence at the time the party files an amended notice, including the timeline under Section 1415(f)(1)(B) of Title 20 of the United States Code.
+
+(f)
+The Superintendent shall take steps to ensure that within 45 days after receipt of the written hearing request the hearing is immediately commenced and completed, including, any mediation requested at any point during the hearing process pursuant to paragraph (2) of subdivision (b) of Section 56501 , and a final administrative decision is rendered, unless a continuance has been granted pursuant to Section 56505 .
+
+(g)
+Notwithstanding any procedure set forth in this chapter, a public agency and a parent or guardian, if the party initiating the hearing so chooses, may meet informally to resolve an issue or issues relating to the identification, assessment, or education and placement of the child, or the provision of a free appropriate public education to the child, to the satisfaction of both parties prior to the hearing. The informal meeting shall be conducted by the district superintendent, county superintendent, or director of the public agency or his or her designee. A designee appointed pursuant to this subdivision shall have the authority to resolve the issue or issues.
+
+(h)
+Upon receipt by the Superintendent of a written request by the parent or guardian or public agency, the Superintendent or his or her designee or designees immediately shall notify, in writing, all parties of the request for the hearing and the scheduled date for the hearing. The notice shall advise all parties of all their rights relating to procedural safeguards. The Superintendent or his or her designee shall provide both parties with a list of persons and organizations within the geographical area that can provide free or reduced cost representation or other assistance in preparing for the due process hearing. This list shall include a brief description of the requirement to qualify for the services. The Superintendent or his or her designee shall have complete discretion in determining which individuals or groups shall be included on the list.
+
+(i)
+In accordance with Section 1415(f)(3)(B) of Title 20 of the United States Code, the party requesting the due process hearing shall not be allowed to raise issues at the due process hearing that were not raised in the notice filed under this section, unless the other party agrees otherwise.
+
+Source:
+Section 56502 , https://leginfo.&shy;legislature.&shy;ca.&shy;gov/faces/codes_displaySection.&shy;xhtml?lawCode=EDC&sectionNum=56502.&shy; (updated Oct. 10, 2007; accessed Sep. 14, 2026).
+
+56500
+
+56500.1
+
+56500.2
+
+56500.3
+
+56500.4
+
+56500.5
+
+56500.6
+
+56501
+
+56501.5
+
+56502
+
+56503
+
+56504
+
+56504.5
+
+56505
+
+56505.1
+
+56505.2
+
+56506
+
+56507
+
+56508
+
+56509
+
+Up to date
+
+Verified:
+
+Sep. 14, 2026
+
+§ 56502's source at
+ca​.gov
+
+Stay Connected
+
+Join thousands of people who receive monthly site updates.
+
+Subscribe
+
+Get Legal Help
+
+The State Bar of California runs a service for finding
+an attorney in good standing. Initial consultations
+are usually free or discounted: Certified Lawyer Referral Services Directory
+
+Committed to Public Service
+
+We will always provide free access to the current law. In addition,
+we provide special support
+for non-profit, educational, and government users. Through social
+entre­pre­neurship, we’re lowering the cost of legal services and
+increasing citizen access.
+
+Navigate
+
+Find a Lawyer
+
+Blog
+
+About Us
+
+API
+
+Contact Us
+
+Reports
+
+Secondary Sources
+
+Privacy Policy
+
+California:
+Codes
+
+Colorado:
+C.R.S.
+
+Florida:
+Statutes
+
+Nevada:
+NRS
+
+New York:
+Laws
+
+Oregon:
+OAR , ORS
+
+Texas:
+Statutes
+
+World:
+Rome Statute , International Dictionary
+
+Location:
+https://california.public.law/codes/education_code_section_56502
+
+Original Source:
+Section 56502 ,
+https://leginfo.&shy;legislature.&shy;ca.&shy;gov/faces/codes_displaySection.&shy;xhtml?lawCode=EDC&sectionNum=56502.&shy;
+(last ac&shy;cessed May 12, 2025).
+
+Blank Outline Levels
+
+×
+
+The legislature occasionally skips outline levels.
+For example:
+
+(3) A person may apply [...]
+(4)(a) A person petitioning for relief [...]
+
+In this example, (3) , (4) ,
+and (4)(a) are all outline levels, but
+(4) was
+omitted by its authors. It's only implied. This presents an
+interesting challenge when laying out the text. We've
+decided to display a blank section with this note, in order
+to aide readability.
+
+Trust but verify.
+
+Here is the original source for section 56502
+
+Do you have an opinion about this solution?
+Drop us a line.
+
+Close

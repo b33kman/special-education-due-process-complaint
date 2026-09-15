@@ -9,10 +9,14 @@ import { join, resolve } from 'node:path'
 
 // ─── Files ──────────────────────────────────────────────────────────────
 
-export function caseDir(argv) {
+/**
+ * The case folder from the command line. With no folder given, prints the
+ * script's own usage line (each script passes one) and exits.
+ */
+export function caseDir(argv, usage = 'node <script> <case folder> [--flags]') {
   const given = argv.find((a) => !a.startsWith('--'))
   if (!given) {
-    console.error('usage: node <script> <case folder> [--flags]')
+    console.error(`usage: ${usage}`)
     process.exit(2)
   }
   const dir = resolve(given)
@@ -72,22 +76,42 @@ export function normalizeForMatch(text) {
     .toLowerCase()
 }
 
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+/**
+ * Where a normalised needle sits in a normalised haystack, or -1. A needle
+ * that begins or ends with a digit must match a whole figure: "40 minutes"
+ * is not on a page that says "240 minutes".
+ */
+function indexOfText(h, n) {
+  if (!n) return -1
+  const re = new RegExp(`${/^\d/.test(n) ? '(?<![\\d.,])' : ''}${escapeRe(n)}${/\d$/.test(n) ? '(?![\\d]|[.,]\\d)' : ''}`)
+  const m = h.match(re)
+  return m ? m.index : -1
+}
+
 /** Whitespace-insensitive containment: is `needle` written inside `hay`? */
 export function containsText(hay, needle) {
   const h = normalizeForMatch(hay)
   const n = normalizeForMatch(needle)
   if (!n) return false
-  if (h.includes(n)) return true
+  if (indexOfText(h, n) !== -1) return true
   // A PDF text layer often breaks a line inside a sentence and drops the
-  // space, or hyphenates. Compare with all spaces removed as a second try.
-  return h.replace(/[\s-]/g, '').includes(n.replace(/[\s-]/g, ''))
+  // space, or hyphenates. Compare with spaces and hyphens removed as a
+  // second try.
+  return indexOfText(h.replace(/[\s-]/g, ''), n.replace(/[\s-]/g, '')) !== -1
+}
+
+/** Strict containment for a quotation: the words, the spaces and the hyphens as written. */
+export function containsExact(hay, needle) {
+  return indexOfText(normalizeForMatch(hay), normalizeForMatch(needle)) !== -1
 }
 
 /** Where in `hay` the needle sits — for a snippet in a report. */
 export function snippetAround(hay, needle, radius = 80) {
   const h = normalizeForMatch(hay)
   const n = normalizeForMatch(needle)
-  const at = h.indexOf(n)
+  const at = indexOfText(h, n)
   if (at === -1) return null
   return h.slice(Math.max(0, at - radius), Math.min(h.length, at + n.length + radius))
 }
@@ -176,18 +200,41 @@ export function draftMonths(text) {
   return out
 }
 
-/** ISO `yyyy-mm-dd` or `yyyy-mm` for a date the reader can order, else null. Two-digit years take the century nearest today. */
+/**
+ * Dates a draft writes in a form the pleading does not use — an abbreviated
+ * month ("Mar. 12, 2025"), day first ("8 September 2026"), a two-digit year
+ * ("9/8/26"). The draft gate refuses them: written that way they would be
+ * checked as loose figures, and a wrong year could pass.
+ */
+export function oddDates(text) {
+  const t = String(text ?? '')
+  const canonical = new Set(draftDates(t).map((d) => d.text.toLowerCase()))
+  const out = []
+  const push = (s) => { if (![...canonical].some((c) => c.includes(s.toLowerCase()) || s.toLowerCase().includes(c))) out.push(s) }
+  const abbrev = MONTHS.flatMap((m) => [m.slice(0, 3), m.slice(0, 4)]).concat(['sept']).filter((a) => !MONTHS.includes(a))
+  for (const m of t.matchAll(new RegExp(`\\b(?:${abbrev.join('|')})\\.?\\s+\\d{1,2}(?:st|nd|rd|th)?,?\\s+\\d{2,4}\\b`, 'gi'))) push(m[0])
+  for (const m of t.matchAll(new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+(?:${MONTHS.join('|')})\\.?,?\\s+\\d{4}\\b`, 'gi'))) push(m[0])
+  for (const m of t.matchAll(/(?<![\d/])\d{1,2}\/\d{1,2}\/\d{2}(?![\d/])/g)) push(m[0])
+  for (const m of t.matchAll(new RegExp(`\\b(?:${MONTHS.join('|')})\\s+\\d{1,2}(?:st|nd|rd|th)?,?\\s+\\d{2}\\b(?!\\d)`, 'gi'))) push(m[0])
+  return out
+}
+
+const validCalendar = (y, mo, d) => {
+  if (mo < 1 || mo > 12) return false
+  if (d === undefined) return true
+  const dt = new Date(Date.UTC(y, mo - 1, d))
+  return d >= 1 && dt.getUTCMonth() === mo - 1 && dt.getUTCDate() === d
+}
+
+/** ISO `yyyy-mm-dd` or `yyyy-mm` for a real calendar date the reader can order, else null. Two-digit years take the century nearest today. */
 export function isoDate(text, today = new Date()) {
   const t = String(text ?? '').trim()
   let m
-  if ((m = t.match(/^(\d{4})-(\d{2})-(\d{2})$/))) return t
-  if ((m = t.match(/^(\d{4})-(\d{2})$/))) return t
-  if ((m = t.match(new RegExp(`^(${MONTH_ALT})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4})$`, 'i')))) {
-    return `${m[3]}-${String(monthNumber(m[1])).padStart(2, '0')}-${String(m[2]).padStart(2, '0')}`
-  }
-  if ((m = t.match(new RegExp(`^(${MONTH_ALT})\\.?,?\\s+(\\d{4})$`, 'i')))) {
-    return `${m[2]}-${String(monthNumber(m[1])).padStart(2, '0')}`
-  }
+  const iso = (y, mo, d) => (validCalendar(Number(y), Number(mo), d === undefined ? undefined : Number(d)) ? `${y}-${String(Number(mo)).padStart(2, '0')}${d === undefined ? '' : `-${String(Number(d)).padStart(2, '0')}`}` : null)
+  if ((m = t.match(/^(\d{4})-(\d{2})-(\d{2})$/))) return iso(m[1], m[2], m[3])
+  if ((m = t.match(/^(\d{4})-(\d{2})$/))) return iso(m[1], m[2])
+  if ((m = t.match(new RegExp(`^(${MONTH_ALT})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4})$`, 'i')))) return iso(m[3], monthNumber(m[1]), m[2])
+  if ((m = t.match(new RegExp(`^(${MONTH_ALT})\\.?,?\\s+(\\d{4})$`, 'i')))) return iso(m[2], monthNumber(m[1]))
   if ((m = t.match(/^(\d{1,2})\s*[/-]\s*(\d{1,2})\s*[/-]\s*(\d{4}|\d{2})$/))) {
     let y = m[3]
     if (y.length === 2) {
@@ -195,21 +242,45 @@ export function isoDate(text, today = new Date()) {
       const cands = [1900 + Number(y), 2000 + Number(y), 2100 + Number(y)]
       y = String(cands.reduce((b, c) => (Math.abs(c - now) < Math.abs(b - now) ? c : b)))
     }
-    return `${y}-${String(m[1]).padStart(2, '0')}-${String(m[2]).padStart(2, '0')}`
+    return iso(y, m[1], m[2])
   }
   return null
 }
 
-/** `2026-02-10` → `February 10, 2026`; `2025-11` → `November 2025`. */
+/** `2026-02-10` → `February 10, 2026`; `2025-11` → `November 2025`; anything else as given. */
 export function longDate(iso) {
   const m = String(iso).match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/)
-  if (!m) return String(iso)
+  if (!m || !MONTHS[Number(m[2]) - 1]) return String(iso)
   const name = MONTHS[Number(m[2]) - 1]
   const Name = name[0].toUpperCase() + name.slice(1)
   return m[3] ? `${Name} ${Number(m[3])}, ${m[1]}` : `${Name} ${m[1]}`
 }
 
 export const MS_PER_MONTH = (365.25 / 12) * 24 * 60 * 60 * 1000
+
+/** Age in whole years on `onIso`, from a date of birth in any form isoDate reads; null when either is not a full date. */
+export function ageOn(dobText, onIso) {
+  const dob = isoDate(dobText)
+  if (!dob || dob.length !== 10) return null
+  const born = new Date(`${dob}T00:00:00Z`)
+  const on = new Date(`${onIso}T00:00:00Z`)
+  if (Number.isNaN(born.getTime()) || Number.isNaN(on.getTime())) return null
+  let age = on.getUTCFullYear() - born.getUTCFullYear()
+  const m = on.getUTCMonth() - born.getUTCMonth()
+  if (m < 0 || (m === 0 && on.getUTCDate() < born.getUTCDate())) age -= 1
+  return age >= 0 && age < 120 ? age : null
+}
+
+/**
+ * The pieces of a quotation that must each be on the page: an ellipsis —
+ * "…", "...", "[…]" or "[...]" — marks words left out between them.
+ */
+export function quoteSegments(quote) {
+  return String(quote ?? '')
+    .split(/\[\s*(?:…|\.{3})\s*\]|…|\.{3}/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0)
+}
 
 // ─── Numbers and quotations ─────────────────────────────────────────────
 
@@ -227,22 +298,33 @@ export function numbersIn(text) {
   return out
 }
 
+/** Is the figure written in the text — with its unit: "95%" is not on a page that says "95 minutes", nor "$150" where it says "150". */
 export function numberAppearsIn(number, text) {
   const n = number.replace(/[$%]/g, '')
   const t = String(text ?? '').replace(/,/g, '')
-  return new RegExp(`(?<![\\d.])${n.replace(/\./g, '\\.')}(?![\\d])`).test(t)
+  const before = number.startsWith('$') ? '\\$\\s?' : ''
+  const after = number.endsWith('%') ? '\\s?(?:%|percent)' : ''
+  return new RegExp(`${before}(?<![\\d.])${n.replace(/\./g, '\\.')}(?![\\d])${after}`, 'i').test(t)
 }
 
-/** Balanced quoted spans in a sentence, curly or straight. */
+/**
+ * Balanced quoted spans in a sentence — curly or straight double quotes,
+ * and single quotes around three or more words (an apostrophe is never
+ * followed by two spaces and a closing quote).
+ */
 export function quotedSpans(text) {
   const out = []
-  for (const m of String(text ?? '').matchAll(/["“]([^"“”]{3,})["”]/g)) out.push(m[1])
+  const t = String(text ?? '')
+  for (const m of t.matchAll(/["“]([^"“”]{3,})["”]/g)) out.push(m[1])
+  for (const m of t.matchAll(/(?<![\w])['‘]([^'’‘]*?\s[^'’‘]*?\s[^'’‘]*?)['’](?![\w])/g)) out.push(m[1])
   return out
 }
 
 /** The same sentence with its quoted spans blanked, so a district's "I" is not the draft's. */
 export function withoutQuotes(text) {
-  return String(text ?? '').replace(/["“]([^"“”]*)["”]/g, (m) => '"' + ' '.repeat(m.length - 2) + '"')
+  return String(text ?? '')
+    .replace(/["“]([^"“”]*)["”]/g, (m) => '"' + ' '.repeat(m.length - 2) + '"')
+    .replace(/(?<![\w])['‘]([^'’‘]*?\s[^'’‘]*?\s[^'’‘]*?)['’](?![\w])/g, (m) => "'" + ' '.repeat(m.length - 2) + "'")
 }
 
 // ─── The annotated draft ────────────────────────────────────────────────
@@ -279,7 +361,7 @@ export function parseAnnotated(markdown) {
 export function splitSentences(paragraph) {
   const sentences = []
   let rest = paragraph
-  const re = /^(.*?[.!?]["”)]*)\s*((?:\[[RFES]\d+\]\s*)+)/s
+  const re = /^(.*?[.!?…]["”)]*)\s*((?:\[[RFES]\d+\]\s*)+)/s
   while (rest.trim()) {
     const m = rest.match(re)
     if (!m) {

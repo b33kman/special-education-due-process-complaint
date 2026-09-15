@@ -5,9 +5,11 @@
     "bytes": 4252,
     "pages": 2,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "iep"
+    ],
+    "documentDate": "09/08/2025",
+    "title": "Individualized Education Program, annual review of September 8, 2025"
   },
   {
     "docId": "02_Progress_Reports_2025-2026",
@@ -15,9 +17,11 @@
     "bytes": 1960,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "progress"
+    ],
+    "documentDate": "11/14/2025 – 03/06/2026",
+    "title": "Progress reports on the IEP reading goal for three reporting periods"
   },
   {
     "docId": "03_SAI_Service_Delivery_Log_Sep2025-Feb2026",
@@ -25,9 +29,11 @@
     "bytes": 2309,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "service_log"
+    ],
+    "documentDate": "09/08/2025 – 02/27/2026",
+    "title": "Specialized academic instruction service delivery log"
   },
   {
     "docId": "04_Prior_Written_Notice_2026-03-12",
@@ -35,9 +41,11 @@
     "bytes": 2595,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "pwn"
+    ],
+    "documentDate": "March 12, 2026",
+    "title": "Prior written notice declining to revise the reading goal"
   },
   {
     "docId": "05_Correspondence_Dec2025-Apr2026",
@@ -45,8 +53,10 @@
     "bytes": 2122,
     "pages": 1,
     "imageOnlyPages": 0,
-    "kinds": [],
-    "documentDate": null,
-    "title": null
+    "kinds": [
+      "correspondence"
+    ],
+    "documentDate": "December 2, 2025 – April 2, 2026",
+    "title": "Emails between the Parent and the District about a reevaluation and the reading goal"
   }
 ]

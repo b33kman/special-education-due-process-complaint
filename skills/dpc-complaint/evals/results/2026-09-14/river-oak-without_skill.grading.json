@@ -1,0 +1,94 @@
+{
+  "expectations": [
+    {
+      "text": "A finished complaint file exists in the case folder (complaint.md or an equivalent single document).",
+      "passed": true,
+      "evidence": "complaint.md, 18640 characters"
+    },
+    {
+      "text": "The caption names the Office of Administrative Hearings (California), not the California Department of Education, as the body the complaint is before.",
+      "passed": true,
+      "evidence": "# Request for Due Process Hearing and Mediation | **BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS** | **STATE OF CALIFORNIA — SPECIAL EDUCATION DIVISION**"
+    },
+    {
+      "text": "The complaint contains the student's name, the residence address including the ZIP code 95833, and the school name Willow Creek Elementary School.",
+      "passed": true,
+      "evidence": "name true, ZIP true, school true"
+    },
+    {
+      "text": "Every calendar date written in the statement of the problems appears in the text of the five PDFs.",
+      "passed": false,
+      "evidence": "not in the documents or the person's statement: December 17, 2025 (no statement heading found; the whole complaint was checked)"
+    },
+    {
+      "text": "Every number written in the statement of the problems appears in the text of the five PDFs (no arithmetic the documents do not state, such as a computed shortfall).",
+      "passed": false,
+      "evidence": "figures not in the documents or the person's statement: 34, 56502, 1625, 4560, 2935, 48, 55, 7, 580, 386, 56343, 56380, 9, 300.323, 36, 2007, 502, 811, 56043, 30 (no statement heading found; the whole complaint was checked)"
+    },
+    {
+      "text": "The statement of the problems is in the third person: no 'I', 'my', 'me' or 'we' outside a quotation.",
+      "passed": true,
+      "evidence": "no first-person pronoun outside quotations"
+    },
+    {
+      "text": "The statement of the problems does not call the student by his given name (Jordan); it says Student.",
+      "passed": false,
+      "evidence": "\"Jordan\" appears 23 time(s) in the statement"
+    },
+    {
+      "text": "The statement of the problems contains no regulation citations and no legal conclusions ('violated', 'denied FAPE', 'in violation of').",
+      "passed": false,
+      "evidence": "citations in the facts: U.S.C, §, 34 C.F.R.; legal conclusions: free appropriate public education, denied Jordan a FAPE, violates, violation"
+    },
+    {
+      "text": "The complaint contains no outcome language ('likely to prevail', 'strong case', 'a hearing officer would').",
+      "passed": true,
+      "evidence": "none found"
+    },
+    {
+      "text": "A proposed resolution section lists the four remedies the parent asked for.",
+      "passed": true,
+      "evidence": "15 days true, IEE true, compensatory true, quarterly logs true"
+    },
+    {
+      "text": "A sources file traces each factual paragraph of the statement to a document and a page number.",
+      "passed": true,
+      "evidence": "sources.md carries 6 page references"
+    },
+    {
+      "text": "The state's filing procedure (where the original goes, the copy to the district, the filing address, the two-year window) is recorded with URLs of official California pages and an access date.",
+      "passed": false,
+      "evidence": "1 official URL(s) https://www.dgs.ca.gov/OAH/Services/Page-Content/Office-of-Administrative-Hearings-Services-List-Folder/File-or-Upload-OAH-Case-Documents; access date \"read on September 14, 2026\""
+    },
+    {
+      "text": "A verification report exists and reports the status FINAL with zero blocking findings.",
+      "passed": false,
+      "evidence": "no verification report"
+    },
+    {
+      "text": "The run did not ask the user any question before finishing.",
+      "passed": true,
+      "evidence": "run's final reply: asked=no"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 6,
+    "total": 14,
+    "pass_rate": 0.57
+  },
+  "graded_by": "grade.mjs",
+  "files": [
+    "complaint.html",
+    "complaint.md",
+    "extracted-text/01_IEP_River_Oak_2025-09-08.txt",
+    "extracted-text/02_Progress_Reports_2025-2026.txt",
+    "extracted-text/03_SAI_Service_Delivery_Log_Sep2025-Feb2026.txt",
+    "extracted-text/04_Prior_Written_Notice_2026-03-12.txt",
+    "extracted-text/05_Correspondence_Dec2025-Apr2026.txt",
+    "proof-of-service.md",
+    "read-me-first.md",
+    "service-minutes.md",
+    "sources.md"
+  ]
+}

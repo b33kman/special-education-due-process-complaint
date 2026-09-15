@@ -9,12 +9,11 @@
 // verify-readings.mjs can say "this cannot be checked by machine" instead
 // of quietly passing it.
 
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, basename, extname } from 'node:path'
-import { caseDir, workDir, writeJson } from './lib.mjs'
-import { mkdirSync } from 'node:fs'
+import { caseDir, workDir, readJson, writeJson } from './lib.mjs'
 
-const dir = caseDir(process.argv.slice(2))
+const dir = caseDir(process.argv.slice(2), 'node scripts/pdf-text.mjs <case folder>   — every PDF in <case>/documents → per-page text in work/text/ and the inventory work/documents.json')
 const docsDir = join(dir, 'documents')
 let files
 try {
@@ -32,6 +31,9 @@ const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs')
 const work = workDir(dir)
 const textDir = join(work, 'text')
 mkdirSync(textDir, { recursive: true })
+// Re-running over a folder keeps what step 2 wrote into the inventory
+// (kinds, documentDate, title) for each document already there.
+const previous = new Map((existsSync(join(work, 'documents.json')) ? readJson(join(work, 'documents.json')) : []).map((d) => [d.docId, d]))
 
 const slug = (name) =>
   basename(name, extname(name))
@@ -64,16 +66,18 @@ for (const file of files) {
   }
   const docId = slug(file)
   writeJson(join(textDir, `${docId}.json`), { docId, file, pages })
+  const was = previous.get(docId) ?? {}
   inventory.push({
     docId,
     file,
     bytes: statSync(path).size,
     pages: doc.numPages,
     imageOnlyPages,
-    // Filled in by the skill after reading the document (see SKILL.md step 2).
-    kinds: [],
-    documentDate: null,
-    title: null,
+    // Filled in by the skill after reading the document (SKILL.md step 2);
+    // kept from the previous inventory on a re-run.
+    kinds: was.kinds ?? [],
+    documentDate: was.documentDate ?? null,
+    title: was.title ?? null,
   })
   console.log(`✓ ${file}: ${doc.numPages} page(s)${imageOnlyPages ? `, ${imageOnlyPages} with no text layer` : ''}`)
 }

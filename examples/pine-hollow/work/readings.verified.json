@@ -6,9 +6,10 @@
     "field": "child.nameFirst",
     "value": "Maya",
     "note": "the page writes the name last-first: 'Okafor, Maya'",
+    "context": "Student: Okafor, Maya",
     "verification": {
       "status": "verified",
-      "snippet": "y schools individualized education program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel cou"
+      "snippet": "pine hollow county schools individualized education program student information student: okafor, maya date of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel cou"
     }
   },
   {
@@ -97,9 +98,10 @@
     "page": 1,
     "field": "child.addressPostalCode",
     "value": "27999",
+    "context": "Pine Hollow, NC 27999",
     "verification": {
       "status": "verified",
-      "snippet": "9/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com scho"
+      "snippet": "e of birth: 04/19/2013 grade: 7 student id: ph-208114 address: 72 laurel court, pine hollow, nc 27999 parent: grace okafor phone: (555) 010-2088 email: grace.okafor@example.com scho"
     }
   },
   {
@@ -393,9 +395,10 @@
     "page": 1,
     "field": "child.nameFirst",
     "value": "Maya",
+    "context": "Student: Maya Okafor",
     "verification": {
       "status": "verified",
-      "snippet": "pine hollow county schools - related service log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: "
+      "snippet": "pine hollow county schools - related service log student: maya okafor student id: ph-208114 service: speech-language therapy iep requirement: 60 minu"
     }
   },
   {
@@ -787,9 +790,10 @@
     "page": 1,
     "field": "child.nameFirst",
     "value": "Maya",
+    "context": "Student: Maya Okafor",
     "verification": {
       "status": "verified",
-      "snippet": "ne hollow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace ok"
+      "snippet": "pine hollow county schools - prior written notice date: december 4, 2025 student: maya okafor date of birth: 04/19/2013 school: cedar ridge middle school to: grace okafor, 7"
     }
   },
   {
@@ -892,9 +896,10 @@
     "field": "child.addressPostalCode",
     "value": "27999",
     "note": "the 'To:' line",
+    "context": "Pine Hollow, NC 27999",
     "verification": {
       "status": "verified",
-      "snippet": "l: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2025 the parent requested, in writing, an indepe"
+      "snippet": "04/19/2013 school: cedar ridge middle school to: grace okafor, 72 laurel court, pine hollow, nc 27999 action refused on november 10, 2025 the parent requested, in writing, an indepe"
     }
   },
   {
@@ -987,9 +992,10 @@
     "field": "child.nameFirst",
     "value": "Maya",
     "note": "from the subject lines, 'Maya Okafor'",
+    "context": "independent educational evaluation - Maya Okafor",
     "verification": {
       "status": "verified",
-      "snippet": "te: november 10, 2025 subject: request for independent educational evaluation - maya okafor mr. whitfield, i disagree with the district's evaluation of may 6, 2025."
+      "snippet": " grace okafor to: daniel whitfield date: november 10, 2025 subject: request for independent educational evaluation - maya okafor mr. whitfield, i disagree with the district's evaluation of may 6, 2025. it did"
     }
   },
   {

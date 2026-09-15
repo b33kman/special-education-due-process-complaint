@@ -1,19 +1,32 @@
 {
-  "_about": "The filing state's procedure, verified on the web this run. Every field cites entries in `sources`, each with a URL, an access date and the words that support the value. A field with no source keeps the complaint a DRAFT. See references/state-research.md. Delete this key when you copy the file.",
+  "_about": {
+    "what": "The filing state's procedure, verified on the web this run. Every field is { \"value\", \"sources\": [\"S1\", …] }, each S# an entry in `sources` with a URL, an access date and a quotation of the page's own words. Every quotation is checked against the page by scripts/verify-state.mjs (the page's text is kept in work/state-text/<id>.txt); a field whose source did not verify keeps the complaint a DRAFT. See references/state-research.md. The scripts ignore _about. A value left null is missing — nothing here is pre-answered; the limitations window in particular is whatever the state's rule says, found on the page, not 24 by default.",
+    "sources[].quote": "The words on the page that support the values citing this source, verbatim. Use … between passages that are not adjacent on the page; each piece is checked on its own. Nothing in square brackets except […] — an editorial insertion is not on the page.",
+    "seaName": "The state education agency as it names itself.",
+    "captionAgency": "The body the complaint is captioned before (the SEA, or the hearings office where a separate office runs the hearings). Prints as the first caption line, without the state's name, which the second line carries.",
+    "filesWith": "Who receives the original and who receives a copy, and anything that must accompany the filing (a proof of service).",
+    "filingAddress": "The full mailing address for the filing, and for the SEA copy where that is separate.",
+    "channels": "Which of mail, hand delivery, fax, email and portal the receiving office accepts, with the address, number or URL for each — from the receiving office's own page.",
+    "limitationsMonths": "The state's window for bringing a complaint, in whole months, as a number, with the source that states it.",
+    "requiredForm": "Whether the state requires its own form, and where it is.",
+    "additionalContents": "A list (possibly empty) of what the state requires a complaint to state beyond 34 C.F.R. § 300.508(b), one string each. Each item gets an entry in case.json → additionalContents (numbered by \"requirement\") that either prints or says where the pleading already states it. An empty list is an answer and still needs the source that shows the state's requirements were read.",
+    "serviceRecipients": "Who must be served, as they should be named in the certificate of service: the district's superintendent (or the office the state names), and the state agency where the state requires a copy. Filing with the forum is not service.",
+    "notes": "Anything else the person filing needs to know: serve-before-filing rules, resolution session timing, a form for expedited cases, two official sources that disagree and which was followed."
+  },
   "code": "CA",
   "name": "California",
   "checkedOn": "2026-01-01",
   "sources": [
-    { "id": "S1", "title": "the page's own title", "url": "https://", "accessed": "2026-01-01", "quote": "the sentence or two that supports the values citing S1" }
+    { "id": "S1", "title": "", "url": "", "accessed": "2026-01-01", "quote": "" }
   ],
-  "seaName": { "value": "", "sources": ["S1"] },
-  "captionAgency": { "value": "the body the complaint is captioned before", "sources": ["S1"] },
-  "filesWith": { "value": "who receives the original and who receives a copy", "sources": ["S1"] },
-  "filingAddress": { "value": "", "sources": ["S1"] },
-  "channels": { "value": "mail / hand delivery / fax / email / portal, with the address, number or URL for each", "sources": ["S1"] },
-  "limitationsMonths": { "value": 24, "sources": ["S1"] },
-  "requiredForm": { "value": "none required, or the form's name and where it is", "sources": ["S1"] },
-  "additionalContents": { "value": [], "sources": ["S1"] },
-  "serviceRecipients": { "value": ["the agency, as it should be named in the certificate", "the Superintendent of the district"], "sources": ["S1"] },
+  "seaName": { "value": null, "sources": [] },
+  "captionAgency": { "value": null, "sources": [] },
+  "filesWith": { "value": null, "sources": [] },
+  "filingAddress": { "value": null, "sources": [] },
+  "channels": { "value": null, "sources": [] },
+  "limitationsMonths": { "value": null, "sources": [] },
+  "requiredForm": { "value": null, "sources": [] },
+  "additionalContents": { "value": null, "sources": [] },
+  "serviceRecipients": { "value": null, "sources": [] },
   "notes": ""
 }

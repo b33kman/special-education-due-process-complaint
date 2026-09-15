@@ -8,9 +8,6 @@
     "skill": "dpc-complaint 1.0.0",
     "note": "Worked example on invented documents. The parent, student, district and school are fictional."
   },
-  "privacy": {
-    "initials": false
-  },
   "student": {
     "first": {
       "value": "Jordan",
@@ -126,6 +123,7 @@
       "id": "iep-meeting",
       "detail": "convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data",
       "sources": [
+        "F4",
         "R22",
         "R31"
       ]
@@ -134,6 +132,7 @@
       "id": "iee",
       "detail": "fund an independent educational evaluation in reading and written expression",
       "sources": [
+        "F4",
         "R45"
       ]
     },
@@ -141,6 +140,7 @@
       "id": "compensatory-services",
       "detail": "provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026",
       "sources": [
+        "F4",
         "R35",
         "R36"
       ]
@@ -149,6 +149,7 @@
       "id": "prospective-services",
       "detail": "implement the IEP as written, with quarterly service logs provided to the Parent",
       "sources": [
+        "F4",
         "R23"
       ]
     }

@@ -45,10 +45,12 @@ const findFile = (re) => textFiles.find((f) => re.test(f.rel))
 const complaint = findFile(/^complaint\.md$/i) ?? findFile(/complaint.*\.md$/i) ?? textFiles.filter((f) => /\.md$/i.test(f.name) && !/sources|verification|readme|notes/i.test(f.name)).sort((a, b) => b.text.length - a.text.length)[0]
 const body = complaint?.text ?? ''
 
-// The statement of the problems: from its heading to the proposed resolution.
+// The statement — the statement of facts (where the run wrote one) and the
+// statement of the problems — from the first such heading to the proposed
+// resolution, whatever numeral or number the headings carry.
 function statementOf(text) {
-  const start = text.search(/^#+\s*(III\.?\s*)?statement of (the )?(problems?|facts)|^(III|3)\.\s+.*statement/im)
-  const endRe = /^#+\s*(IV\.?\s*)?proposed resolution|^(IV|4)\.\s+.*(resolution|relief)|^#+\s*(proposed )?(resolution|relief)/im
+  const start = text.search(/^#+\s*(?:[IVX]+|\d+)?\.?\s*statement of (?:the )?(?:problems?|facts)|^(?:[IVX]+|\d+)\.\s+.*statement/im)
+  const endRe = /^#+\s*(?:[IVX]+|\d+)?\.?\s*proposed resolution|^(?:[IVX]+|\d+)\.\s+.*(?:resolution|relief)|^#+\s*(?:proposed )?(?:resolution|relief)/im
   if (start < 0) return { text, how: 'no statement heading found; the whole complaint was checked' }
   const rest = text.slice(start)
   const end = rest.slice(20).search(endRe)

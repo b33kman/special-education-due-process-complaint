@@ -6,6 +6,7 @@
       "section": "caption",
       "index": 0,
       "cls": "caption-court",
+      "n": null,
       "text": "BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS",
       "tags": [
         "S1",
@@ -16,6 +17,7 @@
       "section": "caption",
       "index": 1,
       "cls": "caption-court",
+      "n": null,
       "text": "STATE OF CALIFORNIA",
       "tags": []
     },
@@ -23,6 +25,7 @@
       "section": "caption",
       "index": 2,
       "cls": "caption-label",
+      "n": null,
       "text": "In the Matter of:",
       "tags": []
     },
@@ -30,6 +33,7 @@
       "section": "caption",
       "index": 3,
       "cls": "caption-party",
+      "n": null,
       "text": "JORDAN RIVERA, a minor, by and through the parent, DANA RIVERA,",
       "tags": [
         "R1",
@@ -42,6 +46,7 @@
       "section": "caption",
       "index": 4,
       "cls": "caption-role",
+      "n": null,
       "text": "Petitioner,",
       "tags": []
     },
@@ -49,6 +54,7 @@
       "section": "caption",
       "index": 5,
       "cls": "caption-v",
+      "n": null,
       "text": "v.",
       "tags": []
     },
@@ -56,6 +62,7 @@
       "section": "caption",
       "index": 6,
       "cls": "caption-party",
+      "n": null,
       "text": "RIVER OAK UNIFIED SCHOOL DISTRICT,",
       "tags": [
         "R15"
@@ -65,6 +72,7 @@
       "section": "caption",
       "index": 7,
       "cls": "caption-role",
+      "n": null,
       "text": "Respondent.",
       "tags": []
     },
@@ -72,6 +80,7 @@
       "section": "caption",
       "index": 8,
       "cls": "caption-case",
+      "n": null,
       "text": "Case No. ____________",
       "tags": []
     },
@@ -79,6 +88,7 @@
       "section": "caption",
       "index": 9,
       "cls": "caption-title",
+      "n": null,
       "text": "DUE PROCESS COMPLAINT NOTICE",
       "tags": []
     },
@@ -86,6 +96,7 @@
       "section": "caption",
       "index": 10,
       "cls": "caption-cite",
+      "n": null,
       "text": "20 U.S.C. § 1415(b)(7)",
       "tags": []
     },
@@ -93,6 +104,7 @@
       "section": "caption",
       "index": 11,
       "cls": "caption-cite",
+      "n": null,
       "text": "34 C.F.R. § 300.508",
       "tags": []
     },
@@ -100,6 +112,7 @@
       "section": "caption",
       "index": 12,
       "cls": "caption-date",
+      "n": null,
       "text": "Date: April 17, 2026",
       "tags": []
     },
@@ -107,6 +120,7 @@
       "section": "introduction",
       "index": 0,
       "cls": null,
+      "n": 1,
       "text": "Petitioner Jordan Rivera (“Student”) is an 8-year-old student who has been eligible for special education and related services under the category of Autism since March 11, 2024, and who attends Willow Creek Elementary School in the River Oak Unified School District (“District”). This due process complaint is brought on Student’s behalf by the parent, Dana Rivera (“Parent”), who is self-represented.",
       "tags": [
         "R1",
@@ -124,7 +138,8 @@
       "section": "introduction",
       "index": 1,
       "cls": null,
-      "text": "The District has denied Student a free appropriate public education (“FAPE”) by failing to provide an individualized education program (“IEP”) adequate to Student’s needs; by failing to implement the services the operative IEP requires; and by failing to conduct an appropriate and timely evaluation of Student.",
+      "n": 2,
+      "text": "The District has denied Student a free appropriate public education (“FAPE”) by failing to provide an individualized education program (“IEP”) adequate to Student’s needs; by failing to implement the services the operative IEP requires; and by failing to evaluate Student appropriately.",
       "tags": [
         "claim:inadequate-iep",
         "claim:failure-to-implement",
@@ -135,13 +150,15 @@
       "section": "parties",
       "index": 0,
       "cls": "cite",
-      "text": "34 C.F.R. § 300.508(b)(1)–(2).",
+      "n": null,
+      "text": "34 C.F.R. § 300.508(b)(1)–(3).",
       "tags": []
     },
     {
       "section": "parties",
       "index": 1,
       "cls": null,
+      "n": 3,
       "text": "Student was born on November 3, 2017, resides with the Parent at 1418 Alder Street, Willow Creek, CA 95833, and is enrolled at Willow Creek Elementary School. The Parent may be reached at dana.r@example.com and (555) 010-4471.",
       "tags": [
         "R3",
@@ -158,6 +175,7 @@
       "section": "facts",
       "index": 0,
       "cls": null,
+      "n": 4,
       "text": "On September 8, 2025, the IEP team adopted the annual reading fluency goal of 60 words per minute, carried forward from the March 11, 2024 IEP.",
       "tags": [
         "R18",
@@ -168,6 +186,7 @@
       "section": "facts",
       "index": 1,
       "cls": null,
+      "n": 5,
       "text": "On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.",
       "tags": [
         "R36",
@@ -178,6 +197,7 @@
       "section": "facts",
       "index": 2,
       "cls": null,
+      "n": 6,
       "text": "On November 14, 2025, the District’s progress report recorded 21 words per minute.",
       "tags": [
         "R29"
@@ -187,6 +207,7 @@
       "section": "facts",
       "index": 3,
       "cls": null,
+      "n": 7,
       "text": "On December 2, 2025, the Parent requested a reevaluation of reading skills in writing.",
       "tags": [
         "R44",
@@ -197,6 +218,7 @@
       "section": "facts",
       "index": 4,
       "cls": null,
+      "n": 8,
       "text": "On December 4, 2025, the District wrote that it would prepare an assessment plan within the required timeline.",
       "tags": [
         "R46",
@@ -207,6 +229,7 @@
       "section": "facts",
       "index": 5,
       "cls": null,
+      "n": 9,
       "text": "On January 23, 2026, the District’s progress report recorded 24 words per minute.",
       "tags": [
         "R30"
@@ -216,6 +239,7 @@
       "section": "facts",
       "index": 6,
       "cls": null,
+      "n": 10,
       "text": "On March 6, 2026, the District’s progress report recorded 23 words per minute and stated that the goal was not met.",
       "tags": [
         "R31"
@@ -225,6 +249,7 @@
       "section": "facts",
       "index": 7,
       "cls": null,
+      "n": 11,
       "text": "On March 12, 2026, the IEP team declined to revise the reading goal, and the District issued a prior written notice.",
       "tags": [
         "R39",
@@ -236,6 +261,7 @@
       "section": "facts",
       "index": 8,
       "cls": null,
+      "n": 12,
       "text": "On March 14, 2026, the Parent requested revision of the goal and the assessment plan in writing.",
       "tags": [
         "R48",
@@ -246,6 +272,7 @@
       "section": "facts",
       "index": 9,
       "cls": null,
+      "n": 13,
       "text": "On April 2, 2026, the Parent wrote that she had received no response and no assessment plan.",
       "tags": [
         "R50",
@@ -256,6 +283,7 @@
       "section": "statement",
       "index": 0,
       "cls": "subheading",
+      "n": null,
       "text": "A. Failure to provide an adequate individualized education program",
       "tags": [
         "claim:inadequate-iep"
@@ -265,6 +293,7 @@
       "section": "statement",
       "index": 1,
       "cls": "cite",
+      "n": null,
       "text": "34 C.F.R. §§ 300.320, 300.324.",
       "tags": []
     },
@@ -272,6 +301,7 @@
       "section": "statement",
       "index": 2,
       "cls": null,
+      "n": 14,
       "text": "On September 8, 2025 the IEP team adopted an annual reading fluency goal providing that Student will increase oral reading fluency to 60 words per minute with 90% accuracy on a first-grade passage, from a baseline of 22 words per minute, and noted that the goal was carried forward from the March 11, 2024 IEP with the baseline updated.",
       "tags": [
         "R18",
@@ -282,6 +312,7 @@
       "section": "statement",
       "index": 3,
       "cls": null,
+      "n": 15,
       "text": "The IEP records the Parent's statement that the reading goal had not changed since the March 11, 2024 IEP, her request for a revised goal and more intensive reading instruction, and her written exception that she did not agree the reading goal was appropriate.",
       "tags": [
         "R21",
@@ -292,6 +323,7 @@
       "section": "statement",
       "index": 4,
       "cls": null,
+      "n": 16,
       "text": "Progress reports dated November 14, 2025, January 23, 2026 and March 6, 2026 recorded 21, 24 and 23 words per minute, and the March 6, 2026 report states that the goal was not met and recommends continuing it.",
       "tags": [
         "R29",
@@ -303,6 +335,7 @@
       "section": "statement",
       "index": 5,
       "cls": null,
+      "n": 17,
       "text": "On March 12, 2026 the IEP team declined to revise the goal, stating that the goal remained appropriate and that it would review the goal at the annual review in September 2026.",
       "tags": [
         "R39",
@@ -314,6 +347,7 @@
       "section": "statement",
       "index": 6,
       "cls": null,
+      "n": 18,
       "text": "The Parent requested revision in writing on March 14, 2026, and wrote on April 2, 2026 that she had received no response.",
       "tags": [
         "R48",
@@ -326,6 +360,7 @@
       "section": "statement",
       "index": 7,
       "cls": "subheading",
+      "n": null,
       "text": "B. Failure to implement the services the IEP requires",
       "tags": [
         "claim:failure-to-implement"
@@ -335,6 +370,7 @@
       "section": "statement",
       "index": 8,
       "cls": "cite",
+      "n": null,
       "text": "34 C.F.R. § 300.323.",
       "tags": []
     },
@@ -342,6 +378,7 @@
       "section": "statement",
       "index": 9,
       "cls": null,
+      "n": 19,
       "text": "The September 8, 2025 IEP provides for 240 minutes per week of specialized academic instruction in reading, delivered in a small-group setting of no more than 4 students by a credentialed special education teacher in the special education classroom.",
       "tags": [
         "R18",
@@ -352,6 +389,7 @@
       "section": "statement",
       "index": 10,
       "cls": null,
+      "n": 20,
       "text": "The District's service delivery log for September 8, 2025 to February 27, 2026 records the full 240 minutes in 4 of 24 instructional weeks, an average of 95 minutes per week across the period, and 20 weeks below 240 minutes.",
       "tags": [
         "R34",
@@ -362,6 +400,7 @@
       "section": "statement",
       "index": 11,
       "cls": null,
+      "n": 21,
       "text": "The log records that the small-group reading block was discontinued on October 6, 2025 when the reading intervention position became vacant, that specialized academic instruction was thereafter provided in the general education classroom during available periods, and that the position remained unfilled as of February 27, 2026.",
       "tags": [
         "R36",
@@ -372,6 +411,7 @@
       "section": "statement",
       "index": 12,
       "cls": null,
+      "n": 22,
       "text": "In the prior written notice dated March 12, 2026 the District acknowledged that the block was discontinued in October 2025 owing to staffing and stated that compensatory services were not proposed at the meeting.",
       "tags": [
         "R39",
@@ -382,7 +422,8 @@
       "section": "statement",
       "index": 13,
       "cls": "subheading",
-      "text": "C. Failure to evaluate appropriately and on time",
+      "n": null,
+      "text": "C. Failure to evaluate Student appropriately",
       "tags": [
         "claim:evaluation"
       ]
@@ -391,13 +432,15 @@
       "section": "statement",
       "index": 14,
       "cls": "cite",
-      "text": "34 C.F.R. §§ 300.301–300.311, 300.502.",
+      "n": null,
+      "text": "34 C.F.R. §§ 300.301–300.311.",
       "tags": []
     },
     {
       "section": "statement",
       "index": 15,
       "cls": null,
+      "n": 23,
       "text": "On December 2, 2025 the Parent requested in writing a reevaluation of Student's reading skills, including an assessment of phonological processing and decoding.",
       "tags": [
         "R44",
@@ -408,6 +451,7 @@
       "section": "statement",
       "index": 16,
       "cls": null,
+      "n": 24,
       "text": "On December 4, 2025 the District wrote that it would prepare an assessment plan for the Parent's consent within the required timeline.",
       "tags": [
         "R46",
@@ -418,6 +462,7 @@
       "section": "statement",
       "index": 17,
       "cls": null,
+      "n": 25,
       "text": "The prior written notice dated March 12, 2026 states that the Parent requested the reevaluation on December 2, 2025 and that the District would provide an assessment plan; on April 2, 2026 the Parent wrote that she had not received one.",
       "tags": [
         "R39",
@@ -430,6 +475,7 @@
       "section": "resolution",
       "index": 0,
       "cls": "cite",
+      "n": null,
       "text": "34 C.F.R. § 300.508(b)(6).",
       "tags": []
     },
@@ -437,6 +483,7 @@
       "section": "resolution",
       "index": 1,
       "cls": null,
+      "n": 26,
       "text": "The Parent proposes the following resolution:",
       "tags": []
     },
@@ -444,8 +491,10 @@
       "section": "resolution",
       "index": 2,
       "cls": "relief",
+      "n": null,
       "text": "(a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data;",
       "tags": [
+        "F4",
         "R22",
         "R31"
       ]
@@ -454,8 +503,10 @@
       "section": "resolution",
       "index": 3,
       "cls": "relief",
+      "n": null,
       "text": "(b) fund an independent educational evaluation in reading and written expression;",
       "tags": [
+        "F4",
         "R45"
       ]
     },
@@ -463,8 +514,10 @@
       "section": "resolution",
       "index": 4,
       "cls": "relief",
+      "n": null,
       "text": "(c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and",
       "tags": [
+        "F4",
         "R35",
         "R36"
       ]
@@ -473,8 +526,10 @@
       "section": "resolution",
       "index": 5,
       "cls": "relief",
+      "n": null,
       "text": "(d) implement the IEP as written, with quarterly service logs provided to the Parent.",
       "tags": [
+        "F4",
         "R23"
       ]
     },
@@ -482,6 +537,7 @@
       "section": "signature",
       "index": 0,
       "cls": "dated",
+      "n": null,
       "text": "Dated: ______________________",
       "tags": []
     },
@@ -489,6 +545,7 @@
       "section": "signature",
       "index": 1,
       "cls": "lead",
+      "n": null,
       "text": "Respectfully submitted,",
       "tags": []
     },
@@ -496,6 +553,7 @@
       "section": "signature",
       "index": 2,
       "cls": "sigline",
+      "n": null,
       "text": "______________________________",
       "tags": []
     },
@@ -503,6 +561,7 @@
       "section": "signature",
       "index": 3,
       "cls": null,
+      "n": null,
       "text": "Dana Rivera",
       "tags": [
         "R10",
@@ -513,6 +572,7 @@
       "section": "signature",
       "index": 4,
       "cls": null,
+      "n": null,
       "text": "Parent of Jordan Rivera",
       "tags": []
     },
@@ -520,6 +580,7 @@
       "section": "signature",
       "index": 5,
       "cls": null,
+      "n": null,
       "text": "Self-represented (pro se)",
       "tags": []
     },
@@ -527,6 +588,7 @@
       "section": "signature",
       "index": 6,
       "cls": null,
+      "n": null,
       "text": "1418 Alder Street",
       "tags": [
         "R6",
@@ -539,6 +601,7 @@
       "section": "signature",
       "index": 7,
       "cls": null,
+      "n": null,
       "text": "Willow Creek, CA 95833",
       "tags": [
         "R6",
@@ -551,6 +614,7 @@
       "section": "signature",
       "index": 8,
       "cls": null,
+      "n": null,
       "text": "(555) 010-4471",
       "tags": [
         "R12"
@@ -560,6 +624,7 @@
       "section": "signature",
       "index": 9,
       "cls": null,
+      "n": null,
       "text": "dana.r@example.com",
       "tags": [
         "R13"
@@ -569,24 +634,28 @@
       "section": "service",
       "index": 0,
       "cls": null,
-      "text": "The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Office of Administrative Hearings, Special Education Division and the Superintendent of the River Oak Unified School District, by the method indicated below.",
+      "n": null,
+      "text": "The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of the River Oak Unified School District, by the method indicated below.",
       "tags": [
         "S1",
         "S2",
-        "S4"
+        "S4",
+        "S7"
       ]
     },
     {
       "section": "service",
       "index": 1,
       "cls": "method",
-      "text": "Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing",
+      "n": null,
+      "text": "Method of service:   [  ] U.S. mail   [  ] Hand delivery   [  ] Other: ____________________",
       "tags": []
     },
     {
       "section": "service",
       "index": 2,
       "cls": "dated",
+      "n": null,
       "text": "Dated: ______________________",
       "tags": []
     },
@@ -594,6 +663,7 @@
       "section": "service",
       "index": 3,
       "cls": "sigline",
+      "n": null,
       "text": "______________________________",
       "tags": []
     },
@@ -601,6 +671,7 @@
       "section": "service",
       "index": 4,
       "cls": null,
+      "n": null,
       "text": "Dana Rivera",
       "tags": []
     },
@@ -608,6 +679,7 @@
       "section": "service",
       "index": 5,
       "cls": null,
+      "n": null,
       "text": "Self-represented (pro se)",
       "tags": []
     }

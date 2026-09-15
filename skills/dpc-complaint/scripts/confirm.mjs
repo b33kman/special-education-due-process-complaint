@@ -19,7 +19,7 @@ import { join } from 'node:path'
 import { caseDir, hasFlag, readJson, writeJson, today } from './lib.mjs'
 
 const argv = process.argv.slice(2)
-const dir = caseDir(argv)
+const dir = caseDir(argv, 'node scripts/confirm.mjs <case folder> --decisions | --all-verified --by "<name>"   — records the person’s decision on each verified reading')
 const work = join(dir, 'work')
 const verifiedPath = join(work, 'readings.verified.json')
 if (!existsSync(verifiedPath)) {
@@ -62,6 +62,14 @@ for (const r of readings) {
     status = 'rejected'
     rejected++
   } else if (d && typeof d === 'object' && typeof d.edit === 'string' && d.edit.trim()) {
+    // An edit corrects a reading that IS on the page (a typo in the page's
+    // own words, a value the person knows better). A reading the verifier
+    // could not find is not corrected into existence: it is deleted from
+    // readings.json, or the value is typed into case.json as "typed".
+    if (!machineOk) {
+      console.error(`${r.id} cannot be edited: verification status is ${r.verification?.status} — a reading that is not on its page is deleted, or the value is entered as "typed"`)
+      process.exit(1)
+    }
     status = 'edited'
     editedValue = d.edit.trim()
     edited++

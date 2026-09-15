@@ -4,10 +4,8 @@
   "state": "NC",
   "runMeta": {
     "model": "claude-fable-5-1",
-    "effort": "max"
-  },
-  "privacy": {
-    "initials": false
+    "effort": "max",
+    "skill": "dpc-complaint 1.0.0"
   },
   "student": {
     "first": {
@@ -59,7 +57,15 @@
       }
     },
     "homeless": false,
-    "homelessContact": null
+    "homelessContact": null,
+    "respondent": {
+      "value": "Pine Hollow County Board of Education",
+      "source": "typed"
+    },
+    "county": {
+      "value": "Pine Hollow",
+      "source": "typed"
+    }
   },
   "parent": {
     "first": {
@@ -154,6 +160,11 @@
         "R27",
         "R69"
       ]
+    },
+    {
+      "id": "attorneys-fees",
+      "detail": "",
+      "sources": []
     }
   ],
   "events": [
@@ -278,27 +289,46 @@
   ],
   "additionalContents": [
     {
-      "heading": "County of the student's residence",
-      "text": "____________",
+      "requirement": 1,
+      "heading": "County of the student’s residence",
+      "met": "the caption (COUNTY OF PINE HOLLOW), supplied by counsel",
       "sources": [
         "S1",
         "S7"
-      ],
-      "note": "no document in the file states the county; Form H-06E asks for it in the caption and on the home-address line, and OAH assigns the hearing region from the county on the petition"
+      ]
     },
     {
-      "heading": "Student's date of birth",
-      "text": "04/19/2013",
+      "requirement": 2,
+      "heading": "Student’s date of birth",
+      "met": "section II (Student was born on April 19, 2013)",
       "sources": [
         "R3",
         "S1"
       ]
     },
     {
+      "requirement": 3,
       "heading": "Basis of the petition, in the categories Form H-06E lists",
       "text": "the evaluation of Student, and the denial of a free appropriate public education",
       "sources": [
         "S1"
+      ]
+    },
+    {
+      "requirement": 4,
+      "heading": "The petitioner’s telephone number and full address",
+      "met": "section II (the Parent’s address and telephone) and the signature block (counsel’s address and telephone)",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "requirement": 5,
+      "heading": "A certificate of service naming the superintendent served",
+      "met": "the certificate of service, which names the Superintendent of the Pine Hollow County Board of Education",
+      "sources": [
+        "S1",
+        "S3"
       ]
     }
   ]

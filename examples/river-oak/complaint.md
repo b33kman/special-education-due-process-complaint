@@ -28,11 +28,11 @@ Date: April 17, 2026
 
 1. Petitioner Jordan Rivera (“Student”) is an 8-year-old student who has been eligible for special education and related services under the category of Autism since March 11, 2024, and who attends Willow Creek Elementary School in the River Oak Unified School District (“District”). This due process complaint is brought on Student’s behalf by the parent, Dana Rivera (“Parent”), who is self-represented.
 
-2. The District has denied Student a free appropriate public education (“FAPE”) by failing to provide an individualized education program (“IEP”) adequate to Student’s needs; by failing to implement the services the operative IEP requires; and by failing to conduct an appropriate and timely evaluation of Student.
+2. The District has denied Student a free appropriate public education (“FAPE”) by failing to provide an individualized education program (“IEP”) adequate to Student’s needs; by failing to implement the services the operative IEP requires; and by failing to evaluate Student appropriately.
 
 ## II. Contact and residence information
 
-*34 C.F.R. § 300.508(b)(1)–(2).*
+*34 C.F.R. § 300.508(b)(1)–(3).*
 
 3. Student was born on November 3, 2017, resides with the Parent at 1418 Alder Street, Willow Creek, CA 95833, and is enrolled at Willow Creek Elementary School. The Parent may be reached at dana.r@example.com and (555) 010-4471.
 
@@ -86,9 +86,9 @@ Date: April 17, 2026
 
 22. In the prior written notice dated March 12, 2026 the District acknowledged that the block was discontinued in October 2025 owing to staffing and stated that compensatory services were not proposed at the meeting.
 
-### C. Failure to evaluate appropriately and on time
+### C. Failure to evaluate Student appropriately
 
-*34 C.F.R. §§ 300.301–300.311, 300.502.*
+*34 C.F.R. §§ 300.301–300.311.*
 
 23. On December 2, 2025 the Parent requested in writing a reevaluation of Student's reading skills, including an assessment of phonological processing and decoding.
 
@@ -132,9 +132,9 @@ dana.r@example.com
 
 ## Certificate of service
 
-The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Office of Administrative Hearings, Special Education Division and the Superintendent of the River Oak Unified School District, by the method indicated below.
+The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of the River Oak Unified School District, by the method indicated below.
 
-Method of service:   ☐ U.S. mail   ☐ Hand delivery   ☐ Electronic filing
+Method of service:   [  ] U.S. mail   [  ] Hand delivery   [  ] Other: ____________________
 
 Dated: ______________________
 
