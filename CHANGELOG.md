@@ -2,6 +2,10 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.8 — 2026-09-15
+
+- Claims and relief: Claude recommends the ones with strong support, usually no more than four. When more than four have strong support, it says so and offers every one of them as checkboxes; "Add another" still shows the rest.
+
 ## 1.0.7 — 2026-09-15
 
 - Claims and relief are offered as one checkbox question each, never as a typed list: no more than four recommended items — the claims the documents support best, then the remedies that fit the chosen claims — with a last box, "Add another", that shows the rest four at a time.
