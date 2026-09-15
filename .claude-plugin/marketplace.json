@@ -1,6 +1,6 @@
 {
   "name": "due-process-complaint",
-  "description": "The Due Process Complaint Writer: a free Claude plugin that writes special education due process complaints (IDEA) from school documents, with every fact checked against them.",
+  "description": "The Due Process Complaint Writer: a free plugin for Claude and ChatGPT that writes special education due process complaints (IDEA) from a child's IEP, school documents and other important information, with every fact checked against them.",
   "owner": {
     "name": "Mark Beekman",
     "url": "https://github.com/b33kman"
@@ -10,7 +10,7 @@
       "name": "due-process-complaint",
       "displayName": "Due Process Complaint Writer",
       "source": "./",
-      "description": "Writes a special education due process complaint (IDEA) from a child's IEP and school documents — evaluations, prior written notices, progress reports, service logs, emails — for any US state, in Claude Chat, Cowork or Claude Code: facts confirmed with the person filing, the state's filing details confirmed on its official filing page, every date, figure and quotation checked against the documents, delivered as a PDF to file and a Word file to edit.",
+      "description": "Writes a special education due process complaint (IDEA) from a child's IEP, school documents and other important information — evaluations, prior written notices, progress reports, service logs, emails, private evaluations and the family's own account — for any US state, in Claude or ChatGPT: facts confirmed with the person filing, the state's filing details confirmed on its official filing page, every date, figure and quotation checked against the documents, delivered as a PDF to file and a Word file to edit.",
       "author": {
         "name": "Mark Beekman",
         "url": "https://github.com/b33kman"
@@ -33,7 +33,9 @@
         "pdf",
         "docx",
         "ai",
-        "pro-se"
+        "pro-se",
+        "chatgpt",
+        "codex"
       ],
       "category": "legal",
       "tags": [

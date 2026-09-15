@@ -1,6 +1,15 @@
 # Changelog
 
-Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
+Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
+
+## 1.0.11 — 2026-09-15
+
+- **Works in ChatGPT.** Tested in the ChatGPT desktop app; the README has an "Install in ChatGPT" section, and a `.codex-plugin/plugin.json` gives ChatGPT the plugin's name and description. The skill's instructions no longer assume Claude.
+- **Nothing to install.** The three scripts are now self-contained files built from `src/`, so they run on Node.js 20 or later without `npm install`, wherever package installs are blocked.
+- **The person decides, and the AI waits.** A third rule: stop at each question and wait for the answer, and mark the complaint final only after the person has confirmed the facts and chosen the claims and relief. (In a ChatGPT test, the AI finished a complaint without asking.) Where an app has no checkboxes, the choices come as a short numbered list.
+- **Each fact stated once.** A fact paragraph can start with a label, `[#consent]`; a claim points to its facts with the label, which prints as the paragraph number, instead of repeating them. The check refuses a label that points nowhere.
+- **Fixed: long claim headings, regulation lines and signature lines ran off the page.** They now wrap inside the margins, with a test.
+- Descriptions say "IEP, school documents and other important information"; the banner and share image name both Claude and ChatGPT.
 
 ## 1.0.10 — 2026-09-15
 

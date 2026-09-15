@@ -1,6 +1,5 @@
 {
   "name": "due-process-complaint",
-  "displayName": "Due Process Complaint Writer",
   "version": "1.0.11",
   "description": "Writes a special education due process complaint (IDEA) from a child's IEP, school documents and other important information — evaluations, prior written notices, progress reports, service logs, emails, private evaluations and the family's own account — for any US state, in Claude or ChatGPT: facts confirmed with the person filing, the state's filing details confirmed on its official filing page, every date, figure and quotation checked against the documents, delivered as a PDF to file and a Word file to edit.",
   "author": {
@@ -28,5 +27,23 @@
     "pro-se",
     "chatgpt",
     "codex"
-  ]
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Due Process Complaint Writer",
+    "shortDescription": "Write a special education due process complaint from a child's IEP, school documents and other important information.",
+    "longDescription": "Give it the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, confirms the facts with you, lets you choose the claims and relief, confirms how to file in your state on the official page, checks every date, figure and quotation against the documents, and delivers a PDF to file and a Word file to edit. For parents filing on their own, advocates, special education attorneys and legal aid organizations. Not legal advice.",
+    "developerName": "Mark Beekman",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/b33kman/special-education-due-process-complaint",
+    "defaultPrompt": [
+      "Draft a due process complaint from these documents.",
+      "I'm an attorney. Draft a due process complaint for my client from these records.",
+      "Help me write a special education due process complaint for my child."
+    ]
+  }
 }

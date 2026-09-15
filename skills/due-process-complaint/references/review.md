@@ -6,7 +6,7 @@ Where you can, give this to a fresh subagent with the case folder and this file.
 
 | Check | Look for |
 |---|---|
-| **Fidelity** | Every name, date, figure and quotation matches its page — including what a paraphrase implies. Open the pages. Check every caption fact, every filing address and number, and at least a quarter of the numbered paragraphs. |
+| **Fidelity** | Every name, date, figure and quotation matches its page — including what a paraphrase implies. Open the pages. Check every caption fact, every filing address and number, and at least a quarter of the numbered paragraphs. Each claim points to the paragraphs that actually bear on it. |
 | **The state's own rules** | The caption, the respondent's name, any county line, who is served and whether before filing, how the complaint may be sent — all as the receiving office's own page or form says, in `complaint.md` and in `filing-instructions.md`. |
 | **Consistency** | Names, defined terms, dates, parties and figures agree across the caption, the body, the relief, the signature block and the certificate. |
 | **Posture** | No legal conclusion, advice or outcome language. Each claim's heading fits the facts under it. No paragraph concedes what a claim contests. Events older than the state's time limit are pointed out to the person, without saying whether an exception applies. |

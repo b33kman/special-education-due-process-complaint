@@ -3,8 +3,9 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "Special Education Due Process Complaint Writer"
 abstract: >-
-  A Claude plugin and skill (for Claude Chat, Cowork and Claude Code) that drafts an IDEA special education due
-  process complaint (34 C.F.R. § 300.508) from a folder of school documents —
+  A free plugin and skill for Claude (Chat, Cowork, Claude Code) and ChatGPT that drafts an IDEA special
+  education due process complaint (34 C.F.R. § 300.508) from a child's IEP, school documents and other
+  important information —
   IEPs, evaluations, prior written notices, progress reports, service logs and
   correspondence — for any of the 50 US states and the District of Columbia.
   Every date, figure and quotation is checked against the documents or the
@@ -16,7 +17,7 @@ authors:
     family-names: Beekman
 repository-code: "https://github.com/b33kman/special-education-due-process-complaint"
 url: "https://github.com/b33kman/special-education-due-process-complaint"
-version: 1.0.10
+version: 1.0.11
 license: MIT
 keywords:
   - special education
@@ -28,3 +29,5 @@ keywords:
   - legal drafting
   - Claude plugin
   - Claude skill
+  - ChatGPT plugin
+  - Agent Skills

@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
+  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude and ChatGPT that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
 </p>
 
 # Special Education Due Process Complaint Writer
@@ -7,10 +7,11 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/b33kman/special-education-due-process-complaint)](https://github.com/b33kman/special-education-due-process-complaint/releases)
 [![Claude plugin](https://img.shields.io/badge/Claude-plugin-d97757)](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)
+[![ChatGPT plugin](https://img.shields.io/badge/ChatGPT-plugin-10a37f)](https://developers.openai.com/plugins/build/plugins)
 
-**A free AI plugin for Claude that writes a special education due process complaint from your child's IEP and school documents.**
+**A free AI plugin for Claude and ChatGPT that writes a special education due process complaint from your child's IEP, school documents and other important information.**
 
-A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give Claude the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, checks the facts with you, looks up how to file in your state, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
+A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give the plugin the IEPs, evaluations, prior written notices, progress reports, service logs, emails and any private evaluations. It reads every page, checks the facts with you, lets you choose what to raise, looks up how to file in your state, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
 
 It is for parents filing on their own (pro se), advocates, special education attorneys and legal aid organizations. It is not legal advice.
 
@@ -23,10 +24,12 @@ It is for parents filing on their own (pro se), advocates, special education att
 
 ## What you need
 
-- The **Claude app**
-- A **paid Claude plan**: Pro, Max, Team or Enterprise
+One of these:
 
-## Install the plugin
+- **Claude:** the Claude app on a paid plan (Pro, Max, Team or Enterprise). [Install in Claude](#install-in-claude)
+- **ChatGPT:** the ChatGPT desktop app. Plugins worked on a free ChatGPT account when we tested in September 2026. [Install in ChatGPT](#install-in-chatgpt)
+
+## Install in Claude
 
 You only do this once.
 
@@ -72,15 +75,41 @@ Click **Due Process Complaint Writer** to open its page. A blue switch at the to
 
 <img src="docs/images/install-6-done.png" alt="The Due Process Complaint Writer page with its switch turned on" width="700">
 
-## How to write a due process complaint with Claude
+## Install in ChatGPT
 
-1. **Start a new chat.** Click **New** in the left sidebar.
-2. **Attach your documents.** Drag the PDFs into the message box. Each file can be up to 30 MB.
+In the ChatGPT desktop app. You only do this once.
+
+### Step 1. Open **Plugins** in Settings, then click **Add** and **Add a marketplace**
+
+Open **Settings** and click **Plugins** in the left column. Click **Add** at the top right, then **Add a marketplace**.
+
+<img src="docs/images/chatgpt-1-plugins.png" alt="ChatGPT Settings with Plugins selected, and the Add menu open showing Add a marketplace" width="720">
+
+### Step 2. Paste the address, then click **Add marketplace**
+
+Paste this address into the **Source** box. Leave **Git ref** and **Sparse paths** as they are.
+
+```
+https://github.com/b33kman/special-education-due-process-complaint
+```
+
+<img src="docs/images/chatgpt-2-add-marketplace.png" alt="The Add plugin marketplace window with the address in the Source box and the Add marketplace button" width="580">
+
+### Step 3. Find the plugin under **Personal**
+
+Click **Plugins** in the left sidebar, then **Personal**. The due process complaint plugin is listed there. Click **⋯** next to it, then **Try now** to start a chat with it.
+
+<img src="docs/images/chatgpt-3-try-now.png" alt="The Plugins page with the Personal tab selected and the plugin's menu open on Try now" width="580">
+
+## How to write a due process complaint
+
+1. **Start a new chat with the plugin.** In Claude, click **New** in the left sidebar. In ChatGPT, click **Try now** on the plugin, as in Step 3 above.
+2. **Attach your documents.** Drag the PDFs into the message box. In Claude, each file can be up to 30 MB.
 3. **Say what you want.** For example:
 
    > Draft a due process complaint from these documents. The state is California and I'm the parent, filing on my own.
 
-4. **Answer Claude's questions.** It shows you the facts it found and the page each came from, and asks you to confirm them. You choose the problems to raise and what you want the school to do.
+4. **Answer the questions.** It shows you the facts it found and the page each came from, and asks you to confirm them. You choose the problems to raise and what you want the school to do. Where the app has no checkboxes, answer with the numbers of the options you want.
 5. **Download your files** when it's finished:
    - **complaint.pdf** — the complaint to file
    - **complaint.docx** — the same complaint, to edit in Word
@@ -88,7 +117,7 @@ Click **Due Process Complaint Writer** to open its page. A blue switch at the to
 
 Until every check passes, the files are named **complaint.DRAFT** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
 
-For the best results, choose the most capable Claude model the app offers.
+For the best results, choose the most capable model the app offers.
 
 ## Due process complaint examples
 
@@ -103,16 +132,25 @@ Each state decides which office receives the complaint, how it may be sent and w
 
 ## If something goes wrong
 
+**In Claude**
+
 - **The plugin shows up in Code but not in Chat.** It was added in Code, which keeps its own list of plugins. Select **Chat** at the top of the sidebar and do the install steps again.
 - **You don't see the plugin after Step 4.** Check that the address was pasted exactly, then close and reopen the app.
 - **Claude says it can't run code or create files.** Open **Settings → Capabilities** and turn on **Code execution and file creation**, then start a new chat. On a Team or Enterprise plan, ask your administrator.
-- **Claude says it can't install packages.** Your organization has limited Claude's internet access. Ask your administrator to allow **package managers** in **Organization settings → Capabilities**.
-- **A document is a scan, a photo or an email.** Attach it anyway and tell Claude. It types it out word for word so it can be checked like the rest.
+
+**In ChatGPT**
+
+- **You don't see the plugin after Step 2.** Check that the address was pasted exactly, then look under **Plugins → Personal** again.
+- **ChatGPT says Node.js is missing.** Install it free from [nodejs.org](https://nodejs.org), then ask again.
+
+**Either app**
+
+- **A document is a scan, a photo or an email.** Attach it anyway and say so. It types it out word for word so it can be checked like the rest.
 - **Still stuck?** [Tell us what you see](https://github.com/b33kman/special-education-due-process-complaint/issues).
 
 ## Updating
 
-In Step 4 you left **Sync automatically** on. Claude says that keeps the plugin up to date when it changes here. Each new version is listed on the [Releases page](https://github.com/b33kman/special-education-due-process-complaint/releases).
+In Claude, you left **Sync automatically** on in Step 4, which Claude says keeps the plugin up to date when it changes here. Each new version is listed on the [Releases page](https://github.com/b33kman/special-education-due-process-complaint/releases).
 
 ## What it will not do
 
@@ -123,7 +161,7 @@ In Step 4 you left **Sync automatically** on. Claude says that keeps the plugin 
 
 ## Privacy
 
-The documents you attach go to Claude like any other attachment, under your Claude plan's terms. The plugin doesn't send them anywhere else. It looks up your state's filing pages on the web, and those lookups don't name the student. If you're an attorney using it on a client's file, make sure Claude's terms fit your confidentiality duties.
+The documents you attach go to Claude or ChatGPT like any other attachment, under that app's terms. The plugin doesn't send them anywhere else. It looks up your state's filing pages on the web, and those lookups don't name the student. If you're an attorney using it on a client's file, make sure the app's terms fit your confidentiality duties.
 
 ## Frequently asked questions
 
@@ -143,7 +181,7 @@ Every state education agency must publish a model form, but no state or district
 You can, but check every fact before you file: AI tools can get dates, quotations and legal citations wrong. This plugin refuses any date, number or quotation that isn't in your documents or in what you told it, and marks the file DRAFT until that check passes. Read the whole complaint before you sign it; the person who signs is responsible for it.
 
 ### Is it free?
-The plugin is free and open source (MIT license). You need a paid Claude plan to use plugins: Pro, Max, Team or Enterprise.
+The plugin is free and open source (MIT license). In Claude you need a paid plan to use plugins: Pro, Max, Team or Enterprise. In ChatGPT, the desktop app's plugins worked on a free account when we tested in September 2026.
 
 ### How long does a family have to file?
 Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own time limit. A few do: the table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The plugin confirms the filing state's time limit on its official filing page every time and points out events older than it; whether an exception applies is for the person signing to decide.
@@ -161,7 +199,7 @@ Parents filing on their own (pro se), advocates helping families, and special ed
 Two ways. First, a check refuses any date, number or quotation that isn't in the documents or in what you told it, and any complaint missing a required part. Then the draft is reviewed for everything a check can't catch, and the errors are fixed before the complaint is final.
 
 <details>
-<summary><b>For developers and Claude Code users</b></summary>
+<summary><b>For developers, Claude Code and Codex</b></summary>
 
 ### Install in Claude Code (terminal)
 
@@ -172,7 +210,15 @@ Start `claude`, then type:
 /plugin install due-process-complaint@due-process-complaint
 ```
 
-Choose **User scope** when asked. Node.js 20 or later must be installed first; Claude Code installs the plugin's packages with it. To update: `/plugin marketplace update due-process-complaint`, or turn on auto-update in `/plugin` → **Marketplaces**.
+Choose **User scope** when asked. Node.js 20 or later must be installed. To update: `/plugin marketplace update due-process-complaint`, or turn on auto-update in `/plugin` → **Marketplaces**.
+
+### Install in Codex (terminal)
+
+```
+codex plugin marketplace add b33kman/special-education-due-process-complaint
+```
+
+Then open `/plugins` and install it. Node.js 20 or later must be installed.
 
 ### Install with the skills CLI (Claude Code, Codex, Cursor and other agents)
 
@@ -198,7 +244,9 @@ To update: `git pull`, then `npm install`. What changed in each version is in [C
 
 ### How it works
 
-Claude reads the PDFs, confirms the facts with the person filing, confirms the state's filing details from the bundled table against its official filing page, and drafts `complaint.md`. `check.mjs` refuses any date, figure or quotation not in the documents or the person's statement, a missing required element, and sections out of order. The draft is then reviewed against `references/review.md`, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word, named DRAFT unless the complaint is final and passes the check.
+The AI reads the PDFs, confirms the facts with the person filing, waits for them to choose the claims and relief, confirms the state's filing details from the bundled table against its official filing page, and drafts `complaint.md`, stating each fact once and pointing each claim to its fact paragraphs by label. `check.mjs` refuses any date, figure or quotation not in the documents or the person's statement, a missing required element, and sections out of order. The draft is then reviewed against `references/review.md`, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word, prints each label as its paragraph number, and names the files DRAFT unless the complaint is final and passes the check.
+
+The three scripts are self-contained files built from `src/` with `npm run build`, so they run on Node.js 20 or later with nothing to install, in Claude's and ChatGPT's code environments alike.
 
 Each worked example in [`examples/`](examples/) has its documents, the person's statement, the filing instructions and the finished complaint.
 
@@ -208,16 +256,20 @@ Each worked example in [`examples/`](examples/) has its documents, the person's 
 npm install && npm test
 ```
 
+After editing anything in `src/`, run `npm run build`; a test fails if the scripts in the skill are not the build of `src/`.
+
 Each test breaks a worked example in one way (an invented date, a figure that is only the tail of the real one, a quotation not on the page, a missing school, a section out of order) and asserts the check refuses it, and that a draft is never given the name of the file to file.
 
 ### Layout
 
 ```
-.claude-plugin/          plugin and marketplace manifests
+.claude-plugin/          Claude plugin and marketplace manifests (ChatGPT and Codex read them too)
+.codex-plugin/           OpenAI plugin manifest: the name and description ChatGPT shows
 skills/due-process-complaint/
-  SKILL.md               the procedure Claude follows
+  SKILL.md               the procedure the AI follows
   references/            the exemplar (form and voice), the review checklist, the state table
-  scripts/               pdf-text.mjs, check.mjs, render.mjs
+  scripts/               pdf-text.mjs, check.mjs, render.mjs, built from src/ (do not edit)
+src/                     the scripts' source; build.mjs builds them
 examples/                two complete worked examples on invented documents
 tests/                   the tests
 docs/images/             the pictures on this page
