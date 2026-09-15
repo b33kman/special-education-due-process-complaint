@@ -1,8 +1,8 @@
 {
   "name": "due-process-complaint",
-  "displayName": "Due Process Complaint Drafter",
-  "version": "1.0.8",
-  "description": "Drafts an IDEA special education due process complaint from school documents (IEPs, evaluations, prior written notices, progress reports, service logs, emails) for any US state, in Claude Chat, Cowork or Claude Code: facts confirmed with the person filing, the state's filing procedure looked up on its official pages, every date, figure and quotation checked against the documents, the draft reviewed for errors, delivered as a PDF to file and a Word file to edit.",
+  "displayName": "Due Process Complaint Writer",
+  "version": "1.0.9",
+  "description": "Writes a special education due process complaint (IDEA) from a child's IEP and school documents — evaluations, prior written notices, progress reports, service logs, emails — for any US state, in Claude Chat, Cowork or Claude Code: facts confirmed with the person filing, the state's filing rules looked up on its official pages, every date, figure and quotation checked against the documents, delivered as a PDF to file and a Word file to edit.",
   "author": {
     "name": "Mark Beekman",
     "url": "https://github.com/b33kman"
@@ -23,6 +23,8 @@
     "parent-advocacy",
     "disability-rights",
     "pdf",
-    "docx"
+    "docx",
+    "ai",
+    "pro-se"
   ]
 }

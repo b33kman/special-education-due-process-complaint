@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "Special Education Due Process Complaint Drafter"
+title: "Special Education Due Process Complaint Writer"
 abstract: >-
   A Claude plugin and skill (for Claude Chat, Cowork and Claude Code) that drafts an IDEA special education due
   process complaint (34 C.F.R. § 300.508) from a folder of school documents —
@@ -16,7 +16,7 @@ authors:
     family-names: Beekman
 repository-code: "https://github.com/b33kman/special-education-due-process-complaint"
 url: "https://github.com/b33kman/special-education-due-process-complaint"
-version: 1.0.8
+version: 1.0.9
 license: MIT
 keywords:
   - special education

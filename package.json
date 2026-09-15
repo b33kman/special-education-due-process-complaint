@@ -1,8 +1,8 @@
 {
   "name": "special-education-due-process-complaint",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": true,
-  "description": "Due Process Complaint Drafter — a Claude plugin and skill (Chat, Cowork, Claude Code) that drafts an IDEA special education due process complaint from school documents, checks every date, figure and quotation against them, and delivers a PDF to file and a Word file to edit.",
+  "description": "Special Education Due Process Complaint Writer — a free AI plugin and skill (Chat, Cowork, Claude Code) that drafts an IDEA special education due process complaint from school documents, checks every date, figure and quotation against them, and delivers a PDF to file and a Word file to edit.",
   "keywords": [
     "special-education",
     "due-process-complaint",

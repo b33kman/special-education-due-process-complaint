@@ -1,19 +1,19 @@
-# Due Process Complaint Drafter
+# Special Education Due Process Complaint Writer
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/b33kman/special-education-due-process-complaint)](https://github.com/b33kman/special-education-due-process-complaint/releases)
 [![Claude plugin](https://img.shields.io/badge/Claude-plugin-d97757)](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)
 
-**A free plugin for Claude that writes a special education due process complaint from your school documents.**
+**A free AI plugin for Claude that writes a special education due process complaint from your child's IEP and school documents.**
 
-Give Claude the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, checks the facts with you, looks up how to file in your state, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
+A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give Claude the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, checks the facts with you, looks up how to file in your state, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
 
-It is for parents filing on their own, advocates, special education attorneys and legal aid organizations. It is not legal advice.
+It is for parents filing on their own (pro se), advocates, special education attorneys and legal aid organizations. It is not legal advice.
 
 <p align="center">
-  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/complaint-first-page.png" alt="The first page of a finished due process complaint" width="460"></a>
+  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/complaint-first-page.png" alt="Example of a special education due process complaint written by the Due Process Complaint Writer: the first page, with the caption and numbered paragraphs" width="460"></a>
   <br>
-  <a href="examples/river-oak/complaint.pdf"><b>See a finished complaint (PDF)</b></a><br>
+  <a href="examples/river-oak/complaint.pdf"><b>See a due process complaint example (PDF)</b></a><br>
   <sub>Made-up people and documents.</sub>
 </p>
 
@@ -56,19 +56,19 @@ Leave **Sync automatically** on, then click **Sync**.
 
 <img src="docs/images/install-4-paste-and-sync.png" alt="The address pasted into the URL box, Sync automatically turned on, and the Sync button" width="580">
 
-### Step 5. Click **Add** next to **Due Process Complaint Drafter**
+### Step 5. Click **Add** next to **Due Process Complaint Writer**
 
-<img src="docs/images/install-5-add.png" alt="Due Process Complaint Drafter in the plugin list with its Add button" width="700">
+<img src="docs/images/install-5-add.png" alt="Due Process Complaint Writer in the plugin list with its Add button" width="700">
 
 If a yellow message says *"Auto-sync requires the Claude GitHub App to have access to this repository,"* close it. The plugin still installs.
 
 ### Step 6. Check that the switch is blue
 
-Click **Due Process Complaint Drafter** to open its page. A blue switch at the top right means it's on. You're done.
+Click **Due Process Complaint Writer** to open its page. A blue switch at the top right means it's on. You're done.
 
-<img src="docs/images/install-6-done.png" alt="The Due Process Complaint Drafter page with its switch turned on" width="700">
+<img src="docs/images/install-6-done.png" alt="The Due Process Complaint Writer page with its switch turned on" width="700">
 
-## Write your first complaint
+## How to write a due process complaint with Claude
 
 1. **Start a new chat.** Click **New** in the left sidebar.
 2. **Attach your documents.** Drag the PDFs into the message box. Each file can be up to 30 MB.
@@ -86,14 +86,16 @@ Until every check passes, the files are named **complaint.DRAFT** and marked **D
 
 For the best results, choose the most capable Claude model the app offers.
 
-## See finished complaints
+## Due process complaint examples
 
-Both examples use made-up people and documents.
+Two finished complaints, written by the plugin from made-up people and documents:
 
-- **[California, a parent filing on their own (PDF)](examples/river-oak/complaint.pdf)**
-- **[North Carolina, an attorney filing (PDF)](examples/pine-hollow/complaint.pdf)**
+- **[California due process complaint, a parent filing on their own (PDF)](examples/river-oak/complaint.pdf)**
+- **[North Carolina due process complaint, an attorney filing (PDF)](examples/pine-hollow/complaint.pdf)**
 
-**Where to file in every state:** [STATES.md](STATES.md) lists the office that takes due process complaints in each state, its official page, its contacts and the time limit.
+## How to file a due process complaint in your state
+
+Each state decides which office receives the complaint, how it may be sent and whether the school district must be served first. The school district always gets a copy. **[STATES.md](STATES.md) lists, for every state and DC, the office that takes special education due process complaints, its official filing page, its contacts and the time limit.** The plugin also looks up your state's official page every time and writes the filing instructions for you.
 
 ## If something goes wrong
 
@@ -121,25 +123,37 @@ The documents you attach go to Claude like any other attachment, under your Clau
 
 ## Frequently asked questions
 
-**What is a special education due process complaint?**
+### What is a special education due process complaint?
 A written complaint that starts a due process hearing under the Individuals with Disabilities Education Act (IDEA). A parent or a public agency may file one on any matter relating to a child's identification, evaluation or educational placement, or the provision of a free appropriate public education (34 C.F.R. § 300.507(a)). A hearing officer decides the dispute after a hearing; the complaint sets out what the hearing is about.
 
-**What must a due process complaint contain?**
+### What must a due process complaint contain?
 Under 34 C.F.R. § 300.508(b): the child's name; the address of the child's residence; the name of the child's school; for a homeless child, available contact information and the school; a description of the problem, including the facts relating to it; and a proposed resolution to the extent known. Some states require more. The plugin won't produce a final complaint while one is missing.
 
-**How long does a family have to file?**
+### What is a due process complaint notice?
+The same document. The IDEA statute calls it a "due process complaint notice" (20 U.S.C. § 1415(b)(7)(A) and (c)(2)); the federal regulations call it a due process complaint (34 C.F.R. § 300.508). Some states call it a request for a due process hearing.
+
+### Is there a due process complaint form?
+Every state education agency must publish a model form, but no state or district may require you to use it (34 C.F.R. § 300.509). Any document that contains what § 300.508(b) requires will do. Where a state's form asks for something more, the plugin looks it up and asks you for it.
+
+### Can I use AI to write a due process complaint?
+You can, but check every fact before you file: AI tools can get dates, quotations and legal citations wrong. This plugin refuses any date, number or quotation that isn't in your documents or in what you told it, and marks the file DRAFT until that check passes. Read the whole complaint before you sign it; the person who signs is responsible for it.
+
+### Is it free?
+The plugin is free and open source (MIT license). You need a paid Claude plan to use plugins: Pro, Max, Team or Enterprise.
+
+### How long does a family have to file?
 Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own time limit. A few do: the table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The plugin looks up the filing state's time limit on its official pages every time and points out events older than it; whether an exception applies is for the person signing to decide.
 
-**Where is a due process complaint filed?**
+### Where is a due process complaint filed?
 It depends on the state. In many it goes to the state education agency; in some to a separate hearings office (California and North Carolina, for example); in others to the school district, with a copy to the state (Illinois and Arizona, for example). The other party always gets a copy (34 C.F.R. § 300.508(a)), and some offices accept a complaint only after the district has been served. **[STATES.md](STATES.md) lists the office, the official filing page, the contacts and the time limit for every state and DC.**
 
-**Is it legal advice? Will it tell me whether the case is strong?**
+### Is it legal advice? Will it tell me whether the case is strong?
 No. It drafts from the documents and the facts you confirm. It does not choose claims or predict outcomes. The person who signs the complaint is responsible for it.
 
-**Who is it for?**
+### Who is it for?
 Parents filing on their own (pro se), advocates helping families, and special education attorneys and legal aid organizations drafting for clients. It asks a parent in plain words and an attorney in legal terms; the complaint follows the same form either way.
 
-**How does it keep errors out of the complaint?**
+### How does it keep errors out of the complaint?
 Two ways. First, a check refuses any date, number or quotation that isn't in the documents or in what you told it, and any complaint missing a required part. Then the draft is reviewed for everything a check can't catch, and the errors are fixed before the complaint is final.
 
 <details>
@@ -155,6 +169,14 @@ Start `claude`, then type:
 ```
 
 Choose **User scope** when asked. Node.js 20 or later must be installed first; Claude Code installs the plugin's packages with it. To update: `/plugin marketplace update due-process-complaint`, or turn on auto-update in `/plugin` → **Marketplaces**.
+
+### Install with the skills CLI (Claude Code, Codex, Cursor and other agents)
+
+```
+npx skills add b33kman/special-education-due-process-complaint
+```
+
+Node.js 20 or later must be installed first.
 
 ### Upload the skill instead
 

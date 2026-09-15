@@ -2,6 +2,12 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.9 — 2026-09-15
+
+- Renamed to the Due Process Complaint Writer. The GitHub page is now "Special Education Due Process Complaint Writer", led by the terms people search for, with new answers on the due process complaint notice, model forms, using AI, and cost.
+- In Cowork and Claude Code, the state's filing rules are looked up by a subagent as soon as the state is known, while Claude reads the documents.
+- Install with the skills CLI: `npx skills add b33kman/special-education-due-process-complaint`.
+
 ## 1.0.8 — 2026-09-15
 
 - Claims and relief: Claude recommends the ones with strong support, usually no more than four. When more than four have strong support, it says so and offers every one of them as checkboxes; "Add another" still shows the rest.
