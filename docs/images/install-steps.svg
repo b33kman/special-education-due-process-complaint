@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="880" height="300" viewBox="0 0 880 300" role="img" aria-labelledby="t d">
-  <title id="t">Adding the Due Process Complaint Drafter in the Claude desktop app</title>
-  <desc id="d">In the Claude desktop app: open Customize, go to Plugins, click the plus button and choose Add marketplace, paste https://github.com/b33kman/special-education-due-process-complaint, then find Due Process Complaint Drafter and click Install.</desc>
+  <title id="t">Adding the Due Process Complaint Drafter in Claude</title>
+  <desc id="d">In Claude: open Customize, go to Plugins, click the plus button and choose Add marketplace, paste https://github.com/b33kman/special-education-due-process-complaint, then find Due Process Complaint Drafter and click Install.</desc>
   <defs>
     <style>
       .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
@@ -8,7 +8,7 @@
     </style>
   </defs>
   <rect x="0.5" y="0.5" width="879" height="299" rx="14" fill="#faf9f5" stroke="#e3e0d8"/>
-  <text x="32" y="44" class="sans" font-size="15" font-weight="700" fill="#3d3929">In the Claude desktop app</text>
+  <text x="32" y="44" class="sans" font-size="15" font-weight="700" fill="#3d3929">In Claude — web or desktop app, Chat or Cowork</text>
 
   <g class="sans">
     <!-- step 1 -->

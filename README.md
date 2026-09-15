@@ -2,11 +2,11 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/b33kman/special-education-due-process-complaint)](https://github.com/b33kman/special-education-due-process-complaint/releases)
-[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](https://claude.com/claude-code)
+[![Claude plugin](https://img.shields.io/badge/Claude-plugin-d97757)](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)
 
-**A Claude Code plugin that drafts an IDEA special education due process complaint from a folder of school documents** — IEPs, evaluations, prior written notices, progress reports, service logs, emails — for any US state and the District of Columbia.
+**A Claude plugin that drafts an IDEA special education due process complaint from a folder of school documents** — IEPs, evaluations, prior written notices, progress reports, service logs, emails — for any US state and the District of Columbia.
 
-Give Claude the documents in the Claude desktop app. It reads every page, confirms the facts with you, looks up your state's filing rules on the official state page, drafts the complaint in the form of a pleading, checks every date, figure and quotation against the documents, and hands you a **PDF to file** and a **Word file to edit**, with instructions for filing in your state.
+Attach the documents in a Claude chat. It reads every page, confirms the facts with you, looks up your state's filing rules on the official state page, drafts the complaint in the form of a pleading, checks every date, figure and quotation against the documents, and hands you a **PDF to file** and a **Word file to edit**, with instructions for filing in your state.
 
 Built for special education attorneys, legal aid organizations, advocates, and parents filing on their own. It is not legal advice, it does not decide which claims to bring, and it says nothing about how a complaint will fare.
 
@@ -18,23 +18,22 @@ Built for special education attorneys, legal aid organizations, advocates, and p
 
 ## Install in three steps
 
-You need the **Claude desktop app** ([download](https://claude.com/download)) on a paid Claude plan (Pro, Max, Team or Enterprise). No terminal and no coding.
+For the **Claude app** — Chat or Cowork, on the web or the desktop app — on a paid Claude plan (Pro, Max, Team or Enterprise). No terminal, nothing to install on your computer.
 
-### 1. Install Node.js
+### 1. Turn on code execution
 
-The plugin uses a free program called Node.js to read the PDFs and make the finished PDF and Word files.
+The plugin runs small programs to read your PDFs and make the finished PDF and Word files.
 
-1. Go to **[nodejs.org](https://nodejs.org)** and click the big download button (the one marked **LTS**).
-2. Open the file you downloaded and click **Continue** / **Next** until it says it's done. Keep the standard choices.
-3. **Quit the Claude app completely and open it again**, so it can find Node.js.
+- **On your own plan (Pro or Max):** open **Settings → Capabilities** and turn on **Code execution and file creation**.
+- **On a Team or Enterprise plan:** your administrator turns on **Code execution and file creation** (and **Skills**) in **Organization settings → Capabilities**, and lets it reach **package managers** — on Enterprise plans network access starts switched off.
 
-### 2. Add the plugin in the Claude app
+### 2. Add the plugin
 
 <p align="center">
-  <img src="docs/images/install-steps.svg" alt="In the Claude desktop app: 1. Open Customize in the left sidebar, then Plugins. 2. Click + and choose Add marketplace, from a repository. 3. Paste https://github.com/b33kman/special-education-due-process-complaint. 4. Find Due Process Complaint Drafter and click Install." width="760">
+  <img src="docs/images/install-steps.svg" alt="In Claude: 1. Open Customize in the left sidebar, then Plugins. 2. Click + and choose Add marketplace, from a repository. 3. Paste https://github.com/b33kman/special-education-due-process-complaint. 4. Find Due Process Complaint Drafter and click Install." width="760">
 </p>
 
-1. In the Claude app, open **Customize** in the left sidebar and go to the **Plugins** tab.
+1. Open **Customize** in the left sidebar and go to the **Plugins** tab. (In Cowork, open the **Cowork** tab first, then **Customize**.)
 2. Click **+**, then **Add marketplace**, and choose to add it from a repository.
 3. Paste this address and confirm:
 
@@ -50,32 +49,24 @@ In the same **Plugins** screen, turn on automatic updates for this marketplace i
 
 ## Draft your first complaint
 
-1. **Put the documents in a folder.** On your computer, make a folder for the case — for example `Documents/Due process/Jordan` — and inside it a folder named **`documents`** holding the PDFs (IEPs, evaluations, prior written notices, progress reports, service logs, letters and emails).
+1. **Start a new chat** (or a new Cowork task).
 
-   ```
-   Jordan/
-     documents/
-       IEP 2025-09-08.pdf
-       Progress reports.pdf
-       Service log.pdf
-   ```
-
-2. **Open the Code tab** at the top of the Claude app, choose **Local**, click **Select folder**, and pick the case folder (`Jordan`). The Code tab is where Claude can open the files on your computer.
+2. **Attach the documents** — IEPs, evaluations, prior written notices, progress reports, service logs, letters and emails. Drag the PDFs into the message box or use the attach button. Each file can be up to 30 MB.
 
 3. **Ask for the complaint** in your own words, for example:
 
-   > Draft a due process complaint from the documents in this folder. The state is California and I'm the parent, filing on my own.
+   > Draft a due process complaint from these documents. The state is California and I'm the parent, filing on my own.
 
 4. **Answer Claude's questions.** It shows you the facts it found, with the page each came from, and asks you to confirm them. It asks you to choose the problems to raise and what you want the school to do. It does not choose for you.
 
-5. **Get your files.** When it's finished, the case folder holds:
+5. **Download your files** when it's finished:
    - **`complaint.pdf`** — the complaint to file
    - **`complaint.docx`** — the same complaint, to edit in Word
    - **`filing-instructions.md`** — where and how to file in your state, with the official pages
 
    Until everything checks out, the files are named `complaint.DRAFT.pdf` and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
 
-Use the most capable Claude model the app offers, at the highest effort setting: careful reading is where the quality comes from.
+Use the most capable Claude model the app offers: careful reading is where the quality comes from.
 
 ```mermaid
 flowchart LR
@@ -104,10 +95,10 @@ Until the complaint passes the check and is marked final, it is written as `comp
 
 ## If something goes wrong
 
-- **Claude says Node.js (or `node`) is missing, or a step stops with `Cannot find package`.** Install Node.js (step 1), quit and reopen the Claude app, then uninstall and reinstall the plugin from **Customize** → **Plugins**, and ask again.
-- **You can't find the plugin in Browse plugins.** Check that the address in step 2 was pasted exactly, then close and reopen the Claude app.
-- **Claude can't see your documents.** Make sure you started in the **Code** tab with **Select folder** pointed at the case folder, and that the PDFs are inside its `documents` folder.
-- **A document is a scan or a photo, or isn't a PDF** (an email, a picture of a letter). Tell Claude; it reads it and types it out word for word so it can be checked like the rest.
+- **Claude says it can't run code or create files.** Turn on **Code execution and file creation** (install step 1), start a new chat, and ask again.
+- **Claude says it can't install packages or reach the package registry.** On a Team or Enterprise plan, ask your administrator to allow network access to **package managers** for code execution.
+- **You can't find the plugin in Browse plugins.** Check that the address in step 2 was pasted exactly, then refresh the page or reopen the app.
+- **A document is a scan or a photo, or isn't a PDF** (an email, a picture of a letter). Attach it anyway and tell Claude; it reads it and types it out word for word so it can be checked like the rest.
 - **Still stuck?** [Open an issue](https://github.com/b33kman/special-education-due-process-complaint/issues) and describe what you see.
 
 ## Updating
@@ -120,16 +111,18 @@ What changed in each version is in [CHANGELOG.md](CHANGELOG.md); each version is
 
 ## Other ways to install
 
-**In the terminal version of Claude Code** — start `claude`, then type:
+**Upload the skill instead of adding the plugin.** Download `due-process-complaint-skill.zip` from the [latest release](https://github.com/b33kman/special-education-due-process-complaint/releases/latest), then in Claude open **Customize → Skills**, choose **Upload a skill**, and select the ZIP. You won't get automatic updates this way.
+
+**In Claude Code (the coding tool), in the terminal** — start `claude`, then type:
 
 ```
 /plugin marketplace add b33kman/special-education-due-process-complaint
 /plugin install due-process-complaint@due-process-complaint
 ```
 
-Choose **User scope** when asked. Node.js 20 or later must be installed first; Claude Code installs the plugin's packages with it.
+Choose **User scope** when asked. Node.js 20 or later must be installed on your computer first; Claude Code installs the plugin's packages with it.
 
-**As a personal skill, from a clone:**
+**As a personal skill for Claude Code, from a clone:**
 
 ```bash
 git clone https://github.com/b33kman/special-education-due-process-complaint.git
@@ -176,7 +169,7 @@ No. It drafts from the documents and the facts the person filing confirms, and i
 Special education attorneys and legal aid organizations drafting for clients, advocates helping families, and parents filing on their own (pro se). It asks an attorney the attorney's questions and a parent in plain words; the pleading is the same either way.
 
 **What does it need to run?**
-The Claude desktop app on a paid plan, and Node.js (a free download, step 1 of the install). It reads PDFs; a scanned page, a photo or an email is read and typed out by Claude so it can be checked too.
+A paid Claude plan with **Code execution and file creation** turned on, in Chat or Cowork (or Claude Code). It reads PDFs; a scanned page, a photo or an email is read and typed out by Claude so it can be checked too.
 
 **How does it keep errors out of the complaint?**
 Two ways. A script refuses any date, figure or quotation that is not in the documents or in the person's own statement, a missing required element, and a complaint that does not follow the form. Then the draft is reviewed, by a fresh subagent where possible, for what a script cannot catch — fidelity to the pages, the state's own rules, consistency, legal posture, completeness and the rendered files — and the errors are fixed before the complaint is final. Until then it is written only as `complaint.DRAFT.pdf`.

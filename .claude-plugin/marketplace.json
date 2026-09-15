@@ -1,6 +1,6 @@
 {
   "name": "due-process-complaint",
-  "description": "The Due Process Complaint Drafter: a Claude Code plugin that drafts IDEA special education due process complaints from school documents, with every fact traced to its source.",
+  "description": "The Due Process Complaint Drafter: a Claude plugin that drafts IDEA special education due process complaints from school documents, with every fact checked against them.",
   "owner": {
     "name": "Mark Beekman",
     "url": "https://github.com/b33kman"
@@ -10,7 +10,7 @@
       "name": "due-process-complaint",
       "displayName": "Due Process Complaint Drafter",
       "source": "./",
-      "description": "Drafts an IDEA special education due process complaint from a folder of school documents (IEPs, evaluations, prior written notices, progress reports, service logs, emails) for any US state: facts confirmed with the person filing, the state’s filing procedure looked up on its official pages, every date, figure and quotation checked against the documents, the draft reviewed for errors, delivered as a PDF to file and a Word file to edit.",
+      "description": "Drafts an IDEA special education due process complaint from school documents (IEPs, evaluations, prior written notices, progress reports, service logs, emails) for any US state, in Claude Chat, Cowork or Claude Code: facts confirmed with the person filing, the state's filing procedure looked up on its official pages, every date, figure and quotation checked against the documents, the draft reviewed for errors, delivered as a PDF to file and a Word file to edit.",
       "author": {
         "name": "Mark Beekman",
         "url": "https://github.com/b33kman"
