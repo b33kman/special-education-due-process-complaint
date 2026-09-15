@@ -100,7 +100,15 @@ Date: April 17, 2026
 
 *34 C.F.R. § 300.508(b)(6).*
 
-26. The Parent proposes the following resolution: (a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data; (b) fund an independent educational evaluation in reading and written expression; (c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and (d) implement the IEP as written, with quarterly service logs provided to the Parent.
+26. The Parent proposes the following resolution:
+
+&nbsp;&nbsp;&nbsp;&nbsp;(a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data;
+
+&nbsp;&nbsp;&nbsp;&nbsp;(b) fund an independent educational evaluation in reading and written expression;
+
+&nbsp;&nbsp;&nbsp;&nbsp;(c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and
+
+&nbsp;&nbsp;&nbsp;&nbsp;(d) implement the IEP as written, with quarterly service logs provided to the Parent.
 
 Dated: ______________________
 

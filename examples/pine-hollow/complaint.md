@@ -92,7 +92,13 @@ Date: June 1, 2026
 
 *34 C.F.R. § 300.508(b)(6).*
 
-24. The Parent proposes the following resolution: (a) compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order; (b) an independent educational evaluation in speech-language and written expression at public expense; and (c) restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.
+24. The Parent proposes the following resolution:
+
+&nbsp;&nbsp;&nbsp;&nbsp;(a) compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order;
+
+&nbsp;&nbsp;&nbsp;&nbsp;(b) an independent educational evaluation in speech-language and written expression at public expense; and
+
+&nbsp;&nbsp;&nbsp;&nbsp;(c) restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.
 
 ## VI. Additional information required in North Carolina
 

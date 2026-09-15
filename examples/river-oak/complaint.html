@@ -22,6 +22,9 @@
   /* Numbered allegations, double-spaced: the number at the margin, the text a tab in, wrapped lines back at the margin. */
   p.para { line-height: 2; margin: 0; text-align: left; overflow-wrap: anywhere; orphans: 2; widows: 2; }
   p.para .n { display: inline-block; width: 0.5in; }
+  /* Lettered remedies under the resolution's lead-in: indented, with a hanging letter. */
+  p.relief { line-height: 2; margin: 0 0 0 1in; padding-left: 0.5in; text-indent: -0.5in; text-align: left; overflow-wrap: anywhere; orphans: 2; widows: 2; }
+  p.relief .l { display: inline-block; width: 0.5in; text-indent: 0; }
   p.placeholder { background: #fff3cd; padding: 4pt 6pt; margin: 6pt 0; }
   /* The closing: "Dated" at the left margin, the signer's block on the right half, never split across a page. */
   .closing { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30pt; page-break-inside: avoid; break-inside: avoid; }
@@ -101,7 +104,11 @@
 <section class="resolution">
 <h2>V. Proposed resolution</h2>
 <p class="cite">34 C.F.R. § 300.508(b)(6).</p>
-<p class="para"><span class="n">26.</span>The Parent proposes the following resolution: (a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data; (b) fund an independent educational evaluation in reading and written expression; (c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and (d) implement the IEP as written, with quarterly service logs provided to the Parent.</p>
+<p class="para"><span class="n">26.</span>The Parent proposes the following resolution:</p>
+<p class="relief"><span class="l">(a)</span>convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data;</p>
+<p class="relief"><span class="l">(b)</span>fund an independent educational evaluation in reading and written expression;</p>
+<p class="relief"><span class="l">(c)</span>provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and</p>
+<p class="relief"><span class="l">(d)</span>implement the IEP as written, with quarterly service logs provided to the Parent.</p>
 </section>
 <section class="signature">
 <div class="closing"><p class="dated">Dated: ______________________</p><div class="sigblock"><p class="lead">Respectfully submitted,</p><p class="sigline"></p><p class="">Dana Rivera</p><p class="">Parent of Jordan Rivera</p><p class="">Self-represented (pro se)</p><p class="">1418 Alder Street</p><p class="">Willow Creek, CA 95833</p><p class="">(555) 010-4471</p><p class="">dana.r@example.com</p></div></div>

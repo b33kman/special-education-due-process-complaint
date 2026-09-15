@@ -347,17 +347,24 @@ Checked on 2026-09-14.
   - R107: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.date: “February 9, 2026”
   - R112: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.statement: “I also have not received a response about the independent evaluation beyond the December 4 notice.”
 
-**[resolution 2]** The Parent proposes the following resolution: (a) compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order; (b) an independent educational evaluation in speech-language and written expression at public expense; and (c) restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.
+**[resolution 2]** The Parent proposes the following resolution:
+  - fixed wording; no factual claim
+
+**[resolution 3]** (a) compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order;
   - F4: counsel’s own statement — “compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order; an independent educational evaluation in speech-language and written expression at public expense; and restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.”
   - R27: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — iep.services: “Speech-Language Therapy: 60 minutes per week, individual, provided by a licensed speech-language pathologist in the speech room, 08/21/2025 to 08/20/2026.”
   - R46: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Week of 09/22/2025: 30 minutes, group of 3 (provider caseload reassigned; individual slot unavailable).”
   - R67: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Total minutes delivered: 690.”
   - R68: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.mandate: “Total minutes required by the IEP for 22 weeks: 1,320.”
   - R69: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Note: Individual sessions ended the week of 09/22/2025 when the provider's caseload was reassigned. The IEP was not amended.”
+
+**[resolution 4]** (b) an independent educational evaluation in speech-language and written expression at public expense; and
   - F4: counsel’s own statement — “compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order; an independent educational evaluation in speech-language and written expression at public expense; and restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.”
   - R82: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — iee.request: “On November 10, 2025 the parent requested, in writing, an independent educational evaluation in the areas of speech-language and written expression at public expense, stating disagreement with the evaluation dated May 6, 2025.”
   - R83: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — pwn.action: “The district declines to fund an independent educational evaluation.”
   - R96: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — iee.request: “I am requesting an independent educational evaluation in speech-language and written expression at public expense.”
+
+**[resolution 5]** (c) restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.
   - F4: counsel’s own statement — “compensatory speech-language therapy, delivered individually, equal to the minutes not delivered from September 22, 2025 to the date of the order; an independent educational evaluation in speech-language and written expression at public expense; and restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.”
   - R27: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — iep.services: “Speech-Language Therapy: 60 minutes per week, individual, provided by a licensed speech-language pathologist in the speech room, 08/21/2025 to 08/20/2026.”
   - R69: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Note: Individual sessions ended the week of 09/22/2025 when the provider's caseload was reassigned. The IEP was not amended.”

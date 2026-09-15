@@ -259,12 +259,21 @@ Checked on 2026-09-14.
   - R50: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.date: “April 2, 2026”
   - R51: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.statement: “I have not received a response to my March 14 request, and I still have not received an assessment plan.”
 
-**[resolution 2]** The Parent proposes the following resolution: (a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data; (b) fund an independent educational evaluation in reading and written expression; (c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and (d) implement the IEP as written, with quarterly service logs provided to the Parent.
+**[resolution 2]** The Parent proposes the following resolution:
+  - fixed wording; no factual claim
+
+**[resolution 3]** (a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data;
   - R22: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — iep.goals: “By 09/07/2026, Jordan will increase oral reading fluency to 60 words per minute with 90% accuracy on a first-grade passage, as measured by DIBELS 8 ORF probes administered at the end of each reporting period. Baseline (08/29/2025): 22 words per minute. Note: goal carried forward from the 03/11/2024 IEP with the baseline updated.”
   - R31: 02_Progress_Reports_2025-2026.pdf, p. 1 — progress.narrative: “Progress report dated 03/06/2026: 23 words per minute, 89% accuracy. Goal not met. Recommend continuing the goal.”
+
+**[resolution 4]** (b) fund an independent educational evaluation in reading and written expression;
   - R45: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.request: “I am requesting in writing a reevaluation of Jordan's reading skills, including a full assessment of his phonological processing and decoding.”
+
+**[resolution 5]** (c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and
   - R35: 03_SAI_Service_Delivery_Log_Sep2025-Feb2026.pdf, p. 1 — serviceLog.delivered: “Instructional weeks logged: 24. Weeks at the full 240 minutes: 4. Average minutes delivered per week across the period: 95. Weeks below 240 minutes: 20.”
   - R36: 03_SAI_Service_Delivery_Log_Sep2025-Feb2026.pdf, p. 1 — serviceLog.missed: “The small-group reading block was discontinued on 10/06/2025 when the reading intervention position became vacant. The position remained unfilled as of 02/27/2026.”
+
+**[resolution 6]** (d) implement the IEP as written, with quarterly service logs provided to the Parent.
   - R23: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — iep.services: “Specialized Academic Instruction - Reading: 240 minutes per week, delivered in a small-group setting of no more than 4 students by a credentialed special education teacher, in the Special Education Classroom, from 09/08/2025 to 09/07/2026.”
 
 **[signature 4]** Dana Rivera

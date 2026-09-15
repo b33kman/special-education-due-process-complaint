@@ -435,13 +435,44 @@
       "section": "resolution",
       "index": 1,
       "cls": null,
-      "text": "The Parent proposes the following resolution: (a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data; (b) fund an independent educational evaluation in reading and written expression; (c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and (d) implement the IEP as written, with quarterly service logs provided to the Parent.",
+      "text": "The Parent proposes the following resolution:",
+      "tags": []
+    },
+    {
+      "section": "resolution",
+      "index": 2,
+      "cls": "relief",
+      "text": "(a) convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data;",
       "tags": [
         "R22",
-        "R31",
-        "R45",
+        "R31"
+      ]
+    },
+    {
+      "section": "resolution",
+      "index": 3,
+      "cls": "relief",
+      "text": "(b) fund an independent educational evaluation in reading and written expression;",
+      "tags": [
+        "R45"
+      ]
+    },
+    {
+      "section": "resolution",
+      "index": 4,
+      "cls": "relief",
+      "text": "(c) provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026; and",
+      "tags": [
         "R35",
-        "R36",
+        "R36"
+      ]
+    },
+    {
+      "section": "resolution",
+      "index": 5,
+      "cls": "relief",
+      "text": "(d) implement the IEP as written, with quarterly service logs provided to the Parent.",
+      "tags": [
         "R23"
       ]
     },

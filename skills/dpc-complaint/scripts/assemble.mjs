@@ -196,8 +196,9 @@ chosen.forEach((cl, i) => {
 section('statement', numbered('Statement of the problems'), statementParagraphs)
 
 // IV. Proposed resolution
+// Each remedy is its own lettered sub-paragraph under a one-line lead-in,
+// so a long list reads as a list; a single remedy is one sentence.
 const reliefClauses = []
-const reliefTags = []
 for (const r of c.relief ?? []) {
   const ref = reliefRef.find((o) => o.id === r.id)
   if (!ref) {
@@ -206,19 +207,22 @@ for (const r of c.relief ?? []) {
   }
   const detail = String(r.detail ?? '').trim().replace(/[.!?]+$/, '')
   if (ref.requiresDetail && !detail) continue
-  reliefClauses.push(detail || ref.filingLabel)
-  if (r.sources) reliefTags.push(...r.sources)
+  reliefClauses.push({ text: detail || ref.filingLabel, tags: r.sources ?? [] })
 }
-const lettered =
+const reliefParagraphs =
   reliefClauses.length === 0
-    ? null
+    ? [P('[No relief has been entered. Enter the proposed resolution before filing.]', [], 'placeholder')]
     : reliefClauses.length === 1
-      ? reliefClauses[0]
-      : reliefClauses.map((cl, i, all) => `${i === all.length - 1 ? 'and ' : ''}(${String.fromCharCode(97 + i)}) ${cl}`).join('; ')
-section('resolution', numbered('Proposed resolution'), [
-  P('34 C.F.R. § 300.508(b)(6).', [], 'cite'),
-  ...(lettered ? [P(`The Parent proposes the following resolution: ${lettered}.`, reliefTags)] : [P('[No relief has been entered. Enter the proposed resolution before filing.]', [], 'placeholder')]),
-])
+      ? [P(`The Parent proposes the following resolution: ${reliefClauses[0].text}.`, reliefClauses[0].tags)]
+      : [
+          P('The Parent proposes the following resolution:', []),
+          ...reliefClauses.map((cl, i, all) => {
+            const last = i === all.length - 1
+            const punctuation = last ? '.' : i === all.length - 2 ? '; and' : ';'
+            return P(`(${String.fromCharCode(97 + i)}) ${cl.text}${punctuation}`, cl.tags, 'relief')
+          }),
+        ]
+section('resolution', numbered('Proposed resolution'), [P('34 C.F.R. § 300.508(b)(6).', [], 'cite'), ...reliefParagraphs])
 
 // V. Anything the state requires beyond the federal six
 const extra = c.additionalContents ?? []
@@ -299,6 +303,7 @@ for (const s of doc.sections) {
     if (p.cls === 'subheading') md.push(`### ${p.text}`, '')
     else if (p.cls === 'cite') md.push(`*${p.text}*`, '')
     else if (p.n) md.push(`${p.n}. ${p.text}`, '')
+    else if (p.cls === 'relief') md.push(`&nbsp;&nbsp;&nbsp;&nbsp;${p.text}`, '')
     else md.push(p.text, '')
   }
 }
@@ -338,6 +343,9 @@ html.push(`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Due
   /* Numbered allegations, double-spaced: the number at the margin, the text a tab in, wrapped lines back at the margin. */
   p.para { line-height: 2; margin: 0; text-align: left; overflow-wrap: anywhere; orphans: 2; widows: 2; }
   p.para .n { display: inline-block; width: 0.5in; }
+  /* Lettered remedies under the resolution's lead-in: indented, with a hanging letter. */
+  p.relief { line-height: 2; margin: 0 0 0 1in; padding-left: 0.5in; text-indent: -0.5in; text-align: left; overflow-wrap: anywhere; orphans: 2; widows: 2; }
+  p.relief .l { display: inline-block; width: 0.5in; text-indent: 0; }
   p.placeholder { background: #fff3cd; padding: 4pt 6pt; margin: 6pt 0; }
   /* The closing: "Dated" at the left margin, the signer's block on the right half, never split across a page. */
   .closing { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30pt; page-break-inside: avoid; break-inside: avoid; }
@@ -392,7 +400,10 @@ for (const s of doc.sections.slice(1)) {
       if (p.cls === 'subheading') html.push(`<h3>${esc(p.text)}</h3>`)
       else if (p.cls === 'cite') html.push(`<p class="cite">${esc(p.text)}</p>`)
       else if (p.cls === 'placeholder') html.push(`<p class="placeholder">${esc(p.text)}</p>`)
-      else if (p.n) html.push(`<p class="para"><span class="n">${p.n}.</span>${esc(p.text)}</p>`)
+      else if (p.cls === 'relief') {
+        const m = p.text.match(/^(\([a-z]\))\s+([\s\S]*)$/)
+        html.push(m ? `<p class="relief"><span class="l">${esc(m[1])}</span>${esc(m[2])}</p>` : `<p class="relief">${esc(p.text)}</p>`)
+      } else if (p.n) html.push(`<p class="para"><span class="n">${p.n}.</span>${esc(p.text)}</p>`)
       else html.push(`<p>${esc(p.text)}</p>`)
     }
   }
