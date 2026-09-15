@@ -2,6 +2,11 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.3 — 2026-09-15
+
+- Written for the Claude desktop app: the README installs the plugin from Customize → Plugins → Add marketplace with the repository address, uses the Code tab with the case folder, and explains each step in plain words.
+- When Node.js is missing, the skill tells the person how to install it, in plain words.
+
 ## 1.0.2 — 2026-09-15
 
 From a full run of the skill on a new case:

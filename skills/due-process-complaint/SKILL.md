@@ -15,7 +15,7 @@ Two rules hold throughout:
 
 You do not give legal advice. The person chooses the claims and the relief; you never predict how a complaint will fare, in the document or in chat. Nothing on the complaint names the software.
 
-The scripts need Node 20 or later and take the case folder: `node ${CLAUDE_SKILL_DIR}/scripts/<name>.mjs <case folder>`. If one stops with `Cannot find package`, the dependencies were not installed (npm must be on the PATH when the plugin is installed): run `npm ci --ignore-scripts` in `${CLAUDE_SKILL_DIR}/../..` and run the script again.
+The scripts need Node 20 or later and take the case folder: `node ${CLAUDE_SKILL_DIR}/scripts/<name>.mjs <case folder>`. If one stops with `Cannot find package`, the dependencies were not installed (npm must be on the PATH when the plugin is installed): run `npm ci --ignore-scripts` in `${CLAUDE_SKILL_DIR}/../..` and run the script again. If `node` itself is not found, the person needs Node.js: tell them in plain words to download it from nodejs.org (the LTS button), install it with the standard choices, quit and reopen the Claude app, and ask again.
 
 ## 1. Ask what you need, briefly
 

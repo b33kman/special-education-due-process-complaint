@@ -1,31 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="330" viewBox="0 0 880 330" role="img" aria-labelledby="t d">
-  <title id="t">Installing the Due Process Complaint Drafter in Claude Code</title>
-  <desc id="d">Three steps typed in a terminal: start Claude Code with claude, add the marketplace b33kman/special-education-due-process-complaint, then install due-process-complaint@due-process-complaint.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="300" viewBox="0 0 880 300" role="img" aria-labelledby="t d">
+  <title id="t">Adding the Due Process Complaint Drafter in the Claude desktop app</title>
+  <desc id="d">In the Claude desktop app: open Customize, go to Plugins, click the plus button and choose Add marketplace, paste https://github.com/b33kman/special-education-due-process-complaint, then find Due Process Complaint Drafter and click Install.</desc>
   <defs>
     <style>
-      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 15px; }
       .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     </style>
   </defs>
-  <rect x="0.5" y="0.5" width="879" height="329" rx="12" fill="#1e2127" stroke="#3a3f4b"/>
-  <rect x="0.5" y="0.5" width="879" height="40" rx="12" fill="#2b2f37"/>
-  <rect x="0.5" y="28" width="879" height="13" fill="#2b2f37"/>
-  <circle cx="24" cy="20" r="6.5" fill="#ff5f57"/>
-  <circle cx="46" cy="20" r="6.5" fill="#febc2e"/>
-  <circle cx="68" cy="20" r="6.5" fill="#28c840"/>
-  <text x="440" y="25" text-anchor="middle" class="sans" font-size="13" fill="#9aa1ad">Terminal — what to type</text>
+  <rect x="0.5" y="0.5" width="879" height="299" rx="14" fill="#faf9f5" stroke="#e3e0d8"/>
+  <text x="32" y="44" class="sans" font-size="15" font-weight="700" fill="#3d3929">In the Claude desktop app</text>
 
-  <g class="sans" font-size="12.5" font-weight="600" letter-spacing="0.6">
-    <text x="32" y="78" fill="#7cc4ff">STEP 1 · START CLAUDE CODE IN A TERMINAL</text>
-    <text x="32" y="162" fill="#7cc4ff">STEP 2 · IN CLAUDE CODE, ADD THE MARKETPLACE</text>
-    <text x="32" y="246" fill="#7cc4ff">STEP 3 · INSTALL THE PLUGIN</text>
+  <g class="sans">
+    <!-- step 1 -->
+    <circle cx="48" cy="92" r="16" fill="#d97757"/><text x="48" y="97.5" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">1</text>
+    <text x="76" y="88" font-size="15" font-weight="700" fill="#3d3929">Open Customize</text>
+    <text x="76" y="108" font-size="13" fill="#6b6758">in the left sidebar, then the Plugins tab</text>
+
+    <!-- step 2 -->
+    <circle cx="470" cy="92" r="16" fill="#d97757"/><text x="470" y="97.5" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">2</text>
+    <text x="498" y="88" font-size="15" font-weight="700" fill="#3d3929">Click +  →  Add marketplace</text>
+    <text x="498" y="108" font-size="13" fill="#6b6758">choose to add it from a repository</text>
+
+    <!-- step 3 -->
+    <circle cx="48" cy="168" r="16" fill="#d97757"/><text x="48" y="173.5" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">3</text>
+    <text x="76" y="164" font-size="15" font-weight="700" fill="#3d3929">Paste this address</text>
   </g>
-  <g class="mono">
-    <text x="32" y="108"><tspan fill="#8b93a1">$ </tspan><tspan fill="#e6e6e6">claude</tspan></text>
-    <text x="32" y="192"><tspan fill="#d98cf0">&gt; </tspan><tspan fill="#e6e6e6">/plugin marketplace add b33kman/special-education-due-process-complaint</tspan></text>
-    <text x="32" y="276"><tspan fill="#d98cf0">&gt; </tspan><tspan fill="#e6e6e6">/plugin install due-process-complaint@due-process-complaint</tspan></text>
+  <rect x="76" y="178" width="620" height="38" rx="8" fill="#fff" stroke="#cfcabd"/>
+  <text x="92" y="202" class="mono" font-size="14.5" fill="#1f1e1a">https://github.com/b33kman/special-education-due-process-complaint</text>
+
+  <g class="sans">
+    <!-- step 4 -->
+    <circle cx="48" cy="254" r="16" fill="#d97757"/><text x="48" y="259.5" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">4</text>
+    <text x="76" y="250" font-size="15" font-weight="700" fill="#3d3929">Install “Due Process Complaint Drafter”</text>
+    <text x="76" y="270" font-size="13" fill="#6b6758">find it in Browse plugins and click Install</text>
   </g>
-  <line x1="32" y1="130" x2="848" y2="130" stroke="#343944"/>
-  <line x1="32" y1="214" x2="848" y2="214" stroke="#343944"/>
-  <text x="32" y="310" class="sans" font-size="12" fill="#8b93a1">Illustration of the commands. Claude Code installs the plugin's script packages itself — Node.js 20+ must be installed first.</text>
 </svg>

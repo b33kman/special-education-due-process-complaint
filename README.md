@@ -6,7 +6,7 @@
 
 **A Claude Code plugin that drafts an IDEA special education due process complaint from a folder of school documents** — IEPs, evaluations, prior written notices, progress reports, service logs, emails — for any US state and the District of Columbia.
 
-Give Claude the documents. It reads every page, confirms the facts with you, looks up your state's filing rules on the official state page, drafts the complaint in the form of a pleading, checks every date, figure and quotation against the documents, and hands you a **PDF to file** and a **Word file to edit**, with instructions for filing in your state.
+Give Claude the documents in the Claude desktop app. It reads every page, confirms the facts with you, looks up your state's filing rules on the official state page, drafts the complaint in the form of a pleading, checks every date, figure and quotation against the documents, and hands you a **PDF to file** and a **Word file to edit**, with instructions for filing in your state.
 
 Built for special education attorneys, legal aid organizations, advocates, and parents filing on their own. It is not legal advice, it does not decide which claims to bring, and it says nothing about how a complaint will fare.
 
@@ -18,68 +18,72 @@ Built for special education attorneys, legal aid organizations, advocates, and p
 
 ## Install in three steps
 
-### 1. Install Claude Code and Node.js
+You need the **Claude desktop app** ([download](https://claude.com/download)) on a paid Claude plan (Pro, Max, Team or Enterprise). No terminal and no coding.
 
-- **Claude Code** — [claude.com/claude-code](https://claude.com/claude-code). You'll type the install commands inside it.
-- **Node.js 20 or later** — [nodejs.org](https://nodejs.org). The plugin's three small scripts run on Node. Check what you have by typing `node --version` in a terminal; it should print `v20` or higher. Install Node **before** the plugin: Claude Code uses it to install the plugin's packages.
+### 1. Install Node.js
 
-### 2. Add the plugin and install it
+The plugin uses a free program called Node.js to read the PDFs and make the finished PDF and Word files.
+
+1. Go to **[nodejs.org](https://nodejs.org)** and click the big download button (the one marked **LTS**).
+2. Open the file you downloaded and click **Continue** / **Next** until it says it's done. Keep the standard choices.
+3. **Quit the Claude app completely and open it again**, so it can find Node.js.
+
+### 2. Add the plugin in the Claude app
 
 <p align="center">
-  <img src="docs/images/install-steps.svg" alt="Step 1: type claude in a terminal. Step 2: in Claude Code, type /plugin marketplace add b33kman/special-education-due-process-complaint. Step 3: type /plugin install due-process-complaint@due-process-complaint." width="760">
+  <img src="docs/images/install-steps.svg" alt="In the Claude desktop app: 1. Open Customize in the left sidebar, then Plugins. 2. Click + and choose Add marketplace, from a repository. 3. Paste https://github.com/b33kman/special-education-due-process-complaint. 4. Find Due Process Complaint Drafter and click Install." width="760">
 </p>
 
-Open a terminal and start Claude Code:
+1. In the Claude app, open **Customize** in the left sidebar and go to the **Plugins** tab.
+2. Click **+**, then **Add marketplace**, and choose to add it from a repository.
+3. Paste this address and confirm:
 
-```bash
-claude
-```
+   ```
+   https://github.com/b33kman/special-education-due-process-complaint
+   ```
 
-Then type these two lines **into Claude Code**, one at a time:
+4. Click **Browse plugins**, find **Due Process Complaint Drafter**, and click **Install**.
 
-```
-/plugin marketplace add b33kman/special-education-due-process-complaint
-```
+### 3. Turn on updates
 
-```
-/plugin install due-process-complaint@due-process-complaint
-```
-
-When it asks where to install, choose **User scope** so the plugin is available in all your projects. Claude Code downloads the plugin and installs its packages for you.
-
-### 3. Check that it worked
-
-Type `/plugin` in Claude Code and open the **Installed** tab: **due-process-complaint** should be listed. Then turn on automatic updates while you are there (see [Updating](#updating)).
+In the same **Plugins** screen, turn on automatic updates for this marketplace if the app offers it, so you always have the latest version. See [Updating](#updating).
 
 ## Draft your first complaint
 
-1. Make a folder for the case **outside any git repository**, with the PDFs in a `documents` folder inside it:
+1. **Put the documents in a folder.** On your computer, make a folder for the case — for example `Documents/Due process/Jordan` — and inside it a folder named **`documents`** holding the PDFs (IEPs, evaluations, prior written notices, progress reports, service logs, letters and emails).
 
    ```
-   Documents/due-process/jordan/
+   Jordan/
      documents/
-       IEP_2025-09-08.pdf
-       Progress_Reports.pdf
-       Service_Log.pdf
+       IEP 2025-09-08.pdf
+       Progress reports.pdf
+       Service log.pdf
    ```
 
-2. In Claude Code, ask for the complaint in your own words, for example:
+2. **Open the Code tab** at the top of the Claude app, choose **Local**, click **Select folder**, and pick the case folder (`Jordan`). The Code tab is where Claude can open the files on your computer.
 
-   > Draft a due process complaint from the documents in `~/Documents/due-process/jordan`. The state is California and I'm the parent, filing on my own.
+3. **Ask for the complaint** in your own words, for example:
 
-3. Answer Claude's questions. It confirms the facts with you before it drafts, and asks you to choose the claims and the remedies.
+   > Draft a due process complaint from the documents in this folder. The state is California and I'm the parent, filing on my own.
 
-4. Collect the files from the case folder: `complaint.pdf` to file, `complaint.docx` to edit, and `filing-instructions.md` for where and how to file.
+4. **Answer Claude's questions.** It shows you the facts it found, with the page each came from, and asks you to confirm them. It asks you to choose the problems to raise and what you want the school to do. It does not choose for you.
 
-The skill starts on a request like that. You can also start it directly with `/due-process-complaint:due-process-complaint`. Use the most capable Claude model available to you, at the highest effort setting: reading and drafting are where the quality is.
+5. **Get your files.** When it's finished, the case folder holds:
+   - **`complaint.pdf`** — the complaint to file
+   - **`complaint.docx`** — the same complaint, to edit in Word
+   - **`filing-instructions.md`** — where and how to file in your state, with the official pages
+
+   Until everything checks out, the files are named `complaint.DRAFT.pdf` and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
+
+Use the most capable Claude model the app offers, at the highest effort setting: careful reading is where the quality comes from.
 
 ```mermaid
 flowchart LR
-    A["School documents<br>(PDFs)"] --> B["Claude reads<br>every page"]
+    A["Your documents<br>(PDFs)"] --> B["Claude reads<br>every page"]
     B --> C["You confirm<br>the facts"]
-    C --> D["State's official<br>filing page"]
+    C --> D["Your state's official<br>filing page"]
     D --> E["Draft<br>complaint"]
-    E --> F{"Fact check<br>and review"}
+    E --> F{{"Fact check<br>and review"}}
     F -- "errors: fix" --> E
     F -- "passes" --> G["complaint.pdf<br>complaint.docx<br>filing instructions"]
 ```
@@ -100,33 +104,38 @@ Until the complaint passes the check and is marked final, it is written as `comp
 
 ## If something goes wrong
 
-- **`/plugin` isn't recognized.** Update Claude Code, restart it, and try again.
-- **A script stops with `Cannot find package`.** Node.js wasn't installed when the plugin was. Install Node.js 20 or later, then run `/plugin uninstall due-process-complaint@due-process-complaint` and install it again. (The skill also tries to repair this itself.)
-- **The skill doesn't appear after installing.** Close and reopen Claude Code. If it's still missing, remove the plugin cache with `rm -rf ~/.claude/plugins/cache`, restart Claude Code, and install again.
-- **A document is a scan or not a PDF** (a photo of a letter, an email). Say so; Claude reads it and types it out word for word so it can be checked like the rest.
-- **Something else.** [Open an issue](https://github.com/b33kman/special-education-due-process-complaint/issues).
+- **Claude says Node.js (or `node`) is missing, or a step stops with `Cannot find package`.** Install Node.js (step 1), quit and reopen the Claude app, then uninstall and reinstall the plugin from **Customize** → **Plugins**, and ask again.
+- **You can't find the plugin in Browse plugins.** Check that the address in step 2 was pasted exactly, then close and reopen the Claude app.
+- **Claude can't see your documents.** Make sure you started in the **Code** tab with **Select folder** pointed at the case folder, and that the PDFs are inside its `documents` folder.
+- **A document is a scan or a photo, or isn't a PDF** (an email, a picture of a letter). Tell Claude; it reads it and types it out word for word so it can be checked like the rest.
+- **Still stuck?** [Open an issue](https://github.com/b33kman/special-education-due-process-complaint/issues) and describe what you see.
 
 ## Updating
 
-**If you installed the plugin**, turn on automatic updates once: run `/plugin`, open **Marketplaces**, choose `due-process-complaint`, and select **Enable auto-update**. Claude Code then checks for a new version in the background after it starts; run `/reload-plugins` when it tells you an update is ready, or it loads the next time you start Claude Code. Automatic updates are off by default for marketplaces outside Anthropic's own.
+When a new version comes out, the Claude app can update the plugin for you: in **Customize** → **Plugins**, turn on automatic updates for this marketplace if the option is there. Otherwise, open the marketplace there and refresh or update it.
 
-To update by hand instead, run `/plugin marketplace update due-process-complaint`, then install the plugin again.
+In the terminal version of Claude Code, turn it on with `/plugin` → **Marketplaces** → `due-process-complaint` → **Enable auto-update**, or update by hand with `/plugin marketplace update due-process-complaint`. If you installed from a clone, run `git pull` and then `npm install`.
 
-**If you installed from a clone**, run `git pull` in the repository folder, then `npm install`.
-
-What changed in each version is in [CHANGELOG.md](CHANGELOG.md); each version is also published as a [GitHub release](https://github.com/b33kman/special-education-due-process-complaint/releases), so watching the repository for releases tells you when there is a new one.
+What changed in each version is in [CHANGELOG.md](CHANGELOG.md); each version is also a [GitHub release](https://github.com/b33kman/special-education-due-process-complaint/releases), so watching the repository for releases tells you when there is a new one.
 
 ## Other ways to install
 
-**As a personal skill, from a clone** (no plugin marketplace):
+**In the terminal version of Claude Code** — start `claude`, then type:
+
+```
+/plugin marketplace add b33kman/special-education-due-process-complaint
+/plugin install due-process-complaint@due-process-complaint
+```
+
+Choose **User scope** when asked. Node.js 20 or later must be installed first; Claude Code installs the plugin's packages with it.
+
+**As a personal skill, from a clone:**
 
 ```bash
 git clone https://github.com/b33kman/special-education-due-process-complaint.git
 cd special-education-due-process-complaint && npm install
 ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint
 ```
-
-Then start it with `/due-process-complaint`, or just ask for a due process complaint.
 
 ## Examples
 
@@ -167,7 +176,7 @@ No. It drafts from the documents and the facts the person filing confirms, and i
 Special education attorneys and legal aid organizations drafting for clients, advocates helping families, and parents filing on their own (pro se). It asks an attorney the attorney's questions and a parent in plain words; the pleading is the same either way.
 
 **What does it need to run?**
-Claude Code, Node 20 or later, and web access for the state procedure step. It works on PDFs with a text layer; a scanned page with no text layer has to be read by eye.
+The Claude desktop app on a paid plan, and Node.js (a free download, step 1 of the install). It reads PDFs; a scanned page, a photo or an email is read and typed out by Claude so it can be checked too.
 
 **How does it keep errors out of the complaint?**
 Two ways. A script refuses any date, figure or quotation that is not in the documents or in the person's own statement, a missing required element, and a complaint that does not follow the form. Then the draft is reviewed, by a fresh subagent where possible, for what a script cannot catch — fidelity to the pages, the state's own rules, consistency, legal posture, completeness and the rendered files — and the errors are fixed before the complaint is final. Until then it is written only as `complaint.DRAFT.pdf`.
