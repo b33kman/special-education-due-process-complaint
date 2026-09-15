@@ -1,6 +1,14 @@
 # Changelog
 
-Each release bumps `version` in `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
+Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
+
+## 1.0.1 — 2026-09-15
+
+- `check.mjs` runs correctly when the skill is reached through a symlink (the personal-skill install); before, it printed nothing.
+- The skill runs its scripts from `${CLAUDE_SKILL_DIR}` without a permission prompt for each, and recovers when the plugin's dependencies were not installed.
+- Scanned pages and documents that are not PDFs are transcribed into `work/text/`, so the check reads them.
+- The skill says where to put the case folder.
+- A clearer README: install in three steps, how to check it worked, troubleshooting, and pictures of the result.
 
 ## 1.0.0 — 2026-09-15
 

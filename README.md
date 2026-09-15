@@ -1,57 +1,110 @@
 # Due Process Complaint Drafter
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/b33kman/special-education-due-process-complaint)](https://github.com/b33kman/special-education-due-process-complaint/releases)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](https://claude.com/claude-code)
+
 **A Claude Code plugin that drafts an IDEA special education due process complaint from a folder of school documents** — IEPs, evaluations, prior written notices, progress reports, service logs, emails — for any US state and the District of Columbia.
 
-Claude reads every page, confirms the facts with the person filing, looks up the state's filing procedure on its official pages, and drafts a complaint in the form of a pleading. A script checks that every date, figure and quotation in it is in the documents or in the person's own words; a fresh reviewer checks the rest. The result is a **PDF to file** and a **Word file to edit**, with filing instructions for the state.
+Give Claude the documents. It reads every page, confirms the facts with you, looks up your state's filing rules on the official state page, drafts the complaint in the form of a pleading, checks every date, figure and quotation against the documents, and hands you a **PDF to file** and a **Word file to edit**, with instructions for filing in your state.
 
-It is built for the people who file these: special education attorneys, legal aid organizations, advocates, and parents filing on their own. It is not legal advice, it does not decide which claims a file supports, and it says nothing about how a complaint will fare.
+Built for special education attorneys, legal aid organizations, advocates, and parents filing on their own. It is not legal advice, it does not decide which claims to bring, and it says nothing about how a complaint will fare.
 
-## What you get
+<p align="center">
+  <img src="docs/images/complaint-first-page.png" alt="The first page of a complaint drafted by the plugin: the forum's name, a bracketed caption naming the student, parent and school district, and numbered, double-spaced paragraphs" width="460">
+  <br>
+  <sub>The first page of a finished complaint, from the <a href="examples/river-oak/">California example</a> (invented people and documents).</sub>
+</p>
 
-For a case folder holding the documents:
+## Install in three steps
 
-| File | What it is |
-|---|---|
-| `complaint.pdf` | The complaint, to file: the forum's name over a bracketed caption, then consecutively numbered, double-spaced paragraphs — introduction, contact and residence information, statement of facts, statement of the problems (one lettered section per claim, the regulation under each heading), proposed resolution — the signature block and the certificate of service. Letter, one-inch margins, Times 12, page numbers. |
-| `complaint.docx` | The same document as a Word file, to edit before filing. |
-| `complaint.md` | The complaint's source text: what Claude drafted and the script checked. |
-| `filing-instructions.md` | How to file in that state — where the complaint goes, how it may be sent, who is served and when, the time limit — each point with the official page it came from. |
-| `statement.md` | The person's own account, in their words. |
+### 1. Install Claude Code and Node.js
 
-Until the complaint passes the check and is marked final, it is written as `complaint.DRAFT.pdf` and `complaint.DRAFT.docx` with **DRAFT — NOT FOR FILING** at the top, so a draft cannot be filed by mistake.
+- **Claude Code** — [claude.com/claude-code](https://claude.com/claude-code). You'll type the install commands inside it.
+- **Node.js 20 or later** — [nodejs.org](https://nodejs.org). The plugin's three small scripts run on Node. Check what you have by typing `node --version` in a terminal; it should print `v20` or higher. Install Node **before** the plugin: Claude Code uses it to install the plugin's packages.
 
-## How it works
+### 2. Add the plugin and install it
 
-1. **Ask** who is filing (a parent, or an attorney), the state and the filing date.
-2. **Read** every PDF page by page (`pdf-text.mjs`).
-3. **Confirm** the facts the complaint will rest on with the person — names, address, school, events and dates, each with its page — and take their own account in their words.
-4. **Look up the state's procedure** on its official due process filing page — listed, with the office's contacts, for all 50 states and DC in [STATES.md](STATES.md).
-5. **Draft** `complaint.md` in the form of `references/exemplar.md`.
-6. **Check** it (`check.mjs`): every date, figure and quotation must be in the documents or the person's statement; the required elements must be there; the sections must follow the form. Then **review** it for everything else (`references/review.md`) and fix what is found.
-7. **Render** the PDF and the Word file (`render.mjs`) and hand them over with the filing instructions.
+<p align="center">
+  <img src="docs/images/install-steps.svg" alt="Step 1: type claude in a terminal. Step 2: in Claude Code, type /plugin marketplace add b33kman/special-education-due-process-complaint. Step 3: type /plugin install due-process-complaint@due-process-complaint." width="760">
+</p>
 
-## Install
+Open a terminal and start Claude Code:
 
-Requires [Claude Code](https://claude.com/claude-code) and Node 20 or later.
+```bash
+claude
+```
 
-**As a plugin.** In Claude Code:
+Then type these two lines **into Claude Code**, one at a time:
 
 ```
 /plugin marketplace add b33kman/special-education-due-process-complaint
+```
+
+```
 /plugin install due-process-complaint@due-process-complaint
 ```
 
-Claude Code installs the three script dependencies (`pdfjs-dist`, `docx`, `pdf-lib`) with the plugin.
+When it asks where to install, choose **User scope** so the plugin is available in all your projects. Claude Code downloads the plugin and installs its packages for you.
 
-**As a personal skill, from a clone:**
+### 3. Check that it worked
 
-```bash
-git clone https://github.com/b33kman/special-education-due-process-complaint.git
-cd special-education-due-process-complaint && npm install
-ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint
+Type `/plugin` in Claude Code and open the **Installed** tab: **due-process-complaint** should be listed. Then turn on automatic updates while you are there (see [Updating](#updating)).
+
+## Draft your first complaint
+
+1. Make a folder for the case **outside any git repository**, with the PDFs in a `documents` folder inside it:
+
+   ```
+   Documents/due-process/jordan/
+     documents/
+       IEP_2025-09-08.pdf
+       Progress_Reports.pdf
+       Service_Log.pdf
+   ```
+
+2. In Claude Code, ask for the complaint in your own words, for example:
+
+   > Draft a due process complaint from the documents in `~/Documents/due-process/jordan`. The state is California and I'm the parent, filing on my own.
+
+3. Answer Claude's questions. It confirms the facts with you before it drafts, and asks you to choose the claims and the remedies.
+
+4. Collect the files from the case folder: `complaint.pdf` to file, `complaint.docx` to edit, and `filing-instructions.md` for where and how to file.
+
+The skill starts on a request like that. You can also start it directly with `/due-process-complaint:due-process-complaint`. Use the most capable Claude model available to you, at the highest effort setting: reading and drafting are where the quality is.
+
+```mermaid
+flowchart LR
+    A["School documents<br>(PDFs)"] --> B["Claude reads<br>every page"]
+    B --> C["You confirm<br>the facts"]
+    C --> D["State's official<br>filing page"]
+    D --> E["Draft<br>complaint"]
+    E --> F{"Fact check<br>and review"}
+    F -- "errors: fix" --> E
+    F -- "passes" --> G["complaint.pdf<br>complaint.docx<br>filing instructions"]
 ```
 
-Then ask Claude Code for a due process complaint from a folder of PDFs. The skill starts on that request; you can also call it directly — `/due-process-complaint:due-process-complaint` as a plugin, `/due-process-complaint` as a personal skill. Run it with the most capable Claude model available to you, at the highest effort setting: reading and drafting are where the quality is.
+## What you get
+
+| File | What it is |
+|---|---|
+| `complaint.pdf` | The complaint, to file: the forum's name over a bracketed caption, then numbered, double-spaced paragraphs — introduction, contact and residence information, statement of facts, statement of the problems (one lettered section per claim, the regulation under each heading), proposed resolution — the signature block and the certificate of service. Letter, one-inch margins, Times 12, page numbers. |
+| `complaint.docx` | The same document as a Word file, to edit before filing. |
+| `filing-instructions.md` | How to file in that state — where the complaint goes, how it may be sent, who is served and when, the time limit — each point with the official page it came from. |
+| `complaint.md` | The complaint's source text, as drafted and checked. |
+| `statement.md` | Your own account, in your words. |
+
+Until the complaint passes the check and is marked final, it is written as `complaint.DRAFT.pdf` and `complaint.DRAFT.docx` with **DRAFT — NOT FOR FILING** at the top, so a draft can't be filed by mistake.
+
+**Where to file in every state:** [STATES.md](STATES.md) lists the office that receives due process complaints, its official filing page, contacts and time limit for all 50 states and DC.
+
+## If something goes wrong
+
+- **`/plugin` isn't recognized.** Update Claude Code, restart it, and try again.
+- **A script stops with `Cannot find package`.** Node.js wasn't installed when the plugin was. Install Node.js 20 or later, then run `/plugin uninstall due-process-complaint@due-process-complaint` and install it again. (The skill also tries to repair this itself.)
+- **The skill doesn't appear after installing.** Close and reopen Claude Code. If it's still missing, remove the plugin cache with `rm -rf ~/.claude/plugins/cache`, restart Claude Code, and install again.
+- **A document is a scan or not a PDF** (a photo of a letter, an email). Say so; Claude reads it and types it out word for word so it can be checked like the rest.
+- **Something else.** [Open an issue](https://github.com/b33kman/special-education-due-process-complaint/issues).
 
 ## Updating
 
@@ -63,21 +116,24 @@ To update by hand instead, run `/plugin marketplace update due-process-complaint
 
 What changed in each version is in [CHANGELOG.md](CHANGELOG.md); each version is also published as a [GitHub release](https://github.com/b33kman/special-education-due-process-complaint/releases), so watching the repository for releases tells you when there is a new one.
 
-## Using it
+## Other ways to install
 
-Put the documents in a folder:
+**As a personal skill, from a clone** (no plugin marketplace):
 
-```
-my-case/
-  documents/
-    IEP_2025-09-08.pdf
-    Progress_Reports.pdf
-    ...
+```bash
+git clone https://github.com/b33kman/special-education-due-process-complaint.git
+cd special-education-due-process-complaint && npm install
+ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint
 ```
 
-Then: *"Draft a due process complaint from the documents in `my-case/`. The state is California and I'm filing pro se."*
+Then start it with `/due-process-complaint`, or just ask for a due process complaint.
 
-Two worked examples ship, each on invented documents: `examples/river-oak/` (California, a parent filing pro se) and `examples/pine-hollow/` (North Carolina, an attorney filing, with the county in the caption and a one-year time limit).
+## Examples
+
+Two complete worked examples on invented documents, each with the documents, the person's statement, the filing instructions and the finished complaint:
+
+- [`examples/river-oak/`](examples/river-oak/) — California, a parent filing on her own.
+- [`examples/pine-hollow/`](examples/pine-hollow/) — North Carolina, an attorney filing, with the county in the caption and a one-year time limit.
 
 ## What it will not do
 
@@ -134,6 +190,8 @@ skills/due-process-complaint/
   scripts/               pdf-text.mjs, check.mjs, render.mjs
 examples/                two complete worked examples on invented documents
 tests/                   the tests
+docs/images/             the pictures on this page
+CHANGELOG.md             what changed in each version
 STATES.md                where to file in each state: office, official page, contacts, time limit
 ```
 

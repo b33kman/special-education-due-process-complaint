@@ -1,5 +1,6 @@
 ---
 name: due-process-complaint
+allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/*)
 description: Use when someone wants an IDEA special education due process complaint (a "due process complaint notice", "request for a due process hearing", "impartial hearing request", "DPC") drafted from a child's or client's school documents — IEPs, evaluations, prior written notices, progress reports, service logs, emails — in any US state, delivered as a PDF to file and a Word file to edit. Trigger even when they just say "draft the complaint from these PDFs" or "turn this file into a due process request". Not for state complaints to the SEA, OCR complaints, 504 grievances, or general legal research.
 ---
 
@@ -14,7 +15,7 @@ Two rules hold throughout:
 
 You do not give legal advice. The person chooses the claims and the relief; you never predict how a complaint will fare, in the document or in chat. Nothing on the complaint names the software.
 
-The scripts need Node 20 or later and take the case folder: `node <this skill>/scripts/<name>.mjs <case folder>`.
+The scripts need Node 20 or later and take the case folder: `node ${CLAUDE_SKILL_DIR}/scripts/<name>.mjs <case folder>`. If one stops with `Cannot find package`, the dependencies were not installed (npm must be on the PATH when the plugin is installed): run `npm ci --ignore-scripts` in `${CLAUDE_SKILL_DIR}/../..` and run the script again.
 
 ## 1. Ask what you need, briefly
 
@@ -22,7 +23,7 @@ In a short message or two (buttons for closed choices where available): who is f
 
 ## 2. Read everything
 
-The documents go in `<case>/documents/`. Run `pdf-text.mjs <case>`; it writes each PDF's text, page by page, to `<case>/work/text/`. Read all of it. A page with no text layer must be read by eye from the PDF.
+Make a case folder outside this skill's folder and outside any git repository (for example `~/Documents/due-process/<student>/`) and put the documents in `<case>/documents/`. Run `pdf-text.mjs <case>`; it writes each PDF's text, page by page, to `<case>/work/text/`. Read all of it. A page with no text layer, or a document that is not a PDF (an email, a photo of a letter), is read by eye and transcribed word for word into `<case>/work/text/<name>-transcribed.txt` — the check reads every text file there, and a fact from a document must never be passed off as the person's statement.
 
 ## 3. Confirm the facts with the person
 

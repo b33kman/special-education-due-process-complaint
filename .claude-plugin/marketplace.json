@@ -11,7 +11,6 @@
       "displayName": "Due Process Complaint Drafter",
       "source": "./",
       "description": "Drafts an IDEA special education due process complaint from a folder of school documents (IEPs, evaluations, prior written notices, progress reports, service logs, emails) for any US state: facts confirmed with the person filing, the state’s filing procedure looked up on its official pages, every date, figure and quotation checked against the documents, the draft reviewed for errors, delivered as a PDF to file and a Word file to edit.",
-      "version": "1.0.0",
       "author": {
         "name": "Mark Beekman",
         "url": "https://github.com/b33kman"

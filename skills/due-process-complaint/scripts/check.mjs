@@ -12,7 +12,7 @@
 //
 // Exit 1 on any error. Also lists what rests on statement.md alone.
 
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, realpathSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -193,7 +193,8 @@ export function checkComplaint(dir) {
 
 // ─── Command line ───────────────────────────────────────────────────────
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Compared as real paths, so it also runs when the skill is reached through a symlink.
+if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
   if (!process.argv[2]) {
     console.error('usage: node scripts/check.mjs <case folder>   — every date, figure and quotation in complaint.md against the documents and statement.md; the required elements; the form')
     process.exit(2)

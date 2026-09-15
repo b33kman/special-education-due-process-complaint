@@ -1,6 +1,6 @@
 {
   "name": "special-education-due-process-complaint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Due Process Complaint Drafter — a Claude Code plugin and skill that drafts an IDEA special education due process complaint from school documents, checks every date, figure and quotation against them, and delivers a PDF to file and a Word file to edit.",
   "keywords": [

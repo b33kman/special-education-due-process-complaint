@@ -6,7 +6,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -112,6 +112,16 @@ test('render never names a draft, or a complaint that fails the check, for filin
   assert.match(r.out, /DRAFT: check\.mjs found 1 error/)
   assert.ok(existsSync(join(failing, 'complaint.DRAFT.pdf')) && !existsSync(join(failing, 'complaint.pdf')))
   rmSync(failing, { recursive: true, force: true })
+})
+
+test('the check works when the skill is reached through a symlink, as a personal-skill install is', () => {
+  const dir = copy(examples.proSe, once('On October 6, 2025, the small-group', 'On October 7, 2025, the small-group'))
+  const link = join(mkdtempSync(join(tmpdir(), 'due-process-link-')), 'skill')
+  symlinkSync(dirname(scripts), link)
+  const r = spawnSync(process.execPath, [join(link, 'scripts', 'check.mjs'), dir], { encoding: 'utf8' })
+  assert.equal(r.status, 1, r.stdout + r.stderr)
+  assert.match(r.stdout, /the date “October 7, 2025” is not in the documents/)
+  rmSync(dir, { recursive: true, force: true })
 })
 
 test('every script prints its usage with no arguments', () => {
