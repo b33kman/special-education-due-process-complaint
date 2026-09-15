@@ -16,6 +16,8 @@ Install in Claude Code: `/plugin marketplace add b33kman/special-education-due-p
 - [California, filed by a parent pro se](https://github.com/b33kman/special-education-due-process-complaint/tree/main/examples/river-oak): a complete run on invented documents
 - [North Carolina, filed by an attorney](https://github.com/b33kman/special-education-due-process-complaint/tree/main/examples/pine-hollow): a complete run on invented documents, with a one-year filing window and the state's petition form
 
+- [Where to file, by state](https://github.com/b33kman/special-education-due-process-complaint/blob/main/STATES.md): for all 50 states and DC, the office that receives a special education due process complaint, its official filing page, address, email, fax, time limit and a filing note
+
 ## Optional
 
 - [51-state filing research](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/state-rules.json): each state's official due process filing page (filingUrl), with the address, fax, email and portal as researched in 2026; looked up again every run

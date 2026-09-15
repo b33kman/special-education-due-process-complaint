@@ -30,7 +30,7 @@ Show them what the documents say that the complaint will rest on: the student's 
 
 ## 4. Verify the state's procedure
 
-Open the state's official due process filing page — the `filingUrl` for the state in `references/state-rules.json` — and look up: who the complaint is filed with and at what address; how it may be sent (mail, fax, email, portal); who must be served, and whether before filing; the time limit for filing; and whether the state has a form, and what its caption and contents require. Read the state education agency's page and the statute too. Use only official sources, and copy every address and number as the page writes it. Where two official pages disagree, follow the receiving office's own page and say so.
+Open the state's official due process filing page — the `filingUrl` for the state in `references/state-rules.json`, whose row also has the office's contacts and a `filingNote` of what the research found — and look up: who the complaint is filed with and at what address; how it may be sent (mail, fax, email, portal); who must be served, and whether before filing; the time limit for filing; and whether the state has a form, and what its caption and contents require. Read the state education agency's page and the statute too. Use only official sources, and copy every address and number as the page writes it. Where two official pages disagree, follow the receiving office's own page and say so.
 
 Write it up as `<case>/filing-instructions.md`, each point with the URL it came from.
 

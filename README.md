@@ -25,7 +25,7 @@ Until the complaint passes the check and is marked final, it is written as `comp
 1. **Ask** who is filing (a parent, or an attorney), the state and the filing date.
 2. **Read** every PDF page by page (`pdf-text.mjs`).
 3. **Confirm** the facts the complaint will rest on with the person — names, address, school, events and dates, each with its page — and take their own account in their words.
-4. **Look up the state's procedure** on its official due process filing page, listed for all 51 jurisdictions in `references/state-rules.json`.
+4. **Look up the state's procedure** on its official due process filing page — listed, with the office's contacts, for all 50 states and DC in [STATES.md](STATES.md).
 5. **Draft** `complaint.md` in the form of `references/exemplar.md`.
 6. **Check** it (`check.mjs`): every date, figure and quotation must be in the documents or the person's statement; the required elements must be there; the sections must follow the form. Then **review** it for everything else (`references/review.md`) and fix what is found.
 7. **Render** the PDF and the Word file (`render.mjs`) and hand them over with the filing instructions.
@@ -92,7 +92,7 @@ Six things, under 34 C.F.R. § 300.508(b): the child's name; the address of the 
 Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own explicit time limit. A few states do: the research table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The skill looks up the filing state's window on its official pages every run and points out events older than it; whether an exception applies is the signer's judgment.
 
 **Where is a due process complaint filed?**
-It depends on the state: with the state education agency in most, and with a separate hearings office in others — California, Indiana, Maryland, Massachusetts, North Carolina, Pennsylvania and Washington, in the bundled research. The other party gets a copy (34 C.F.R. § 300.508(a)), and some offices accept a complaint only after the district has been served — California's does. The skill starts from each state's official due process filing page and writes filing instructions — where the complaint goes, how it may be sent, who is served and when — with the source of each.
+It depends on the state. In many it goes to the state education agency; in some to a separate hearings office (California and North Carolina, for example); in others to the school district, with a copy to the state (Illinois and Arizona, for example). The other party always gets a copy (34 C.F.R. § 300.508(a)), and some offices accept a complaint only after the district has been served — California's does. **[STATES.md](STATES.md) lists the office, the official filing page, the contacts and the time limit for every state and DC.** The skill opens the state's official page on every run and writes filing instructions with the source of each point.
 
 **Is it legal advice? Will it tell me whether the case is strong?**
 No. It drafts from the documents and the facts the person filing confirms, and it does not choose claims or predict outcomes. The person who signs the complaint is responsible for it.
@@ -120,10 +120,11 @@ Each test breaks a worked example in one way — an invented date, a figure that
 .claude-plugin/          plugin and marketplace manifests
 skills/due-process-complaint/
   SKILL.md               the procedure Claude follows
-  references/            the exemplar (form and voice), the review checklist, the 51-state table
+  references/            the exemplar (form and voice), the review checklist, the state table (STATES.md, readable)
   scripts/               pdf-text.mjs, check.mjs, render.mjs
 examples/                two complete worked examples on invented documents
 tests/                   the tests
+STATES.md                where to file in each state: office, official page, contacts, time limit
 ```
 
 ## Provenance
@@ -132,7 +133,7 @@ The exemplar and the state research table are derived from Sped DPC, a due proce
 
 ## License
 
-*(To be chosen by the author.)*
+[MIT](LICENSE). The worked examples are fiction; the state research is a starting point, not legal authority — confirm every value on the state's official page before relying on it.
 
 ## Disclaimer
 

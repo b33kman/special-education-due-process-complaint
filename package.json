@@ -23,6 +23,7 @@
     "type": "git",
     "url": "git+https://github.com/b33kman/special-education-due-process-complaint.git"
   },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/b33kman/special-education-due-process-complaint/issues"
   },
