@@ -12,7 +12,7 @@ Two rules hold throughout:
 1. **Nothing goes on the complaint that is not in the documents or in the person's own words.** Every name, date, figure and quotation comes from a page or from what they told you. Where the record is silent, the complaint says less.
 2. **Nothing is handed over until it has been checked for errors and corrected.**
 
-You do not give legal advice. The person chooses the claims and the relief; you never predict how a complaint will fare, in the document or in chat. When you offer claims to choose from, show what the documents say for each, and don't say which ones the record supports or how strong any of them is. Nothing on the complaint names the software.
+You do not give legal advice. The person chooses the claims and the relief; you never predict how a complaint will fare, in the document or in chat. Nothing on the complaint names the software.
 
 ## Setting up
 
@@ -24,7 +24,15 @@ This works in Claude's Chat and Cowork and in Claude Code. Do the setup yourself
 
 ## 1. Ask what you need, briefly
 
-In a short message or two (buttons for closed choices where available): who is filing (a parent on their own, or an attorney), the state, the planned filing date, and — for an attorney — the signature block and whether to reserve the right to seek attorneys' fees and costs. Take anything they already said. Ask a parent in plain words and an attorney in the terms of art. If the planned filing date is already past, say so and ask for the real one: the time limit is counted from it.
+Keep every question quick to answer: group them, and use buttons or checkboxes wherever the answer is a choice. In a short message or two, ask:
+
+- who is filing and their relationship to the child — a parent, guardian, foster or surrogate parent, or the student, if education rights have passed to them at the age of majority (then the student is the petitioner);
+- whether an attorney represents them, or someone else, such as an advocate, is helping (an advocate who isn't a lawyer doesn't sign as counsel; the person filing signs);
+- the state, and the planned filing date;
+- whether any earlier complaint, pending hearing or settlement agreement covers these issues;
+- for an attorney: the signature block, and whether to reserve the right to seek attorneys' fees and costs.
+
+Take anything they already said. Ask a parent in plain words and an attorney in the terms of art. If the planned filing date is already past, say so and ask for the real one: the time limit is counted from it.
 
 ## 2. Read everything
 
@@ -32,7 +40,18 @@ With the documents in `<case>/documents/`, run `pdf-text.mjs <case>`; it writes 
 
 ## 3. Confirm the facts with the person
 
-Show them what the documents say that the complaint will rest on: the student's name, date of birth, address, school and district; the parent's name and contact details; and the key events with their dates, each with its document and page. They confirm or correct. Anything they tell you in their own words — what the district did, how they learned of it, what it has meant for the student, what they want — goes into `<case>/statement.md`, as they said it. That file counts as a source.
+Show them what the documents say that the complaint will rest on: the student's name, date of birth, address, school and district; the parent's name and contact details; and the key events with their dates, each with its document and page. They confirm or correct. Ask too whether anything is missing — a newer IEP, a notice, emails — and what happened that was never written down, such as calls or meetings with no notes.
+
+Ask these only where the documents point to them:
+
+- a suspension, removal or manifestation determination: is the complaint about it? (Discipline hearings are expedited; say so in the filing instructions.)
+- a private school placement: do they want the costs repaid, and did they tell the district in writing before moving the child, and when?
+- a proposed change of program or school: do they want the current one kept while the case goes on (stay-put, or pendency)?
+- no stable address: the contact information to give instead, as for a homeless child (it goes in `address:`).
+
+Then ask them to choose the claims and the relief, each as checkboxes: a short name and one line of what the documents show, plus a box to write in something else. Keep it to one screen, and don't say which ones the record supports or how strong any of them is.
+
+Anything they tell you in their own words — what the district did, how they learned of it, what it has meant for the student, what they want — goes into `<case>/statement.md`, as they said it. That file counts as a source.
 
 ## 4. Verify the state's procedure
 
@@ -48,7 +67,7 @@ Follow `references/exemplar.md` — it is both the voice and the file format (fr
 - The statement of facts is the chronology, one dated event per paragraph, oldest first. The statement of the problems has one lettered section per claim the person chose, with the regulation in italics under its heading, then the facts that bear on it.
 - Dates in full ("October 14, 2025"), figures exactly as the documents give them, quotations short and word for word. No arithmetic ("a shortfall of 28 sessions", "less than half"): state the figures and let the reader compare.
 - Facts only. No legal conclusions ("violated", "denied FAPE") inside the facts, no characterisation, no citations except under the headings.
-- The required elements: the child's name; the address of residence (or contact information for a homeless child); the school; the problem and its facts; the proposed resolution — and anything the state requires. When the state's form asks for something the documents don't give (the district's address, the student's main language), ask the person and put their answer in `statement.md`; if they don't know, leave a blank line and tell them.
+- The required elements: the child's name; the address of residence (or contact information for a homeless child); the school; the problem and its facts; the proposed resolution — and anything the state requires. When the state's form asks for something the documents don't give (the district's address, the student's main language, whether they want mediation, whether they need an interpreter or accommodations at the hearing), ask the person and put their answer in `statement.md`; if they don't know, leave a blank line and tell them.
 - Leave `status: draft` in the front matter.
 
 ## 6. Check, then review
@@ -62,3 +81,5 @@ Then review the draft for everything a script cannot catch, using `references/re
 Set `status: final` and run `render.mjs <case>`. It writes `complaint.pdf` and `complaint.docx` only when the check passes on a final complaint; otherwise it writes `complaint.DRAFT.pdf` and `complaint.DRAFT.docx`, marked DRAFT — NOT FOR FILING. Look at the PDF before handing it over.
 
 Give the person `complaint.pdf`, `complaint.docx` and `filing-instructions.md` to download, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md`. Say that you did not decide which claims the file supports and that you say nothing about how the complaint will fare.
+
+Offer a short cover letter to send with it to the hearing office and the district. If they want one, write it as a one-page Word file from the caption and `filing-instructions.md`, with nothing in it the complaint doesn't say.

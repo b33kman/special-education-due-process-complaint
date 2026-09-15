@@ -2,6 +2,15 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.6 — 2026-09-15
+
+- More questions up front, kept quick with buttons and checkboxes: who holds the child's education rights (including a student of 18 or older), whether an advocate is helping, and whether an earlier complaint, hearing or settlement covers the same issues.
+- Before drafting: whether a document is missing, and what happened that was never written down.
+- Asked only when the documents point to it: discipline, a private school placement and repayment, keeping the current placement during the case (stay-put), and contact information when there is no stable address.
+- Claims and relief are offered as one screen of checkboxes, each with one line of what the documents show.
+- Where the state's form asks: mediation, and an interpreter or accommodations at the hearing.
+- At hand-over, an offer of a one-page cover letter.
+
 ## 1.0.5 — 2026-09-15
 
 - When Claude offers claims to choose from, it shows what the documents say for each and no longer says which ones the record supports.
