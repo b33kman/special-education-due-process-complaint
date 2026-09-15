@@ -95,7 +95,7 @@ Two finished complaints, written by the plugin from made-up people and documents
 
 ## How to file a due process complaint in your state
 
-Each state decides which office receives the complaint, how it may be sent and whether the school district must be served first. The school district always gets a copy. **[STATES.md](STATES.md) lists, for every state and DC, the office that takes special education due process complaints, its official filing page, its contacts and the time limit.** The plugin also looks up your state's official page every time and writes the filing instructions for you.
+Each state decides which office receives the complaint, how it may be sent and whether the school district must be served first. The school district always gets a copy. **[STATES.md](STATES.md) lists, for every state and DC, the office that takes special education due process complaints, its official filing page, its contacts and the time limit.** The plugin starts from this table, confirms the details on your state's official filing page every time, and writes the filing instructions for you.
 
 ## If something goes wrong
 
@@ -115,7 +115,7 @@ In Step 4 you left **Sync automatically** on. Claude says that keeps the plugin 
 - Choose the claims or what to ask for. You decide.
 - Say whether the complaint will win.
 - Fill a gap. If no document and nothing you said supports a fact, the complaint leaves it out.
-- Guess a filing address or deadline. It looks them up on your state's official pages every time.
+- Guess a filing address or deadline. It confirms them on your state's official filing page every time.
 
 ## Privacy
 
@@ -142,7 +142,7 @@ You can, but check every fact before you file: AI tools can get dates, quotation
 The plugin is free and open source (MIT license). You need a paid Claude plan to use plugins: Pro, Max, Team or Enterprise.
 
 ### How long does a family have to file?
-Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own time limit. A few do: the table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The plugin looks up the filing state's time limit on its official pages every time and points out events older than it; whether an exception applies is for the person signing to decide.
+Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own time limit. A few do: the table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The plugin confirms the filing state's time limit on its official filing page every time and points out events older than it; whether an exception applies is for the person signing to decide.
 
 ### Where is a due process complaint filed?
 It depends on the state. In many it goes to the state education agency; in some to a separate hearings office (California and North Carolina, for example); in others to the school district, with a copy to the state (Illinois and Arizona, for example). The other party always gets a copy (34 C.F.R. § 300.508(a)), and some offices accept a complaint only after the district has been served. **[STATES.md](STATES.md) lists the office, the official filing page, the contacts and the time limit for every state and DC.**
@@ -194,7 +194,7 @@ To update: `git pull`, then `npm install`. What changed in each version is in [C
 
 ### How it works
 
-Claude reads the PDFs, confirms the facts with the person filing, looks up the state's procedure on its official pages, and drafts `complaint.md`. `check.mjs` refuses any date, figure or quotation not in the documents or the person's statement, a missing required element, and sections out of order. The draft is then reviewed against `references/review.md`, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word, named DRAFT unless the complaint is final and passes the check.
+Claude reads the PDFs, confirms the facts with the person filing, confirms the state's filing details from the bundled table against its official filing page, and drafts `complaint.md`. `check.mjs` refuses any date, figure or quotation not in the documents or the person's statement, a missing required element, and sections out of order. The draft is then reviewed against `references/review.md`, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word, named DRAFT unless the complaint is final and passes the check.
 
 Each worked example in [`examples/`](examples/) has its documents, the person's statement, the filing instructions and the finished complaint.
 

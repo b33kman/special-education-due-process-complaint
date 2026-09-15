@@ -53,13 +53,13 @@ Then ask them to choose the claims, and then the relief, each as one checkbox qu
 
 Anything they tell you in their own words — what the district did, how they learned of it, what it has meant for the student, what they want — goes into `<case>/statement.md`, as they said it. That file counts as a source.
 
-## 4. Verify the state's procedure
+## 4. Confirm the state's filing rules
 
 This step needs only the state, so don't wait for steps 2 and 3: where subagents are available (Cowork, Claude Code), give this step and the state's row to a subagent as soon as you know the state, and read the documents and confirm the facts while it works. Otherwise do it here.
 
-Open the state's official due process filing page — the `filingUrl` for the state in `references/state-rules.json`, whose row also has the office's contacts and a `filingNote` of what the research found — and look up: who the complaint is filed with and at what address; how it may be sent (mail, fax, email, portal); who must be served, and whether before filing; the time limit for filing; and whether the state has a form, and what its caption and contents require. Read the state education agency's page and the statute too. Use only official sources, and copy every address and number as the page writes it — from the page's own text: a web tool's summary can paraphrase or invent, so read the full page, and an official PDF's own text (download it into a scratch folder's `documents/` and run `pdf-text.mjs` on it where you can). Where two official pages disagree, follow the receiving office's own page and say so.
+Start from the state's row in `references/state-rules.json`: the filing office, its address, email, fax and portal, the time limit, whether the district is served, and a note on how filing works there. Then open the row's `filingUrl`, the state's official filing page, and confirm the address, the email or fax, and the time limit from the page's own text (a web tool's summary can paraphrase or invent). Where the page or the note mentions a state form, open it (for a PDF, download it into a scratch folder's `documents/`, never the case's, and read it with `pdf-text.mjs`) and note anything it asks for beyond § 300.508(b). Copy every address and number as the official page writes it; where the page and the row differ, the page wins. If the page won't load, use the row and tell the person which details could not be confirmed today.
 
-Write it up as `<case>/filing-instructions.md`, each point with the URL it came from.
+Write it up as `<case>/filing-instructions.md`, each point with the official page it came from, or marked as from the bundled table where it could not be confirmed.
 
 ## 5. Draft `complaint.md`
 

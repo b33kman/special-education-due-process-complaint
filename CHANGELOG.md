@@ -2,6 +2,11 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.10 — 2026-09-15
+
+- The state's filing rules start from the bundled table. Claude confirms the address, email or fax and the time limit on the state's official filing page, reads the state's form only where there is one, and says which details it could not confirm if the page won't load, instead of researching every state from scratch.
+- A new share image for the repository.
+
 ## 1.0.9 — 2026-09-15
 
 - Renamed to the Due Process Complaint Writer. The GitHub page is now "Special Education Due Process Complaint Writer", led by the terms people search for, with new answers on the due process complaint notice, model forms, using AI, and cost.
