@@ -2,6 +2,16 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` — Claude Code delivers an update to installed plugins only when that number changes — and is published as a GitHub release.
 
+## 1.0.2 — 2026-09-15
+
+From a full run of the skill on a new case:
+
+- The check accepts a period or comma inside a closing quotation mark, and shows the whole quotation when it refuses one.
+- A figure with a unit ("15 days") is traced with its unit, so the list of what rests on the person's statement is complete.
+- A long forum name wraps inside the caption's margins; a row of checkboxes breaks only between items.
+- The skill checks the planned filing date against today, reads official pages' own text rather than a web tool's summary, and asks the person for anything the state's form wants that the documents don't give.
+- The exemplar is a different invented case from the worked examples and follows its own rules; no computed ages on the complaints.
+
 ## 1.0.1 — 2026-09-15
 
 - `check.mjs` runs correctly when the skill is reached through a symlink (the personal-skill install); before, it printed nothing.

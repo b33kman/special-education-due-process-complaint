@@ -13,7 +13,7 @@ status: final
 
 ## Introduction
 
-Petitioner Jordan Rivera (“Student”) is an 8-year-old student who is eligible for special education and related services under the category of Autism (initially found eligible on March 11, 2024), and who attends Willow Creek Elementary School in the River Oak Unified School District (“District”). This due process complaint is brought on Student’s behalf by the parent, Dana Rivera (“Parent”), who is self-represented.
+Petitioner Jordan Rivera (“Student”) is a student who is eligible for special education and related services under the category of Autism (initially found eligible on March 11, 2024), and who attends Willow Creek Elementary School in the River Oak Unified School District (“District”). This due process complaint is brought on Student’s behalf by the parent, Dana Rivera (“Parent”), who is self-represented.
 
 The District has denied Student a free appropriate public education (“FAPE”) by failing to provide an individualized education program (“IEP”) adequate to Student’s needs; by failing to implement the services the operative IEP requires; and by failing to evaluate Student appropriately. Petitioner requests an impartial due process hearing on the problems stated in this complaint.
 

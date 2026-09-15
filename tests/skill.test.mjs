@@ -75,7 +75,7 @@ test('a figure no source gives is refused — including one that is only the tai
 })
 
 test('a quotation that is not word for word in a source is refused', () => {
-  refused((md) => md.replace('## Statement of the problems', 'The District wrote that it “will never fund an outside evaluation.”\n\n## Statement of the problems'), /the quotation “will never fund an outside evaluation\.” is not word for word/)
+  refused((md) => md.replace('## Statement of the problems', 'The District wrote that it “will never fund an outside evaluation.”\n\n## Statement of the problems'), /the quotation “will never fund an outside evaluation” is not word for word/)
 })
 
 test('a figure from the person’s own statement passes, and is listed as resting on it', () => {
@@ -83,7 +83,26 @@ test('a figure from the person’s own statement passes, and is listed as restin
   writeFileSync(join(dir, 'statement.md'), `${readFileSync(join(dir, 'statement.md'), 'utf8')}\nThe reading teacher left after 7 weeks, on July 21, 2025.\n`)
   const r = run('check', dir)
   assert.equal(r.code, 0, r.out)
-  assert.match(r.out, /From statement\.md, not from any document[\s\S]*· July 21, 2025 —[\s\S]*· 7 —/)
+  assert.match(r.out, /From statement\.md, not from any document[\s\S]*· July 21, 2025 —[\s\S]*· 7 weeks —/)
+  rmSync(dir, { recursive: true, force: true })
+})
+
+test('a period inside the closing quotation mark is the writer’s, and a figure is traced with its unit', () => {
+  const dir = copy(examples.proSe, (md) => md.replace('## Statement of the problems', 'The District’s service log describes the instruction as “delivered in a small-group setting.”\n\n## Statement of the problems'))
+  const r = run('check', dir)
+  assert.equal(r.code, 0, r.out)
+  assert.match(r.out, /· 15 days —/, 'within 15 days comes from the statement, though a document says 15%')
+  rmSync(dir, { recursive: true, force: true })
+})
+
+test('a long forum name wraps inside the margins of the caption', async () => {
+  const dir = copy(examples.proSe, once('forum: Office of Administrative Hearings', 'forum: Office of Administrative Hearings, Special Education Division, Department of General Services'))
+  assert.equal(run('render', dir).code, 0)
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
+  for (const item of (await (await doc.getPage(1)).getTextContent()).items) {
+    if (!item.str.trim()) continue
+    assert.ok(item.transform[4] >= 71 && item.transform[4] + item.width <= 541, `“${item.str}” runs outside the margins`)
+  }
   rmSync(dir, { recursive: true, force: true })
 })
 

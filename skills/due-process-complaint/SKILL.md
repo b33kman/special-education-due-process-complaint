@@ -19,7 +19,7 @@ The scripts need Node 20 or later and take the case folder: `node ${CLAUDE_SKILL
 
 ## 1. Ask what you need, briefly
 
-In a short message or two (buttons for closed choices where available): who is filing (a parent on their own, or an attorney), the state, the planned filing date, and — for an attorney — the signature block. Take anything they already said. Ask a parent in plain words and an attorney in the terms of art.
+In a short message or two (buttons for closed choices where available): who is filing (a parent on their own, or an attorney), the state, the planned filing date, and — for an attorney — the signature block. Take anything they already said. Ask a parent in plain words and an attorney in the terms of art. If the planned filing date is already past, say so and ask for the real one: the time limit is counted from it.
 
 ## 2. Read everything
 
@@ -31,7 +31,7 @@ Show them what the documents say that the complaint will rest on: the student's 
 
 ## 4. Verify the state's procedure
 
-Open the state's official due process filing page — the `filingUrl` for the state in `references/state-rules.json`, whose row also has the office's contacts and a `filingNote` of what the research found — and look up: who the complaint is filed with and at what address; how it may be sent (mail, fax, email, portal); who must be served, and whether before filing; the time limit for filing; and whether the state has a form, and what its caption and contents require. Read the state education agency's page and the statute too. Use only official sources, and copy every address and number as the page writes it. Where two official pages disagree, follow the receiving office's own page and say so.
+Open the state's official due process filing page — the `filingUrl` for the state in `references/state-rules.json`, whose row also has the office's contacts and a `filingNote` of what the research found — and look up: who the complaint is filed with and at what address; how it may be sent (mail, fax, email, portal); who must be served, and whether before filing; the time limit for filing; and whether the state has a form, and what its caption and contents require. Read the state education agency's page and the statute too. Use only official sources, and copy every address and number as the page writes it — from the page's own text: a web tool's summary can paraphrase or invent, so read an official PDF with `pdf-text.mjs` (put it in a scratch case folder's `documents/`) or its full text. Where two official pages disagree, follow the receiving office's own page and say so.
 
 Write it up as `<case>/filing-instructions.md`, each point with the URL it came from.
 
@@ -43,7 +43,7 @@ Follow `references/exemplar.md` — it is both the voice and the file format (fr
 - The statement of facts is the chronology, one dated event per paragraph, oldest first. The statement of the problems has one lettered section per claim the person chose, with the regulation in italics under its heading, then the facts that bear on it.
 - Dates in full ("October 14, 2025"), figures exactly as the documents give them, quotations short and word for word. No arithmetic ("a shortfall of 28 sessions", "less than half"): state the figures and let the reader compare.
 - Facts only. No legal conclusions ("violated", "denied FAPE") inside the facts, no characterisation, no citations except under the headings.
-- The required elements: the child's name; the address of residence (or contact information for a homeless child); the school; the problem and its facts; the proposed resolution — and anything the state requires.
+- The required elements: the child's name; the address of residence (or contact information for a homeless child); the school; the problem and its facts; the proposed resolution — and anything the state requires. When the state's form asks for something the documents don't give (the district's address, the student's main language), ask the person and put their answer in `statement.md`; if they don't know, leave a blank line and tell them.
 - Leave `status: draft` in the front matter.
 
 ## 6. Check, then review

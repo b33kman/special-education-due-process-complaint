@@ -13,7 +13,7 @@ status: final
 
 ## Introduction
 
-Petitioner Maya Okafor (“Student”) is a 13-year-old student who is eligible for special education and related services under the category of Speech or Language Impairment (initially found eligible on February 14, 2020), and who attends Cedar Ridge Middle School in the Pine Hollow County Schools, for which the Pine Hollow County Board of Education is the responsible local educational agency and the respondent here (“District”). This due process complaint is brought on Student’s behalf by the parent, Grace Okafor (“Parent”). Petitioner and the Parent are represented by Renée Castillo of Castillo Education Law PLLC.
+Petitioner Maya Okafor (“Student”) is a student who is eligible for special education and related services under the category of Speech or Language Impairment (initially found eligible on February 14, 2020), and who attends Cedar Ridge Middle School in the Pine Hollow County Schools, for which the Pine Hollow County Board of Education is the responsible local educational agency and the respondent here (“District”). This due process complaint is brought on Student’s behalf by the parent, Grace Okafor (“Parent”). Petitioner and the Parent are represented by Renée Castillo of Castillo Education Law PLLC.
 
 The District has denied Student a free appropriate public education (“FAPE”) by failing to implement the services the operative individualized education program (“IEP”) requires; by failing to evaluate Student appropriately; and by refusing to fund an independent educational evaluation at public expense without filing its own due process complaint. Petitioner requests an impartial due process hearing on the problems stated in this complaint.
 

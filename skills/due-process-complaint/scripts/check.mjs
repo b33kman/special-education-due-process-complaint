@@ -97,17 +97,17 @@ function monthsIn(text) {
 function claimsIn(block) {
   let t = block.replace(/^\([a-z]\)\s+/, '')
   // A defined term in parentheses — (“Student”), (“FAPE”) — is not a quotation.
-  const quotes = [...t.matchAll(/(\(?)["“]([^"“”]{2,})["”](\)?)/g)].filter((m) => !(m[1] && m[3])).map((m) => m[2])
+  // American style puts a period or comma inside the closing quote; it is the writer's, not the source's.
+  const quotes = [...t.matchAll(/(\(?)["“]([^"“”]{2,})["”](\)?)/g)].filter((m) => !(m[1] && m[3])).map((m) => m[2].replace(/[.,;:]+$/, ''))
   const dates = [...t.matchAll(new RegExp(`\\b(${MONTHS.join('|')})\\s+(\\d{1,2}),\\s+(\\d{4})\\b`, 'gi'))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${Number(m[2])}/${m[3]}` }))
   for (const d of dates) t = t.replace(d.text, ' ')
   const months = [...t.matchAll(new RegExp(`\\b(${MONTHS.join('|')})\\s+(\\d{4})\\b`, 'gi'))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${m[2]}` }))
   for (const m of months) t = t.replace(m.text, ' ')
-  // Citations, section letters, ages and form codes ("CELF-5", "H-06E") are not facts about the child.
+  // Citations, section letters and form codes ("CELF-5", "H-06E") are not facts about the child.
   t = t
     .replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, ' ')
     .replace(/§+\s*[\d.()a-z,–\s-]+/gi, ' ')
-    .replace(/\b\d+-year-old\b/g, ' ')
-  const numbers = [...t.matchAll(/(?<![\w.]|[A-Za-z]-)\$?\d[\d,]*(?:\.\d+)?%?/g)].map((m) => m[0].replace(/,/g, ''))
+  const numbers = [...t.matchAll(/(?<![\w.]|[A-Za-z]-)(\$?\d[\d,]*(?:\.\d+)?%?)(?:\s+([a-z]+))?/gi)].map((m) => ({ n: m[1].replace(/,/g, ''), unit: m[2] ?? '' }))
   return { dates, months, numbers, quotes }
 }
 const figureIn = (n, text) => new RegExp(`${n.startsWith('$') ? '\\$\\s?' : ''}(?<![\\d.])${escapeRe(n.replace(/[$%]/g, ''))}(?![\\d])${n.endsWith('%') ? '\\s?(?:%|percent)' : ''}`, 'i').test(String(text).replace(/,/g, ''))
@@ -176,7 +176,11 @@ export function checkComplaint(dir) {
         if (stmtMonths.has(m.key)) statementOnly.push(`${m.text} — ${where}`)
         else errors.push(`${where} — “${m.text}” is not in the documents or statement.md`)
       }
-      for (const n of new Set(numbers)) {
+      for (const { n, unit } of numbers) {
+        // A figure with its unit ("15 days") is looked for with the unit first, so "15%" in a document does not account for it.
+        const withUnit = unit && !/%$/.test(n) ? `${n} ${unit}` : ''
+        if (withUnit ? contains(documents, withUnit) : figureIn(n, documents)) continue
+        if (withUnit ? contains(statement, withUnit) : figureIn(n, statement)) { statementOnly.push(`${withUnit || n} — ${where}`); continue }
         if (figureIn(n, documents)) continue
         if (figureIn(n, statement)) statementOnly.push(`${n} — ${where}`)
         else errors.push(`${where} — the figure “${n}” is not in the documents or statement.md`)
@@ -184,7 +188,7 @@ export function checkComplaint(dir) {
       for (const q of quotes) {
         if (contains(documents, q, false)) continue
         if (contains(statement, q, false)) statementOnly.push(`“${q}” — ${where}`)
-        else errors.push(`${where} — the quotation “${q.slice(0, 60)}” is not word for word in the documents or statement.md`)
+        else errors.push(`${where} — the quotation “${q}” is not word for word in the documents or statement.md`)
       }
     }
   }

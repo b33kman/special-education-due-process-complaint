@@ -217,7 +217,7 @@ const flow = (ls, leading, drawLine) => {
 
 newPage()
 if (draft) { drawCentered(BANNER); y -= SINGLE + 6 }
-for (const line of caption.court) { drawCentered(line); y -= SINGLE }
+for (const line of caption.court) for (const l of wrap(line, F.bold, SIZE, WIDTH)) { drawCentered(l); y -= SINGLE }
 y -= 18
 // The caption: two columns, the parties inside an L-shaped rule.
 const leftW = 3.5 * 72
@@ -303,7 +303,17 @@ for (const s of body) {
   if (s.id === 'service') {
     const first = s.paragraphs.findIndex((p) => p.cls === 'dated')
     for (const p of s.paragraphs.slice(0, first < 0 ? undefined : first)) {
-      if (p.cls === 'method' && width(clean(p.text)) <= WIDTH) { ensure(SINGLE); draw(p.text, PAGE.margin); y -= SINGLE }
+      if (p.cls === 'method' && p.text.includes('[')) {
+        // A row of checkboxes keeps its spacing and breaks only between items.
+        const rows = []
+        for (const item of p.text.split(/\s{2,}(?=\[)/)) {
+          const next = rows.length ? `${rows.at(-1)}   ${item}` : item
+          if (rows.length && width(clean(next)) <= WIDTH) rows[rows.length - 1] = next
+          else rows.push(item)
+        }
+        ensure(rows.length * SINGLE)
+        for (const r of rows) { draw(r, PAGE.margin); y -= SINGLE }
+      } else if (p.cls === 'method' && width(clean(p.text)) <= WIDTH) { ensure(SINGLE); draw(p.text, PAGE.margin); y -= SINGLE }
       else flow(wrap(p.text, F.regular, SIZE, WIDTH), SINGLE, (l) => draw(l, PAGE.margin))
       y -= p.cls === 'method' ? 6 : 12
     }
