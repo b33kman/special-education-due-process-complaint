@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
+</p>
+
 # Special Education Due Process Complaint Writer
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
