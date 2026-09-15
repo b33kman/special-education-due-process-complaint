@@ -100,7 +100,7 @@ test('nothing runs outside the margins: a long forum name, claim heading, regula
     once('forum: Office of Administrative Hearings', 'forum: Office of Administrative Hearings, Special Education Division, Department of General Services'),
     once('### A. Failure to provide an adequate individualized education program', '### A. Failure to provide an adequate individualized education program and to revise it when the progress reports recorded no progress toward the annual reading fluency goal'),
     once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.101, 300.300, 300.301, 300.303, 300.304, 300.305, 300.306, 300.320, 300.321, 300.323, 300.324, 300.503.*'),
-    once('dana.r@example.com', 'dana.r@example.com\n\nBar number and jurisdiction: ______________________'),
+    once('(555) 010-4471\n\ndana.r@example.com', '(555) 010-4471\n\ndana.r@example.com\n\nBar number and jurisdiction: ______________________'),
   ].reduce((m, edit) => edit(m), md))
   assert.equal(run('render', dir).code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
