@@ -45,7 +45,7 @@
   },
   "facts": {
     "F1": { "question": "What the district did, or failed to do", "answer": "", "proposed": false },
-    "F2": { "question": "How the client learned of it", "answer": "", "proposed": false },
+    "F2": { "question": "How the Parent learned of it", "answer": "", "proposed": false },
     "F3": { "question": "Effect on the student", "answer": "", "proposed": false },
     "F4": { "question": "Relief sought", "answer": "", "proposed": false }
   },
