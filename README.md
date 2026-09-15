@@ -103,7 +103,7 @@ Click **Plugins** in the left sidebar, then **Personal**. The due process compla
 
 ## How to write a due process complaint
 
-1. **Start a new chat with the plugin.** In Claude, click **New** in the left sidebar. In ChatGPT, click **Try now** on the plugin, as in Step 3 above.
+1. **Start a new chat with the plugin.** In Claude or ChatGPT, click **New** or **New chat** in the left sidebar.
 2. **Attach your documents.** Drag the PDFs into the message box. In Claude, each file can be up to 30 MB.
 3. **Say what you want.** For example:
 
@@ -165,6 +165,58 @@ The documents you attach go to Claude or ChatGPT like any other attachment, unde
 
 ## Frequently asked questions
 
+### How does it save me time?
+It does the slow parts for you. It reads every page of every document, pulls out the dates, figures and quotations that matter, and lays them out as a dated chronology with the page each came from. It suggests the claims your documents support best, finds your state's filing office, address and time limit, and sets the complaint out as a legal pleading, ready as a PDF to file and a Word file to edit. In one test with seven school documents, the reading, drafting, checking and formatting took about six minutes.
+
+### How is this different from asking a regular AI chat?
+A regular chat writes what sounds right. This plugin follows a set procedure built for due process complaints:
+
+- A script checks every date, number and quotation against your documents and refuses anything it can't find there.
+- It shows you the facts with the page each came from, and you choose the claims and what to ask for.
+- It includes every element federal law requires (34 C.F.R. § 300.508(b)), and a complaint missing one stays a draft.
+- It uses your state's filing office, address and time limit, confirmed on the state's official page.
+- It produces a formatted pleading (caption, numbered paragraphs, signature block, certificate of service) as a PDF and a Word file, and marks drafts so they can't be filed by mistake.
+- It never predicts how your case will turn out.
+
+### Can I use AI to write a due process complaint?
+Yes, as long as you check what it writes. A general AI chat can get dates, quotations and legal citations wrong. This plugin is built to catch that, as the next answer explains, but you should still read the complaint before you sign it.
+
+### Will it hallucinate or make things up?
+It's built not to, and today's AI models are very capable, but no AI is perfect. The safeguards:
+
+- Every date, number and quotation is checked against your documents, and anything that isn't there is refused.
+- It shows you the facts it found, with the page each came from, and asks you to confirm or correct them.
+- It reviews the draft for errors a check can't catch, such as a fact that doesn't match its page.
+- The files stay marked DRAFT until the check passes.
+
+Always read the whole complaint against your documents before you sign and file it. The person who signs is responsible for it.
+
+### Is my information private and protected?
+Your documents go only to Claude or ChatGPT, and Anthropic or OpenAI keeps and protects them under its own privacy and security policies, the same as anything else you share in those apps. The plugin doesn't send your documents anywhere else, and no one who makes the plugin can see them. When it looks up your state's filing rules on the web, those searches don't include your child's name.
+
+Both apps let you choose whether your chats are used to improve their AI: in Claude, in your [privacy settings](https://privacy.claude.com/en/articles/12109829-how-do-i-change-my-model-improvement-privacy-settings); in ChatGPT, under **Settings → Data Controls → Improve the model for everyone**. If you're an attorney using it for a client, make sure the app's terms fit your confidentiality duties.
+
+### Is it legal advice? Will it tell me whether I'll win?
+No. It drafts from your documents and the facts you confirm. It suggests the claims your documents support best, but you choose, and it never predicts how the case will turn out. The person who signs the complaint is responsible for it.
+
+### Do I still need a lawyer?
+No. A parent can file a due process complaint without a lawyer. A special education attorney or advocate can help you decide what to raise and prepare for the hearing. For free help, your state's Parent Training and Information Center can point you to resources: [find your parent center](https://www.parentcenterhub.org/find-your-center/).
+
+### Can I change the complaint?
+Yes. Ask for changes in the chat, and it updates the draft and checks it again. Or edit `complaint.docx` in Word yourself; the plugin's checks don't cover changes you make there, so read them carefully.
+
+### Will it file the complaint for me?
+No. It gives you `filing-instructions.md`: where to send the complaint, how it may be sent (mail, email, fax or an online portal, depending on the state), who must get a copy and when, and the time limit, each with the official page it came from. You sign and send it. It can also write a short cover letter to go with it.
+
+### What documents should I gather?
+Whatever you have: IEPs (current and past), school and private evaluations, prior written notices, progress reports, service logs, report cards, discipline records, letters and emails with the school, and your own notes of meetings and calls. PDFs work best; scans and photos can be read too.
+
+### Who is it for?
+Parents filing on their own (pro se), advocates helping families, and special education attorneys and legal aid organizations drafting for clients. It asks a parent in plain words and an attorney in legal terms; the complaint follows the same form either way.
+
+### Is it free?
+The plugin is free and open source (MIT license). In Claude you need a paid plan to use plugins: Pro, Max, Team or Enterprise. In ChatGPT, the desktop app's plugins worked on a free account when we tested in September 2026.
+
 ### What is a special education due process complaint?
 A written complaint that starts a due process hearing under the Individuals with Disabilities Education Act (IDEA). A parent or a public agency may file one on any matter relating to a child's identification, evaluation or educational placement, or the provision of a free appropriate public education (34 C.F.R. § 300.507(a)). A hearing officer decides the dispute after a hearing; the complaint sets out what the hearing is about.
 
@@ -177,26 +229,14 @@ The same document. The IDEA statute calls it a "due process complaint notice" (2
 ### Is there a due process complaint form?
 Every state education agency must publish a model form, but no state or district may require you to use it (34 C.F.R. § 300.509). Any document that contains what § 300.508(b) requires will do. Where a state's form asks for something more, the plugin looks it up and asks you for it.
 
-### Can I use AI to write a due process complaint?
-You can, but check every fact before you file: AI tools can get dates, quotations and legal citations wrong. This plugin refuses any date, number or quotation that isn't in your documents or in what you told it, and marks the file DRAFT until that check passes. Read the whole complaint before you sign it; the person who signs is responsible for it.
-
-### Is it free?
-The plugin is free and open source (MIT license). In Claude you need a paid plan to use plugins: Pro, Max, Team or Enterprise. In ChatGPT, the desktop app's plugins worked on a free account when we tested in September 2026.
-
 ### How long does a family have to file?
 Under 34 C.F.R. § 300.507(a)(2), two years from the date the parent or agency knew or should have known about the action the complaint is about, unless the state has its own time limit. A few do: the table bundled here records one year for Alaska, North Carolina and Wisconsin and three years for Kentucky. The plugin confirms the filing state's time limit on its official filing page every time and points out events older than it; whether an exception applies is for the person signing to decide.
 
 ### Where is a due process complaint filed?
 It depends on the state. In many it goes to the state education agency; in some to a separate hearings office (California and North Carolina, for example); in others to the school district, with a copy to the state (Illinois and Arizona, for example). The other party always gets a copy (34 C.F.R. § 300.508(a)), and some offices accept a complaint only after the district has been served. **[STATES.md](STATES.md) lists the office, the official filing page, the contacts and the time limit for every state and DC.**
 
-### Is it legal advice? Will it tell me whether the case is strong?
-No. It drafts from the documents and the facts you confirm. It does not choose claims or predict outcomes. The person who signs the complaint is responsible for it.
-
-### Who is it for?
-Parents filing on their own (pro se), advocates helping families, and special education attorneys and legal aid organizations drafting for clients. It asks a parent in plain words and an attorney in legal terms; the complaint follows the same form either way.
-
-### How does it keep errors out of the complaint?
-Two ways. First, a check refuses any date, number or quotation that isn't in the documents or in what you told it, and any complaint missing a required part. Then the draft is reviewed for everything a check can't catch, and the errors are fixed before the complaint is final.
+### Can it write a state complaint, an OCR complaint or a 504 grievance?
+No. It writes IDEA special education due process complaints only. A state complaint to your state education agency, a complaint to the U.S. Department of Education's Office for Civil Rights, and a Section 504 grievance each follow different rules.
 
 <details>
 <summary><b>For developers, Claude Code and Codex</b></summary>
