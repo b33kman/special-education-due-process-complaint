@@ -2,7 +2,7 @@
 
 > A Claude plugin and skill (for Claude Chat, Cowork and Claude Code) that drafts an IDEA special education due process complaint from a folder of school documents, for any US state and the District of Columbia. It reads the IEPs, evaluations, prior written notices, progress reports, service logs and emails; confirms the facts with the person filing; looks up the state's filing procedure on its official pages; drafts the complaint as a pleading; checks that every date, figure and quotation is in the documents or the person's own words and that every element 34 C.F.R. § 300.508(b) requires is there; reviews the draft for errors; and delivers it as a PDF to file and a Word file to edit. It is for special education attorneys, legal aid organizations, advocates and parents. It is not legal advice and says nothing about how a complaint will fare.
 
-Install in Claude (web or desktop app): Customize → Plugins → + → Add marketplace → add from repository https://github.com/b33kman/special-education-due-process-complaint → install Due Process Complaint Drafter. Requires a paid plan (code execution, on by default). In Claude Code: `/plugin marketplace add b33kman/special-education-due-process-complaint`, then `/plugin install due-process-complaint@due-process-complaint`.
+Install in the Claude app (Chat selected, not Code): Customize → Plugins → Add → Add marketplace → Add from a repository → paste https://github.com/b33kman/special-education-due-process-complaint → Sync → Add next to Due Process Complaint Drafter. Requires a paid plan (Pro, Max, Team or Enterprise). In Claude Code: `/plugin marketplace add b33kman/special-education-due-process-complaint`, then `/plugin install due-process-complaint@due-process-complaint`.
 
 ## Docs
 
@@ -13,8 +13,8 @@ Install in Claude (web or desktop app): Customize → Plugins → + → Add mark
 
 ## Examples
 
-- [California, filed by a parent pro se](https://github.com/b33kman/special-education-due-process-complaint/tree/main/examples/river-oak): a complete run on invented documents
-- [North Carolina, filed by an attorney](https://github.com/b33kman/special-education-due-process-complaint/tree/main/examples/pine-hollow): a complete run on invented documents, with a one-year filing window and the state's petition form
+- [California, filed by a parent pro se (PDF)](https://github.com/b33kman/special-education-due-process-complaint/blob/main/examples/river-oak/complaint.pdf): the finished complaint from a complete run on invented documents
+- [North Carolina, filed by an attorney (PDF)](https://github.com/b33kman/special-education-due-process-complaint/blob/main/examples/pine-hollow/complaint.pdf): the finished complaint from a complete run on invented documents, with a one-year filing window
 
 - [Where to file, by state](https://github.com/b33kman/special-education-due-process-complaint/blob/main/STATES.md): for all 50 states and DC, the office that receives a special education due process complaint, its official filing page, address, email, fax, time limit and a filing note
 
