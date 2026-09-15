@@ -26,7 +26,7 @@ For the **Claude app** — Chat or Cowork, on the web or the desktop app — on 
   <img src="docs/images/install-steps.svg" alt="In Claude: 1. Open Customize in the left sidebar, then Plugins. 2. Click + and choose Add marketplace, from a repository. 3. Paste https://github.com/b33kman/special-education-due-process-complaint. 4. Find Due Process Complaint Drafter and click Install." width="760">
 </p>
 
-1. Open **Customize** in the left sidebar and go to the **Plugins** tab. (In Cowork, open the **Cowork** tab first, then **Customize**.)
+1. Open **Customize** in the left sidebar and go to the **Plugins** tab. (In Cowork, open the **Cowork** tab first, then **Customize**.) Don't add it from the **Code** tab: Code keeps its own list of plugins, so a plugin added there doesn't appear in Chat or Cowork.
 2. Click **+**, then **Add marketplace**, and choose to add it from a repository.
 3. Paste this address and confirm:
 
@@ -91,6 +91,7 @@ Until the complaint passes the check and is marked final, it is written as `comp
 - **Claude says it can't run code or create files.** That setting is on by default, but it can be switched off: open **Settings → Capabilities**, turn on **Code execution and file creation**, start a new chat, and ask again. On a Team or Enterprise plan, your administrator controls it.
 - **Claude says it can't install packages or reach the package registry.** Your organization has limited Claude's network access. Ask your administrator to allow **package managers** for code execution (Organization settings → Capabilities).
 - **You can't find the plugin in Browse plugins.** Check that the address in step 1 was pasted exactly, then refresh the page or reopen the app.
+- **It shows up in the Code tab but not in Chat or Cowork.** It was added from the Code tab, which keeps its own plugin list. Add it again from **Customize → Plugins**, as in step 1. To check it's there, type **/** in the message box in Chat or Cowork; the skill appears in the list.
 - **A document is a scan or a photo, or isn't a PDF** (an email, a picture of a letter). Attach it anyway and tell Claude; it reads it and types it out word for word so it can be checked like the rest.
 - **Still stuck?** [Open an issue](https://github.com/b33kman/special-education-due-process-complaint/issues) and describe what you see.
 
