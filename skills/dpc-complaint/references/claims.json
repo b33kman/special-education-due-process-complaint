@@ -7,7 +7,7 @@
       "filingClause": "failing to provide an individualized education program (“IEP”) adequate to Student’s needs",
       "cfr": "34 C.F.R. §§ 300.320, 300.324",
       "isProcedural": false,
-      "turnsOn": "The plan as written — whether the goals are measurable and the services match what the evaluations describe."
+      "turnsOn": "The plan as written — whether the goals are measurable, whether progress on them is measured and reported, and whether the services match what the evaluations describe."
     },
     {
       "id": "failure-to-implement",
@@ -18,20 +18,36 @@
       "turnsOn": "Delivery rather than content. The IEP itself is not challenged; what was actually provided is."
     },
     {
+      "id": "child-find",
+      "filingHeading": "Failure to identify and evaluate Student as a child suspected of having a disability",
+      "filingClause": "failing to identify and evaluate Student as a child suspected of having a disability",
+      "cfr": "34 C.F.R. §§ 300.111, 300.301",
+      "isProcedural": false,
+      "turnsOn": "Whether the district had reason to suspect a disability and did not refer or evaluate — the child-find duty, before any IEP exists."
+    },
+    {
       "id": "evaluation",
       "filingHeading": "Failure to evaluate appropriately and on time",
       "filingClause": "failing to conduct an appropriate and timely evaluation of Student",
-      "cfr": "34 C.F.R. §§ 300.111, 300.301–300.311, 300.502",
+      "cfr": "34 C.F.R. §§ 300.301–300.311, 300.502",
       "isProcedural": false,
-      "turnsOn": "Child find, the areas assessed, the timelines, and a refused request for an independent educational evaluation."
+      "turnsOn": "The areas assessed, the instruments, the timelines, a reevaluation not done when requested, and a refused request for an independent educational evaluation."
     },
     {
       "id": "procedural",
       "filingHeading": "Failure to follow required procedures",
-      "filingClause": "failing to follow required procedures, including notice to and participation by the Parent",
-      "cfr": "34 C.F.R. §§ 300.503, 300.322, 300.513(a)(2)",
+      "filingClause": "failing to follow required procedures, including notice to, consent from, and participation by the Parent",
+      "cfr": "34 C.F.R. §§ 300.300, 300.322, 300.503, 300.513(a)(2)",
       "isProcedural": true,
-      "turnsOn": "A required step was missed — and § 300.513(a)(2) requires the resulting harm to be stated as well."
+      "turnsOn": "A required step was missed — prior written notice, parental consent, a meeting the Parent could attend — and § 300.513(a)(2) requires the resulting harm to be stated as well."
+    },
+    {
+      "id": "placement",
+      "filingHeading": "Change of placement without the required procedures",
+      "filingClause": "changing Student’s educational placement without the required procedures",
+      "cfr": "34 C.F.R. §§ 300.116, 300.327, 300.503",
+      "isProcedural": true,
+      "turnsOn": "A move to a different classroom, school or program made outside the IEP team, or without prior written notice — and what the move cost the student."
     },
     {
       "id": "lre",

@@ -1,6 +1,6 @@
 # Sources — Jordan Rivera v. River Oak Unified School District
 
-Prepared 2026-09-14. Every fact on the complaint is listed here with what it rests on. A reading is the document’s own words at the page given; a fact marked “the Parent’s own statement” was typed by the Parent and is not in any document; a state source is a web page opened on the date shown.
+Prepared 2026-09-15. Every fact on the complaint is listed here with what it rests on. A reading is the document’s own words at the page given; a fact marked “the Parent’s own statement” was typed by the Parent and is not in any document; a state source is a web page opened on the date shown.
 
 ## Documents
 
@@ -81,12 +81,12 @@ Prepared 2026-09-14. Every fact on the complaint is listed here with what it res
 |---|---|---|---|
 | E1 | 2025-09-08 | The IEP team adopted the annual reading fluency goal of 60 words per minute, carried forward from the March 11, 2024 IEP. | R18, R22 |
 | E2 | 2025-10-06 | The small-group reading block was discontinued when the reading intervention position became vacant. | R36, R38 |
-| E3 | 2025-11-14 | Progress report: 21 words per minute. | R29 |
+| E3 | 2025-11-14 | the District’s progress report recorded 21 words per minute. | R29 |
 | E4 | 2025-12-02 | The Parent requested a reevaluation of reading skills in writing. | R44, R45 |
 | E5 | 2025-12-04 | The District wrote that it would prepare an assessment plan within the required timeline. | R46, R47 |
-| E6 | 2026-01-23 | Progress report: 24 words per minute. | R30 |
-| E7 | 2026-03-06 | Progress report: 23 words per minute; goal not met. | R31 |
-| E8 | 2026-03-12 | The IEP team declined to revise the reading goal; prior written notice issued. | R39, R40, R41 |
+| E6 | 2026-01-23 | the District’s progress report recorded 24 words per minute. | R30 |
+| E7 | 2026-03-06 | the District’s progress report recorded 23 words per minute and stated that the goal was not met. | R31 |
+| E8 | 2026-03-12 | the IEP team declined to revise the reading goal, and the District issued a prior written notice. | R39, R40, R41 |
 | E9 | 2026-03-14 | The Parent requested revision of the goal and the assessment plan in writing. | R48, R49 |
 | E10 | 2026-04-02 | The Parent wrote that she had received no response and no assessment plan. | R50, R51 |
 
@@ -148,7 +148,8 @@ Checked on 2026-09-14.
   - claim:failure-to-implement: fixed wording for this claim (references/claims.json)
   - claim:evaluation: fixed wording for this claim (references/claims.json)
 
-**[parties 2]** Student resides with the Parent at 1418 Alder Street, Willow Creek, CA 95833, and is enrolled at Willow Creek Elementary School. The Parent may be reached at dana.r@example.com and (555) 010-4471.
+**[parties 2]** Student was born on November 3, 2017, resides with the Parent at 1418 Alder Street, Willow Creek, CA 95833, and is enrolled at Willow Creek Elementary School. The Parent may be reached at dana.r@example.com and (555) 010-4471.
+  - R3: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.dob: “11/03/2017”
   - R6: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressLine1: “1418 Alder Street”
   - R7: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressCity: “Willow Creek”
   - R8: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.addressState: “CA”
@@ -156,6 +157,44 @@ Checked on 2026-09-14.
   - R14: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — child.school: “Willow Creek Elementary School”
   - R13: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.email: “dana.r@example.com”
   - R12: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — parent.phone: “(555) 010-4471”
+
+**[facts 1]** On September 8, 2025, the IEP team adopted the annual reading fluency goal of 60 words per minute, carried forward from the March 11, 2024 IEP.
+  - R18: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — iep.date: “09/08/2025”
+  - R22: 01_IEP_River_Oak_2025-09-08.pdf, p. 1 — iep.goals: “By 09/07/2026, Jordan will increase oral reading fluency to 60 words per minute with 90% accuracy on a first-grade passage, as measured by DIBELS 8 ORF probes administered at the end of each reporting period. Baseline (08/29/2025): 22 words per minute. Note: goal carried forward from the 03/11/2024 IEP with the baseline updated.”
+
+**[facts 2]** On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.
+  - R36: 03_SAI_Service_Delivery_Log_Sep2025-Feb2026.pdf, p. 1 — serviceLog.missed: “The small-group reading block was discontinued on 10/06/2025 when the reading intervention position became vacant. The position remained unfilled as of 02/27/2026.”
+  - R38: 03_SAI_Service_Delivery_Log_Sep2025-Feb2026.pdf, p. 1 — serviceLog.delivered: “Week of 10/06/2025: 90 (small-group reading block discontinued pending staffing; SAI provided in the general education classroom during available periods).”
+
+**[facts 3]** On November 14, 2025, the District’s progress report recorded 21 words per minute.
+  - R29: 02_Progress_Reports_2025-2026.pdf, p. 1 — progress.narrative: “Progress report dated 11/14/2025: 21 words per minute, 88% accuracy (DIBELS 8 ORF, first-grade passage). Progressing slowly. Small-group reading instruction has been provided within the general education classroom this period.”
+
+**[facts 4]** On December 2, 2025, the Parent requested a reevaluation of reading skills in writing.
+  - R44: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.date: “December 2, 2025”
+  - R45: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.request: “I am requesting in writing a reevaluation of Jordan's reading skills, including a full assessment of his phonological processing and decoding.”
+
+**[facts 5]** On December 4, 2025, the District wrote that it would prepare an assessment plan within the required timeline.
+  - R46: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.date: “December 4, 2025”
+  - R47: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.response: “The District will prepare an assessment plan for your consent within the required timeline.”
+
+**[facts 6]** On January 23, 2026, the District’s progress report recorded 24 words per minute.
+  - R30: 02_Progress_Reports_2025-2026.pdf, p. 1 — progress.narrative: “Progress report dated 01/23/2026: 24 words per minute, 90% accuracy. Progressing slowly.”
+
+**[facts 7]** On March 6, 2026, the District’s progress report recorded 23 words per minute and stated that the goal was not met.
+  - R31: 02_Progress_Reports_2025-2026.pdf, p. 1 — progress.narrative: “Progress report dated 03/06/2026: 23 words per minute, 89% accuracy. Goal not met. Recommend continuing the goal.”
+
+**[facts 8]** On March 12, 2026, the IEP team declined to revise the reading goal, and the District issued a prior written notice.
+  - R39: 04_Prior_Written_Notice_2026-03-12.pdf, p. 1 — pwn.date: “March 12, 2026”
+  - R40: 04_Prior_Written_Notice_2026-03-12.pdf, p. 1 — pwn.action: “The parent requested that the annual reading fluency goal (Goal 1 of the IEP dated September 8, 2025) be revised. The IEP team declined to revise the goal.”
+  - R41: 04_Prior_Written_Notice_2026-03-12.pdf, p. 1 — pwn.reasons: “The team determined that the goal remains appropriate and that Jordan is making progress toward it, as reflected in the progress reports dated November 14, 2025, January 23, 2026 and March 6, 2026. The team will review the goal at the annual review in September 2026.”
+
+**[facts 9]** On March 14, 2026, the Parent requested revision of the goal and the assessment plan in writing.
+  - R48: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.date: “March 14, 2026”
+  - R49: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.request: “I am requesting in writing that Jordan's reading fluency goal be revised based on his current level, and that the District provide the assessment plan I requested on December 2, 2025, which I have not received.”
+
+**[facts 10]** On April 2, 2026, the Parent wrote that she had received no response and no assessment plan.
+  - R50: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.date: “April 2, 2026”
+  - R51: 05_Correspondence_Dec2025-Apr2026.pdf, p. 1 — correspondence.statement: “I have not received a response to my March 14 request, and I still have not received an assessment plan.”
 
 **[statement 1]** A. Failure to provide an adequate individualized education program
   - claim:inadequate-iep: fixed wording for this claim (references/claims.json)

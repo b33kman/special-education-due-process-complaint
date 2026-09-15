@@ -2,34 +2,89 @@
   "createdOn": "2026-09-14",
   "filingDate": "2026-04-17",
   "state": "CA",
-  "runMeta": { "model": "claude-fable-5-1", "effort": "max", "skill": "dpc-complaint 1.0.0", "note": "Worked example on invented documents. The parent, student, district and school are fictional." },
-  "privacy": { "initials": false },
+  "runMeta": {
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "skill": "dpc-complaint 1.0.0",
+    "note": "Worked example on invented documents. The parent, student, district and school are fictional."
+  },
+  "privacy": {
+    "initials": false
+  },
   "student": {
-    "first": { "value": "Jordan", "source": "R1" },
+    "first": {
+      "value": "Jordan",
+      "source": "R1"
+    },
     "middle": null,
-    "last": { "value": "Rivera", "source": "R2" },
-    "dob": { "value": "11/03/2017", "source": "R3" },
-    "school": { "value": "Willow Creek Elementary School", "source": "R14" },
-    "district": { "value": "River Oak Unified School District", "source": "R15" },
-    "disability": { "value": "Autism", "source": "R16" },
-    "eligibleSince": { "value": "03/11/2024", "source": "R17" },
+    "last": {
+      "value": "Rivera",
+      "source": "R2"
+    },
+    "dob": {
+      "value": "11/03/2017",
+      "source": "R3"
+    },
+    "school": {
+      "value": "Willow Creek Elementary School",
+      "source": "R14"
+    },
+    "district": {
+      "value": "River Oak Unified School District",
+      "source": "R15"
+    },
+    "disability": {
+      "value": "Autism",
+      "source": "R16"
+    },
+    "eligibleSince": {
+      "value": "03/11/2024",
+      "source": "R17"
+    },
     "address": {
-      "line1": { "value": "1418 Alder Street", "source": "R6" },
+      "line1": {
+        "value": "1418 Alder Street",
+        "source": "R6"
+      },
       "line2": null,
-      "city": { "value": "Willow Creek", "source": "R7" },
-      "state": { "value": "CA", "source": "R8" },
-      "postalCode": { "value": "95833", "source": "R9" }
+      "city": {
+        "value": "Willow Creek",
+        "source": "R7"
+      },
+      "state": {
+        "value": "CA",
+        "source": "R8"
+      },
+      "postalCode": {
+        "value": "95833",
+        "source": "R9"
+      }
     },
     "homeless": false,
     "homelessContact": null
   },
   "parent": {
-    "first": { "value": "Dana", "source": "R10" },
-    "last": { "value": "Rivera", "source": "R11" },
-    "phone": { "value": "(555) 010-4471", "source": "R12" },
-    "email": { "value": "dana.r@example.com", "source": "R13" }
+    "first": {
+      "value": "Dana",
+      "source": "R10"
+    },
+    "last": {
+      "value": "Rivera",
+      "source": "R11"
+    },
+    "phone": {
+      "value": "(555) 010-4471",
+      "source": "R12"
+    },
+    "email": {
+      "value": "dana.r@example.com",
+      "source": "R13"
+    }
   },
-  "representation": { "type": "pro-se", "counsel": null },
+  "representation": {
+    "type": "pro-se",
+    "counsel": null
+  },
   "facts": {
     "F1": {
       "question": "What the district did, or failed to do",
@@ -53,27 +108,140 @@
     }
   },
   "claims": [
-    { "id": "inadequate-iep", "impact": null },
-    { "id": "failure-to-implement", "impact": null },
-    { "id": "evaluation", "impact": null }
+    {
+      "id": "inadequate-iep",
+      "impact": null
+    },
+    {
+      "id": "failure-to-implement",
+      "impact": null
+    },
+    {
+      "id": "evaluation",
+      "impact": null
+    }
   ],
   "relief": [
-    { "id": "iep-meeting", "detail": "convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data", "sources": ["R22", "R31"] },
-    { "id": "iee", "detail": "fund an independent educational evaluation in reading and written expression", "sources": ["R45"] },
-    { "id": "compensatory-services", "detail": "provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026", "sources": ["R35", "R36"] },
-    { "id": "prospective-services", "detail": "implement the IEP as written, with quarterly service logs provided to the Parent", "sources": ["R23"] }
+    {
+      "id": "iep-meeting",
+      "detail": "convene an IEP team meeting within 15 days to adopt measurable annual reading goals based on current assessment data",
+      "sources": [
+        "R22",
+        "R31"
+      ]
+    },
+    {
+      "id": "iee",
+      "detail": "fund an independent educational evaluation in reading and written expression",
+      "sources": [
+        "R45"
+      ]
+    },
+    {
+      "id": "compensatory-services",
+      "detail": "provide compensatory specialized academic instruction equal to the minutes not delivered between October 6, 2025 and February 27, 2026",
+      "sources": [
+        "R35",
+        "R36"
+      ]
+    },
+    {
+      "id": "prospective-services",
+      "detail": "implement the IEP as written, with quarterly service logs provided to the Parent",
+      "sources": [
+        "R23"
+      ]
+    }
   ],
   "events": [
-    { "id": "E1", "date": "2025-09-08", "what": "The IEP team adopted the annual reading fluency goal of 60 words per minute, carried forward from the March 11, 2024 IEP.", "sources": ["R18", "R22"] },
-    { "id": "E2", "date": "2025-10-06", "what": "The small-group reading block was discontinued when the reading intervention position became vacant.", "sources": ["R36", "R38"] },
-    { "id": "E3", "date": "2025-11-14", "what": "Progress report: 21 words per minute.", "sources": ["R29"] },
-    { "id": "E4", "date": "2025-12-02", "what": "The Parent requested a reevaluation of reading skills in writing.", "sources": ["R44", "R45"] },
-    { "id": "E5", "date": "2025-12-04", "what": "The District wrote that it would prepare an assessment plan within the required timeline.", "sources": ["R46", "R47"] },
-    { "id": "E6", "date": "2026-01-23", "what": "Progress report: 24 words per minute.", "sources": ["R30"] },
-    { "id": "E7", "date": "2026-03-06", "what": "Progress report: 23 words per minute; goal not met.", "sources": ["R31"] },
-    { "id": "E8", "date": "2026-03-12", "what": "The IEP team declined to revise the reading goal; prior written notice issued.", "sources": ["R39", "R40", "R41"] },
-    { "id": "E9", "date": "2026-03-14", "what": "The Parent requested revision of the goal and the assessment plan in writing.", "sources": ["R48", "R49"] },
-    { "id": "E10", "date": "2026-04-02", "what": "The Parent wrote that she had received no response and no assessment plan.", "sources": ["R50", "R51"] }
+    {
+      "id": "E1",
+      "date": "2025-09-08",
+      "what": "The IEP team adopted the annual reading fluency goal of 60 words per minute, carried forward from the March 11, 2024 IEP.",
+      "sources": [
+        "R18",
+        "R22"
+      ]
+    },
+    {
+      "id": "E2",
+      "date": "2025-10-06",
+      "what": "The small-group reading block was discontinued when the reading intervention position became vacant.",
+      "sources": [
+        "R36",
+        "R38"
+      ]
+    },
+    {
+      "id": "E3",
+      "date": "2025-11-14",
+      "what": "the District’s progress report recorded 21 words per minute.",
+      "sources": [
+        "R29"
+      ]
+    },
+    {
+      "id": "E4",
+      "date": "2025-12-02",
+      "what": "The Parent requested a reevaluation of reading skills in writing.",
+      "sources": [
+        "R44",
+        "R45"
+      ]
+    },
+    {
+      "id": "E5",
+      "date": "2025-12-04",
+      "what": "The District wrote that it would prepare an assessment plan within the required timeline.",
+      "sources": [
+        "R46",
+        "R47"
+      ]
+    },
+    {
+      "id": "E6",
+      "date": "2026-01-23",
+      "what": "the District’s progress report recorded 24 words per minute.",
+      "sources": [
+        "R30"
+      ]
+    },
+    {
+      "id": "E7",
+      "date": "2026-03-06",
+      "what": "the District’s progress report recorded 23 words per minute and stated that the goal was not met.",
+      "sources": [
+        "R31"
+      ]
+    },
+    {
+      "id": "E8",
+      "date": "2026-03-12",
+      "what": "the IEP team declined to revise the reading goal, and the District issued a prior written notice.",
+      "sources": [
+        "R39",
+        "R40",
+        "R41"
+      ]
+    },
+    {
+      "id": "E9",
+      "date": "2026-03-14",
+      "what": "The Parent requested revision of the goal and the assessment plan in writing.",
+      "sources": [
+        "R48",
+        "R49"
+      ]
+    },
+    {
+      "id": "E10",
+      "date": "2026-04-02",
+      "what": "The Parent wrote that she had received no response and no assessment plan.",
+      "sources": [
+        "R50",
+        "R51"
+      ]
+    }
   ],
   "additionalContents": []
 }

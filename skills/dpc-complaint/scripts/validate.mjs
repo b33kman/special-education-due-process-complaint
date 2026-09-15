@@ -176,8 +176,14 @@ for (const e of events) {
     add('warning', 'outside-limitations', `event ${e.id} (${e.date}) is more than ${months} months before the filing date ${filingDate}; the window is ${months} months (${rule}). Exceptions exist; whether one applies is ${signer === 'counsel' ? 'counsel’s' : 'the signer’s'} judgment.`)
   }
 }
+// The chronology prints as the statement of facts, so an event with no source
+// is a sentence on the pleading that nothing supports.
 for (const e of c.events ?? []) {
-  if (!e.sources?.length) add('warning', 'event-unsourced', `event ${e.id} names no source`)
+  if (!e.sources?.length) add('blocking', 'unsourced', `event ${e.id} ("${String(e.what ?? '').slice(0, 60)}") names no source`)
+  else for (const t of e.sources) {
+    if (/^R\d+$/.test(t) && !usable.has(t)) add('blocking', 'unconfirmed', `event ${e.id} cites ${t}, which is not a confirmed reading`)
+  }
+  if (!isoDate(e.date)) add('warning', 'event-undated', `event ${e.id} has no date the chronology can order ("${e.date}")`)
 }
 
 // ─── Anything the state requires beyond the federal six: sourced, and true to its sources ──

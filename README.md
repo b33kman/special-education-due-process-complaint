@@ -10,7 +10,7 @@ For a case folder holding the documents, the skill produces:
 
 | File | What it is |
 |---|---|
-| `complaint.md` / `complaint.html` | The complaint, in the form of a filed pleading: the forum's name over a bracketed caption, consecutively numbered paragraphs — introduction, contact and residence information, the statement of the problems (one lettered section per claim, regulations under the headings), proposed resolution — then the signature block and the certificate of service. Times 12, one-inch margins, page numbers. The `.html` prints to a letter-size PDF from any browser. |
+| `complaint.md` / `complaint.html` | The complaint, in the form of a filed pleading: the forum's name over a bracketed caption, then consecutively numbered paragraphs — introduction, contact and residence information (name, date of birth, address, school), the statement of facts (the confirmed chronology, oldest first), the statement of the problems (one lettered section per claim, regulations under the headings), the proposed resolution, any state-required items — then the signature block and the certificate of service. Times 12, one-inch margins, page numbers. The `.html` prints to a letter-size PDF from any browser. |
 | `sources.md` | Every paragraph of the complaint with what it rests on: the document, page and verbatim words for each reading; the person's own statements; the web page, quotation and access date for each fact about the state's procedure. |
 | `verification-report.md` | What was checked and what passed: readings verified on their page, confirmations, the draft gate's rounds, the validator's findings, a *How to file* section for the state (where the original goes, the copy, the channels, the form, the window), and a status line — **FINAL** or **DRAFT — NOT FOR FILING**. |
 
@@ -86,6 +86,7 @@ Two worked examples ship, each a complete run on invented documents — the PDFs
 - It will not fill a gap in the record. If no document and no statement of yours supports a fact, the complaint says less.
 - It will not take a filing address, a limitations period or a forum from memory. Each is verified on the web during the run, and if it cannot be, the complaint stays a DRAFT and the report says which item.
 - It does not read scans well. A page with no text layer must be read by eye, and readings from it are marked unverifiable in the report.
+- It signs for two kinds of filer: an attorney, or the parent pro se. A lay advocate who helps a parent is not a signer and is not named on the pleading.
 
 ## Confidentiality
 

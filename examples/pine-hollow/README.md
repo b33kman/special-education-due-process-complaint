@@ -8,7 +8,7 @@ npm install --no-save --no-package-lock pdf-lib && node make-documents.mjs
 
 The case: a seventh-grader whose IEP requires 60 minutes a week of individual speech-language therapy; from late September the district delivered 30 minutes a week in a group of three and never amended the IEP; the parent asked in writing for an independent evaluation, the district refused it in a prior written notice and did not file for a hearing. An attorney files in North Carolina, where the window is **one year** and the forum is the Office of Administrative Hearings.
 
-This example is the with-skill run from the skill's own evaluation (`skills/dpc-complaint/evals/`), rebuilt with the current scripts: a fresh model instance was handed the skill and this prompt and produced everything in `work/` without a person in the loop — the prompt supplied every answer, including the authority to confirm every reading that verified. It is kept exactly as that run wrote it, apart from the three short readings that now carry a `context` (the verifier began requiring one after this run) and the source label `typed`.
+This example is the with-skill run from the skill's own evaluation (`skills/dpc-complaint/evals/`), rebuilt with the current scripts: a fresh model instance was handed the skill and this prompt and produced everything in `work/` without a person in the loop — the prompt supplied every answer, including the authority to confirm every reading that verified. It is kept as that run wrote it, apart from four later changes to the skill: three short readings now carry a `context` (the verifier began requiring one after this run), the source label is `typed`, the chronology entries were rewritten as sentences so they print as the Statement of Facts, and the explanation of the blank county item moved from the pleading to its `note`.
 
 ## What is in the folder
 
@@ -20,14 +20,14 @@ This example is the with-skill run from the skill's own evaluation (`skills/dpc-
 | `work/readings.verified.json` | `verify-readings.mjs` | 112 of 112 verified on their page. |
 | `work/confirmed.json` | counsel, via `confirm.mjs --all-verified --by "Renée Castillo"` | The confirmation record. |
 | `work/state.json` | the model, from the web | North Carolina's procedure from nine official sources — OAH's petition form H-06E and its page, N.C. Gen. Stat. §§ 115C-109.6 and 115C-107.2 at ncleg.gov, DPI's dispute-resolution page and its July 2026 procedural-safeguards handbook, OAH's filing, FAQ and contact pages — each with URL, access date and quotation. Window: **12 months** (§ 115C-109.6(b)). Original to OAH at 1711 New Hope Church Road, Raleigh; a copy to the superintendent and a copy to DPI. No form is required; H-06E is offered. |
-| `work/case.json` | counsel's answers and the confirmed readings | Caption facts (each citing a reading), the represented signature block, the four statements of fact, two claims, three relief items, the chronology, and three North Carolina items for section V: the county of residence (left blank — no document states it), the date of birth, and the form's category of dispute. |
+| `work/case.json` | counsel's answers and the confirmed readings | Caption facts (each citing a reading), the represented signature block, the four statements of fact, two claims, three relief items, the chronology, and three North Carolina items for section VI: the county of residence (left blank — no document states it), the date of birth, and the form's category of dispute. |
 | `work/statement.annotated.md` | the model | The statement of the problems, 532 words, every sentence tagged; `check-draft.mjs` passed it with 0 errors. One sentence rests on counsel's statement alone — "The District did not file for a hearing." — and the report says so. |
 | `complaint.md`, `complaint.html`, `sources.md`, `verification-report.md` | the gates | The deliverables. Status **FINAL**, with three warnings. |
 
 ## The three warnings, and why they are right
 
 - **`outside-limitations`** — the district's evaluation of May 6, 2025 is more than 12 months before the June 1, 2026 filing date. The validator says so, names North Carolina's rule and its sources, and decides nothing: whether an exception reaches it is counsel's judgment. A skill that assumed the federal two years would have said nothing.
-- **`blank-item`** — the county of residence prints as a blank line under section V because no document states it. The reason is in the item's `note`, which the warning and the report carry; the pleading shows only the blank, and counsel fills it in.
+- **`blank-item`** — the county of residence prints as a blank line under section VI because no document states it. The reason is in the item's `note`, which the warning and the report carry; the pleading shows only the blank, and counsel fills it in.
 - **`filing-date-past`** — the example is dated June 1, 2026 and the gates were last run after that. On a live file the date is set to the real filing date.
 
 ## How it was run
@@ -48,5 +48,5 @@ node $S/run-gates.mjs examples/pine-hollow          # FINAL, 3 warnings
 
 - The certificate of service names the superintendent **and** the North Carolina Department of Public Instruction with its mailing address, because `state.json` → `serviceRecipients` says the state requires a copy to DPI, with the statute quoted.
 - The introduction says the parent "is represented by Renée Castillo of Castillo Education Law PLLC"; the signature block carries the firm and "Bar No. 61042 (North Carolina)"; "self-represented" appears nowhere.
-- Section III states the log's figures — 22 weeks, 4 at 60 minutes, 15 at 30, 3 with none, 690 delivered, 1,320 required — and never the subtraction between them.
+- Section IV states the log’s figures — 22 weeks, 4 at 60 minutes, 15 at 30, 3 with none, 690 delivered, 1,320 required — and never the subtraction between them.
 - The North Carolina form's caption conventions ("COUNTY OF ___", a Board of Education as respondent) are recorded in `state.json` → `notes` for counsel to consider; the skill does not put a state's form conventions into the caption on its own. If counsel wants the Board of Education named, `case.json` → `student.respondent` prints it.

@@ -3,7 +3,7 @@
 Everything here is invented. The student, the parent, the district, the school, the staff, the address and every date and figure were written for this example by `make-documents.mjs`, and the five PDFs in `documents/` are regenerated from that file:
 
 ```bash
-npm install --no-save pdf-lib && node make-documents.mjs
+npm install --no-save --no-package-lock pdf-lib && node make-documents.mjs
 ```
 
 The case: a third-grader with an IEP whose reading goal was carried forward unchanged from the prior year, whose small-group reading instruction stopped in October when a position went vacant, and whose parent asked for a reevaluation in December and never received an assessment plan. The parent files in California, self-represented.
@@ -51,7 +51,7 @@ It rewrites the four deliverables from `work/` and appends a line to `work/gates
 
 ## Things worth noticing in the output
 
-- The caption reads *BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS, STATE OF CALIFORNIA*, not *BEFORE THE CALIFORNIA DEPARTMENT OF EDUCATION*, because `state.json` says who hears these cases and cites OAH and CDE for it.
+- The caption reads *BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS / STATE OF CALIFORNIA*, not *BEFORE THE CALIFORNIA DEPARTMENT OF EDUCATION*, because `state.json` says who hears these cases and cites OAH and CDE for it.
 - The certificate of service names the Office of Administrative Hearings and the Superintendent of the District, from `state.json` → `serviceRecipients`.
-- Section III states figures the documents state — 4 of 24 weeks, an average of 95 minutes, 20 weeks below 240 — and never the arithmetic between them. `tests/gates.test.mjs` shows what happens when a sentence adds "a shortfall of 145 minutes per week": the gate refuses it.
+- Section IV states figures the documents state — 4 of 24 weeks, an average of 95 minutes, 20 weeks below 240 — and never the arithmetic between them. `tests/gates.test.mjs` shows what happens when a sentence adds "a shortfall of 145 minutes per week": the gate refuses it.
 - The introduction gives the student's age and eligibility date from readings; the Parent's statements (`case.json` → `facts`) are not quoted in the complaint, they informed the claims and relief the parent chose.

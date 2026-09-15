@@ -170,7 +170,14 @@ const impacts = claims
   .map((cl, i) => ({ letter: `${String.fromCharCode(65 + i)} (impact)`, text: String(cl.impact ?? '').trim() }))
   .filter((x) => x.text)
   .map((x) => ({ letter: x.letter, paragraphs: [splitSentences(x.text)] }))
-for (const s of [...sections, ...impacts]) {
+/* The chronology (case.json → events) prints as the statement of facts, one
+   numbered paragraph per event, so each event's sentence is held to the
+   same rules: its dates, figures and quotations in the sources it names. */
+const chronology = (caseFile.events ?? [])
+  .map((e) => ({ letter: `Facts (${e.id})`, text: `${String(e.what ?? '').trim()} ${(e.sources ?? []).map((t) => `[${t}]`).join('')}`.trim() }))
+  .filter((x) => x.text)
+  .map((x) => ({ letter: x.letter, paragraphs: [splitSentences(x.text)] }))
+for (const s of [...sections, ...impacts, ...chronology]) {
   for (const paragraph of s.paragraphs) {
     for (const sentence of paragraph) {
       const where = `${s.letter ?? '?'}: “${sentence.text.slice(0, 90)}${sentence.text.length > 90 ? '…' : ''}”`
@@ -224,13 +231,17 @@ for (const s of [...sections, ...impacts]) {
 }
 
 // ─── Repetition ───────────────────────────────────────────────────────
+// Within the statement only. The chronology states each event once by its
+// date, and an issue's section restating a dated fact from it is the form
+// of a pleading, not padding.
 const OVERLAP = 0.7
-for (let i = 0; i < allSentences.length; i++) {
-  const a = allSentences[i]
+const statementSentences = allSentences.filter((s) => !s.where.startsWith('Facts ('))
+for (let i = 0; i < statementSentences.length; i++) {
+  const a = statementSentences[i]
   const wa = wordSet(a.text)
   if (wa.size < 6) continue
   for (let j = 0; j < i; j++) {
-    const b = allSentences[j]
+    const b = statementSentences[j]
     const wb = wordSet(b.text)
     if (wb.size < 6 || containment(wa, wb) < OVERLAP) continue
     const newFigure = numbersIn(a.text).some((n) => !numberAppearsIn(n, b.text)) || draftDates(a.text).some((d) => !b.text.includes(d.text))

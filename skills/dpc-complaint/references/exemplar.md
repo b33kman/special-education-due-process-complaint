@@ -2,7 +2,7 @@
 
 This is the standard the skill writes to. Read it before drafting and match its register exactly: **third person** ("Student", "the Parent", "the District"), **nearly every sentence carrying a date, a number, a document, or a specific act**, no legal conclusions in the facts, regulations under the headings only, and **short** — the whole complaint is about 600 words, the statement of the problems under 200. Density is the standard, not length.
 
-The people, district and facts below are invented. Use nothing from it but its shape and voice.
+The people, district and facts below are invented. Use nothing from it but its voice. The printed form — numbered paragraphs, a Statement of Facts built from the chronology before the Statement of the Problems, the closing and the certificate — is the assembler's and is described in `format.md`; the two worked examples in `examples/` show it.
 
 ---
 

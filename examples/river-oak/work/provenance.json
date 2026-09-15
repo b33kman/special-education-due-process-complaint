@@ -1,5 +1,5 @@
 {
-  "assembledOn": "2026-09-14",
+  "assembledOn": "2026-09-15",
   "filingDate": "2026-04-17",
   "provenance": [
     {
@@ -140,8 +140,9 @@
       "section": "parties",
       "index": 1,
       "cls": null,
-      "text": "Student resides with the Parent at 1418 Alder Street, Willow Creek, CA 95833, and is enrolled at Willow Creek Elementary School. The Parent may be reached at dana.r@example.com and (555) 010-4471.",
+      "text": "Student was born on November 3, 2017, resides with the Parent at 1418 Alder Street, Willow Creek, CA 95833, and is enrolled at Willow Creek Elementary School. The Parent may be reached at dana.r@example.com and (555) 010-4471.",
       "tags": [
+        "R3",
         "R6",
         "R7",
         "R8",
@@ -149,6 +150,104 @@
         "R14",
         "R13",
         "R12"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 0,
+      "cls": null,
+      "text": "On September 8, 2025, the IEP team adopted the annual reading fluency goal of 60 words per minute, carried forward from the March 11, 2024 IEP.",
+      "tags": [
+        "R18",
+        "R22"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 1,
+      "cls": null,
+      "text": "On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.",
+      "tags": [
+        "R36",
+        "R38"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 2,
+      "cls": null,
+      "text": "On November 14, 2025, the District’s progress report recorded 21 words per minute.",
+      "tags": [
+        "R29"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 3,
+      "cls": null,
+      "text": "On December 2, 2025, the Parent requested a reevaluation of reading skills in writing.",
+      "tags": [
+        "R44",
+        "R45"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 4,
+      "cls": null,
+      "text": "On December 4, 2025, the District wrote that it would prepare an assessment plan within the required timeline.",
+      "tags": [
+        "R46",
+        "R47"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 5,
+      "cls": null,
+      "text": "On January 23, 2026, the District’s progress report recorded 24 words per minute.",
+      "tags": [
+        "R30"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 6,
+      "cls": null,
+      "text": "On March 6, 2026, the District’s progress report recorded 23 words per minute and stated that the goal was not met.",
+      "tags": [
+        "R31"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 7,
+      "cls": null,
+      "text": "On March 12, 2026, the IEP team declined to revise the reading goal, and the District issued a prior written notice.",
+      "tags": [
+        "R39",
+        "R40",
+        "R41"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 8,
+      "cls": null,
+      "text": "On March 14, 2026, the Parent requested revision of the goal and the assessment plan in writing.",
+      "tags": [
+        "R48",
+        "R49"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 9,
+      "cls": null,
+      "text": "On April 2, 2026, the Parent wrote that she had received no response and no assessment plan.",
+      "tags": [
+        "R50",
+        "R51"
       ]
     },
     {
@@ -290,7 +389,7 @@
       "section": "statement",
       "index": 14,
       "cls": "cite",
-      "text": "34 C.F.R. §§ 300.111, 300.301–300.311, 300.502.",
+      "text": "34 C.F.R. §§ 300.301–300.311, 300.502.",
       "tags": []
     },
     {

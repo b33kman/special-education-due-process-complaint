@@ -1,5 +1,5 @@
 {
-  "assembledOn": "2026-09-14",
+  "assembledOn": "2026-09-15",
   "filingDate": "2026-06-01",
   "provenance": [
     {
@@ -140,8 +140,9 @@
       "section": "parties",
       "index": 1,
       "cls": null,
-      "text": "Student resides with the Parent at 72 Laurel Court, Pine Hollow, NC 27999, and is enrolled at Cedar Ridge Middle School. The Parent may be reached at grace.okafor@example.com and (555) 010-2088.",
+      "text": "Student was born on April 19, 2013, resides with the Parent at 72 Laurel Court, Pine Hollow, NC 27999, and is enrolled at Cedar Ridge Middle School. The Parent may be reached at grace.okafor@example.com and (555) 010-2088.",
       "tags": [
+        "R3",
         "R6",
         "R7",
         "R8",
@@ -149,6 +150,136 @@
         "R14",
         "R13",
         "R12"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 0,
+      "cls": null,
+      "text": "On May 6, 2025, the District’s speech-language pathologist administered the CELF-5 to Student; the evaluation is dated May 6, 2025.",
+      "tags": [
+        "R86",
+        "R20"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 1,
+      "cls": null,
+      "text": "On August 21, 2025, the IEP team met for Student’s annual review; the IEP provides speech-language therapy at 60 minutes per week, individual, from August 21, 2025 to August 20, 2026; the team declined the Parent’s request to reevaluate written expression; and the Parent signed, writing that she still wanted written expression tested.",
+      "tags": [
+        "R18",
+        "R27",
+        "R32",
+        "R34"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 2,
+      "cls": null,
+      "text": "On September 22, 2025, individual speech-language sessions ended when the provider’s caseload was reassigned; the log records 30 minutes in a group of 3 for that week.",
+      "tags": [
+        "R46",
+        "R69"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 3,
+      "cls": null,
+      "text": "On October 27, 2025, the log records no speech-language service for the week (provider absent; no make-up scheduled).",
+      "tags": [
+        "R51"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 4,
+      "cls": null,
+      "text": "On November 10, 2025, the Parent requested in writing an independent educational evaluation in speech-language and written expression at public expense, stating disagreement with the evaluation of May 6, 2025.",
+      "tags": [
+        "R92",
+        "R95",
+        "R96",
+        "R82"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 5,
+      "cls": null,
+      "text": "On November 24, 2025, the log records no speech-language service for the week (holiday week).",
+      "tags": [
+        "R55"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 6,
+      "cls": null,
+      "text": "On December 4, 2025, the District issued a prior written notice declining to fund an independent educational evaluation, stating that it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window.",
+      "tags": [
+        "R81",
+        "R83",
+        "R84"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 7,
+      "cls": null,
+      "text": "On January 14, 2026, the Parent wrote to the District that Student reported her speech sessions were with two other students and half as long, and asked for the service log and when individual sessions would resume.",
+      "tags": [
+        "R98",
+        "R101",
+        "R102"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 8,
+      "cls": null,
+      "text": "On January 19, 2026, the log records no speech-language service for the week (provider absent; no make-up scheduled).",
+      "tags": [
+        "R61"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 9,
+      "cls": null,
+      "text": "On January 21, 2026, the District sent the speech-language service log and wrote that the provider's caseload was reassigned in September and individual sessions have not been available since; it expects to post a second SLP position this spring.",
+      "tags": [
+        "R103",
+        "R106"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 10,
+      "cls": null,
+      "text": "On January 30, 2026, the service log period ended; its summary states 22 weeks, 4 at 60 minutes individual, 15 at 30 minutes group, 3 with no service, and 690 total minutes delivered against 1,320 required by the IEP for 22 weeks.",
+      "tags": [
+        "R41",
+        "R63",
+        "R64",
+        "R65",
+        "R66",
+        "R67",
+        "R68"
+      ]
+    },
+    {
+      "section": "facts",
+      "index": 11,
+      "cls": null,
+      "text": "On February 9, 2026, the Parent wrote that the log shows 690 minutes delivered against 1,320 required, asked the District to make up the missed minutes and restore individual sessions now, and noted no response about the independent evaluation beyond the December 4 notice.",
+      "tags": [
+        "R107",
+        "R110",
+        "R111",
+        "R112"
       ]
     },
     {
@@ -236,7 +367,7 @@
       "section": "statement",
       "index": 7,
       "cls": "cite",
-      "text": "34 C.F.R. §§ 300.111, 300.301–300.311, 300.502.",
+      "text": "34 C.F.R. §§ 300.301–300.311, 300.502.",
       "tags": []
     },
     {

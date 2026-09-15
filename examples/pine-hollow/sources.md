@@ -1,6 +1,6 @@
 # Sources — Maya Okafor v. Pine Hollow County Schools
 
-Prepared 2026-09-14. Every fact on the complaint is listed here with what it rests on. A reading is the document’s own words at the page given; a fact marked “counsel’s own statement” was typed by counsel and is not in any document; a state source is a web page opened on the date shown.
+Prepared 2026-09-15. Every fact on the complaint is listed here with what it rests on. A reading is the document’s own words at the page given; a fact marked “counsel’s own statement” was typed by counsel and is not in any document; a state source is a web page opened on the date shown.
 
 ## Documents
 
@@ -139,17 +139,17 @@ Prepared 2026-09-14. Every fact on the complaint is listed here with what it res
 
 | Id | Date | Event | Sources |
 |---|---|---|---|
-| E1 | 2025-05-06 | The District's speech-language evaluation of Student, dated May 6, 2025 (A. Lucero); the CELF-5 was administered 05/06/2025. | R86, R20 |
-| E2 | 2025-08-21 | Annual review IEP meeting; the IEP provides speech-language therapy at 60 minutes per week, individual, from 08/21/2025 to 08/20/2026; the team declined the parent's request to reevaluate written expression; the parent signed and wrote that she still wanted written expression tested. | R18, R27, R32, R34 |
-| E3 | 2025-09-22 | Week of 09/22/2025: individual speech-language sessions ended when the provider's caseload was reassigned; the log records 30 minutes, group of 3. | R46, R69 |
-| E4 | 2025-10-27 | Week of 10/27/2025: no speech-language service (provider absent; no make-up scheduled). | R51 |
+| E1 | 2025-05-06 | the District’s speech-language pathologist administered the CELF-5 to Student; the evaluation is dated May 6, 2025. | R86, R20 |
+| E2 | 2025-08-21 | the IEP team met for Student’s annual review; the IEP provides speech-language therapy at 60 minutes per week, individual, from August 21, 2025 to August 20, 2026; the team declined the Parent’s request to reevaluate written expression; and the Parent signed, writing that she still wanted written expression tested. | R18, R27, R32, R34 |
+| E3 | 2025-09-22 | individual speech-language sessions ended when the provider’s caseload was reassigned; the log records 30 minutes in a group of 3 for that week. | R46, R69 |
+| E4 | 2025-10-27 | the log records no speech-language service for the week (provider absent; no make-up scheduled). | R51 |
 | E5 | 2025-11-10 | The Parent requested in writing an independent educational evaluation in speech-language and written expression at public expense, stating disagreement with the evaluation of May 6, 2025. | R92, R95, R96, R82 |
-| E6 | 2025-11-24 | Week of 11/24/2025: no speech-language service (holiday week). | R55 |
-| E7 | 2025-12-04 | Prior written notice dated December 4, 2025: the District declined to fund an independent educational evaluation, stating it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window. | R81, R83, R84 |
+| E6 | 2025-11-24 | the log records no speech-language service for the week (holiday week). | R55 |
+| E7 | 2025-12-04 | the District issued a prior written notice declining to fund an independent educational evaluation, stating that it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window. | R81, R83, R84 |
 | E8 | 2026-01-14 | The Parent wrote to the District that Student reported her speech sessions were with two other students and half as long, and asked for the service log and when individual sessions would resume. | R98, R101, R102 |
-| E9 | 2026-01-19 | Week of 01/19/2026: no speech-language service (provider absent; no make-up scheduled). | R61 |
+| E9 | 2026-01-19 | the log records no speech-language service for the week (provider absent; no make-up scheduled). | R61 |
 | E10 | 2026-01-21 | The District sent the speech-language service log and wrote that the provider's caseload was reassigned in September and individual sessions have not been available since; it expects to post a second SLP position this spring. | R103, R106 |
-| E11 | 2026-01-30 | End of the service log period (08/25/2025 through 01/30/2026): 22 weeks; 4 weeks at 60 minutes individual; 15 weeks at 30 minutes group; 3 weeks with no service; 690 total minutes delivered against 1,320 required by the IEP for 22 weeks. | R41, R63, R64, R65, R66, R67, R68 |
+| E11 | 2026-01-30 | the service log period ended; its summary states 22 weeks, 4 at 60 minutes individual, 15 at 30 minutes group, 3 with no service, and 690 total minutes delivered against 1,320 required by the IEP for 22 weeks. | R41, R63, R64, R65, R66, R67, R68 |
 | E12 | 2026-02-09 | The Parent wrote that the log shows 690 minutes delivered against 1,320 required, asked the District to make up the missed minutes and restore individual sessions now, and noted no response about the independent evaluation beyond the December 4 notice. | R107, R110, R111, R112 |
 
 ## State procedure — North Carolina
@@ -216,7 +216,8 @@ Checked on 2026-09-14.
   - claim:failure-to-implement: fixed wording for this claim (references/claims.json)
   - claim:evaluation: fixed wording for this claim (references/claims.json)
 
-**[parties 2]** Student resides with the Parent at 72 Laurel Court, Pine Hollow, NC 27999, and is enrolled at Cedar Ridge Middle School. The Parent may be reached at grace.okafor@example.com and (555) 010-2088.
+**[parties 2]** Student was born on April 19, 2013, resides with the Parent at 72 Laurel Court, Pine Hollow, NC 27999, and is enrolled at Cedar Ridge Middle School. The Parent may be reached at grace.okafor@example.com and (555) 010-2088.
+  - R3: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — child.dob: “04/19/2013”
   - R6: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — child.addressLine1: “72 Laurel Court”
   - R7: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — child.addressCity: “Pine Hollow”
   - R8: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — child.addressState: “NC”
@@ -224,6 +225,64 @@ Checked on 2026-09-14.
   - R14: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — child.school: “Cedar Ridge Middle School”
   - R13: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — parent.email: “grace.okafor@example.com”
   - R12: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — parent.phone: “(555) 010-2088”
+
+**[facts 1]** On May 6, 2025, the District’s speech-language pathologist administered the CELF-5 to Student; the evaluation is dated May 6, 2025.
+  - R86: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — pwn.reasons: “Speech-language evaluation dated May 6, 2025 (A. Lucero); IEP dated August 21, 2025; classroom work samples.”
+  - R20: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — iep.presentLevels: “On the CELF-5 administered 05/06/2025, Maya obtained a Core Language Score of 71 (2nd percentile). Expressive Language Index 68; Receptive Language Index 79.”
+
+**[facts 2]** On August 21, 2025, the IEP team met for Student’s annual review; the IEP provides speech-language therapy at 60 minutes per week, individual, from August 21, 2025 to August 20, 2026; the team declined the Parent’s request to reevaluate written expression; and the Parent signed, writing that she still wanted written expression tested.
+  - R18: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — iep.date: “08/21/2025”
+  - R27: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 1 — iep.services: “Speech-Language Therapy: 60 minutes per week, individual, provided by a licensed speech-language pathologist in the speech room, 08/21/2025 to 08/20/2026.”
+  - R32: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 2 — iep.teamNotes: “The team declined the parent's request to reevaluate written expression, on the basis that the 05/06/2025 evaluation is current and the added instruction addresses the concern.”
+  - R34: 01_IEP_Pine_Hollow_2025-08-21.pdf, p. 2 — iep.teamNotes: “The parent signed the IEP on 08/21/2025 and wrote: "I agree with the services. I still want written expression tested."”
+
+**[facts 3]** On September 22, 2025, individual speech-language sessions ended when the provider’s caseload was reassigned; the log records 30 minutes in a group of 3 for that week.
+  - R46: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Week of 09/22/2025: 30 minutes, group of 3 (provider caseload reassigned; individual slot unavailable).”
+  - R69: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Note: Individual sessions ended the week of 09/22/2025 when the provider's caseload was reassigned. The IEP was not amended.”
+
+**[facts 4]** On October 27, 2025, the log records no speech-language service for the week (provider absent; no make-up scheduled).
+  - R51: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Week of 10/27/2025: 0 (provider absent; no make-up scheduled).”
+
+**[facts 5]** On November 10, 2025, the Parent requested in writing an independent educational evaluation in speech-language and written expression at public expense, stating disagreement with the evaluation of May 6, 2025.
+  - R92: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.date: “November 10, 2025”
+  - R95: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.statement: “I disagree with the district's evaluation of May 6, 2025. It did not test written expression, and Maya's language scores do not match what I see at home.”
+  - R96: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — iee.request: “I am requesting an independent educational evaluation in speech-language and written expression at public expense.”
+  - R82: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — iee.request: “On November 10, 2025 the parent requested, in writing, an independent educational evaluation in the areas of speech-language and written expression at public expense, stating disagreement with the evaluation dated May 6, 2025.”
+
+**[facts 6]** On November 24, 2025, the log records no speech-language service for the week (holiday week).
+  - R55: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Week of 11/24/2025: 0 (holiday week).”
+
+**[facts 7]** On December 4, 2025, the District issued a prior written notice declining to fund an independent educational evaluation, stating that it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window.
+  - R81: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — pwn.date: “December 4, 2025”
+  - R83: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — pwn.action: “The district declines to fund an independent educational evaluation.”
+  - R84: 03_Prior_Written_Notice_2025-12-04.pdf, p. 1 — pwn.reasons: “The district considers the May 6, 2025 evaluation to be appropriate. The district will conduct its own assessment of written expression during the spring 2026 reevaluation window.”
+
+**[facts 8]** On January 14, 2026, the Parent wrote to the District that Student reported her speech sessions were with two other students and half as long, and asked for the service log and when individual sessions would resume.
+  - R98: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.date: “January 14, 2026”
+  - R101: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.statement: “Maya tells me her speech sessions are now with two other students and are half as long. Her IEP says 60 minutes a week, individual.”
+  - R102: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.request: “Please send me the service log and tell me when individual sessions will resume.”
+
+**[facts 9]** On January 19, 2026, the log records no speech-language service for the week (provider absent; no make-up scheduled).
+  - R61: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Week of 01/19/2026: 0 (provider absent; no make-up scheduled).”
+
+**[facts 10]** On January 21, 2026, the District sent the speech-language service log and wrote that the provider's caseload was reassigned in September and individual sessions have not been available since; it expects to post a second SLP position this spring.
+  - R103: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.date: “January 21, 2026”
+  - R106: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.response: “the speech-language service log is attached. Ms. Lucero's caseload was reassigned in September and individual sessions have not been available since. We expect to post a second SLP position this spring.”
+
+**[facts 11]** On January 30, 2026, the service log period ended; its summary states 22 weeks, 4 at 60 minutes individual, 15 at 30 minutes group, 3 with no service, and 690 total minutes delivered against 1,320 required by the IEP for 22 weeks.
+  - R41: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.period: “08/25/2025 through 01/30/2026”
+  - R63: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Weeks in period: 22.”
+  - R64: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Weeks at 60 minutes individual: 4.”
+  - R65: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Weeks at 30 minutes group: 15.”
+  - R66: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.missed: “Weeks with no service: 3.”
+  - R67: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.delivered: “Total minutes delivered: 690.”
+  - R68: 02_Speech_Language_Service_Log_2025-2026.pdf, p. 1 — serviceLog.mandate: “Total minutes required by the IEP for 22 weeks: 1,320.”
+
+**[facts 12]** On February 9, 2026, the Parent wrote that the log shows 690 minutes delivered against 1,320 required, asked the District to make up the missed minutes and restore individual sessions now, and noted no response about the independent evaluation beyond the December 4 notice.
+  - R107: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.date: “February 9, 2026”
+  - R110: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.statement: “the log shows 690 minutes delivered against 1,320 required.”
+  - R111: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.request: “I am asking the district to make up the missed minutes and to restore individual sessions now, not in the spring.”
+  - R112: 04_Correspondence_Nov2025-Feb2026.pdf, p. 1 — correspondence.statement: “I also have not received a response about the independent evaluation beyond the December 4 notice.”
 
 **[statement 1]** A. Failure to implement the services the IEP requires
   - claim:failure-to-implement: fixed wording for this claim (references/claims.json)

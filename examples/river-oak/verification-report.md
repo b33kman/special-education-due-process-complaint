@@ -2,14 +2,14 @@
 
 **Status: FINAL**
 
-Prepared 2026-09-14 for Jordan Rivera, California. Run with claude-fable-5-1 at max effort.
+Prepared 2026-09-15 for Jordan Rivera, California. Run with claude-fable-5-1 at max effort.
 
 ## What was checked
 
 1. **Documents read:** 5, 6 pages; 0 page(s) with no text layer.
 2. **Readings machine-verified on their page:** 51 of 51.
 3. **Confirmed by the Parent:** 51 confirmed, 0 edited, 0 rejected. Only confirmed and edited readings reach the complaint.
-4. **Statement of the problems:** 441 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 13.
+4. **Statement of the problems:** 578 words; every sentence tagged with its sources; every date, figure and quotation checked against the cited sources; pleading rules enforced (third person, no legal conclusions, no citations, no advice, no outcome language, no given names, no repetition). Gate runs: 17.
 
 ```
 2026-09-14T21:56:53.210Z check-draft errors=0 warnings=0 words=441
@@ -25,6 +25,10 @@ Prepared 2026-09-14 for Jordan Rivera, California. Run with claude-fable-5-1 at 
 2026-09-14T23:09:43.201Z check-draft errors=0 warnings=0 words=441
 2026-09-14T23:11:01.488Z check-draft errors=0 warnings=0 words=441
 2026-09-14T23:13:04.434Z check-draft errors=0 warnings=0 words=441
+2026-09-14T23:57:15.712Z check-draft errors=8 warnings=0 words=578
+2026-09-14T23:57:55.565Z check-draft errors=0 warnings=0 words=578
+2026-09-14T23:58:10.160Z check-draft errors=0 warnings=0 words=578
+2026-09-15T00:00:43.001Z check-draft errors=0 warnings=0 words=578
 ```
 
 5. **Validation:** 0 blocking, 1 warning(s).
@@ -32,7 +36,7 @@ Prepared 2026-09-14 for Jordan Rivera, California. Run with claude-fable-5-1 at 
 
 ## Findings
 
-- Warning [filing-date-past] the planned filing date 2026-04-17 is earlier than today (2026-09-14); the limitations check ran from it — set filingDate to the real date before filing
+- Warning [filing-date-past] the planned filing date 2026-04-17 is earlier than today (2026-09-15); the limitations check ran from it — set filingDate to the real date before filing
 
 ## How to file in California
 

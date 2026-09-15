@@ -81,6 +81,10 @@ const filingDate = c.filingDate || today()
 const doc = { sections: [] }
 const section = (id, heading, paragraphs, opts = {}) => doc.sections.push({ id, heading, paragraphs, ...opts })
 const P = (text, tags = [], cls = null) => ({ text, tags, cls })
+// Section numerals run in order over the sections that exist.
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII']
+let numeral = 0
+const numbered = (title) => `${ROMAN[numeral++]}. ${title}`
 
 const stateName = state.name || c.state
 // The caption's second line is "STATE OF …", so the agency line must not
@@ -131,22 +135,42 @@ if (clauses.length) {
   const defined = joined.replace(/individualized education program \(“IEP”\)/g, (m) => (seen ? 'IEP' : ((seen = true), m)))
   fape = `The District has denied Student a free appropriate public education (“FAPE”) by ${defined}.`
 }
-section('introduction', 'I. Introduction', [P(intro, introTags), ...(fape ? [P(fape, chosen.map((cl) => `claim:${cl.id}`))] : [])])
+section('introduction', numbered('Introduction'), [P(intro, introTags), ...(fape ? [P(fape, chosen.map((cl) => `claim:${cl.id}`))] : [])])
 
-// II. Contact and residence
+// II. Contact and residence — the § 300.508(b)(1)–(2) facts, with the date of birth.
 const contact = [v(c.parent?.email), v(c.parent?.phone)].filter(Boolean)
+const dobIso = isoDate(v(c.student?.dob))
+const born = v(c.student?.dob) ? ` was born on ${dobIso && dobIso.length === 10 ? longDate(dobIso) : v(c.student?.dob)},` : ''
 const parties = [
   P(`34 C.F.R. § 300.508(b)(1)–(2).`, [], 'cite'),
   P(
     c.student?.homeless
-      ? `Student does not have a fixed address. Student is enrolled at ${school}. The Parent may be reached at ${v(c.student?.homelessContact)}.`
-      : `Student resides with the Parent at ${addressOneLine}, and is enrolled at ${school}.${contact.length ? ` The Parent may be reached at ${contact.join(' and ')}.` : ''}`,
-    [...addressSources, ...src(c.student?.school), ...src(c.parent?.email), ...src(c.parent?.phone), ...src(c.student?.homelessContact)],
+      ? `Student${born} does not have a fixed address, and is enrolled at ${school}. The Parent may be reached at ${v(c.student?.homelessContact)}.`
+      : `Student${born} resides with the Parent at ${addressOneLine}, and is enrolled at ${school}.${contact.length ? ` The Parent may be reached at ${contact.join(' and ')}.` : ''}`,
+    [...src(c.student?.dob), ...addressSources, ...src(c.student?.school), ...src(c.parent?.email), ...src(c.parent?.phone), ...src(c.student?.homelessContact)],
   ),
 ]
-section('parties', 'II. Contact and residence information', parties)
+section('parties', numbered('Contact and residence information'), parties)
 
-// III. Statement of the problems
+// III. Statement of facts — the confirmed chronology, one numbered paragraph
+// per event, oldest first. Each event's sentence was gated by check-draft
+// against the sources it names, exactly as the statement's sentences are.
+const chronology = (c.events ?? [])
+  .map((e) => ({ ...e, iso: isoDate(e.date) }))
+  .sort((a, b) => String(a.iso ?? a.date).localeCompare(String(b.iso ?? b.date)))
+const eventSentence = (e) => {
+  const what = String(e.what ?? '').trim()
+  if (!what) return ''
+  const lead = e.iso ? (e.iso.length === 7 ? `In ${longDate(e.iso)}, ` : `On ${longDate(e.iso)}, `) : `${e.date}: `
+  if (/^(on|in)\s/i.test(what) || /^\d/.test(what)) return what
+  const body = /^(The|A|An)\s/.test(what) ? what[0].toLowerCase() + what.slice(1) : what
+  return `${lead}${body}${/[.!?]$/.test(body) ? '' : '.'}`
+}
+if (chronology.length) {
+  section('facts', numbered('Statement of facts'), chronology.map((e) => P(eventSentence(e), e.sources ?? [])))
+}
+
+// IV. Statement of the problems
 const draft = readText(join(work, 'statement.annotated.md'))
 const sections = parseAnnotated(draft)
 const statementParagraphs = []
@@ -169,7 +193,7 @@ chosen.forEach((cl, i) => {
     statementParagraphs.push(P(stripTags(cl.impact.trim()), tags))
   }
 })
-section('statement', 'III. Statement of the problems', statementParagraphs)
+section('statement', numbered('Statement of the problems'), statementParagraphs)
 
 // IV. Proposed resolution
 const reliefClauses = []
@@ -191,7 +215,7 @@ const lettered =
     : reliefClauses.length === 1
       ? reliefClauses[0]
       : reliefClauses.map((cl, i, all) => `${i === all.length - 1 ? 'and ' : ''}(${String.fromCharCode(97 + i)}) ${cl}`).join('; ')
-section('resolution', 'IV. Proposed resolution', [
+section('resolution', numbered('Proposed resolution'), [
   P('34 C.F.R. § 300.508(b)(6).', [], 'cite'),
   ...(lettered ? [P(`The Parent proposes the following resolution: ${lettered}.`, reliefTags)] : [P('[No relief has been entered. Enter the proposed resolution before filing.]', [], 'placeholder')]),
 ])
@@ -199,7 +223,7 @@ section('resolution', 'IV. Proposed resolution', [
 // V. Anything the state requires beyond the federal six
 const extra = c.additionalContents ?? []
 if (extra.length) {
-  section('state-additional', `V. Additional information required in ${stateName}`, extra.map((item) => P(`${item.heading ? item.heading + ': ' : ''}${item.text}`, item.sources ?? [])))
+  section('state-additional', numbered(`Additional information required in ${stateName}`), extra.map((item) => P(`${item.heading ? item.heading + ': ' : ''}${item.text}`, item.sources ?? [])))
 }
 
 // Signature block. A pleading closes with "Dated:" at the left margin and
@@ -263,7 +287,7 @@ section('service', 'Certificate of service', [
 // certificate carry no number.
 let n = 0
 for (const s of doc.sections) {
-  if (!['introduction', 'parties', 'statement', 'resolution', 'state-additional'].includes(s.id)) continue
+  if (!['introduction', 'parties', 'facts', 'statement', 'resolution', 'state-additional'].includes(s.id)) continue
   for (const p of s.paragraphs) if (!p.cls) p.n = ++n
 }
 

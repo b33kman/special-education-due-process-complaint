@@ -1,12 +1,12 @@
 {
-  "validatedOn": "2026-09-14",
+  "validatedOn": "2026-09-15",
   "status": "FINAL",
   "stateUnverified": 0,
   "findings": [
     {
       "level": "warning",
       "code": "filing-date-past",
-      "message": "the planned filing date 2026-04-17 is earlier than today (2026-09-14); the limitations check ran from it — set filingDate to the real date before filing"
+      "message": "the planned filing date 2026-04-17 is earlier than today (2026-09-15); the limitations check ran from it — set filingDate to the real date before filing"
     }
   ]
 }

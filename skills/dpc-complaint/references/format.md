@@ -27,16 +27,17 @@ Letter, one-inch margins, Times New Roman 12 point, black on white, a page numbe
 
    The parties' names are in capitals; the rest of each party line is not. The respondent is the district as the documents name it, unless the person chose otherwise (`case.json` → `student.respondent`).
 3. **I. INTRODUCTION** — who Student is, from the caption facts; then the one sentence that names the claims, in the fixed wording of `claims.json`.
-4. **II. CONTACT AND RESIDENCE INFORMATION** — the home address and how to reach the Parent.
-5. **III. STATEMENT OF THE PROBLEMS** — one lettered subsection per claim, its fixed heading in bold, the regulation beneath it in italics, then the facts.
-6. **IV. PROPOSED RESOLUTION** — one paragraph of lettered clauses, in the person's own words.
-7. **V. ADDITIONAL INFORMATION REQUIRED IN [STATE]** — only where the state requires something beyond the federal six, one numbered item each.
-8. The closing: "Dated: ________" at the left margin; on the right half of the page, "Respectfully submitted," a signature line, and the signer's block — name, capacity, bar number and jurisdiction, firm, street, city and ZIP, telephone, email for counsel; name, "Parent of [Student]", "Self-represented (pro se)", address, telephone, email for a parent.
-9. **CERTIFICATE OF SERVICE** — who was served, from the verified state block; the method; "Dated" and a second signature line.
+4. **II. CONTACT AND RESIDENCE INFORMATION** — the date of birth, the home address and how to reach the Parent (or, for a student with no fixed address, the contact information and the school).
+5. **III. STATEMENT OF FACTS** — the confirmed chronology, one numbered paragraph per event, oldest first, each beginning "On <date>," and each gated against the sources it names. This is the timeline of what happened; the records it rests on are named in the sentences.
+6. **IV. STATEMENT OF THE PROBLEMS** — one lettered subsection per claim, its fixed heading in bold, the regulation beneath it in italics, then the facts relating to that problem and what it cost the student.
+7. **V. PROPOSED RESOLUTION** — one paragraph of lettered clauses, in the person's own words.
+8. **VI. ADDITIONAL INFORMATION REQUIRED IN [STATE]** — only where the state requires something beyond the federal six, one numbered item each. (Where a section is absent the numerals close up.)
+9. The closing: "Dated: ________" at the left margin; on the right half of the page, "Respectfully submitted," a signature line, and the signer's block — name, capacity, bar number and jurisdiction, firm, street, city and ZIP, telephone, email for counsel; name, "Parent of [Student]", "Self-represented (pro se)", address, telephone, email for a parent. A lay advocate is not a signer: the parent signs, and the advocate's help is not stated on the pleading.
+10. **CERTIFICATE OF SERVICE** — who was served, from the verified state block (the district's superintendent and the state agency, as the state names them); the method; "Dated" and a second signature line.
 
 ## Paragraphs and headings
 
-- Every paragraph from the introduction through section V is numbered consecutively, the number at the margin, the text half an inch in, wrapped lines back at the margin. Double-spaced. Left-aligned (justified text with a long email address in it leaves rivers).
+- Every paragraph from the introduction through the last numbered section is numbered consecutively, the number at the margin, the text half an inch in, wrapped lines back at the margin. Double-spaced. Left-aligned (justified text with a long email address in it leaves rivers).
 - Section headings are centred, bold, capitals; subsection headings bold, left. The regulation under a heading is the only citation in the document outside the caption.
 - The caption, headings, signature block and certificate are single-spaced.
 - No footnotes, no exhibits list, no table of contents, no "WHEREFORE" clause. A due process complaint notice is short; the exemplar is under 600 words and the examples are about 900.
