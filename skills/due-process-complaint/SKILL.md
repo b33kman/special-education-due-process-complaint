@@ -9,7 +9,7 @@ You draft a complete due process complaint under 34 C.F.R. § 300.508 from the d
 
 Three rules hold throughout:
 
-1. **Nothing goes on the complaint that is not in the documents or in the person's own words.** Every name, date, figure and quotation comes from a page or from what they told you. Where the record is silent, the complaint says less.
+1. **Nothing goes on the complaint that is not in the documents or in the person's own words.** Every name, date, figure and quotation comes from a page or from what they told you. Where the record is silent, the complaint says less. The one exception is where it is sent: the offices on the certificate of service, and their addresses, come from the official pages recorded in `filing-instructions.md`.
 2. **Nothing is handed over until it has been checked for errors and corrected.**
 3. **The person decides.** At each question below, stop and wait for their answer, even where you could carry on by yourself; never assume an answer to keep going. The complaint is marked final only after they have confirmed the facts and chosen the claims and relief.
 
@@ -56,13 +56,15 @@ Then ask them to choose the claims, and then the relief, each as one checkbox qu
 
 Anything they tell you in their own words — what the district did, how they learned of it, what it has meant for the student, what they want — goes into `<case>/statement.md`, as they said it. That file counts as a source.
 
-## 4. Confirm the state's filing rules
+## 4. Confirm the state's filing rules and the district's office
 
-This step needs only the state, so don't wait for steps 2 and 3: where subagents are available, give this step and the state's row to a subagent as soon as you know the state, and read the documents and confirm the facts while it works. Otherwise do it here.
+The state's part needs only the state, so don't wait for steps 2 and 3: where subagents are available, give this step and the state's row to a subagent as soon as you know the state, and read the documents and confirm the facts while it works. Otherwise do it here. The district's part needs the district, from the documents or the person; do it once you know it.
 
 Start from the state's row in `references/state-rules.json`: the filing office, its address, email, fax and portal, the time limit, whether the district is served, and a note on how filing works there. Then open the row's `filingUrl`, the state's official filing page, and confirm the address, the email or fax, and the time limit from the page's own text (a web tool's summary can paraphrase or invent). Where the page or the note mentions a state form, open it (for a PDF, download it into a scratch folder's `documents/`, never the case's, and read it with `pdf-text.mjs`) and note anything it asks for beyond § 300.508(b). Copy every address and number as the official page writes it; where the page and the row differ, the page wins. If the page won't load, use the row and tell the person which details could not be confirmed today.
 
-Write it up as `<case>/filing-instructions.md`, each point with the official page it came from, or marked as from the bundled table where it could not be confirmed.
+**The school district.** Most people filing don't know which office of the district to send it to, or where, so find out for them. Federal law has the complaint go to the district (34 C.F.R. § 300.508(a)), but states differ on whether it goes there first, at the same time as the state, or as a copy, and to which office; the row's note and the state's page say which. Find that office, its address, telephone and email on the district's own official website — a page on due process requests, special education, or the superintendent's office — and check them against the letterhead on the district's documents in the folder. Where they differ, the website wins; tell the person. Name the office the state names (often the superintendent or the special education director); where the state names none, the office the district names for due process requests; otherwise the superintendent's office. Give a person's name only where the district's own page does. A charter school that is its own district is served itself. Where the district is also the office the complaint is filed with, as in New York City, say so. Search for the district, never the student. If the address can't be confirmed, ask the person, and say it could not be confirmed.
+
+Write it up as `<case>/filing-instructions.md`, each point with the official page it came from, or marked as from the bundled table where it could not be confirmed. Give the district its own section, headed `## The school district`: the office, its address, telephone and email, whether the complaint goes there first, at the same time as the state, or as a copy, and the page that gives them. The certificate of service names only the offices and addresses this file gives, and `check.mjs` holds it to that.
 
 ## 5. Draft `complaint.md`
 
@@ -74,12 +76,13 @@ Follow `references/exemplar.md` — it is both the voice and the file format (fr
 - Dates in full ("October 14, 2025") and figures exactly as the documents give them. Where the District's own words are the evidence — a refusal, an admission, an instruction, a description of what happened, in an email, a prior written notice, a service log or a teacher's note — quote them, short and word for word, and name the document they are in: a fact the District wrote itself is stronger quoted than paraphrased. No arithmetic ("a shortfall of 28 sessions", "less than half"): state the figures and let the reader compare.
 - Facts only. No legal conclusions ("violated", "denied FAPE") inside the facts, no characterisation, and no citations except under the headings — the one exception is an attorney's reservation of fees, which cites its statute in the proposed resolution.
 - The proposed resolution: a remedy that rests on a figure in the documents names that figure and the document that gives it — the weeks the service log records with no instruction, the minutes a week the IEP requires, the sessions a report records as owed. A period the person is asking for ("within 30 days") is theirs to choose and needs no document. Never send the reader to a paragraph number for a remedy.
-- The required elements: the child's name; the address of residence (or contact information for a homeless child); the school; the problem and its facts; the proposed resolution — and anything the state requires. When the state's form asks for something the documents don't give (the district's address, the student's main language, whether they want mediation, whether they need an interpreter or accommodations at the hearing), ask the person and put their answer in `statement.md`; if they don't know, leave a blank line and tell them.
+- The required elements: the child's name; the address of residence (or contact information for a homeless child); the school; the problem and its facts; the proposed resolution — and anything the state requires. When the state's form asks for something the documents don't give (the student's main language, whether they want mediation, whether they need an interpreter or accommodations at the hearing), ask the person and put their answer in `statement.md`; if they don't know, leave a blank line and tell them.
+- The certificate of service lists, under `Served on:`, each office the complaint goes to — one line each, the office then its address, separated by commas, exactly as `filing-instructions.md` gives them — with the district's office always among them. The method and the date stay blank for the person to fill in when they send it.
 - Leave `status: draft` in the front matter.
 
 ## 6. Check, then review
 
-Run `check.mjs <case>`. It refuses any date, figure or quotation that is not in the documents or `statement.md`, and a complaint missing a required element. Fix each finding from the sources and run it again until it passes. It also lists what rests on the person's statement alone; tell them.
+Run `check.mjs <case>`. It refuses any date, figure or quotation that is not in the documents or `statement.md`, a complaint missing a required element, and a certificate of service that doesn't name the district's office as `filing-instructions.md` gives it. Fix each finding from the sources and run it again until it passes. It also lists what rests on the person's statement alone; tell them.
 
 Then review the draft for everything a script cannot catch, using `references/review.md`. Where subagents are available, give the review to a fresh subagent with the case folder and that file — it reads what is on the page, not what you meant; otherwise do it yourself as a separate pass, reading from the files, not from memory of drafting. Fix every error it finds at its source and run `check.mjs` again. A finding that is a judgment for the person signing — keeping a paragraph that concedes something, filing about an event older than the time limit — goes to them to decide.
 
@@ -89,11 +92,11 @@ Once the person has confirmed the facts and chosen the claims and relief (rule 3
 
 Then ask whether they want a short cover letter to send with the complaint — one yes/no question, and wait for the answer (rule 3). Ask it here, before the files are handed over: once the handover is announced the work reads as finished, and a question after it gets dropped. Ask whatever the filing route; even where the state takes the complaint through a portal, the district is served separately and a letter goes with that copy.
 
-If they want one, write it as a one-page Word file from the caption and `filing-instructions.md`, with nothing in it the complaint doesn't say. Who signs it decides how it reads:
+If they want one, write it as a one-page Word file from the caption and `filing-instructions.md`, with nothing in it the complaint doesn't say, addressed to the office the complaint is filed with and copied to the district's office where that is a different one. Who signs it decides how it reads:
 
 - **A parent, guardian or student filing on their own**: plain words in the first person — who they are, that the enclosed due process complaint concerns the student, the date, how to reach them, and a request that the office confirm it arrived. No terms of art.
 - **An attorney**: a transmittal letter addressed to the office named in `filing-instructions.md`, giving the caption, what is enclosed and on whose behalf, who else was served and by what method, and a request for acknowledgment; the signature block as on the complaint.
 
 ## 8. Hand over
 
-Give the person `complaint.pdf`, `complaint.docx`, `filing-instructions.md` and the cover letter if they asked for one, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md`. Say that they chose the claims and that you say nothing about how the complaint will fare.
+Give the person `complaint.pdf`, `complaint.docx`, `filing-instructions.md` and the cover letter if they asked for one, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md` — including which office of the district gets it, where, and whether before, with or after the state. Say that they chose the claims and that you say nothing about how the complaint will fare.

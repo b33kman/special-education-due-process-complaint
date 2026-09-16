@@ -8,6 +8,12 @@ The request is filed with the Office of Administrative Hearings, Special Educati
 
 Source: <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Services/Page-Content/Special-Education-Services-List-Folder/Request-Special-Education-Due-Process-Hearing>, <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Resources/Page-Content/Special-Education-Resources-List-Folder/Notice-of-Procedural-Safeguards>, <https://california.public.law/codes/education_code_section_56502>, <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Self-Help/Filing-and-Serving-Documents>
 
+## The school district
+
+The complaint is served on the Superintendent, River Oak Unified School District, 500 Oak Valley Road, Willow Creek, CA 95833, telephone (555) 010-3000 — before it is filed with the Office of Administrative Hearings, as above. California's rules name no particular office within the district, so it goes to the superintendent's office.
+
+Source: This example's district is invented, so its office has no website. In a real case the office and address come from the district's own official website, checked against the letterhead on the district's documents.
+
 ## Filing address
 
 Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833
@@ -28,7 +34,7 @@ Source: <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Self-Help/Filin
 
 ## Who is served
 
-the River Oak Unified School District; the Office of Administrative Hearings
+the Superintendent, River Oak Unified School District (address under “The school district”); the Special Education Division, Office of Administrative Hearings (address under “Filing address”)
 
 Source: <https://www.dgs.ca.gov/-/media/Divisions/OAH/Special-Education/Forms---Special-Education/Students-ReqHO/StudentsReqforDPHOnly92024AccRE.pdf>, <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Self-Help/Filing-and-Serving-Documents>
 

@@ -113,11 +113,15 @@ rcastillo@example.com
 
 ## Certificate of service
 
-Counsel for Petitioner and the Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Superintendent of the Pine Hollow County Board of Education; and the North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, by the method indicated below.
+Counsel for Petitioner and the Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on each office named below, by the method indicated below.
 
 Method of service:   [  ] U.S. mail   [  ] Hand delivery   [  ] Other: ____________________
 
-Name and address of each person served: ________________________________________________
+Served on:
+
+Superintendent, Pine Hollow County Board of Education, 200 County Line Road, Pine Hollow, NC 27999
+
+North Carolina Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356
 
 Dated: ______________________
 

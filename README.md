@@ -113,7 +113,7 @@ Click **Plugins** in the left sidebar, then **Personal**. The due process compla
 5. **Download your files** when it's finished:
    - **complaint.pdf** — the complaint to file
    - **complaint.docx** — the same complaint, to edit in Word
-   - **filing-instructions.md** — where and how to file in your state
+   - **filing-instructions.md** — where and how to file in your state, including which office of your school district gets it and at what address
 
 Until every check passes, the files are named **complaint.DRAFT** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
 
@@ -128,7 +128,9 @@ Two finished complaints, written by the plugin from made-up people and documents
 
 ## How to file a due process complaint in your state
 
-Each state decides which office receives the complaint, how it may be sent and whether the school district must be served first. The school district always gets a copy. **[STATES.md](STATES.md) lists, for every state and DC, the office that takes special education due process complaints, its official filing page, its contacts and the time limit.** The plugin starts from this table, confirms the details on your state's official filing page every time, and writes the filing instructions for you.
+Each state decides which office receives the complaint, how it may be sent, and whether the school district gets it first, at the same time, or as a copy. The school district always gets it. **[STATES.md](STATES.md) lists, for every state and DC, the office that takes special education due process complaints, its official filing page, its contacts, the time limit, and who in the district receives it.** The plugin starts from this table, confirms the details on your state's official filing page every time, and writes the filing instructions for you.
+
+**You won't have to find the school district's address yourself.** The plugin looks up the right office on your district's own website, checks it against the district's letterhead on your documents, and prints it with its address on the complaint's certificate of service.
 
 ## If something goes wrong
 
@@ -161,11 +163,11 @@ Each new version is listed on the [Releases page](https://github.com/b33kman/spe
 - Choose the claims or what to ask for. You decide.
 - Say whether the complaint will win.
 - Fill a gap. If no document and nothing you said supports a fact, the complaint leaves it out.
-- Guess a filing address or deadline. It confirms them on your state's official filing page every time.
+- Guess a filing address or deadline. It confirms the state's on its official filing page, and the district's on the district's own website, every time.
 
 ## Privacy
 
-The documents you attach go to Claude or ChatGPT like any other attachment, under that app's terms. The plugin doesn't send them anywhere else. It looks up your state's filing pages on the web, and those lookups don't name the student. If you're an attorney using it on a client's file, make sure the app's terms fit your confidentiality duties.
+The documents you attach go to Claude or ChatGPT like any other attachment, under that app's terms. The plugin doesn't send them anywhere else. It looks up your state's filing pages and your school district's website, and those lookups name the district, never the student. If you're an attorney using it on a client's file, make sure the app's terms fit your confidentiality duties.
 
 ## Frequently asked questions
 
@@ -210,7 +212,7 @@ No. A parent can file a due process complaint without a lawyer. A special educat
 Yes. Ask for changes in the chat, and it updates the draft and checks it again. Or edit `complaint.docx` in Word yourself; the plugin's checks don't cover changes you make there, so read them carefully.
 
 ### Will it file the complaint for me?
-No. It gives you `filing-instructions.md`: where to send the complaint, how it may be sent (mail, email, fax or an online portal, depending on the state), who must get a copy and when, and the time limit, each with the official page it came from. You sign and send it. It can also write a short cover letter to go with it.
+No. It gives you `filing-instructions.md`: where to send the complaint, how it may be sent (mail, email, fax or an online portal, depending on the state), which office of your school district gets it, at what address, and when, and the time limit, each with the official page it came from. You sign and send it. It can also write a short cover letter to go with it.
 
 ### What documents should I gather?
 Whatever you have: IEPs (current and past), school and private evaluations, prior written notices, progress reports, service logs, report cards, discipline records, letters and emails with the school, and your own notes of meetings and calls. PDFs work best; scans and photos can be read too.

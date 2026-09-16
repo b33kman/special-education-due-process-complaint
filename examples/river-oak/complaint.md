@@ -111,11 +111,15 @@ dana.r@example.com
 
 ## Certificate of service
 
-The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the River Oak Unified School District and the Office of Administrative Hearings, by the method indicated below.
+The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on each office named below, by the method indicated below.
 
 Method of service:   [  ] U.S. mail   [  ] Hand delivery   [  ] Other: ____________________
 
-Name and address of each person served: ________________________________________________
+Served on:
+
+Superintendent, River Oak Unified School District, 500 Oak Valley Road, Willow Creek, CA 95833
+
+Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833
 
 Dated: ______________________
 

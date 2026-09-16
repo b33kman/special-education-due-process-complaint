@@ -11,14 +11,15 @@ abstract: >-
   correspondence — for any of the 50 US states and the District of Columbia.
   Every date, figure and quotation is checked against the documents or the
   person's own statement, the filing state's details are confirmed on its
-  official filing page, and the draft is reviewed for errors before it is delivered as
+  official filing page, the school district's office and address are looked up and
+  printed on the certificate of service, and the draft is reviewed for errors before it is delivered as
   a PDF to file and a Word file to edit.
 authors:
   - given-names: Mark
     family-names: Beekman
 repository-code: "https://github.com/b33kman/special-education-due-process-complaint"
 url: "https://github.com/b33kman/special-education-due-process-complaint"
-version: 1.0.15
+version: 1.0.16
 license: MIT
 keywords:
   - special education

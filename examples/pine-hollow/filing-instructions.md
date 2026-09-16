@@ -8,6 +8,12 @@ The ORIGINAL petition is filed with the Office of Administrative Hearings (the c
 
 Source: <https://www.oah.nc.gov/documents/files/h-06e/open>, <https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_115C/GS_115C-109.6.html>, <https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_115C/GS_115C-107.2.html>, <https://www.oah.nc.gov/hearings-division/hearing-process/filing-contested-case>, <https://www.dpi.nc.gov/documents/publications/catalog/ec145-procedural-safeguards/open>
 
+## The school district
+
+A copy is mailed or hand-delivered to the Superintendent, Pine Hollow County Board of Education, 200 County Line Road, Pine Hollow, NC 27999, telephone (555) 010-5000, when the petition is filed, and recorded on the certificate of service: North Carolina's form names the superintendent of the board of education named as respondent.
+
+Source: <https://www.oah.nc.gov/documents/files/h-06e/open> for who receives it. This example's district is invented, so its office has no website. In a real case the office and address come from the district's own official website, checked against the letterhead on the district's documents.
+
 ## Filing address
 
 Office of Administrative Hearings, 1711 New Hope Church Road, Raleigh, NC 27609 (mailing and physical address). Copy to the N. C. Department of Public Instruction, 6356 Mail Service Center, Raleigh, NC 27699-6356, or by fax to (919) 807-3243.

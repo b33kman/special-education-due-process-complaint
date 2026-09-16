@@ -1,6 +1,6 @@
 # The exemplar: `complaint.md`
 
-Write the complaint as `<case>/complaint.md` in exactly this form. The front matter becomes the caption; the sections print in this order as a pleading — the forum's name, a bracketed caption, consecutively numbered double-spaced paragraphs, the signature block, the certificate of service. Do not number paragraphs or sections yourself; `render.mjs` does. To point to a paragraph, start it with a label, `[#name]`, and write `[#name]` where you refer to it; `render.mjs` prints the number, and `check.mjs` refuses a label that points nowhere. `check.mjs` refuses a complaint whose sections are missing or out of order.
+Write the complaint as `<case>/complaint.md` in exactly this form. The front matter becomes the caption; the sections print in this order as a pleading — the forum's name, a bracketed caption, consecutively numbered double-spaced paragraphs, the signature block, the certificate of service. Do not number paragraphs or sections yourself; `render.mjs` does. To point to a paragraph, start it with a label, `[#name]`, and write `[#name]` where you refer to it; `render.mjs` prints the number, and `check.mjs` refuses a label that points nowhere. `check.mjs` refuses a complaint whose sections are missing or out of order. The offices on the certificate of service come from `filing-instructions.md`, which `check.mjs` reads beside the complaint.
 
 The sections, in order (the bracketed ones only when they apply):
 
@@ -99,11 +99,15 @@ lena.moreno@example.com
 
 ## Certificate of service
 
-The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on the Cedar Valley Unified School District and the Office of Administrative Hearings, by the method indicated below.
+The Parent certifies that on the date written below a true and complete copy of this Due Process Complaint Notice was served on each office named below, by the method indicated below.
 
 Method of service:   [  ] U.S. mail   [  ] Hand delivery   [  ] Other: ____________________
 
-Name and address of each person served: ________________________________________
+Served on:
+
+Superintendent, Cedar Valley Unified School District, 1400 Valley Road, Lakeview, CA 95000
+
+Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833
 
 Dated: ______________________
 
@@ -124,4 +128,4 @@ Self-represented (pro se)
 - **A week is pleaded as a week** ("In the week of September 22, 2025"), a month as a month ("In November 2025").
 - **When counsel files**: the introduction ends "Petitioner and the Parent are represented by [name] of [firm]."; the signature block carries the attorney's name, "Attorney for Petitioner and the Parent", the bar number and jurisdiction, the firm, its address, telephone and email; if counsel asked for it, a reservation of the right to seek attorneys' fees and costs under 20 U.S.C. § 1415(i)(3)(B) follows the lettered remedies as its own paragraph; "Counsel for Petitioner and the Parent certifies" opens the certificate.
 - **Where the state's form puts the county in the caption** (North Carolina's does), fill in `county:`; it prints at the upper left of the caption. Where it names the respondent in a particular way ("___ Board of Education"), use that in `respondent:`.
-- **The certificate names everyone the state's own form or statute says is served** — the district, and where required the state agency or the hearing office itself (California's hearing office says it is served too).
+- **The certificate prints each office served, with its address** — the district's office always, and the state agency or hearing office where the state's rules say it is served too (California's hearing office says so). Each is copied exactly from `filing-instructions.md`, one to a line, office then address, and `check.mjs` refuses one that file doesn't give. The person filing fills in only the method and the date.

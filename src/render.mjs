@@ -61,7 +61,7 @@ for (const s of sections) {
     let closing = s.key === 'signature'
     for (const block of s.blocks) {
       if (/^dated:/i.test(block)) closing = true
-      if (!closing) { paras.push(P(block.replace(/\s*\n\s*/g, ' '), /^(method of service|name and address)/i.test(block) ? 'method' : null)); continue }
+      if (!closing) { paras.push(P(block.replace(/\s*\n\s*/g, ' '), /^(method of service|name and address|served on)/i.test(block) ? 'method' : null)); continue }
       for (const line of block.split('\n').map((l) => l.trim()).filter(Boolean)) {
         paras.push(P(line, /^dated:/i.test(line) ? 'dated' : /^respectfully submitted/i.test(line) ? 'lead' : /^_{5,}$/.test(line) ? 'sigline' : null))
       }

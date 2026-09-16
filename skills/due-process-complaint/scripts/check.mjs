@@ -167,6 +167,23 @@ ${statement}`;
     }
     claimDone();
   }
+  const service = sections.find((s) => s.key === "service");
+  if (service) {
+    const at = service.blocks.findIndex((b) => /^served on:?$/i.test(b));
+    const end = service.blocks.findIndex((b) => /^dated:/i.test(b));
+    const served = at < 0 ? [] : service.blocks.slice(at + 1, end > at ? end : void 0);
+    const partsOf = (office) => office.replace(/\s*\n\s*/g, ", ").split(/,\s*/).filter(Boolean);
+    const instructionsFile = join(dir, "filing-instructions.md");
+    const instructions = existsSync(instructionsFile) ? readFileSync(instructionsFile, "utf8") : "";
+    if (!served.length) errors.push("the certificate of service names nobody served \u2014 under \u201CServed on:\u201D, give each office the complaint goes to, with its address, as filing-instructions.md gives it");
+    else if (!instructions) errors.push("there is no filing-instructions.md \u2014 the offices on the certificate of service, and their addresses, come from it (step 4)");
+    else {
+      for (const office of served) for (const part of partsOf(office)) if (!contains(instructions, part)) errors.push(`Certificate of service: \u201C${part}\u201D is not in filing-instructions.md`);
+      const district = instructions.split(/^## /m).find((chunk) => /^the school district\b/i.test(chunk));
+      if (!district) errors.push("filing-instructions.md has no \u201C## The school district\u201D section \u2014 say which office of the district receives the complaint, its address, and the page that gives them");
+      else if (!served.some((office) => partsOf(office).every((part) => contains(district, part)))) errors.push("the certificate of service does not name the school district\u2019s office as filing-instructions.md gives it");
+    }
+  }
   const docDates = datesIn(documents), stmtDates = datesIn(statement);
   const docMonths = monthsIn(documents), stmtMonths = monthsIn(statement);
   for (const s of body) {

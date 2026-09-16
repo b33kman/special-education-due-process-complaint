@@ -217,6 +217,28 @@ export function checkComplaint(dir) {
     claimDone()
   }
 
+  // The certificate of service names every office the complaint goes to, with its address, so the
+  // person filing is not left to find the district's on their own. Those offices and addresses are
+  // researched on official pages and written into filing-instructions.md with their sources; the
+  // certificate may name only what that file gives, and must name the district's office from it.
+  const service = sections.find((s) => s.key === 'service')
+  if (service) {
+    const at = service.blocks.findIndex((b) => /^served on:?$/i.test(b))
+    const end = service.blocks.findIndex((b) => /^dated:/i.test(b))
+    const served = at < 0 ? [] : service.blocks.slice(at + 1, end > at ? end : undefined)
+    const partsOf = (office) => office.replace(/\s*\n\s*/g, ', ').split(/,\s*/).filter(Boolean)
+    const instructionsFile = join(dir, 'filing-instructions.md')
+    const instructions = existsSync(instructionsFile) ? readFileSync(instructionsFile, 'utf8') : ''
+    if (!served.length) errors.push('the certificate of service names nobody served — under “Served on:”, give each office the complaint goes to, with its address, as filing-instructions.md gives it')
+    else if (!instructions) errors.push('there is no filing-instructions.md — the offices on the certificate of service, and their addresses, come from it (step 4)')
+    else {
+      for (const office of served) for (const part of partsOf(office)) if (!contains(instructions, part)) errors.push(`Certificate of service: “${part}” is not in filing-instructions.md`)
+      const district = instructions.split(/^## /m).find((chunk) => /^the school district\b/i.test(chunk))
+      if (!district) errors.push('filing-instructions.md has no “## The school district” section — say which office of the district receives the complaint, its address, and the page that gives them')
+      else if (!served.some((office) => partsOf(office).every((part) => contains(district, part)))) errors.push('the certificate of service does not name the school district’s office as filing-instructions.md gives it')
+    }
+  }
+
   // Every date, figure and quotation in the body, against the sources.
   const docDates = datesIn(documents), stmtDates = datesIn(statement)
   const docMonths = monthsIn(documents), stmtMonths = monthsIn(statement)

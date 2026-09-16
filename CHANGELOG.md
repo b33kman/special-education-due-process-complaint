@@ -2,6 +2,13 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.16 — 2026-09-16
+
+- **The school district's office and address are found for you, and printed on the certificate of service.** Most people filing don't know which office of the district to send it to, or where, and the procedure used to ask them. It now looks up the office the state names — or the one the district names for due process requests, otherwise the superintendent's office — on the district's own website, checks it against the letterhead on the district's documents, and writes it into `filing-instructions.md` under its own heading with the page it came from.
+- **The certificate lists every office served, with its address**, under "Served on:". The person fills in only the method and the date. The check refuses a certificate that names nobody, leaves out the district's office, or gives an office or address that `filing-instructions.md` doesn't — an address the research never found is as invented as a date no document gives.
+- **STATES.md says who in the district receives the complaint, and in what order**, for each state. It used to say "Copy to the school district: yes" on all 51 rows, which told the reader nothing — and in 16 of the 51 the district receives the complaint itself, not a copy.
+- An attorney's cover letter is copied to the district's office where that is a different office from the one the complaint is filed with.
+
 ## 1.0.15 — 2026-09-16
 
 - **The cover letter is asked about, instead of being offered in passing.** It was the last sentence of the procedure, after the files had been handed over — so in practice nobody was ever asked. It is now a question of its own, put before the handover and waited on like every other choice, because once the files are announced the work reads as finished and a question after that gets dropped.

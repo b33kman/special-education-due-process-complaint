@@ -23,7 +23,7 @@ const run = (script, dir) => {
 }
 function copy(from = examples.proSe, edit) {
   const dir = mkdtempSync(join(tmpdir(), 'due-process-'))
-  for (const f of ['documents', 'complaint.md', 'statement.md']) cpSync(join(from, f), join(dir, f), { recursive: true })
+  for (const f of ['documents', 'complaint.md', 'statement.md', 'filing-instructions.md']) cpSync(join(from, f), join(dir, f), { recursive: true })
   assert.equal(run('pdf-text', dir).code, 0)
   if (edit) writeFileSync(join(dir, 'complaint.md'), edit(readFileSync(join(dir, 'complaint.md'), 'utf8')))
   return dir
@@ -60,7 +60,11 @@ test('both worked examples pass the check and render as the files to file, in th
     assert.match(first, /I\. INTRODUCTION/)
     assert.match(first, /1\.\s+Petitioner/)
     assert.doesNotMatch(first, /DRAFT/)
-    assert.match(await pageText(join(dir, 'complaint.pdf'), -1), /CERTIFICATE OF SERVICE/)
+    const last = (await pageText(join(dir, 'complaint.pdf'), -1)).replace(/\s+/g, ' ')
+    assert.match(last, /CERTIFICATE OF SERVICE/)
+    // The district's office is printed on the certificate, not left for the filer to find.
+    const respondent = readFileSync(join(dir, 'complaint.md'), 'utf8').match(/^respondent: (.*)$/m)[1]
+    assert.match(last, new RegExp(`Served on:.*Superintendent, ${respondent}, \\d+ `, 'i'))
     rmSync(dir, { recursive: true, force: true })
   }
 })
@@ -212,7 +216,7 @@ test('the scripts run with nothing installed, and are built from src/ unchanged'
   for (const f of ['pdf-text.mjs', 'check.mjs', 'render.mjs']) assert.ok(readFileSync(join(out, f)).equals(readFileSync(join(scripts, f))), `${f} is not the build of src/ — run npm run build`)
   // A folder with no node_modules anywhere above it: the scripts must bring everything they use.
   const dir = mkdtempSync(join(tmpdir(), 'due-process-bare-'))
-  for (const f of ['documents', 'complaint.md', 'statement.md']) cpSync(join(examples.proSe, f), join(dir, f), { recursive: true })
+  for (const f of ['documents', 'complaint.md', 'statement.md', 'filing-instructions.md']) cpSync(join(examples.proSe, f), join(dir, f), { recursive: true })
   for (const s of ['pdf-text', 'check', 'render']) {
     const r = spawnSync(process.execPath, [join(out, `${s}.mjs`), dir], { encoding: 'utf8' })
     assert.equal(r.status, 0, `${s}: ${r.stdout}${r.stderr}`)
@@ -248,6 +252,31 @@ test('every file that states the version states the same one', () => {
   }
   assert.match(readFileSync(join(root, 'CITATION.cff'), 'utf8'), new RegExp(`^version: ${version}$`, 'm'), 'CITATION.cff')
   assert.match(readFileSync(join(root, 'CHANGELOG.md'), 'utf8'), new RegExp(`^## ${version.replace(/\./g, '\\.')} — `, 'm'), 'CHANGELOG.md')
+})
+
+test('the certificate of service names the district’s office and every other office served, as filing-instructions.md gives them', () => {
+  const district = 'Superintendent, River Oak Unified School District, 500 Oak Valley Road, Willow Creek, CA 95833'
+  const hearing = 'Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833'
+  // Nobody named: the person is left to find the district's address on their own.
+  refused(once(`${district}\n\n${hearing}\n\n`, ''), /names nobody served/)
+  // Only the hearing office: the district's copy has nowhere to go.
+  refused(once(`${district}\n\n`, ''), /does not name the school district’s office as filing-instructions\.md gives it/)
+  // An address the research never found is as invented as a date no document gives.
+  refused(once('500 Oak Valley Road, Willow Creek', '550 Oak Valley Road, Willow Creek'), /“550 Oak Valley Road” is not in filing-instructions\.md/)
+  // The certificate's addresses come from the instructions, so they have to exist, with the district's own section.
+  const noFile = copy()
+  rmSync(join(noFile, 'filing-instructions.md'))
+  const r = run('check', noFile)
+  assert.equal(r.code, 1, r.out)
+  assert.match(r.out, /there is no filing-instructions\.md/)
+  rmSync(noFile, { recursive: true, force: true })
+  const noSection = copy()
+  const fi = join(noSection, 'filing-instructions.md')
+  writeFileSync(fi, readFileSync(fi, 'utf8').replace('## The school district', '## The district'))
+  const r2 = run('check', noSection)
+  assert.equal(r2.code, 1, r2.out)
+  assert.match(r2.out, /no “## The school district” section/)
+  rmSync(noSection, { recursive: true, force: true })
 })
 
 test('render never names a draft, or a complaint that fails the check, for filing', async () => {
