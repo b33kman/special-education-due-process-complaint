@@ -2,6 +2,17 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.14 — 2026-09-15
+
+An adversarial review of the last three releases. Every finding below was reproduced by running the shipped scripts before it was fixed.
+
+- **Fixed: the check accepted the very shape it was written to refuse.** 1.0.12's claim test counted the commas between paragraph pointers as words, so a long enough list of numbers passed while a short, fully substantive claim was refused — the reverse of its purpose. It now counts only what a claim says in its own words, and a claim of one solid sentence passes.
+- **Fixed: a paragraph pointer written into a remedy printed as a number.** Three places said pointers belong to the claims and nothing enforced it. A label is now defined in the statement of facts and pointed to from a claim, and the check refuses one written anywhere else.
+- **Fixed: a stray `[#label]` in the signature or the certificate of service printed literally on the filed PDF.** It is refused now.
+- **Fixed: a space the PDF extractor leaves before a semicolon no longer refuses the district's own words.** pdf.js ends a text item at a font change, so an extracted line can read "on leave ; no substitute" and a correct quotation was rejected with no way forward — and 1.0.13 asks for far more quotations. Closing up that space is the only latitude given: a quotation that runs two of the page's own words together is still refused.
+- **Both worked examples are redrafted to the current rules** — labelled chronologies, claims that argue rather than re-tell, and remedies that name their figures and the document that gives them. They were written before 1.0.11 and demonstrated none of it.
+- The model complaint's claims no longer restate, nearly word for word, the paragraphs they point at.
+
 ## 1.0.13 — 2026-09-15
 
 - **The District's own words are quoted.** Where a refusal, an admission or a description of what happened is in an email, a prior written notice, a service log or a teacher's note, the complaint quotes it, short and word for word, with the document named. One run produced a complaint with no quotations at all.

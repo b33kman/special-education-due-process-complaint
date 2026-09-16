@@ -25,29 +25,29 @@ Student was born on April 19, 2013, resides with the Parent at 72 Laurel Court, 
 
 ## Statement of facts
 
-On May 6, 2025, the District’s speech-language pathologist administered the CELF-5 to Student; the evaluation is dated May 6, 2025.
+[#eval] On May 6, 2025, the District’s speech-language pathologist administered the CELF-5 to Student; on that administration Student obtained a Core Language Score of 71 (2nd percentile), an Expressive Language Index of 68 and a Receptive Language Index of 79.
 
-On August 21, 2025, the IEP team met for Student’s annual review; the IEP provides speech-language therapy at 60 minutes per week, individual, from August 21, 2025 to August 20, 2026; the team declined the Parent’s request that the District assess written expression; and the Parent signed, writing that she still wanted written expression tested.
+[#iep] On August 21, 2025, the IEP team met for Student’s annual review; the IEP provides speech-language therapy at 60 minutes per week, individual, from August 21, 2025 to August 20, 2026; the team declined the Parent’s request that the District assess written expression; and the Parent signed, writing that she still wanted written expression tested.
 
-In the week of September 22, 2025, individual speech-language sessions ended when the provider’s caseload was reassigned; the log records 30 minutes in a group of 3 for that week.
+[#group] In the week of September 22, 2025, individual speech-language sessions ended when the provider’s caseload was reassigned; the log records 30 minutes in a group of 3 for that week.
 
 In the week of October 27, 2025, the log records no speech-language service for the week (provider absent; no make-up scheduled).
 
-On November 10, 2025, the Parent requested in writing an independent educational evaluation in speech-language and written expression at public expense, stating disagreement with the evaluation of May 6, 2025.
+[#iee] On November 10, 2025, the Parent requested in writing an independent educational evaluation in speech-language and written expression at public expense, stating disagreement with the evaluation of May 6, 2025.
 
 In the week of November 24, 2025, the log records no speech-language service for the week (holiday week).
 
-On December 4, 2025, the District issued a prior written notice declining to fund an independent educational evaluation, stating that it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window.
+[#pwn] On December 4, 2025, the District issued a prior written notice declining to fund an independent educational evaluation, stating that it considers the May 6, 2025 evaluation appropriate and will assess written expression in the spring 2026 reevaluation window.
 
 On January 14, 2026, the Parent wrote to the District that Student reported her speech sessions were with two other students and half as long, and asked for the service log and when individual sessions would resume.
 
 In the week of January 19, 2026, the log records no speech-language service for the week (provider absent; no make-up scheduled).
 
-On January 21, 2026, the District sent the speech-language service log and wrote that the provider’s caseload was reassigned in September and individual sessions have not been available since; it expects to post a second SLP position this spring.
+[#letter] On January 21, 2026, the District sent the speech-language service log and wrote that the provider’s caseload was reassigned in September and individual sessions have not been available since; it expects to post a second SLP position this spring.
 
-On January 30, 2026, the service log period ended; its summary states 22 weeks, 4 at 60 minutes individual, 15 at 30 minutes group, 3 with no service, and 690 total minutes delivered against 1,320 required by the IEP for 22 weeks.
+[#log] On January 30, 2026, the service log period ended; its summary states 22 weeks, 4 at 60 minutes individual, 15 at 30 minutes group, 3 with no service, and 690 total minutes delivered against 1,320 required by the IEP for 22 weeks.
 
-On February 9, 2026, the Parent wrote that the log shows 690 minutes delivered against 1,320 required, asked the District to make up the missed minutes and restore individual sessions now, and noted no response about the independent evaluation beyond the December 4 notice.
+[#asked] On February 9, 2026, the Parent wrote that the log shows 690 minutes delivered against 1,320 required, asked the District to make up the missed minutes and restore individual sessions now, and noted no response about the independent evaluation beyond the December 4 notice.
 
 ## Statement of the problems
 
@@ -55,29 +55,19 @@ On February 9, 2026, the Parent wrote that the log shows 690 minutes delivered a
 
 *34 C.F.R. § 300.323.*
 
-The IEP dated August 21, 2025 provides for speech-language therapy of 60 minutes per week, individual, by a licensed speech-language pathologist in the speech room, from August 21, 2025 to August 20, 2026.
-
-The District’s service log for August 25, 2025 through January 30, 2026 records 60 minutes, individual, in each of the first four weeks and, from the week of September 22, 2025, 30 minutes in a group of 3, noting “provider caseload reassigned; individual slot unavailable”. It records no service in the weeks of October 27, 2025, November 24, 2025 and January 19, 2026, with “no make-up scheduled” for the two weeks the provider was absent.
-
-The log’s summary states 22 weeks in the period, 4 at 60 minutes individual, 15 at 30 minutes group, 3 with no service, 690 total minutes delivered, and 1,320 total minutes required by the IEP for 22 weeks. It notes that individual sessions ended the week of September 22, 2025 when the provider’s caseload was reassigned, and that the IEP was not amended.
-
-On January 14, 2026, after Student reported that her speech sessions were now with two other students and half as long, the Parent asked the District for the service log and when individual sessions would resume. On January 21, 2026, the District sent the log and wrote that the pathologist’s caseload “was reassigned in September and individual sessions have not been available since”. On February 9, 2026, the Parent asked in writing that the District make up the missed minutes and restore individual sessions.
+The IEP requires speech-language therapy of 60 minutes per week, individual. From the week of September 22, 2025 the District delivered 30 minutes in a group of 3 instead, and its own service log gives the reason: “provider caseload reassigned; individual slot unavailable”. Over the log period it delivered 690 of the 1,320 minutes the IEP requires. The IEP was never amended to record the change, and no make-up was scheduled for the weeks the provider was absent (paragraphs [#iep], [#group], [#letter] and [#log]).
 
 ### B. Failure to evaluate Student appropriately
 
 *34 C.F.R. §§ 300.301–300.311.*
 
-The District’s speech-language evaluation is dated May 6, 2025; on the CELF-5 administered that day Student obtained a Core Language Score of 71 (2nd percentile), an Expressive Language Index of 68 and a Receptive Language Index of 79.
-
-At the August 21, 2025 IEP meeting the Parent asked that the District assess written expression, “which was not assessed in May 2025”. The team added 45 minutes per week of specially designed instruction in written expression. It declined the request, on the basis that the May 6, 2025 evaluation is current and the added instruction addresses the concern, and told the Parent she may request an independent educational evaluation if she disagrees with the District’s evaluation. The Parent signed the IEP on August 21, 2025 and wrote: “I agree with the services. I still want written expression tested.”
+The only speech-language evaluation of Student is the District’s of May 6, 2025, which did not assess written expression. The Parent asked at the August 21, 2025 IEP meeting that written expression be assessed, and the team answered by adding 45 minutes per week of specially designed instruction in it while declining to evaluate it — instruction in a skill the District has never measured. The Parent signed the IEP and wrote: “I agree with the services. I still want written expression tested.” (paragraphs [#eval] and [#iep]).
 
 ### C. Refusal to fund an independent educational evaluation
 
 *34 C.F.R. § 300.502(b).*
 
-On November 10, 2025, the Parent wrote that she disagreed with the May 6, 2025 evaluation because “It did not test written expression” and because Student’s language scores “do not match what I see at home”, and requested “an independent educational evaluation in speech-language and written expression at public expense”.
-
-By prior written notice dated December 4, 2025 the District declined to fund an independent educational evaluation, stating that it considers the May 6, 2025 evaluation appropriate and will assess written expression itself during the spring 2026 reevaluation window. The notice lists as the other option considered “Funding an independent evaluation in speech-language only”, rejected “because the district evaluation in that area is current”. The District did not file for a hearing. On February 9, 2026, the Parent wrote that she had not received a response about the independent evaluation beyond the December 4 notice.
+The Parent disagreed in writing with the May 6, 2025 evaluation and asked for an independent educational evaluation at public expense. The District declined by prior written notice, stating that it considers its own evaluation appropriate and will assess written expression itself in the spring 2026 reevaluation window, and it did not file a due process complaint to defend that evaluation (paragraphs [#eval], [#iee] and [#pwn]).
 
 ## Proposed resolution
 
@@ -85,7 +75,7 @@ By prior written notice dated December 4, 2025 the District declined to fund an 
 
 The Parent proposes the following resolution:
 
-(a) compensatory speech-language therapy, delivered individually, equal to the individual therapy minutes the IEP required and the District did not deliver individually from September 22, 2025 to the date of the order;
+(a) compensatory speech-language therapy, delivered individually, for the shortfall the District’s service log records between the 690 minutes delivered and the 1,320 minutes the IEP requires for those 22 weeks;
 
 (b) an independent educational evaluation in speech-language and written expression at public expense; and
 

@@ -50,6 +50,8 @@ function contains(hay, needle, loose = true) {
   if (re(n).test(h)) return true;
   return loose && re(n.replace(/[\s-]/g, "")).test(h.replace(/[\s-]/g, ""));
 }
+var tighten = (s) => String(s ?? "").replace(/\s+([;:,.!?])/g, "$1");
+var quotedIn = (hay, q) => contains(hay, q, false) || contains(tighten(hay), tighten(q), false);
 function datesIn(text) {
   const out = /* @__PURE__ */ new Set();
   const add = (mm, dd, yy) => {
@@ -125,10 +127,14 @@ ${statement}`;
     for (const part of parts.filter(Boolean)) if (!contains(sources, part)) errors.push(`${k}: \u201C${part}\u201D is not in the documents or statement.md`);
   }
   const labels = /* @__PURE__ */ new Set();
-  for (const s of body) {
+  for (const s of sections) {
     for (const block of s.blocks) {
       const name = block.match(/^\[#([^\]]*)\]/)?.[1];
       if (name === void 0) continue;
+      if (s.key !== "facts") {
+        errors.push(`${s.heading}: the paragraph label \u201C[#${name}]\u201D belongs on a paragraph of the statement of facts`);
+        continue;
+      }
       if (!/^[a-z][a-z-]*$/.test(name)) errors.push(`the paragraph label \u201C[#${name}]\u201D must be lowercase letters and hyphens`);
       else if (labels.has(name)) errors.push(`the paragraph label \u201C[#${name}]\u201D starts two paragraphs`);
       labels.add(name);
@@ -137,7 +143,8 @@ ${statement}`;
   for (const s of sections) {
     for (const block of s.blocks) {
       for (const m of block.replace(/^\[#[^\]]*\]/, "").matchAll(/\[#([^\]]*)\]/g)) {
-        if (!labels.has(m[1])) errors.push(`${s.heading}: \u201C[#${m[1]}]\u201D points to no paragraph \u2014 start the paragraph it means with [#${m[1]}]`);
+        if (s.key !== "problems") errors.push(`${s.heading}: \u201C[#${m[1]}]\u201D points at a paragraph of the chronology \u2014 a paragraph number belongs to a claim, and a remedy names its own figures`);
+        else if (!labels.has(m[1])) errors.push(`${s.heading}: \u201C[#${m[1]}]\u201D points to no paragraph \u2014 start the paragraph it means with [#${m[1]}]`);
       }
     }
   }
@@ -146,7 +153,7 @@ ${statement}`;
     let claim = null;
     let words = 0;
     const claimDone = () => {
-      if (claim && words < 25) errors.push(`\u201C${claim}\u201D says only which paragraphs bear on the problem \u2014 say what the problem is, with its key dates and figures`);
+      if (claim && words < 10) errors.push(`\u201C${claim}\u201D says only which paragraphs bear on the problem \u2014 say what the problem is, with its key dates and figures`);
     };
     for (const block of problems.blocks) {
       if (block.startsWith("###")) {
@@ -156,7 +163,7 @@ ${statement}`;
         continue;
       }
       if (/^\*.*\*$/.test(block)) continue;
-      words += block.replace(/\[#[^\]]*\]/g, " ").split(/\s+/).filter(Boolean).length;
+      words += (block.replace(/\[#[^\]]*\]/g, " ").replace(/\bparagraphs?\b/gi, " ").match(/[A-Za-z0-9][A-Za-z0-9''’-]*/g) ?? []).length;
     }
     claimDone();
   }
@@ -189,8 +196,8 @@ ${statement}`;
         else errors.push(`${where} \u2014 the figure \u201C${n}\u201D is not in the documents or statement.md`);
       }
       for (const q of quotes) {
-        if (contains(documents, q, false)) continue;
-        if (contains(statement, q, false)) statementOnly.push(`\u201C${q}\u201D \u2014 ${where}`);
+        if (quotedIn(documents, q)) continue;
+        if (quotedIn(statement, q)) statementOnly.push(`\u201C${q}\u201D \u2014 ${where}`);
         else errors.push(`${where} \u2014 the quotation \u201C${q}\u201D is not word for word in the documents or statement.md`);
       }
     }

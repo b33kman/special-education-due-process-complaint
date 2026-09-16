@@ -276,11 +276,13 @@ Download `due-process-complaint-skill.zip` from the [latest release](https://git
 
 ```bash
 git clone https://github.com/b33kman/special-education-due-process-complaint.git
-cd special-education-due-process-complaint && npm install
+cd special-education-due-process-complaint
 ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint
 ```
 
-To update: `git pull`, then `npm install`. What changed in each version is in [CHANGELOG.md](CHANGELOG.md).
+Nothing to install: the three scripts are self-contained and need only Node.js 20 or later. (`npm install` is for running the tests — see below.)
+
+To update: `git pull`. What changed in each version is in [CHANGELOG.md](CHANGELOG.md).
 
 ### How it works
 
@@ -298,7 +300,7 @@ npm install && npm test
 
 After editing anything in `src/`, run `npm run build`; a test fails if the scripts in the skill are not the build of `src/`.
 
-Each test breaks a worked example in one way (an invented date, a figure that is only the tail of the real one, a quotation not on the page, a missing school, a section out of order) and asserts the check refuses it, and that a draft is never given the name of the file to file.
+Each test breaks a worked example in one way — an invented date, a figure that is only the tail of the real one, a quotation not on the page, a missing school, a section out of order, a label that points nowhere, a claim that only lists paragraph numbers, a paragraph pointer written into a remedy — and asserts the check refuses it, and that a draft is never given the name of the file to file. Others assert what must keep working: that text never runs outside the margins, that the shipped scripts are the build of `src/` unchanged, and that they run with nothing installed.
 
 ### Layout
 

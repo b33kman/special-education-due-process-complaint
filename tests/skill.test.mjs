@@ -114,46 +114,95 @@ test('nothing runs outside the margins: a long forum name, claim heading, regula
 })
 
 test('a claim points to its facts by label, and the label prints as that paragraph’s number', async () => {
-  const dir = copy(examples.proSe, (md) => [
-    once('On September 8, 2025, the IEP team adopted the annual', '[#goal] On September 8, 2025, the IEP team adopted the annual'),
-    once('On November 14, 2025, the District’s progress report', '[#progress-nov] On November 14, 2025, the District’s progress report'),
-    once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraphs [#goal] and [#progress-nov] bear on this problem.'),
-  ].reduce((m, edit) => edit(m), md))
-  const c = run('check', dir)
-  assert.equal(c.code, 0, c.out)
+  const dir = copy(examples.proSe)
+  assert.equal(run('check', dir).code, 0)
   assert.equal(run('render', dir).code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
   let text = ''
   for (let n = 1; n <= doc.numPages; n++) text += ' ' + (await (await doc.getPage(n)).getTextContent()).items.map((i) => i.str).join(' ')
   text = text.replace(/\s+/g, ' ')
-  const goal = text.match(/(\d+)\. On September 8, 2025, the IEP team adopted the annual/)?.[1]
-  const progress = text.match(/(\d+)\. On November 14, 2025, the District.s progress report/)?.[1]
-  assert.ok(goal && progress, 'the labelled facts are numbered paragraphs')
-  assert.match(text, new RegExp(`The facts at paragraphs ${goal} and ${progress} bear on this problem\\.`))
+  // The example's first claim points at the goal and the three progress reports it labels.
+  const goal = text.match(/(\d+)\. On September 8, 2025, the IEP team adopted an annual reading fluency goal/)?.[1]
+  const nov = text.match(/(\d+)\. On November 14, 2025, the District.s progress report/)?.[1]
+  assert.ok(goal && nov, 'the labelled facts are numbered paragraphs')
+  const pointer = text.match(/\(paragraphs [^)]*\)/)?.[0]
+  assert.ok(pointer, 'the first claim prints a paragraph pointer')
+  assert.match(pointer, new RegExp(`\\b${goal}\\b`))
+  assert.match(pointer, new RegExp(`\\b${nov}\\b`))
+  // Nothing a label is written as ever reaches the filed page.
   assert.doesNotMatch(text, /\[#/)
   rmSync(dir, { recursive: true, force: true })
 })
 
-test('a claim that only lists the paragraphs that bear on it is refused', () => {
-  const claim = /## Statement of the problems[\s\S]*?(?=### B\.)/
-  refused((md) => {
-    const [a] = md.match(claim)
-    return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide an adequate individualized education program\n\n*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraphs [#goal] and [#progress] bear on this problem.\n\n`)
-  }, /says only which paragraphs bear on the problem/)
-  // The same claim with its facts said in its own words, pointing to the chronology, passes.
-  const dir = copy(examples.proSe, (md) => {
-    const [a] = md.match(claim)
-    return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide an adequate individualized education program\n\n*34 C.F.R. §§ 300.320, 300.324.*\n\n[#goal] On September 8, 2025, the IEP team adopted an annual reading fluency goal of 60 words per minute, and the progress reports dated November 14, 2025, January 23, 2026 and March 6, 2026 recorded 21, 24 and 23 words per minute. On March 12, 2026, the IEP team declined to revise the goal (paragraph [#goal]).\n\n`)
-  })
+// The worked example's first claim is replaced with `claim`. Its chronology already carries
+// the labels the example's own claims point to, [#goal] among them.
+const claimIs = (claim) => (md) => {
+  const [a] = md.match(/## Statement of the problems[\s\S]*?(?=### B\.)/)
+  return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide an adequate individualized education program\n\n*34 C.F.R. §§ 300.320, 300.324.*\n\n${claim}\n\n`)
+}
+const passes = (edit, from) => {
+  const dir = copy(from, edit)
   const r = run('check', dir)
   assert.equal(r.code, 0, r.out)
   rmSync(dir, { recursive: true, force: true })
+}
+
+test('a claim that only lists the paragraphs that bear on it is refused, however long the list', () => {
+  const says = /says only which paragraphs bear on the problem/
+  refused(claimIs('The facts at paragraphs [#goal] and [#goal] bear on this problem.'), says)
+  // Punctuation is not substance: a longer list of the same pointers buys nothing.
+  refused(claimIs(`The paragraphs that bear on this problem are ${Array(20).fill('[#goal]').join(', ')}.`), says)
+  // Nor is the pointer's own vocabulary, repeated.
+  refused(claimIs('Paragraph [#goal], paragraph [#goal] and paragraph [#goal] are the paragraphs for this problem.'), says)
+})
+
+test('a claim that says what the problem is passes, however short, and points to the chronology', () => {
+  // One sentence of substance and a pointer — the shape the procedure asks for.
+  passes(claimIs('The District did not deliver the reading instruction the September 8, 2025 IEP requires (paragraph [#goal]).'))
+  // A claim whose new content is what the District did NOT do carries no date or figure of its own.
+  passes(claimIs('The District has not revised the reading goal or the services it provides since (paragraph [#goal]).'))
+})
+
+test('a label belongs on a fact paragraph, and only a claim points to one', () => {
+  const belongs = /belongs on a paragraph of the statement of facts/
+  const onlyClaims = /a paragraph number belongs to a claim/
+  // A claim that labels itself and points at itself says nothing about the chronology.
+  refused(claimIs('[#self] The District did not deliver the reading instruction the IEP requires (paragraph [#self]).'), belongs)
+  // A remedy sends the reader to a paragraph number instead of naming its own figures.
+  refused((md) => claimIs('The District did not deliver the reading instruction the September 8, 2025 IEP requires (paragraph [#goal]).')(md)
+    .replace('(d) implement the IEP as written', '(d) implement the IEP as written, for the weeks at paragraph [#goal],'), onlyClaims)
+  // A label left in the signature or the certificate would print as “[#sig]” on the filed PDF.
+  refused(once('Respectfully submitted,', '[#sig] Respectfully submitted,'), belongs)
+  refused(once('The Parent certifies that on the date', '[#cert] The Parent certifies that on the date'), belongs)
 })
 
 test('a label that points nowhere, starts two paragraphs, or is not lowercase words is refused', () => {
   refused(once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraph [#nothing] bear on this problem.'), /“\[#nothing\]” points to no paragraph/)
-  refused((md) => once('On November 14, 2025, the District’s progress report', '[#goal] On November 14, 2025, the District’s progress report')(once('On September 8, 2025, the IEP team adopted the annual', '[#goal] On September 8, 2025, the IEP team adopted the annual')(md)), /“\[#goal\]” starts two paragraphs/)
-  refused(once('On September 8, 2025, the IEP team adopted the annual', '[#Goal] On September 8, 2025, the IEP team adopted the annual'), /“\[#Goal\]” must be lowercase letters and hyphens/)
+  refused(once('[#nov] On November 14, 2025', '[#goal] On November 14, 2025'), /“\[#goal\]” starts two paragraphs/)
+  refused(once('[#goal] On September 8, 2025', '[#Goal] On September 8, 2025'), /“\[#Goal\]” must be lowercase letters and hyphens/)
+})
+
+test('a space the extractor left before a semicolon does not refuse the District’s own words', () => {
+  // pdf.js ends a text item at a font or position change, so an extracted line can read
+  // “on leave ; no substitute”. The writer quotes the page as it reads and is refused,
+  // with no way out but to drop the quotation — and 1.0.13 asks for far more of them.
+  const dir = copy(examples.proSe, once('On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.',
+    'On October 6, 2025, the small-group reading block was discontinued. The service log for that week reads, “teacher on leave; no substitute.”'))
+  writeFileSync(join(dir, 'work', 'text', 'log-transcribed.txt'), 'Week of October 6, 2025: no reading instruction delivered — teacher on leave ; no substitute .\n')
+  const r = run('check', dir)
+  assert.equal(r.code, 0, r.out)
+  rmSync(dir, { recursive: true, force: true })
+
+  // And the latitude is only that. Closing up a space the writer put between two of the page's
+  // own words is rewording, not an extractor artefact, and the quotation is still refused —
+  // otherwise this is just the loose match that quotations are deliberately held out of.
+  const d2 = copy(examples.proSe, once('On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.',
+    'On October 6, 2025, the small-group reading block was discontinued. The service log for that week reads, “teacher onleave; no substitute.”'))
+  writeFileSync(join(d2, 'work', 'text', 'log-transcribed.txt'), 'Week of October 6, 2025: no reading instruction delivered — teacher on leave ; no substitute .\n')
+  const r2 = run('check', d2)
+  assert.equal(r2.code, 1, r2.out)
+  assert.match(r2.out, /the quotation “teacher onleave; no substitute” is not word for word/)
+  rmSync(d2, { recursive: true, force: true })
 })
 
 test('the scripts run with nothing installed, and are built from src/ unchanged', () => {

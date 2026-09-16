@@ -73,6 +73,13 @@ function contains(hay, needle, loose = true) {
   return loose && re(n.replace(/[\s-]/g, '')).test(h.replace(/[\s-]/g, ''))
 }
 
+/** Is `q` quoted word for word in `hay`? The one latitude is the extractor's, not the writer's:
+ *  pdf.js ends a text item at a font or position change, so an extracted line can read
+ *  "on leave ; no substitute". Closing that space up is not rewording — every word, and the
+ *  order of them, still has to match exactly. */
+const tighten = (s) => String(s ?? '').replace(/\s+([;:,.!?])/g, '$1')
+const quotedIn = (hay, q) => contains(hay, q, false) || contains(tighten(hay), tighten(q), false)
+
 /** Every calendar date a source writes, in any common form, as m/d/yyyy. */
 function datesIn(text) {
   const out = new Set()
@@ -161,13 +168,19 @@ export function checkComplaint(dir) {
     for (const part of parts.filter(Boolean)) if (!contains(sources, part)) errors.push(`${k}: “${part}” is not in the documents or statement.md`)
   }
 
-  // Paragraph labels: a numbered paragraph may start with [#label]; [#label] anywhere else
-  // prints as that paragraph's number, so a claim can point to its facts instead of repeating them.
+  // Paragraph labels. A fact paragraph may start with [#label]; a claim writes [#label] where it
+  // means that paragraph's number, so it can point to its facts instead of repeating them.
+  // The two halves are kept where they belong: a label is defined in the chronology and pointed
+  // to from a claim, and nowhere else. A label anywhere else is either pointless (a paragraph
+  // pointing at itself) or harmful — a remedy that sends the reader to a paragraph number instead
+  // of naming its own figures, or a stray [#label] in the signature, which the renderer has no
+  // number for and prints literally on the filed PDF.
   const labels = new Set()
-  for (const s of body) {
+  for (const s of sections) {
     for (const block of s.blocks) {
       const name = block.match(/^\[#([^\]]*)\]/)?.[1]
       if (name === undefined) continue
+      if (s.key !== 'facts') { errors.push(`${s.heading}: the paragraph label “[#${name}]” belongs on a paragraph of the statement of facts`); continue }
       if (!/^[a-z][a-z-]*$/.test(name)) errors.push(`the paragraph label “[#${name}]” must be lowercase letters and hyphens`)
       else if (labels.has(name)) errors.push(`the paragraph label “[#${name}]” starts two paragraphs`)
       labels.add(name)
@@ -176,23 +189,30 @@ export function checkComplaint(dir) {
   for (const s of sections) {
     for (const block of s.blocks) {
       for (const m of block.replace(/^\[#[^\]]*\]/, '').matchAll(/\[#([^\]]*)\]/g)) {
-        if (!labels.has(m[1])) errors.push(`${s.heading}: “[#${m[1]}]” points to no paragraph — start the paragraph it means with [#${m[1]}]`)
+        if (s.key !== 'problems') errors.push(`${s.heading}: “[#${m[1]}]” points at a paragraph of the chronology — a paragraph number belongs to a claim, and a remedy names its own figures`)
+        else if (!labels.has(m[1])) errors.push(`${s.heading}: “[#${m[1]}]” points to no paragraph — start the paragraph it means with [#${m[1]}]`)
       }
     }
   }
 
   // A claim says what the problem is; a list of paragraph numbers is not a claim.
+  // Only what the claim says in its own words is counted: the pointer is struck out, and so is
+  // the pointer's own vocabulary, or a long enough list of labels buys its way past on the commas
+  // between them — which is the very shape this refuses.
   const problems = sections.find((s) => s.key === 'problems')
   if (problems) {
     let claim = null
     let words = 0
     const claimDone = () => {
-      if (claim && words < 25) errors.push(`“${claim}” says only which paragraphs bear on the problem — say what the problem is, with its key dates and figures`)
+      if (claim && words < 10) errors.push(`“${claim}” says only which paragraphs bear on the problem — say what the problem is, with its key dates and figures`)
     }
     for (const block of problems.blocks) {
       if (block.startsWith('###')) { claimDone(); claim = block.replace(/^#+\s*/, '').trim(); words = 0; continue }
       if (/^\*.*\*$/.test(block)) continue
-      words += block.replace(/\[#[^\]]*\]/g, ' ').split(/\s+/).filter(Boolean).length
+      words += (block
+        .replace(/\[#[^\]]*\]/g, ' ')
+        .replace(/\bparagraphs?\b/gi, ' ')
+        .match(/[A-Za-z0-9][A-Za-z0-9''’-]*/g) ?? []).length
     }
     claimDone()
   }
@@ -225,8 +245,8 @@ export function checkComplaint(dir) {
         else errors.push(`${where} — the figure “${n}” is not in the documents or statement.md`)
       }
       for (const q of quotes) {
-        if (contains(documents, q, false)) continue
-        if (contains(statement, q, false)) statementOnly.push(`“${q}” — ${where}`)
+        if (quotedIn(documents, q)) continue
+        if (quotedIn(statement, q)) statementOnly.push(`“${q}” — ${where}`)
         else errors.push(`${where} — the quotation “${q}” is not word for word in the documents or statement.md`)
       }
     }
