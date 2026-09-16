@@ -150,7 +150,11 @@ Each state decides which office receives the complaint, how it may be sent and w
 
 ## Updating
 
-In Claude, you left **Sync automatically** on in Step 4, which Claude says keeps the plugin up to date when it changes here. Each new version is listed on the [Releases page](https://github.com/b33kman/special-education-due-process-complaint/releases).
+**In Claude**, you left **Sync automatically** on in Step 4, which Claude says keeps the plugin up to date when it changes here.
+
+**In ChatGPT**, run the [install steps](#install-in-chatgpt) again to pick up the latest version.
+
+Each new version is listed on the [Releases page](https://github.com/b33kman/special-education-due-process-complaint/releases).
 
 ## What it will not do
 
@@ -268,16 +272,22 @@ npx skills add b33kman/special-education-due-process-complaint
 
 Node.js 20 or later must be installed first.
 
-### Upload the skill instead
+### Upload the skill to Claude
 
-Download `due-process-complaint-skill.zip` from the [latest release](https://github.com/b33kman/special-education-due-process-complaint/releases/latest), then in Claude open **Customize → Skills** and upload the ZIP. It won't update by itself.
+Download `due-process-complaint-skill.zip` from the [latest release](https://github.com/b33kman/special-education-due-process-complaint/releases/latest), then in Claude open **Customize → Skills** and upload the ZIP. It won't update by itself. In ChatGPT and Codex, use the marketplace or the skills CLI above.
 
 ### As a personal skill, from a clone
 
 ```bash
 git clone https://github.com/b33kman/special-education-due-process-complaint.git
 cd special-education-due-process-complaint
-ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint
+```
+
+Then link it into whichever agent you use:
+
+```bash
+ln -s "$(pwd)/skills/due-process-complaint" ~/.claude/skills/due-process-complaint   # Claude
+ln -s "$(pwd)/skills/due-process-complaint" ~/.codex/skills/due-process-complaint    # Codex
 ```
 
 Nothing to install: the three scripts are self-contained and need only Node.js 20 or later. (`npm install` is for running the tests — see below.)

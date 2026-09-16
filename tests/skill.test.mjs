@@ -237,6 +237,19 @@ test('a section out of the approved order, or not in it, is refused', () => {
   refused(once('## Statement of facts', '## Background'), /“## Background” is not a section of the complaint/)
 })
 
+test('every file that states the version states the same one', () => {
+  // An installed plugin updates only when its version changes, and the two manifests are read by
+  // different apps — Claude's and OpenAI's. A release that bumps some of these and not others
+  // ships an update one platform cannot see. CITATION.cff was left a release behind exactly once.
+  const version = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).version
+  assert.match(version, /^\d+\.\d+\.\d+$/)
+  for (const f of ['.claude-plugin/plugin.json', '.codex-plugin/plugin.json']) {
+    assert.equal(JSON.parse(readFileSync(join(root, f), 'utf8')).version, version, f)
+  }
+  assert.match(readFileSync(join(root, 'CITATION.cff'), 'utf8'), new RegExp(`^version: ${version}$`, 'm'), 'CITATION.cff')
+  assert.match(readFileSync(join(root, 'CHANGELOG.md'), 'utf8'), new RegExp(`^## ${version.replace(/\./g, '\\.')} — `, 'm'), 'CHANGELOG.md')
+})
+
 test('render never names a draft, or a complaint that fails the check, for filing', async () => {
   const draft = copy(examples.proSe, once('status: final', 'status: draft'))
   assert.equal(run('render', draft).code, 0)
