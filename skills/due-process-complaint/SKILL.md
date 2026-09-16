@@ -83,10 +83,17 @@ Run `check.mjs <case>`. It refuses any date, figure or quotation that is not in 
 
 Then review the draft for everything a script cannot catch, using `references/review.md`. Where subagents are available, give the review to a fresh subagent with the case folder and that file — it reads what is on the page, not what you meant; otherwise do it yourself as a separate pass, reading from the files, not from memory of drafting. Fix every error it finds at its source and run `check.mjs` again. A finding that is a judgment for the person signing — keeping a paragraph that concedes something, filing about an event older than the time limit — goes to them to decide.
 
-## 7. Render and hand over
+## 7. Render, then ask about a cover letter
 
 Once the person has confirmed the facts and chosen the claims and relief (rule 3), set `status: final` and run `render.mjs <case>`. It writes `complaint.pdf` and `complaint.docx` only when the check passes on a final complaint; otherwise it writes `complaint.DRAFT.pdf` and `complaint.DRAFT.docx`, marked DRAFT — NOT FOR FILING. Look at the PDF before handing it over.
 
-Give the person `complaint.pdf`, `complaint.docx` and `filing-instructions.md` to download, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md`. Say that they chose the claims and that you say nothing about how the complaint will fare.
+Then ask whether they want a short cover letter to send with the complaint — one yes/no question, and wait for the answer (rule 3). Ask it here, before the files are handed over: once the handover is announced the work reads as finished, and a question after it gets dropped. Ask whatever the filing route; even where the state takes the complaint through a portal, the district is served separately and a letter goes with that copy.
 
-Offer a short cover letter to send with it to the hearing office and the district. If they want one, write it as a one-page Word file from the caption and `filing-instructions.md`, with nothing in it the complaint doesn't say.
+If they want one, write it as a one-page Word file from the caption and `filing-instructions.md`, with nothing in it the complaint doesn't say. Who signs it decides how it reads:
+
+- **A parent, guardian or student filing on their own**: plain words in the first person — who they are, that the enclosed due process complaint concerns the student, the date, how to reach them, and a request that the office confirm it arrived. No terms of art.
+- **An attorney**: a transmittal letter addressed to the office named in `filing-instructions.md`, giving the caption, what is enclosed and on whose behalf, who else was served and by what method, and a request for acknowledgment; the signature block as on the complaint.
+
+## 8. Hand over
+
+Give the person `complaint.pdf`, `complaint.docx`, `filing-instructions.md` and the cover letter if they asked for one, and tell them which file to file and which to edit; what rests on their statement alone; anything the review left for them to decide; and how to file, from `filing-instructions.md`. Say that they chose the claims and that you say nothing about how the complaint will fare.

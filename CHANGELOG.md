@@ -2,6 +2,11 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.15 — 2026-09-16
+
+- **The cover letter is asked about, instead of being offered in passing.** It was the last sentence of the procedure, after the files had been handed over — so in practice nobody was ever asked. It is now a question of its own, put before the handover and waited on like every other choice, because once the files are announced the work reads as finished and a question after that gets dropped.
+- **The cover letter is written for whoever signs it.** A parent or student filing on their own gets plain words in the first person; an attorney gets a transmittal letter with the caption, what is enclosed and on whose behalf, who else was served and how, and a request for acknowledgment.
+
 ## 1.0.14 — 2026-09-15
 
 An adversarial review of the last three releases. Every finding below was reproduced by running the shipped scripts before it was fixed.
