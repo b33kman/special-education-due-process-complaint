@@ -2,6 +2,18 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.18 — 2026-09-18
+
+- **What each claim turns on is written down, with its regulation** (`references/claims.md`), and the procedure reads it before recommending. Testing 1.0.17 on invented files found the rule sound but the legal reading loose: one run left out a transition claim because it measured the 16th birthday against the IEP meeting instead of the IEP's whole term, and another miscounted a records delay. The file states each claim's parts and the rules they rest on, each quoted from the regulation: transition services "not later than the first IEP to be in effect when the child turns 16"; records "in no case more than 45 days after the request has been made"; the 60-day initial evaluation; the 10-day manifestation determination; § 300.513(a)(2)'s three effects for a procedural claim.
+- **Something that did not happen is not, by itself, a fact for a claim.** A notice the person never received, or a reply that never came, supports a recommendation only where a document records it. The person can still add the claim themselves. This is the same rule the Sped DPC app applies.
+- **Claims are asked four to a question, in as many questions as it takes.** 1.0.17 said the four-option limit never limits claims, and one run read that as licence to print ten options in one message. Nothing is left out to fit, and nothing is crammed in.
+- **For a procedural claim the person chooses, they are asked what it affected**, in their own words, into `statement.md`, because a hearing officer can find a denial of FAPE on a procedural violation only on one of those three effects.
+- `.codex-plugin/plugin.json` and `CITATION.cff` carry the version again; 1.0.17 bumped only the Claude manifest, so ChatGPT and Codex installs never received it.
+
+## 1.0.17 — 2026-09-18
+
+- **Recommend every claim the documents support, by a rule, never a number.** "Recommend the claims the documents support strongly, usually no more than four" became: recommend every claim the documents or the person's own words give a fact for, in each part it turns on, and no other; the number may be none, one or seven. Where nothing is supported, say that it is about what the documents show, not about the case, and offer the full list. Relief follows the same rule.
+
 ## 1.0.16 — 2026-09-16
 
 - **The school district's office and address are found for you, and printed on the certificate of service.** Most people filing don't know which office of the district to send it to, or where, and the procedure used to ask them. It now looks up the office the state names — or the one the district names for due process requests, otherwise the superintendent's office — on the district's own website, checks it against the letterhead on the district's documents, and writes it into `filing-instructions.md` under its own heading with the page it came from.

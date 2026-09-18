@@ -9,6 +9,7 @@ Install in the Claude app (Chat selected, not Code): Customize → Plugins → A
 - [README](https://github.com/b33kman/special-education-due-process-complaint/blob/main/README.md): what it produces, how it keeps facts honest, installation, frequently asked questions
 - [The skill's procedure](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/SKILL.md): the steps the AI follows, from reading the documents to handing over the complaint
 - [The form of the complaint](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/exemplar.md): caption, introduction, contact and residence information, statement of facts, statement of the problems, proposed resolution, signature, certificate of service
+- [The claims and what each turns on](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/claims.md): the eleven claims, the parts each requires with its regulation, and what counts as a fact for a part
 - [The review before delivery](https://github.com/b33kman/special-education-due-process-complaint/blob/main/skills/due-process-complaint/references/review.md): what is checked that a script cannot catch
 
 ## Examples
