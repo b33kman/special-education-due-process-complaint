@@ -31,15 +31,17 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Due Process Complaint Writer",
-    "shortDescription": "Write a special education due process complaint from a child's IEP, school documents and other important information.",
+    "shortDescription": "Draft IDEA complaints",
     "longDescription": "Give it the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, confirms the facts with you, lets you choose the claims and relief, confirms how to file in your state on the official page, checks every date, figure and quotation against the documents, and delivers a PDF to file and a Word file to edit. For parents filing on their own, advocates, special education attorneys and legal aid organizations. Not legal advice.",
     "developerName": "Mark Beekman",
-    "category": "Legal",
+    "category": "Education & Research",
     "capabilities": [
       "Interactive",
       "Write"
     ],
     "websiteURL": "https://github.com/b33kman/special-education-due-process-complaint",
+    "privacyPolicyURL": "https://github.com/b33kman/special-education-due-process-complaint/blob/main/PRIVACY.md",
+    "supportURL": "https://github.com/b33kman/special-education-due-process-complaint/issues",
     "defaultPrompt": [
       "Draft a due process complaint from these documents.",
       "I'm an attorney. Draft a due process complaint for my client from these records.",
