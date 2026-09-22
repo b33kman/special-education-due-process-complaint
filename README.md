@@ -169,6 +169,8 @@ Each new version is listed on the [Releases page](https://github.com/b33kman/spe
 
 The documents you attach go to Claude or ChatGPT like any other attachment, under that app's terms. The plugin doesn't send them anywhere else. It looks up your state's filing pages and your school district's website, and those lookups name the district, never the student. If you're an attorney using it on a client's file, make sure the app's terms fit your confidentiality duties.
 
+See the full [Privacy Policy](PRIVACY.md) for the data categories involved, how they are used, who receives them, retention, and your controls.
+
 ## Frequently asked questions
 
 ### How does it save me time?
