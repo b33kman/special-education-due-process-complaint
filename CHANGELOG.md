@@ -2,6 +2,12 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 1.0.19 — 2026-09-22
+
+- **Add the square directory artwork OpenAI requires.** One high-contrast icon, matched to the existing banner, serves as both the plugin logo and the composer icon. It is OpenAI presentation metadata and does not change Claude's runtime.
+- **Make the shared setup language provider-neutral.** The skill now describes the capabilities it needs — attachments, public-page browsing and the bundled Node.js scripts — rather than naming particular products. The drafting, checking and rendering workflow is unchanged.
+- **Keep release metadata synchronized.** Both plugin manifests, the package metadata, lockfile and citation file now carry version 1.0.19.
+
 ## 1.0.18 — 2026-09-18
 
 - **What each claim turns on is written down, with its regulation** (`references/claims.md`), and the procedure reads it before recommending. Testing 1.0.17 on invented files found the rule sound but the legal reading loose: one run left out a transition claim because it measured the 16th birthday against the IEP meeting instead of the IEP's whole term, and another miscounted a records delay. The file states each claim's parts and the rules they rest on, each quoted from the regulation: transition services "not later than the first IEP to be in effect when the child turns 16"; records "in no case more than 45 days after the request has been made"; the 60-day initial evaluation; the 10-day manifestation determination; § 300.513(a)(2)'s three effects for a procedural claim.

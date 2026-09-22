@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Due Process Complaint Writer</title>
+  <desc id="description">A checked legal document on a dark blue background.</desc>
+  <rect width="512" height="512" rx="96" fill="#1F2733"/>
+  <path d="M146 72h165l69 69v279c0 20-16 36-36 36H146c-20 0-36-16-36-36V108c0-20 16-36 36-36Z" fill="#FBF5EB"/>
+  <path d="M311 72v69h69Z" fill="#ECA27C"/>
+  <rect x="158" y="184" width="176" height="18" rx="9" fill="#ECA27C"/>
+  <rect x="158" y="232" width="196" height="16" rx="8" fill="#A7A098"/>
+  <rect x="158" y="272" width="158" height="16" rx="8" fill="#A7A098"/>
+  <rect x="158" y="312" width="116" height="16" rx="8" fill="#A7A098"/>
+  <circle cx="342" cy="354" r="72" fill="#ECA27C"/>
+  <path d="m306 354 24 24 49-55" fill="none" stroke="#1F2733" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
