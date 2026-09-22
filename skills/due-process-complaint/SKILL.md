@@ -17,7 +17,7 @@ You do not give legal advice. The person chooses the claims and the relief; you 
 
 ## Setting up
 
-This works in Claude (Chat, Cowork and Claude Code), in ChatGPT and Codex, and in other apps that read skills. Do the setup yourself; the person should never see a command.
+This skill runs in supported chat and coding environments that can read attachments, browse public pages, and execute the bundled Node.js scripts. Do the setup yourself; the person should never see a command.
 
 - **The case folder.** Make a working folder for the case (outside any git repository) with a `documents/` folder in it, and copy in the PDFs and other documents the person attached or pointed you to.
 - **The scripts.** They are in this skill's `scripts/` folder: three self-contained files that need only Node.js 20 or later, with nothing to install. Run them as `node <this skill's folder>/scripts/<name>.mjs <case>`. If Node.js isn't available, tell the person in plain words (on their own computer they can install it from nodejs.org; in a chat app, code execution has to be turned on), and stop.
