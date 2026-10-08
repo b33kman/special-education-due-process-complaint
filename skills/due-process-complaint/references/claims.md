@@ -57,7 +57,7 @@ number, and flag any you have not confirmed against the official text with **[VE
 
 ### 2. Failure to educate Student alongside children without disabilities
 
-*34 C.F.R. §§ 300.114–300.120*
+*34 C.F.R. §§ 300.114–300.117*
 
 - Required: a decision or proposal by the District placing the student in a more separate setting.
 - Required: a fact that the less separate setting was possible or was not considered. That could be
@@ -69,12 +69,18 @@ number, and flag any you have not confirmed against the official text with **[VE
 
 ### 3. Failure to evaluate appropriately and on time
 
-*34 C.F.R. §§ 300.111, 300.301–300.311*
+*34 C.F.R. §§ 300.301–300.311*
+
+**Cite for what the claim actually turns on.** § 300.301 is initial evaluations and § 300.303 is
+reevaluations: a claim about a student already found eligible turns on § 300.303, not § 300.301.
+§ 300.111 is child find — the duty to identify a child **not yet identified** — so add it to the
+heading only where the claim is that the District failed to find the student in the first place.
 
 - Required: a trigger. That is a request for an evaluation (a parent may request an initial
-  evaluation, § 300.301(b)), consent to one, or a documented reason to suspect a disability; child
-  find reaches a child suspected of a disability "even though they are advancing from grade to
-  grade" (§ 300.111(c)(1)).
+  evaluation, § 300.301(b); a parent may request a reevaluation, § 300.303(a)(2)), consent to one,
+  or a documented reason to suspect a disability. Where the claim is child find, the duty reaches a
+  child suspected of a disability "even though they are advancing from grade to grade"
+  (§ 300.111(c)(1)) and § 300.111 goes in the heading.
 - Required: what the District did instead:
   - a refusal;
   - no initial evaluation within 60 days of receiving consent, or the state's own timeframe
@@ -85,8 +91,13 @@ number, and flag any you have not confirmed against the official text with **[VE
   - or no reevaluation in three years, or a request for one refused (§ 300.303) — though a request
     made less than a year after the last one may be refused unless the District agrees
     (§ 300.303(b)(1)).
-- A request for a functional behavior assessment of one student is generally treated as a request
-  for an evaluation.
+- **Whether a request for a functional behavior assessment is a request for an evaluation is
+  contested, and in the Second Circuit it is settled against the Parent.** The Department's Office
+  of Special Education Programs has treated an FBA of one student as an evaluation; the Second
+  Circuit held in *D.S. ex rel. M.S. v. Trumbull Bd. of Educ.* that an FBA is not an evaluation
+  under the IDEA and that dissatisfaction with one does not entitle a parent to a publicly funded
+  independent evaluation. In Connecticut, New York and Vermont, do not plead an FBA refusal as a
+  failure to evaluate. Elsewhere, research the circuit's own law and flag it **[VERIFY-#]**.
 
 ### 4. Refusal to fund an independent educational evaluation
 
@@ -97,8 +108,13 @@ number, and flag any you have not confirmed against the official text with **[VE
   (§ 300.502(b)(1)).
 - Required: the District neither funded it nor filed a due process complaint to show its own
   evaluation was appropriate "without unnecessary delay" (§ 300.502(b)(2)).
-- Where the Parent already obtained the evaluation and seeks reimbursement, the request is for
-  reimbursement under § 300.502(b)(3) and the amount comes from the invoice in the record.
+- Where the Parent already obtained the evaluation and seeks reimbursement, the route is
+  § 300.502(b)(2)(ii) — the District must ensure an independent evaluation at public expense
+  "unless the agency demonstrates in a hearing pursuant to §§ 300.507 through 300.513 that the
+  evaluation obtained by the parent did not meet agency criteria" — and the amount comes from the
+  invoice in the record. **Not § 300.502(b)(3)**, which is the opposite provision: it is what
+  leaves the Parent without public funding once the District has won a hearing on its own
+  evaluation.
 
 ### 5. Denial of parent participation, including predetermination
 
@@ -258,10 +274,13 @@ a private school's name in the file.
 
 ### 18. Any other claim the hearing officer can decide
 
-A parent may file a due process complaint "on any matter relating to the identification,
-evaluation, or educational placement of a child with a disability, or the provision of FAPE to the
-child" (§ 300.507(a)(1)). Where the record supports something the seventeen headings above do not
-reach, plead it as its own lettered claim with the rule it turns on.
+Under § 300.507(a)(1) a parent may file a due process complaint on any of the matters described in
+§ 300.503(a)(1) and (2) — the identification, evaluation or educational placement of a child with a
+disability, or the provision of FAPE to the child. (That is a paraphrase: the regulation's own words
+are "on any of the matters described in § 300.503(a)(1) and (2)", followed by that gloss in a
+parenthetical. Do not quote the gloss as the operative text.) Where the record supports something
+the seventeen headings above do not reach, plead it as its own lettered claim with the rule it turns
+on.
 
 **This is where a state-law claim goes.** Many states require more than federal law: shorter
 timelines, staffing ratios, additional meeting or notice requirements, a right to copies of records.

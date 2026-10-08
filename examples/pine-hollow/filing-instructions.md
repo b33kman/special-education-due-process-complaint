@@ -8,6 +8,16 @@ The ORIGINAL petition is filed with the Office of Administrative Hearings (the c
 
 Source: <https://www.oah.nc.gov/documents/files/h-06e/open>, <https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_115C/GS_115C-109.6.html>, <https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_115C/GS_115C-107.2.html>, <https://www.oah.nc.gov/hearings-division/hearing-process/filing-contested-case>, <https://www.dpi.nc.gov/documents/publications/catalog/ec145-procedural-safeguards/open>
 
+## The State educational agency
+
+34 C.F.R. § 300.508(a)(2) requires the party filing to forward a copy of the complaint to the State
+educational agency. North Carolina's SEA is the North Carolina Department of Public Instruction. The
+petition is filed with the Office of Administrative Hearings, which is a separate body, so the
+Department is a second recipient and has its own line on the certificate of service below, at 6356
+Mail Service Center, Raleigh, NC 27699-6356.
+
+Source: <https://www.oah.nc.gov/documents/files/h-06e/open>, <https://www.dpi.nc.gov/students-families/alternative-choices/exceptional-children>
+
 ## The school district
 
 A copy is mailed or hand-delivered to the Superintendent, Pine Hollow County Board of Education, 200 County Line Road, Pine Hollow, NC 27999, telephone (555) 010-5000, when the petition is filed, and recorded on the certificate of service: North Carolina's form names the superintendent of the board of education named as respondent.

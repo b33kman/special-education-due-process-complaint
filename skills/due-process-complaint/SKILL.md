@@ -186,6 +186,14 @@ open it (for a PDF, download it into a scratch folder's `documents/`, never the 
 official page writes it; where the page and the row differ, the page wins. If the page won't load, use
 the row and tell the person which details could not be confirmed today.
 
+**The State educational agency.** 34 C.F.R. § 300.508(a)(2) requires the party filing to forward a
+copy of the complaint to the SEA, in every state. In most states the complaint is filed with the SEA
+and one line on the certificate covers both. Where a separate hearings office takes the filing — as
+in California, North Carolina, Indiana, Maryland, Massachusetts and Washington — the SEA is a second
+recipient. Settle it from the state's own page: who the SEA is, whether the filing office is the SEA,
+and if not, where its copy goes. Write it under its own heading, `## The State educational agency`,
+and `check.mjs` refuses a `filing-instructions.md` that does not answer it.
+
 **The school district.** Most people filing don't know which office of the district to send it to, or
 where, so find out for them. Federal law has the complaint go to the district (34 C.F.R. § 300.508(a)),
 but states differ on whether it goes there first, at the same time as the state, or as a copy, and to
@@ -201,8 +209,9 @@ Where the district is also the office the complaint is filed with, as in New Yor
 say it could not be confirmed.
 
 Write it up as `<case>/filing-instructions.md`, each point with the official page it came from, or
-marked as from the bundled table where it could not be confirmed. Give the district its own section,
-headed `## The school district`: the office, its address, telephone and email, whether the complaint
+marked as from the bundled table where it could not be confirmed. Give the State educational agency
+its own section, headed `## The State educational agency`, and the district its own section, headed
+`## The school district`: the office, its address, telephone and email, whether the complaint
 goes there first, at the same time as the state, or as a copy, and the page that gives them. The
 certificate of service names only the offices and addresses this file gives, and `check.mjs` holds it
 to that.
@@ -252,9 +261,11 @@ Follow `references/exemplar.md` — it is the voice, the section order and the f
 - The certificate of service lists, under `Served on:`, each office the complaint goes to — one line
   each, the office then its address, separated by commas, exactly as `filing-instructions.md` gives
   them — with the district's office always among them. The method and the date stay blank.
-- End with the review notes after a page break, headed as `references/audit.md` says: **Attorney
-  Review Notes** for an attorney or legal aid filer, plain **Review Notes** for a parent, student or
-  advocate — a parent's own notes are not attorney work product.
+- End with the review notes after a page break, headed **Attorney Review Notes – Attorney Work
+  Product – Remove Before Filing** for an `attorney` or `legal-aid` filer and plain **Review Notes –
+  Remove Before Filing** for a `parent`, `guardian`, `student` or `advocate`: a parent holds no
+  attorney work product. `references/audit.md` says what goes in them. They are not rendered into
+  the final complaint — once it is final they are written beside it as `review-notes.md`.
 - Leave `status: draft` in the front matter.
 
 ## 8. Check, then audit

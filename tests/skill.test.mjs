@@ -196,7 +196,7 @@ test('a source names a document in the folder, and a page that document has', ()
   refused(once('[@02_Progress_Reports, p. 1]', '[@02_Progress_Reports, p. 4]'), /names a page .* does not have/)
   // A stem that could be two documents says nothing about which page was read.
   refused(once('[@01_IEP_River_Oak, p. 1]\n\n[#present]', '[@0, p. 1]\n\n[#present]'), /matches 5 documents . give more of the name/)
-  refused(once('[@01_IEP_River_Oak, p. 1]\n\n[#present]', '[@01_IEP_River_Oak]\n\n[#present]'), /must read \[@stem, p\. N\] or \[@statement\]/)
+  refused(once('[@01_IEP_River_Oak, p. 1]\n\n[#present]', '[@01_IEP_River_Oak]\n\n[#present]'), /must read \[@stem, p\. N\], \[@statement\] or \[@law\]/)
 })
 
 test('a fact with no source at all is refused', () => {
@@ -273,6 +273,142 @@ test('a computed figure may appear in the pleading only because the table comput
 
 test('an arithmetic computation is digits and operators, and nothing else', () => {
   refused(once('| 24 - 4 | 20 weeks |', '| process.exit(0) | 20 weeks |'), /must be digits and \+ - \* \/ \( \) \. only/)
+})
+
+// ─── Authorities ────────────────────────────────────────────────────────
+
+test('a case the authorities file does not list is refused, and a flag is the way to cite it', () => {
+  const fake = once('580 U.S. 386, 399 (2017)', '999 F.3d 1, 7 (9th Cir. 2021)')
+  refused(fake, /the citation .999 F\.3d 1. is not one references\/authorities\.md lists/)
+  // Flagged, it is the person's to run down, which is what the tier rules ask for.
+  passes(chain(
+    once('580 U.S. 386, 399 (2017)', '999 F.3d 1, 7 (9th Cir. 2021) [VERIFY-1: citation not confirmed]'),
+    once('### Citations', '### Flagged issues\n\n- **VERIFY-1** — the citation was not confirmed in this session.\n\n### Citations'),
+  ))
+})
+
+const CASE_NAME = '*Endrew F. ex rel. Joseph F. v. Douglas Cnty. Sch. Dist. RE-1*, 580 U.S. 386, 399 (2017)'
+const SECOND_CIRCUIT_CASE = "*R.E. v. N.Y.C. Dep't of Educ.*, 694 F.3d 167, 186 (2d Cir. 2012)"
+
+test('a case that binds in another circuit is refused where this complaint is filed', () => {
+  // R.E. is Tier 1 in Connecticut, New York and Vermont. River Oak is filed in California.
+  refused(once(CASE_NAME, SECOND_CIRCUIT_CASE), /binds in the 2d Circuit and this complaint is filed in the 9th Circuit/)
+  // The same case is in scope for a complaint filed in the Second Circuit.
+  passes(chain(
+    once('state: California', 'state: New York'),
+    once('circuit: 9th', 'circuit: 2d'),
+    once(CASE_NAME, SECOND_CIRCUIT_CASE),
+  ))
+})
+
+test('a citation carries the name and the first page the authorities file gives it', () => {
+  // The volume and the reporter alone are not enough: a fabricated case name bolted onto a real
+  // citation is the error the guard exists for.
+  refused(once(CASE_NAME, '*Marquez v. Willow Creek Unified Sch. Dist.*, 580 U.S. 386, 399 (2017)'), /is the citation for Endrew F\., and that case is not named here/)
+  refused(once('580 U.S. 386, 399 (2017)', '580 U.S. 391, 399 (2017)'), /gives the wrong first page: references\/authorities\.md reports Endrew F\. at 386/)
+  // A short form cites a pin, not the first page, so its page is not held to the reporter's.
+  passes(once('580 U.S. 386, 399 (2017)', '580 U.S. at 399'))
+})
+
+test('a state court citation is caught by the citation rule, not by the figure check', () => {
+  const r = copy(examples.proSe, once(CASE_NAME, '*Doe v. Sch. Dist.*, 455 P.3d 221, 230 (Cal. 2019)'))
+  const out = run('check', r)
+  assert.equal(out.code, 1, out.out)
+  assert.match(out.out, /the citation .455 P\.3d 221. is not one references\/authorities\.md lists/)
+  assert.doesNotMatch(out.out, /the figure .455./, 'a fabricated state case was reported as an unsourced number')
+  rmSync(r, { recursive: true, force: true })
+})
+
+test('a citation on the italic regulation line is checked like any other', () => {
+  refused(once('*34 C.F.R. §§ 300.101, 300.320, 300.324.*', '*34 C.F.R. §§ 300.101, 300.320, 300.324; Doe v. District, 912 F.3d 1044, 1051 (9th Cir. 2019).*'), /the citation .912 F\.3d 1044. is not one references\/authorities\.md lists/)
+})
+
+test('a date is checked whatever form it is written in', () => {
+  refused(once('On September 8, 2025, the individualized education program team adopted', 'On Sept. 8, 2024, the individualized education program team adopted'), /the date .Sept\. 8, 2024. is not in the documents/)
+  refused(once('On December 2, 2025, the Parent requested in writing', 'On 12/2/2026, the Parent requested in writing'), /the date .12\/2\/2026. is not in the documents/)
+})
+
+test('the arithmetic computation may use only its own inputs, and nothing inert', () => {
+  refused(once('| 4800 - 1320 | 3480 minutes |', '| 1160 * 3 | 3480 minutes |'), /the computation uses 1160, which is not one of its inputs or a result computed above/)
+  refused(once('| 24 - 4 | 20 weeks |', '| 24 - 4 /*- 10*/ | 20 weeks |'), /must be digits and \+ - \* \/ \( \) \. only/)
+  refused(once('| 24 - 4 | 20 weeks |', '| 24 - 4 | weeks below the minimum: 20 |'), /the result .weeks below the minimum: 20. does not lead with a number/)
+})
+
+test('[@law] does not carry a quotation taken from a document', () => {
+  refused(once('## Proposed resolution', 'The District wrote that it “will never fund an outside evaluation of any kind”. 34 C.F.R. § 300.502. [@law]\n\n## Proposed resolution'), /attributes its words to a document/)
+  // What it does cover is listed, so the audit confirms it against the authority itself.
+  const out = passes(once('## Proposed resolution', 'A district must make the services available “in accordance with the child’s IEP”. 34 C.F.R. § 300.323(c)(2). [@law]\n\n## Proposed resolution'))
+  assert.match(out, /Quoted as the law[\s\S]*in accordance with the child/)
+})
+
+test('the circuit is the one the filing state sits in, and the state is a real one', () => {
+  refused(once('circuit: 9th', 'circuit: 2d'), /a complaint filed in California is bound by the 9th Circuit/)
+  refused(once('state: California', 'state: Narnia'), /is not a state or the District of Columbia/)
+})
+
+test('a quotation of the law is sourced to [@law], which is not a way past the source check', () => {
+  const quoted = (tail) => once('## Proposed resolution', `A district must make the services available “in accordance with the child’s IEP”. 34 C.F.R. § 300.323(c)(2).${tail}\n\n## Proposed resolution`)
+  // A regulation cannot be in the case folder, so without the marker the quotation is refused.
+  refused(quoted(''), /the quotation .in accordance with the child.s IEP. is not word for word/)
+  passes(quoted(' [@law]'))
+  // The marker is a claim that the words are the law's, so the paragraph has to cite the law.
+  refused(once('## Proposed resolution', 'The District must do what it promised, “in accordance with the child’s IEP”. [@law]\n\n## Proposed resolution'), /sourced to \[@law\] carries no citation/)
+  // And the chronology carries no law at all.
+  refused(once('## Statement of the problems', 'The rule is that services are delivered “in accordance with the child’s IEP”. 34 C.F.R. § 300.323(c)(2). [@law]\n\n## Statement of the problems'), /\[@law\] belongs in a claim, not in the chronology/)
+})
+
+test('a flag number is matched whole, so VERIFY-10 does not explain VERIFY-1', () => {
+  refused(chain(
+    once('Student resides in the District', '[VERIFY-1: burden allocation not confirmed] Student resides in the District'),
+    once('### Citations', '### Flagged issues\n\n- **VERIFY-10** — something else entirely.\n\n### Citations'),
+  ), /the flag .\[VERIFY-1\]. is not explained in the review notes/)
+})
+
+test('filing-instructions.md answers the § 300.508(a)(2) copy to the State educational agency', () => {
+  const dir = copy()
+  const fi = join(dir, 'filing-instructions.md')
+  writeFileSync(fi, readFileSync(fi, 'utf8').replace('## The State educational agency', '## The state'))
+  const r = run('check', dir)
+  assert.equal(r.code, 1, r.out)
+  assert.match(r.out, /no .## The State educational agency. section/)
+  rmSync(dir, { recursive: true, force: true })
+})
+
+test('the authorities the script carries are the authorities the documents give', async () => {
+  // check.mjs is a self-contained file with no folder beside it, so it cannot read
+  // references/authorities.md or references/state-rules.json at run time. The data it carries is
+  // bound to them here: a case added to one and not the other, or a case moved between the
+  // "binds everywhere" and "Second Circuit" blocks, fails this test rather than shipping.
+  const { TIER1, CIRCUIT_OF, citeKey } = await import(pathToFileURL(join(root, 'src', 'authorities-data.mjs')).href)
+  const refs = join(root, 'skills', 'due-process-complaint', 'references')
+  const doc = readFileSync(join(refs, 'authorities.md'), 'utf8')
+  const sectionOf = (heading) => {
+    const at = doc.indexOf(heading)
+    assert.ok(at > 0, `references/authorities.md has no “${heading}” heading`)
+    const next = doc.indexOf('\n### ', at + heading.length)
+    return doc.slice(at, next > 0 ? next : undefined)
+  }
+  const national = sectionOf('### Binding everywhere')
+  const second = sectionOf('### Second Circuit')
+  assert.equal(TIER1.length, 13)
+  for (const c of TIER1) {
+    const cite = `${c.volume} ${c.reporter} ${c.page}`
+    const where = c.scope === 'national' ? national : second
+    assert.ok(where.includes(cite), `${c.name}: “${cite}” is not in the ${c.scope} block of references/authorities.md`)
+    // And it is in that block only.
+    const other = c.scope === 'national' ? second : national
+    assert.ok(!other.includes(cite), `${c.name}: “${cite}” is in both blocks`)
+  }
+  // Every citation the document lists is one the script carries, so neither grows alone.
+  const keys = new Set(TIER1.map((c) => citeKey(c.volume, c.reporter)))
+  for (const block of [national, second]) {
+    for (const m of block.matchAll(/\b(\d{1,4})\s+(U\.S\.|F\.3d|F\. App'x)\s+\d{1,4}/g)) {
+      assert.ok(keys.has(citeKey(m[1], m[2])), `references/authorities.md lists “${m[0]}” and src/authorities-data.mjs does not`)
+    }
+  }
+  const { states } = JSON.parse(readFileSync(join(refs, 'state-rules.json'), 'utf8'))
+  assert.equal(Object.keys(CIRCUIT_OF).length, states.length)
+  for (const row of states) assert.equal(CIRCUIT_OF[row.code], row.circuit, `${row.code}: the table says ${row.circuit}`)
 })
 
 // ─── The form ───────────────────────────────────────────────────────────

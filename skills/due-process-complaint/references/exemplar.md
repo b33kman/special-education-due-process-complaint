@@ -12,7 +12,10 @@ not a suggestion.
 The bracketed ones print only when they apply.
 
 1. `## Preliminary statement`
-2. `## Required information` — the § 300.508(b) elements, as a table
+2. `## Required information` — the § 300.508(b)(1)–(3) elements as a table, each row saying what
+   requires it. A row the federal rule does not require (a date of birth, a parent's telephone
+   number) says so: it is there because the filing office's form asks for it. For a homeless child
+   the contact information and the school are § 300.508(b)(4) instead.
 3. `## Jurisdiction, timeliness and burden`
 4. `## Statement of facts` — the chronology, one dated event per paragraph, oldest first
 5. `## Statement of the problems` — one `### A. Heading` per claim, the regulation in italics beneath
@@ -91,15 +94,15 @@ stated in this complaint.
 
 ## Required information
 
-*34 C.F.R. § 300.508(b)(1)–(3).*
+*The elements 34 C.F.R. § 300.508(b)(1)–(3) requires, with the further details the filing office asks for.*
 
-| Required element | As provided |
-|---|---|
-| Name of the child | Avery Moreno |
-| Address of the child’s residence | 220 Birch Lane, Lakeview, CA 95000 |
-| Name of the school the child attends | Lakeview Elementary School |
-| Date of birth | February 9, 2016 |
-| Contact for the Parent | lena.moreno@example.com, (555) 010-2231 |
+| Element | As provided | Required by |
+|---|---|---|
+| Name of the child | Avery Moreno | § 300.508(b)(1) |
+| Address of the child’s residence | 220 Birch Lane, Lakeview, CA 95000 | § 300.508(b)(2) |
+| Name of the school the child attends | Lakeview Elementary School | § 300.508(b)(3) |
+| Date of birth | February 9, 2016 | the filing office’s form |
+| Contact for the Parent | lena.moreno@example.com, (555) 010-2231 | the filing office’s form |
 
 ## Jurisdiction, timeliness and burden
 
@@ -252,8 +255,9 @@ Self-represented (pro se)
 ### Flagged issues
 
 - **VERIFY-1** — Which party bears the burden of proof in a California special education due
-  process hearing is not confirmed. California Education Code § 56505(i) was not opened in this
-  session. Confirm on the official text before filing, and amend the Jurisdiction, timeliness and
+  process hearing is not confirmed. No subsection is named here because none was opened in this
+  session, and naming one unread is what the rule against guessing a subsection forbids. Find the
+  provision in the California Education Code, read it, and amend the Jurisdiction, timeliness and
   burden section.
 
 ### Citations
@@ -336,10 +340,13 @@ certificate.
 it prints at the upper left. Where it names the respondent in a particular way ("___ Board of
 Education"), use that in `respondent:`.
 
-**The certificate prints each office served, with its address** — the district's office always, and
-the state agency or hearing office where the state's rules say it is served too. Each is copied
-exactly from `filing-instructions.md`, one to a line, office then address, and `check.mjs` refuses
-one that file does not give. The person filing fills in only the method and the date.
+**The certificate prints each office served, with its address** — the district's office always, the
+**State educational agency always** (§ 300.508(a)(2): the party filing "must forward a copy of the
+due process complaint to the SEA"), and the hearing office where that is a different body. In most
+states the complaint is filed with the SEA, so one line covers both; where it is filed with a
+separate hearings office, as in California and North Carolina, the SEA needs its own line. Each is
+copied exactly from `filing-instructions.md`, one to a line, office then address, and `check.mjs`
+refuses one that file does not give. The person filing fills in only the method and the date.
 
 **Tables, only in four places**: the required-information block, a score trend, a service log, and
 the arithmetic table in the notes.

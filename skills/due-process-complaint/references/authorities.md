@@ -15,7 +15,12 @@ Classify every authority before you cite it.
 - **Tier 1 — listed here.** The cases in § 2 that apply to this filer, and the federal regulations
   and statutes in § 5. Cite with the pin cite given, and with no pin cite where none is given.
 - **Tier 2 — read in this session.** Text the person attached or pasted, or a page you opened and
-  read, in this session. May be quoted, with a pin cite.
+  read, in this session. May be quoted, with a pin cite. **A case citation still carries
+  [VERIFY-#]** unless § 2 lists it: nothing outside the session can confirm what you read, so
+  `check.mjs` refuses an unlisted reporter citation that has no flag. That is the point — the flag
+  keeps the complaint a draft until the person has run the citation down themselves. Quoting a
+  statute or a regulation you have read is different: source that paragraph `[@law]`, which lists
+  the quotation for the audit to confirm instead of refusing it.
 - **Tier 3 — everything else.** New research, a search result's summary, anything you recall.
   Cite with **[VERIFY-#]** only: no quotation, no pin cite, no description of the holding beyond
   the proposition you are citing it for. **Put the full citation in the text before the marker,
@@ -38,7 +43,7 @@ Always consider these. They are Tier 1 in every state and the District of Columb
 Cite these two only where the person has confirmed a unilateral placement (claim 17):
 
 - *Sch. Comm. of Burlington v. Dep't of Educ.*, 471 U.S. 359, 369–70 (1985) — reimbursement.
-- *Florence Cnty. Sch. Dist. Four v. Carter*, 510 U.S. 7, 15 (1993) — a private placement need not
+- *Florence Cnty. Sch. Dist. Four v. Carter*, 510 U.S. 7, 14 (1993) — a private placement need not
   meet state standards.
 
 ### Second Circuit — Connecticut, New York and Vermont only
@@ -60,7 +65,10 @@ only with the circuit named in the sentence so the reader sees what it is.
   the materiality standard for failure to implement; **the Board prevailed on its facts**, and that
   parenthetical goes in the complaint wherever this case is cited.
 - *D.S. ex rel. M.S. v. Trumbull Bd. of Educ.*, 975 F.3d 152 (2d Cir. 2020) — the scope of an
-  independent educational evaluation.
+  independent educational evaluation: **a functional behavior assessment is not an evaluation under
+  the IDEA, and dissatisfaction with one does not entitle a parent to a publicly funded independent
+  evaluation. The Board prevailed on that holding**, and that parenthetical goes in the complaint
+  wherever this case is cited. The parents prevailed only on the separate limitations question.
 
 And these two only with a confirmed unilateral placement:
 
@@ -173,6 +181,7 @@ brief.
   disposition) or was decided for the District or Board.
 - Describe an authority's holding or outcome only if you read its text in this session. That applies
   to authorities named only in the Attorney Review Notes as well.
-- Flag any case not in § 2 with **[VERIFY-#]**.
+- Flag any case not in § 2 with **[VERIFY-#]**, whether or not you read it. For the nine circuits
+  § 2 carries no case for, that is every circuit citation you write, and `check.mjs` enforces it.
 
 No misquotations. No invented pin cites. No case cited for a proposition it does not carry.

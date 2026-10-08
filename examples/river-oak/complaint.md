@@ -204,15 +204,15 @@ No Ninth Circuit decision is cited. None was confirmed in this session, and an u
 | Compensatory minutes owed | 4,800 minutes required (computed above); 1,320 minutes delivered (computed above) | 4800 - 1320 | 3480 minutes |
 | Average minutes per week, recomputed from the District's own weekly entries | 240; 240; 240; 240; 90; 100; 60; 75; 60; 75; 45; 0; 100; 60; 75; 30; 60; 100; 45; 75; 60; 100; 45; 65 (service log); 24 instructional weeks (service log) | (240+240+240+240+90+100+60+75+60+75+45+0+100+60+75+30+60+100+45+75+60+100+45+65)/24 | 95 minutes |
 | Words per minute below the stated benchmark at baseline | 87 words per minute benchmark (IEP, p. 1); 22 words per minute baseline (IEP, p. 1) | 87 - 22 | 65 words per minute |
-| Limitations cutoff, two years before the planned filing date | April 17, 2026 planned filing date (statement) | 2026 - 2 | 2024 |
 
 The District's own summary states an average of 95 minutes per week and 20 weeks below 240. Both were recomputed from its weekly entries and both are correct.
 
 ### For the Parent to decide
 
-- The eligibility date and the prior program of March 11, 2024 are pleaded as background at paragraph 1. March 11, 2024 falls outside the two-year period in 34 C.F.R. § 300.507(a)(2) measured from the planned filing date. The violations pleaded begin with the program dated September 8, 2025. Whether an exception applies to anything earlier is not addressed here.
+- **The limitations cutoff is April 17, 2024**: two years before the planned filing date of April 17, 2026, under 34 C.F.R. § 300.507(a)(2) and California Education Code § 56505. Confirm both the date and the period before filing. The eligibility date and the prior program of March 11, 2024 are pleaded as background at paragraph 1 and fall before that cutoff. The violations pleaded begin with the program dated September 8, 2025. Whether an exception reaches anything earlier is not addressed here.
 - Which party bears the burden of proof in a California special education due process hearing was not confirmed in this session. Confirm it on the official text of the California Education Code before filing.
 - The 15 days in remedy (a) and the monthly log in remedy (d) are the Parent's own choices, not figures from a document.
+- 34 C.F.R. § 300.508(a)(2) requires a copy to the State educational agency. California's is the Department of Education, and the Office of Administrative Hearings conducts the hearing under its supervision, which is why OAH is the state recipient on the certificate. Confirm on the Department's own dispute-resolution page that it does not also want a copy sent directly to it.
 
 ### Verification checklist
 

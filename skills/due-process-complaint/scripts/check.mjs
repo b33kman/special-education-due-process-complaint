@@ -6,6 +6,168 @@ const require = __createRequire(import.meta.url);
 import { existsSync, readdirSync, readFileSync, realpathSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+
+// src/authorities-data.mjs
+var citeKey = (volume, reporter) => `${Number(volume)} ${String(reporter).replace(/\s+/g, "").toLowerCase()}`;
+var TIER1 = [
+  // Binding everywhere.
+  { name: "Endrew F.", volume: 580, reporter: "U.S.", page: 386, scope: "national" },
+  { name: "Rowley", volume: 458, reporter: "U.S.", page: 176, scope: "national" },
+  { name: "Burlington", volume: 471, reporter: "U.S.", page: 359, scope: "national", placementOnly: true },
+  { name: "Carter", volume: 510, reporter: "U.S.", page: 7, scope: "national", placementOnly: true },
+  // Second Circuit: Connecticut, New York and Vermont only.
+  { name: "R.E.", volume: 694, reporter: "F.3d", page: 167, scope: "2d" },
+  { name: "C.F.", volume: 746, reporter: "F.3d", page: 68, scope: "2d" },
+  { name: "L.O.", volume: 822, reporter: "F.3d", page: 95, scope: "2d" },
+  { name: "A.M.", volume: 845, reporter: "F.3d", page: 523, scope: "2d" },
+  { name: "Newington", volume: 546, reporter: "F.3d", page: 111, scope: "2d" },
+  { name: "Woodstock", volume: 370, reporter: "F. App'x", page: 202, scope: "2d" },
+  { name: "Trumbull", volume: 975, reporter: "F.3d", page: 152, scope: "2d" },
+  { name: "Frank G.", volume: 459, reporter: "F.3d", page: 356, scope: "2d", placementOnly: true },
+  { name: "Gagliardo", volume: 489, reporter: "F.3d", page: 105, scope: "2d", placementOnly: true }
+];
+var CIRCUIT_OF = {
+  ME: "1st",
+  MA: "1st",
+  NH: "1st",
+  RI: "1st",
+  CT: "2d",
+  NY: "2d",
+  VT: "2d",
+  DE: "3d",
+  NJ: "3d",
+  PA: "3d",
+  MD: "4th",
+  NC: "4th",
+  SC: "4th",
+  VA: "4th",
+  WV: "4th",
+  LA: "5th",
+  MS: "5th",
+  TX: "5th",
+  KY: "6th",
+  MI: "6th",
+  OH: "6th",
+  TN: "6th",
+  IL: "7th",
+  IN: "7th",
+  WI: "7th",
+  AR: "8th",
+  IA: "8th",
+  MN: "8th",
+  MO: "8th",
+  NE: "8th",
+  ND: "8th",
+  SD: "8th",
+  AK: "9th",
+  AZ: "9th",
+  CA: "9th",
+  HI: "9th",
+  ID: "9th",
+  MT: "9th",
+  NV: "9th",
+  OR: "9th",
+  WA: "9th",
+  CO: "10th",
+  KS: "10th",
+  NM: "10th",
+  OK: "10th",
+  UT: "10th",
+  WY: "10th",
+  AL: "11th",
+  FL: "11th",
+  GA: "11th",
+  DC: "D.C."
+};
+var CODE_OF_STATE = Object.fromEntries(Object.entries({
+  AL: "Alabama",
+  AK: "Alaska",
+  AZ: "Arizona",
+  AR: "Arkansas",
+  CA: "California",
+  CO: "Colorado",
+  CT: "Connecticut",
+  DE: "Delaware",
+  DC: "District of Columbia",
+  FL: "Florida",
+  GA: "Georgia",
+  HI: "Hawaii",
+  ID: "Idaho",
+  IL: "Illinois",
+  IN: "Indiana",
+  IA: "Iowa",
+  KS: "Kansas",
+  KY: "Kentucky",
+  LA: "Louisiana",
+  ME: "Maine",
+  MD: "Maryland",
+  MA: "Massachusetts",
+  MI: "Michigan",
+  MN: "Minnesota",
+  MS: "Mississippi",
+  MO: "Missouri",
+  MT: "Montana",
+  NE: "Nebraska",
+  NV: "Nevada",
+  NH: "New Hampshire",
+  NJ: "New Jersey",
+  NM: "New Mexico",
+  NY: "New York",
+  NC: "North Carolina",
+  ND: "North Dakota",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  OR: "Oregon",
+  PA: "Pennsylvania",
+  RI: "Rhode Island",
+  SC: "South Carolina",
+  SD: "South Dakota",
+  TN: "Tennessee",
+  TX: "Texas",
+  UT: "Utah",
+  VT: "Vermont",
+  VA: "Virginia",
+  WA: "Washington",
+  WV: "West Virginia",
+  WI: "Wisconsin",
+  WY: "Wyoming"
+}).map(([code, name]) => [name.toLowerCase(), code]));
+function circuitForState(state) {
+  const raw = String(state ?? "").trim();
+  const code = CODE_OF_STATE[raw.toLowerCase()] ?? (raw.length === 2 ? raw.toUpperCase() : null);
+  return (code && CIRCUIT_OF[code]) ?? null;
+}
+var REPORTERS = "U\\.\\s?S\\.|F\\.\\s?2d|F\\.\\s?3d|F\\.\\s?4th|F\\.\\s?App'x|F\\.\\s?Supp\\.(?:\\s?\\dd?)?|S\\.\\s?Ct\\.|N\\.E\\.(?:\\s?\\dd)?|N\\.W\\.(?:\\s?\\dd)?|S\\.E\\.(?:\\s?\\dd)?|S\\.W\\.(?:\\s?\\dd)?|So\\.(?:\\s?\\dd)?|P\\.(?:\\s?\\dd)?|A\\.(?:\\s?\\dd)?|Cal\\.\\s?Rptr\\.(?:\\s?\\dd)?|N\\.Y\\.S\\.(?:\\s?\\dd)?";
+function citationsIn(text) {
+  const re = new RegExp(`\\b(\\d{1,4})\\s+(${REPORTERS})\\s+(at\\s+)?(\\d{1,4})`, "g");
+  const out = [];
+  for (const m of String(text ?? "").matchAll(re)) {
+    out.push({
+      raw: m[0].replace(/\s+/g, " "),
+      key: citeKey(m[1], m[2]),
+      page: Number(m[4]),
+      short: Boolean(m[3]),
+      // What was written before the citation, where the case name sits.
+      before: String(text).slice(Math.max(0, m.index - 140), m.index)
+    });
+  }
+  return out;
+}
+var nameNeedle = (name) => name.replace(/[*_]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+function tier1For(key, circuit, { page, short, before } = {}) {
+  const hit = TIER1.find((c) => citeKey(c.volume, c.reporter) === key);
+  if (!hit) return { listed: false, inScope: false };
+  if (!short && page !== void 0 && page !== hit.page) {
+    return { listed: false, inScope: false, wrongPage: hit.page, name: hit.name };
+  }
+  if (before !== void 0) {
+    const seen = String(before).replace(/\s+/g, " ").toLowerCase();
+    if (!seen.includes(nameNeedle(hit.name))) return { listed: false, inScope: false, expectedName: hit.name };
+  }
+  return { listed: true, inScope: hit.scope === "national" || hit.scope === String(circuit).trim(), scope: hit.scope, name: hit.name };
+}
+
+// src/check.mjs
 var FORM = [
   { key: "preliminary", re: /^preliminary statement$/i, required: true, name: "\u201CPreliminary statement\u201D" },
   { key: "required", re: /^required information$/i, required: true, name: "\u201CRequired information\u201D" },
@@ -95,22 +257,31 @@ var stripMarkers = (t) => String(t).replace(FLAG_RE, " ").replace(/\[@[^\]]*\]/g
 function claimsIn(block) {
   let t = stripMarkers(block.replace(/^\([a-z]\)\s+/, ""));
   const quotes = [...t.matchAll(/(\(?)["“]([^"“”]{2,})["”](\)?)/g)].filter((m) => !(m[1] && m[3])).map((m) => m[2].replace(/[.,;:]+$/, ""));
-  const dates = [...t.matchAll(new RegExp(`\\b(${MONTHS.join("|")})\\s+(\\d{1,2}),\\s+(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${Number(m[2])}/${m[3]}` }));
+  const dates = [
+    // "October 14, 2025", and the abbreviated forms a model reaches for anyway.
+    ...[...t.matchAll(new RegExp(`\\b(${MONTH_ALT})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,\\s*(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${Number(m[2])}/${m[3]}` })),
+    // "12/2/2026" and "2026-12-02". The pleading should write a date in full, but a date it does
+    // write in figures still has to be one somebody wrote down.
+    ...[...t.matchAll(/(?<![\d/-])(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})(?![\d/])/g)].map((m) => ({ text: m[0], key: `${Number(m[1])}/${Number(m[2])}/${m[3]}` })),
+    ...[...t.matchAll(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/g)].map((m) => ({ text: m[0], key: `${Number(m[2])}/${Number(m[3])}/${m[1]}` }))
+  ];
   for (const d of dates) t = t.replace(d.text, " ");
-  const months = [...t.matchAll(new RegExp(`\\b(${MONTHS.join("|")})\\s+(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${m[2]}` }));
+  const months = [...t.matchAll(new RegExp(`\\b(${MONTH_ALT})\\.?\\s+(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${m[2]}` }));
   for (const m of months) t = t.replace(m.text, " ");
-  t = t.replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, " ").replace(/§+\s*[\d.()a-z,–\s-]+/gi, " ").replace(/\b\d+\s+(?:U\.?S\.?|F\.(?:\s?\d\w*|\s?App'x|\s?Supp\.?\s?\d?\w*)|S\.\s?Ct\.|N\.E\.|N\.W\.|P\.|A\.|So\.)\s?\d*[\w.']*[^.;)]*\)/g, " ").replace(/\b\d+\s+(?:U\.?S\.?|F\.\s?\d\w*|F\.\s?App'x|S\.\s?Ct\.)\s+at\s+[\d,\s\u2013-]+/g, " ");
+  t = t.replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, " ").replace(/§+\s*[\d.()a-z,–\s-]+/gi, " ").replace(CITATION_LONG, " ").replace(CITATION_SHORT, " ");
   const numbers = [...t.matchAll(/(?<![\w.]|[A-Za-z]-)(\$?\d[\d,]*(?:\.\d+)?%?)(?:\s+([a-z]+))?/gi)].map((m) => ({ n: m[1].replace(/,/g, ""), unit: unitOf(m[2]) }));
   return { dates, months, numbers, quotes };
 }
 var NOT_A_UNIT = /* @__PURE__ */ new Set(["and", "or", "to", "through", "of", "in", "on", "at", "by", "for", "with", "the", "a", "an", "as", "from", "that", "which", "was", "were", "is", "are", "than", "but", "so", "if", "when", "while", "before", "after"]);
 var unitOf = (word) => word && !NOT_A_UNIT.has(word.toLowerCase()) ? word : "";
+var CITATION_LONG = new RegExp(`\\b\\d{1,4}\\s+(?:${REPORTERS})\\s+\\d{1,4}(?:\\s*,\\s*[\\d\u2013\u2014-]+)*(?:\\s*\\([^()]{0,60}\\))?`, "g");
+var CITATION_SHORT = new RegExp(`\\b\\d{1,4}\\s+(?:${REPORTERS})\\s+at\\s+[\\d\u2013\u2014,\\s-]+`, "g");
 var figureIn = (n, text) => new RegExp(`${n.startsWith("$") ? "\\$\\s?" : ""}(?<![\\d.])${escapeRe(n.replace(/[$%]/g, ""))}(?![\\d])${n.endsWith("%") ? "\\s?(?:%|percent)" : ""}`, "i").test(String(text).replace(/,/g, ""));
 var ARITHMETIC_HEADER = ["what", "inputs", "computation", "result"];
-var SAFE_EXPRESSION = /^[\d+\-*/(). ]+$/;
+var SAFE_EXPRESSION = /^(?!.*(?:\/\*|\*\/|\*\*|\/\/))[\d+\-*/(). ]+$/;
 var leadingNumber = (s) => {
-  const m = String(s).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
-  return m ? Number(m[0]) : null;
+  const m = String(s).replace(/,/g, "").match(/^\s*(-?\d+(?:\.\d+)?)/);
+  return m ? Number(m[1]) : null;
 };
 function auditArithmetic(notesSection, sources) {
   const errors = [];
@@ -128,9 +299,17 @@ function auditArithmetic(notesSection, sources) {
         errors.push(`${where}: the computation \u201C${computation}\u201D must be digits and + - * / ( ) . only`);
         continue;
       }
+      const inputFigures = /* @__PURE__ */ new Set();
       for (const { n } of [...inputs.replace(/\([^)]*\)/g, " ").matchAll(/(\$?\d[\d,]*(?:\.\d+)?%?)/g)].map((m) => ({ n: m[1].replace(/,/g, "") }))) {
+        inputFigures.add(n.replace(/[$%]/g, ""));
         if (!figureIn(n, sources) && !results.includes(n.replace(/[$%]/g, ""))) {
           errors.push(`${where}: the input \u201C${n}\u201D is neither in the documents or statement.md nor a result computed above`);
+        }
+      }
+      for (const m of computation.matchAll(/\d+(?:\.\d+)?/g)) {
+        const n = m[0];
+        if (!inputFigures.has(n) && !results.includes(n)) {
+          errors.push(`${where}: the computation uses ${n}, which is not one of its inputs or a result computed above`);
         }
       }
       let value;
@@ -158,8 +337,9 @@ function checkComplaint(dir) {
   const errors = [];
   const statementOnly = [];
   const onFlag = [];
+  const onLaw = [];
   const file = join(dir, "complaint.md");
-  if (!existsSync(file)) return { errors: ["there is no complaint.md in the case folder"], statementOnly, onFlag, openFlags: [], parsed: null };
+  if (!existsSync(file)) return { errors: ["there is no complaint.md in the case folder"], statementOnly, onFlag, onLaw, openFlags: [], parsed: null };
   const parsed = parseComplaint(readFileSync(file, "utf8"));
   const { meta, sections } = parsed;
   const textDir = join(dir, "work", "text");
@@ -174,6 +354,11 @@ ${statement}`;
     if (!meta[k]) errors.push(`the front matter has no ${k}:`);
   }
   if (meta.filer && !FILERS.includes(meta.filer)) errors.push(`filer: must be one of ${FILERS.join(", ")}`);
+  if (meta.state && meta.circuit) {
+    const expected = circuitForState(meta.state);
+    if (!expected) errors.push(`state: \u201C${meta.state}\u201D is not a state or the District of Columbia`);
+    else if (expected !== meta.circuit.trim()) errors.push(`circuit: ${meta.circuit} \u2014 a complaint filed in ${meta.state} is bound by the ${expected} Circuit`);
+  }
   if (!["draft", "final"].includes(meta.status)) errors.push("the front matter needs status: draft or status: final");
   let last = -1;
   for (const s of sections) {
@@ -219,7 +404,7 @@ ${statement}`;
         if (text && text.trim().split(/\s+/).length > MAX_FLAG_WORDS) {
           errors.push(`the flag \u201C[${id}]\u201D is longer than ${MAX_FLAG_WORDS} words \u2014 shorten it and explain it in the review notes`);
         }
-        if (!notesText.includes(id)) errors.push(`the flag \u201C[${id}]\u201D is not explained in the review notes`);
+        if (!new RegExp(`\\b${kind}-${num}\\b`).test(notesText)) errors.push(`the flag \u201C[${id}]\u201D is not explained in the review notes`);
       }
     }
   }
@@ -262,6 +447,7 @@ ${statement}`;
     const want = stem.toLowerCase().replace(/[\s_-]/g, "");
     return textFiles.filter((f) => f.toLowerCase().replace(/\.txt$/, "").replace(/[\s_-]/g, "").startsWith(want));
   };
+  const ATTRIBUTES_TO_A_DOCUMENT = /\b(?:the District|the Distict|the log|the notice|the report|the letter|the email|the IEP|the evaluation|the minutes|the record)\b[^.]{0,60}?\b(?:wrote|writes|records|recorded|states|stated|says|said|noted|notes|acknowledges|acknowledged|describes|described|reads)\b/i;
   const REPORTS = /\b(?:the Parent|the Parents|the Student|Petitioner|Counsel|the person filing)\b[^.]{0,40}?\b(?:report|reports|reported|states|stated|says|said|recalls|recalled|describes|described)\b/i;
   const facts = sections.find((s) => s.key === "facts");
   for (const s of sections) {
@@ -275,9 +461,18 @@ ${statement}`;
           }
           continue;
         }
+        if (/^law$/i.test(body)) {
+          if (s.key === "facts") errors.push(`Statement of facts: [@law] belongs in a claim, not in the chronology \u2014 the facts carry no legal citation`);
+          else if (!/\d+\s+(?:C\.F\.R|U\.S\.C)\.|§+\s*\d|\d+\s+(?:U\.\s?S\.|F\.\s?\d|F\.\s?App)/.test(block)) {
+            errors.push(`${s.heading}: a paragraph sourced to [@law] carries no citation \u2014 give the authority the words come from`);
+          } else if (ATTRIBUTES_TO_A_DOCUMENT.test(stripMarkers(block))) {
+            errors.push(`${s.heading}: a paragraph sourced to [@law] attributes its words to a document \u2014 [@law] is for quoting an authority, so source this to the page it is on`);
+          }
+          continue;
+        }
         const parts = body.match(/^(.*?),\s*p\.\s*(\d+)$/i);
         if (!parts) {
-          errors.push(`${s.heading}: the source \u201C[@${body}]\u201D must read [@stem, p. N] or [@statement]`);
+          errors.push(`${s.heading}: the source \u201C[@${body}]\u201D must read [@stem, p. N], [@statement] or [@law]`);
           continue;
         }
         const [, stem, page] = parts;
@@ -334,6 +529,9 @@ ${statement}`;
     else if (!instructions) errors.push("there is no filing-instructions.md \u2014 the offices on the certificate of service, and their addresses, come from it (step 5)");
     else {
       for (const office of served) for (const part of partsOf(office)) if (!contains(instructions, part)) errors.push(`Certificate of service: \u201C${part}\u201D is not in filing-instructions.md`);
+      if (!instructions.split(/^## /m).some((chunk) => /^the state educational agency\b/i.test(chunk))) {
+        errors.push("filing-instructions.md has no \u201C## The State educational agency\u201D section \u2014 34 C.F.R. \xA7 300.508(a)(2) requires a copy to the SEA, so say who the SEA is, whether the filing office is the SEA, and the page that says so");
+      }
       const district = instructions.split(/^## /m).find((chunk) => /^the school district\b/i.test(chunk));
       if (!district) errors.push("filing-instructions.md has no \u201C## The school district\u201D section \u2014 say which office of the district receives the complaint, its address, and the page that gives them");
       else if (!served.some((office) => partsOf(office).every((part) => contains(district, part)))) errors.push("the certificate of service does not name the school district\u2019s office as filing-instructions.md gives it");
@@ -342,11 +540,30 @@ ${statement}`;
   const arithmetic = auditArithmetic(notes, sources);
   errors.push(...arithmetic.errors);
   const computed = new Set(arithmetic.results);
+  const checkCitations = (text, where, excused) => {
+    for (const c of citationsIn(stripMarkers(text))) {
+      const t = tier1For(c.key, meta.circuit, c);
+      if (t.listed && t.inScope) continue;
+      if (excused) {
+        onFlag.push(`${c.raw} \u2014 ${where}`);
+        continue;
+      }
+      if (t.wrongPage !== void 0) errors.push(`${where} \u2014 \u201C${c.raw}\u201D gives the wrong first page: references/authorities.md reports ${t.name} at ${t.wrongPage}`);
+      else if (t.expectedName) errors.push(`${where} \u2014 \u201C${c.raw}\u201D is the citation for ${t.expectedName}, and that case is not named here`);
+      else if (t.listed) errors.push(`${where} \u2014 \u201C${c.raw}\u201D binds in the ${t.scope} Circuit and this complaint is filed in the ${meta.circuit} Circuit: cite it as persuasive with a [VERIFY-#] flag, or not at all`);
+      else errors.push(`${where} \u2014 the citation \u201C${c.raw}\u201D is not one references/authorities.md lists: cite it with a [VERIFY-#] flag, which is how an authority read in this session reaches the page`);
+    }
+  };
   const docDates = datesIn(documents), stmtDates = datesIn(statement);
   const docMonths = monthsIn(documents), stmtMonths = monthsIn(statement);
   for (const s of pleading) {
     for (const block of s.blocks) {
-      if (block.startsWith("###") || /^\*.*\*$/.test(block)) continue;
+      if (block.startsWith("###")) continue;
+      if (/^\*.*\*$/.test(block)) {
+        checkCitations(block, `${s.heading}: \u201C${block.slice(0, 80)}\u201D`, flagged(block));
+        continue;
+      }
+      const quotesTheLaw = /\[@law\]/i.test(block);
       const texts = isTable(block) ? tableRows(block).slice(1).flat() : [block];
       const where = `${s.heading}: \u201C${stripMarkers(block).trim().slice(0, 80)}${block.length > 80 ? "\u2026" : ""}\u201D`;
       const excused = flagged(block);
@@ -359,6 +576,7 @@ ${statement}`;
       };
       for (const text of texts) {
         const { dates, months, numbers, quotes } = claimsIn(text);
+        checkCitations(text, where, excused);
         for (const d of dates) {
           if (docDates.has(d.key)) continue;
           if (stmtDates.has(d.key)) note(d.text);
@@ -386,13 +604,20 @@ ${statement}`;
         }
         for (const q of quotes) {
           if (quotedIn(documents, q)) continue;
-          if (quotedIn(statement, q)) note(`\u201C${q}\u201D`);
-          else refuse(`the quotation \u201C${q}\u201D is not word for word in the documents or statement.md`);
+          if (quotedIn(statement, q)) {
+            note(`\u201C${q}\u201D`);
+            continue;
+          }
+          if (quotesTheLaw) {
+            onLaw.push(`\u201C${q}\u201D \u2014 ${where}`);
+            continue;
+          }
+          refuse(`the quotation \u201C${q}\u201D is not word for word in the documents or statement.md`);
         }
       }
     }
   }
-  return { errors, statementOnly, onFlag, openFlags, parsed };
+  return { errors, statementOnly, onFlag, onLaw, openFlags, parsed };
 }
 var self = fileURLToPath(import.meta.url);
 if (basename(self) === "check.mjs" && process.argv[1] && realpathSync(process.argv[1]) === realpathSync(self)) {
@@ -400,7 +625,7 @@ if (basename(self) === "check.mjs" && process.argv[1] && realpathSync(process.ar
     console.error("usage: node scripts/check.mjs <case folder>   \u2014 every date, figure and quotation in complaint.md against the documents and statement.md; the flags; the arithmetic; the required elements; the form");
     process.exit(2);
   }
-  const { errors, statementOnly, onFlag, openFlags } = checkComplaint(resolve(process.argv[2]));
+  const { errors, statementOnly, onFlag, onLaw, openFlags } = checkComplaint(resolve(process.argv[2]));
   for (const e of errors) console.log(`\u2717 ${e}`);
   const list = (title, items) => {
     if (!items.length) return;
@@ -410,6 +635,7 @@ ${title}`);
   };
   list("From statement.md, not from any document \u2014 tell the person signing:", statementOnly);
   list("Resting on a flag, not on a source \u2014 the person resolves each of these:", onFlag);
+  list("Quoted as the law \u2014 confirm each against the authority itself (references/audit.md \xA7 8):", onLaw);
   list("Flags still open \u2014 the complaint renders as DRAFT until they are resolved:", openFlags);
   console.log(errors.length ? `
 ${errors.length} error(s). Fix each from the sources and run again.` : "\ncheck passed.");

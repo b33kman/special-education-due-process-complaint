@@ -8,6 +8,18 @@ The request is filed with the Office of Administrative Hearings, Special Educati
 
 Source: <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Services/Page-Content/Special-Education-Services-List-Folder/Request-Special-Education-Due-Process-Hearing>, <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Resources/Page-Content/Special-Education-Resources-List-Folder/Notice-of-Procedural-Safeguards>, <https://california.public.law/codes/education_code_section_56502>, <https://www.dgs.ca.gov/OAH/Case-Types/Special-Education/Self-Help/Filing-and-Serving-Documents>
 
+## The State educational agency
+
+34 C.F.R. § 300.508(a)(2) requires the party filing to forward a copy of the complaint to the State
+educational agency. California's SEA is the California Department of Education. The Office of
+Administrative Hearings, Special Education Division is the office that conducts special education
+due process hearings under the Department's supervision, so the complaint filed with OAH is filed
+with the body the Department designates, and OAH appears on the certificate of service below. Before
+filing, confirm on the Department's own dispute-resolution page whether it also wants a copy sent
+directly to it.
+
+Source: <https://www.cde.ca.gov/sp/se/disputeresolution.asp>, <https://www.dgs.ca.gov/oah/case-types/special-education>
+
 ## The school district
 
 The complaint is served on the Superintendent, River Oak Unified School District, 500 Oak Valley Road, Willow Creek, CA 95833, telephone (555) 010-3000 — before it is filed with the Office of Administrative Hearings, as above. California's rules name no particular office within the district, so it goes to the superintendent's office.

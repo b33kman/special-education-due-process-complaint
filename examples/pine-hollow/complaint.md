@@ -204,13 +204,12 @@ No case is cited. *Endrew F.* and *Rowley* were considered and are not needed: n
 | Minutes delivered individually | 4 weeks at 60 minutes individual (service log) | 4 * 60 | 240 minutes |
 | Individual minutes required but not delivered individually | 1,320 minutes required (computed above); 240 minutes delivered individually (computed above) | 1320 - 240 | 1080 minutes |
 | Weeks without individual therapy | 22 weeks (service log); 4 weeks at 60 minutes individual (service log) | 22 - 4 | 18 weeks |
-| Limitations cutoff, one year before the planned filing date | June 1, 2026 planned filing date (statement) | 2026 - 1 | 2025 |
 
 The District's own summary states 690 minutes delivered against 1,320 required. Both were recomputed from its weekly entries and both are correct. The 1,080 figure in remedy (b) is the measure that matches the violation pleaded: the program requires individual therapy, and group therapy does not discharge it.
 
 ### For counsel to decide
 
-- **North Carolina's filing period is one year, not the federal two.** The evaluation of May 6, 2025 is pleaded as background at paragraph 1 and falls before the cutoff computed above. The violations pleaded begin with the meeting of August 21, 2025. Whether any exception reaches the evaluation itself is not addressed here.
+- **North Carolina's filing period is one year, not the federal two, and the cutoff is June 1, 2025**: one year before the planned filing date of June 1, 2026, under N.C. Gen. Stat. § 115C-109.6(b). Confirm both before filing. The evaluation of May 6, 2025 is pleaded as background at paragraph 1 and falls 26 days before that cutoff. The violations pleaded begin with the meeting of August 21, 2025. Whether any exception reaches the evaluation itself is not addressed here.
 - Which party bears the burden of proof in a North Carolina special education due process hearing was not confirmed in this session. Confirm it on the official text before filing, and amend the Jurisdiction, timeliness and burden section, which states no allocation.
 - Remedy (b) asks for 1,080 minutes on the individual-minutes measure. The 630-minute total shortfall is the alternative measure and is in the table above. Choose one and do not plead both.
 - The continuing-weeks clause in remedy (b) has no figure, by design: the period runs to the order.

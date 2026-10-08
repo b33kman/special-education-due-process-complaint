@@ -55,8 +55,10 @@ A number they have not seen is a number nobody checked.
 - Confirm the pin cite, the decision date and the reporter citation.
 - Confirm the case applies to the issue it is cited under.
 - Confirm whether each case is precedential, and which party prevailed.
-- List every case whose current validity you could not confirm, for the person's own citator check.
-  You cannot run a citator. Do not imply that you did.
+- **Flag** every case whose current validity you could not confirm, with **[VERIFY-#]**, and list
+  it in the notes for the person's own citator check. You cannot run a citator; do not imply that
+  you did. The flag is what matters: while it is open the complaint renders as a draft, so an
+  unconfirmed authority cannot leave as a filable document.
 
 ## 4. Regulatory verification
 
@@ -101,8 +103,11 @@ Look for:
 
 - Confirm every record date: meetings, evaluations, notices, requests, removals, logs.
 - Confirm every decision date on a cited authority.
-- Confirm the filing date and the limitations cutoff, and that the cutoff was computed from the
-  filing date in the arithmetic table.
+- Confirm the filing date and the limitations cutoff. **The cutoff does not go in the arithmetic
+  table**: that table holds digits and operators, and a date cutoff is calendar arithmetic it
+  cannot express — a row reading `2026 - 2 | 2024` certifies a year and says nothing about the day.
+  State the cutoff in the notes in words, with the filing date it was measured from and the
+  provision that sets the period, for the person to confirm.
 - Correct any date attributed to the wrong document.
 
 ## 10. Coverage check
@@ -159,11 +164,27 @@ settle one yourself.
 
 ## The Attorney Review Notes
 
-The complaint ends, after a page break, with a section headed exactly:
+The complaint ends, after a page break, with a section headed for whoever is filing. An attorney or
+a legal aid organization:
 
 ```
 ## Attorney Review Notes – Attorney Work Product – Remove Before Filing
 ```
+
+A parent, guardian, student or advocate:
+
+```
+## Review Notes – Remove Before Filing
+```
+
+A parent holds no attorney work product, and a claim of privilege nobody holds is a false claim on a
+filed document. `check.mjs` refuses the wrong heading for the declared filer.
+
+**They are not in the complaint it renders for filing.** While the complaint is a draft they sit
+inside it, behind the DRAFT banner, which is where they get read and acted on. Once it is final
+`render.mjs` leaves them out of `complaint.pdf` and `complaint.docx` and writes them beside it as
+`review-notes.md`. A page break and a heading saying "Remove Before Filing" are an instruction to a
+human, and what is in these notes is the person's own account of what the District will argue.
 
 It contains these lists. **Omit any list that is empty.** Never describe an authority as verified
 unless you read its text in this session.
