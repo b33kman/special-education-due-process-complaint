@@ -1,8 +1,8 @@
 {
   "name": "special-education-due-process-complaint",
-  "version": "1.0.18",
+  "version": "2.0.0",
   "private": true,
-  "description": "Special Education Due Process Complaint Writer — a free AI plugin and skill for Claude and ChatGPT that drafts an IDEA special education due process complaint from a child's IEP, school documents and other important information, checks every date, figure and quotation against them, and delivers a PDF to file and a Word file to edit.",
+  "description": "Writes a special education due process complaint (IDEA) from a child's IEP, school documents and other important information — evaluations, prior written notices, progress reports, service logs, emails, private evaluations and the family's own account — for any US state, in Claude or ChatGPT: facts confirmed with the person filing, every claim the record supports argued against the district's own stated reasons, the law researched for the filing state and circuit, the state's filing details confirmed on its official filing page, every date, figure, quotation and citation checked, the arithmetic shown and confirmed, anything unverified flagged for the person signing, delivered as a PDF to file and a Word file to edit.",
   "keywords": [
     "special-education",
     "due-process-complaint",

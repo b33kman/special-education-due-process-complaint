@@ -14,6 +14,10 @@ From the progress reports dated November 14, 2025, January 23, 2026 and March 6,
 
 Jordan read 22 words per minute in August 2025 and 23 words per minute in March 2026. The IEP says the end-of-second-grade benchmark is 87 words per minute. He is in third grade.
 
+## The filing
+
+I plan to file on April 17, 2026.
+
 ## Relief sought
 
 An IEP meeting within 15 days to adopt measurable reading goals based on current assessment data; an independent educational evaluation in reading and written expression at the district's expense; compensatory specialized academic instruction equal to the minutes not delivered from October 6, 2025 through February 27, 2026; and the IEP implemented as written, with quarterly service logs sent to me.

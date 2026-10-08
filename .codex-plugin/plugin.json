@@ -1,7 +1,7 @@
 {
   "name": "due-process-complaint",
-  "version": "1.0.18",
-  "description": "Writes a special education due process complaint (IDEA) from a child's IEP, school documents and other important information — evaluations, prior written notices, progress reports, service logs, emails, private evaluations and the family's own account — for any US state, in Claude or ChatGPT: facts confirmed with the person filing, the state's filing details confirmed on its official filing page, every date, figure and quotation checked against the documents, delivered as a PDF to file and a Word file to edit.",
+  "version": "2.0.0",
+  "description": "Writes a special education due process complaint (IDEA) from a child's IEP, school documents and other important information — evaluations, prior written notices, progress reports, service logs, emails, private evaluations and the family's own account — for any US state, in Claude or ChatGPT: facts confirmed with the person filing, every claim the record supports argued against the district's own stated reasons, the law researched for the filing state and circuit, the state's filing details confirmed on its official filing page, every date, figure, quotation and citation checked, the arithmetic shown and confirmed, anything unverified flagged for the person signing, delivered as a PDF to file and a Word file to edit.",
   "author": {
     "name": "Mark Beekman",
     "url": "https://github.com/b33kman"
@@ -32,7 +32,7 @@
   "interface": {
     "displayName": "Due Process Complaint Writer",
     "shortDescription": "Draft IDEA complaints",
-    "longDescription": "Give it the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, confirms the facts with you, lets you choose the claims and relief, confirms how to file in your state on the official page, checks every date, figure and quotation against the documents, and delivers a PDF to file and a Word file to edit. For parents filing on their own, advocates, special education attorneys and legal aid organizations. Not legal advice.",
+    "longDescription": "Give it the IEPs, evaluations, prior written notices, progress reports, service logs and emails. It reads every page, confirms the facts with you, recommends every claim the documents support and lets you choose, argues each claim against the reason the district gave in the record, researches the law for your state and circuit, confirms how to file on your state's official page, checks every date, figure, quotation and citation, shows its arithmetic for you to confirm, flags anything it could not verify, and delivers a PDF to file and a Word file to edit. For parents filing on their own, advocates, special education attorneys and legal aid organizations. Not legal advice.",
     "developerName": "Mark Beekman",
     "category": "Business & Operations",
     "capabilities": [

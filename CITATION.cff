@@ -9,17 +9,19 @@ abstract: >-
   important information —
   IEPs, evaluations, prior written notices, progress reports, service logs and
   correspondence — for any of the 50 US states and the District of Columbia.
-  Every date, figure and quotation is checked against the documents or the
-  person's own statement, the filing state's details are confirmed on its
-  official filing page, the school district's office and address are looked up and
-  printed on the certificate of service, and the draft is reviewed for errors before it is delivered as
+  Every claim the record supports is argued against the reason the district gave in the record.
+  Every date, figure, quotation and citation is checked against the documents, the
+  person's own statement, or an authority read in the session; anything unverified is flagged
+  for the person signing. The arithmetic is shown and confirmed, the filing state's details are
+  confirmed on its official filing page, the school district's office and address are looked up and
+  printed on the certificate of service, and the draft is audited before it is delivered as
   a PDF to file and a Word file to edit.
 authors:
   - given-names: Mark
     family-names: Beekman
 repository-code: "https://github.com/b33kman/special-education-due-process-complaint"
 url: "https://github.com/b33kman/special-education-due-process-complaint"
-version: 1.0.18
+version: 2.0.0
 license: MIT
 keywords:
   - special education

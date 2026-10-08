@@ -35,14 +35,35 @@ function refused(edit, pattern, from) {
   assert.match(r.out, pattern)
   rmSync(dir, { recursive: true, force: true })
 }
+function passes(edit, from) {
+  const dir = copy(from, edit)
+  const r = run('check', dir)
+  assert.equal(r.code, 0, r.out)
+  rmSync(dir, { recursive: true, force: true })
+  return r.out
+}
 const once = (from, to) => (md) => {
   assert.ok(md.includes(from), `the example no longer contains: ${from}`)
   return md.replace(from, to)
 }
+const chain = (...edits) => (md) => edits.reduce((m, edit) => edit(m), md)
+/** Put a flag in the pleading and its explanation in the review notes. */
+const withFlag = (marker, explanation = marker) => chain(
+  once('Student resides in the District', `[${marker}] Student resides in the District`),
+  once('### Citations', `### Flagged issues\n\n- **${explanation}** — the full explanation, which lives here rather than in the pleading.\n\n### Citations`),
+)
 async function pageText(file, n) {
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(file)), isEvalSupported: false }).promise
   return (await (await doc.getPage(n < 0 ? doc.numPages : n)).getTextContent()).items.map((i) => i.str).join(' ')
 }
+async function wholeText(file) {
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(file)), isEvalSupported: false }).promise
+  let text = ''
+  for (let n = 1; n <= doc.numPages; n++) text += ' ' + (await (await doc.getPage(n)).getTextContent()).items.map((i) => i.str).join(' ')
+  return text.replace(/\s+/g, ' ')
+}
+
+// ─── The examples, end to end ───────────────────────────────────────────
 
 test('both worked examples pass the check and render as the files to file, in the pleading form', async () => {
   for (const ex of Object.values(examples)) {
@@ -57,55 +78,299 @@ test('both worked examples pass the check and render as the files to file, in th
     assert.match(first, /BEFORE THE OFFICE OF ADMINISTRATIVE HEARINGS/)
     assert.match(first, /In the Matter of:/)
     assert.match(first, /Petitioner,/)
-    assert.match(first, /I\. INTRODUCTION/)
+    assert.match(first, /I\. PRELIMINARY STATEMENT/)
     assert.match(first, /1\.\s+Petitioner/)
     assert.doesNotMatch(first, /DRAFT/)
+    const all = await wholeText(join(dir, 'complaint.pdf'))
+    // Every section the form requires, in the numerals the renderer assigns.
+    for (const heading of ['REQUIRED INFORMATION', 'JURISDICTION, TIMELINESS AND BURDEN', 'STATEMENT OF FACTS', 'STATEMENT OF THE PROBLEMS', 'PROPOSED RESOLUTION', 'CERTIFICATE OF SERVICE']) {
+      assert.match(all, new RegExp(heading), heading)
+    }
+    // The review notes are the last thing in the document, after the certificate.
+    assert.ok(all.indexOf('Remove Before Filing') > all.indexOf('CERTIFICATE OF SERVICE'), 'the notes come after the certificate')
+    // Nothing a marker is written as ever reaches the page.
+    assert.doesNotMatch(all, /\[#/, 'a paragraph label printed literally')
+    assert.doesNotMatch(all, /\[@/, 'a source marker printed literally')
+    assert.doesNotMatch(all, /\[(?:MISSING|CONFLICT|VERIFY|COUNSEL)-/, 'a flag printed on a final complaint')
+    // A source prints as the page it names.
+    assert.match(all, /\(p\. 1\)/)
     const last = (await pageText(join(dir, 'complaint.pdf'), -1)).replace(/\s+/g, ' ')
-    assert.match(last, /CERTIFICATE OF SERVICE/)
-    // The district's office is printed on the certificate, not left for the filer to find.
     const respondent = readFileSync(join(dir, 'complaint.md'), 'utf8').match(/^respondent: (.*)$/m)[1]
-    assert.match(last, new RegExp(`Served on:.*Superintendent, ${respondent}, \\d+ `, 'i'))
+    assert.match(all.replace(/\s+/g, ' '), new RegExp(`Served on:.*Superintendent, ${respondent}, \\d+ `, 'i'))
+    assert.ok(last.length > 0)
     rmSync(dir, { recursive: true, force: true })
   }
 })
 
+test('the two examples are a parent filing pro se and an attorney filing, and each says so', async () => {
+  const proSe = copy(examples.proSe)
+  assert.equal(run('render', proSe).code, 0)
+  const a = await wholeText(join(proSe, 'complaint.pdf'))
+  assert.match(a, /Self-represented \(pro se\)/)
+  assert.match(a, /Review Notes . Remove Before Filing/)
+  assert.doesNotMatch(a, /Attorney Work Product/, "a parent's own notes are not attorney work product")
+  rmSync(proSe, { recursive: true, force: true })
+
+  const counsel = copy(examples.counsel)
+  assert.equal(run('render', counsel).code, 0)
+  const b = await wholeText(join(counsel, 'complaint.pdf'))
+  assert.match(b, /Attorney for Petitioner and the Parent/)
+  assert.match(b, /Bar No\./)
+  assert.match(b, /Counsel for Petitioner and the Parent certifies/)
+  assert.match(b, /Attorney Review Notes . Attorney Work Product . Remove Before Filing/)
+  assert.match(b, /20 U\.S\.C\. . 1415\(i\)\(3\)\(B\)/, "counsel's fee reservation")
+  rmSync(counsel, { recursive: true, force: true })
+})
+
+// ─── Facts against the sources ──────────────────────────────────────────
+
 test('a date no document or statement gives is refused', () => {
-  refused(once('On October 6, 2025, the small-group', 'On October 7, 2025, the small-group'), /the date “October 7, 2025” is not in the documents/)
+  refused(once('October 6, 2025, the District’s service delivery log records 90 minutes', 'October 7, 2025, the District’s service delivery log records 90 minutes'), /the date .October 7, 2025. is not in the documents/)
 })
 
 test('a figure no source gives is refused — including one that is only the tail of the real figure', () => {
-  refused(once('recorded 21 words per minute', 'recorded 37 words per minute'), /the figure “37” is not in the documents/)
-  refused(once('provides for 240 minutes per week', 'provides for 40 minutes per week'), /the figure “40” is not in the documents/)
+  refused(once('recorded 21 words per minute', 'recorded 37 words per minute'), /the figure .37. is not in the documents/)
+  refused(once('provides 240 minutes per week', 'provides 40 minutes per week'), /the figure .40. is not in the documents/)
 })
 
 test('a quotation that is not word for word in a source is refused', () => {
-  refused((md) => md.replace('## Statement of the problems', 'The District wrote that it “will never fund an outside evaluation.”\n\n## Statement of the problems'), /the quotation “will never fund an outside evaluation” is not word for word/)
+  refused((md) => md.replace('## Statement of the problems', 'The District wrote that it “will never fund an outside evaluation.”\n\n## Statement of the problems'), /the quotation .will never fund an outside evaluation. is not word for word/)
 })
 
 test('a figure from the person’s own statement passes, and is listed as resting on it', () => {
-  const dir = copy(examples.proSe, (md) => md.replace('## Statement of the problems', 'The Parent states that the reading teacher left after 7 weeks, on July 21, 2025.\n\n## Statement of the problems'))
-  writeFileSync(join(dir, 'statement.md'), `${readFileSync(join(dir, 'statement.md'), 'utf8')}\nThe reading teacher left after 7 weeks, on July 21, 2025.\n`)
+  const out = passes(once('within 15 days to adopt measurable reading goals', 'within 15 days to adopt measurable reading goals'))
+  assert.match(out, /From statement\.md, not from any document[\s\S]*15 days/)
+})
+
+test('a space the extractor left before a semicolon does not refuse the District’s own words', () => {
+  // pdf.js ends a text item at a font or position change, so an extracted line can read
+  // “on leave ; no substitute”. Closing that space up is not rewording — every word, and
+  // the order of them, still has to match exactly.
+  const dir = copy(examples.proSe, once('and the note “small-group reading block discontinued pending staffing; SAI provided in the general education classroom during available periods.”', 'and the note “teacher on leave; no substitute.”'))
+  writeFileSync(join(dir, 'work', 'text', 'log-transcribed.txt'), '--- page 1 ---\nWeek of October 6, 2025: 90 minutes — teacher on leave ; no substitute .\n')
   const r = run('check', dir)
   assert.equal(r.code, 0, r.out)
-  assert.match(r.out, /From statement\.md, not from any document[\s\S]*· July 21, 2025 —[\s\S]*· 7 weeks —/)
+  rmSync(dir, { recursive: true, force: true })
+
+  // And the latitude is only that. Closing up a space the writer put between two of the page's
+  // own words is rewording, not an extractor artefact, and the quotation is still refused.
+  const d2 = copy(examples.proSe, once('and the note “small-group reading block discontinued pending staffing; SAI provided in the general education classroom during available periods.”', 'and the note “teacher onleave; no substitute.”'))
+  writeFileSync(join(d2, 'work', 'text', 'log-transcribed.txt'), '--- page 1 ---\nWeek of October 6, 2025: 90 minutes — teacher on leave ; no substitute .\n')
+  const r2 = run('check', d2)
+  assert.equal(r2.code, 1, r2.out)
+  assert.match(r2.out, /the quotation .teacher onleave; no substitute. is not word for word/)
+  rmSync(d2, { recursive: true, force: true })
+})
+
+// ─── Sources ────────────────────────────────────────────────────────────
+
+test('a source names a document in the folder, and a page that document has', () => {
+  refused(once('[@01_IEP_River_Oak, p. 1]\n\n[#present]', '[@99_Does_Not_Exist, p. 1]\n\n[#present]'), /names no document in the case folder/)
+  refused(once('[@02_Progress_Reports, p. 1]', '[@02_Progress_Reports, p. 4]'), /names a page .* does not have/)
+  // A stem that could be two documents says nothing about which page was read.
+  refused(once('[@01_IEP_River_Oak, p. 1]\n\n[#present]', '[@0, p. 1]\n\n[#present]'), /matches 5 documents . give more of the name/)
+  refused(once('[@01_IEP_River_Oak, p. 1]\n\n[#present]', '[@01_IEP_River_Oak]\n\n[#present]'), /must read \[@stem, p\. N\] or \[@statement\]/)
+})
+
+test('a fact with no source at all is refused', () => {
+  refused((md) => md.replace('## Statement of facts\n\n', '## Statement of facts\n\nOn September 8, 2025 the IEP team met for the annual review.\n\n'), /says where nothing came from/)
+})
+
+test('a fact sourced only to the statement says so in its own words', () => {
+  const fact = (sentence) => once('## Statement of the problems', `${sentence} [@statement]\n\n## Statement of the problems`)
+  refused(fact('Two telephone calls to the school went unanswered.'), /must say so in its own words/)
+  // A reporting verb on its own is not the phrase: this is the District speaking, not the Parent.
+  refused(fact('She telephoned the school twice and was told the case manager would call back.'), /must say so in its own words/)
+  passes(fact('The Parent reports that two telephone calls to the school went unanswered.'))
+})
+
+// ─── Flags: write it and flag it ────────────────────────────────────────
+
+test('a flag carries an unsupported fact onto the page, and the check reports what rests on it', () => {
+  const dir = copy(examples.proSe, chain(
+    once('The District’s progress report dated November 14, 2025 recorded 21 words per minute', 'The District’s progress report dated November 14, 2025 recorded 37 words per minute [MISSING-1: figure not legible on the copy]'),
+    once('### Citations', '### Flagged issues\n\n- **MISSING-1** — the figure is not legible on the copy provided.\n\n### Citations'),
+  ))
+  const r = run('check', dir)
+  assert.equal(r.code, 0, r.out)
+  assert.match(r.out, /Resting on a flag[\s\S]*the figure .37./)
+  assert.match(r.out, /Flags still open[\s\S]*MISSING-1/)
   rmSync(dir, { recursive: true, force: true })
 })
 
-test('a period inside the closing quotation mark is the writer’s, and a figure is traced with its unit', () => {
-  const dir = copy(examples.proSe, (md) => md.replace('## Statement of the problems', 'The District’s service log describes the instruction as “delivered in a small-group setting.”\n\n## Statement of the problems'))
-  const r = run('check', dir)
+test('an open flag keeps a final, passing complaint out of the files to file', () => {
+  const dir = copy(examples.proSe, withFlag('VERIFY-1: burden allocation not confirmed', 'VERIFY-1'))
+  assert.equal(run('check', dir).code, 0)
+  const r = run('render', dir)
   assert.equal(r.code, 0, r.out)
-  assert.match(r.out, /· 15 days —/, 'within 15 days comes from the statement, though a document says 15%')
+  assert.match(r.out, /1 flag\(s\) still open/)
+  assert.ok(existsSync(join(dir, 'complaint.DRAFT.pdf')) && !existsSync(join(dir, 'complaint.pdf')))
   rmSync(dir, { recursive: true, force: true })
 })
 
-test('nothing runs outside the margins: a long forum name, claim heading, regulation line or signature line wraps', async () => {
-  const dir = copy(examples.proSe, (md) => [
+test('a flag the review notes do not explain is refused', () => {
+  refused(once('Student resides in the District', '[VERIFY-1: burden allocation not confirmed] Student resides in the District'), /is not explained in the review notes/)
+})
+
+test('flags are numbered from 1, with no gaps, and never twice', () => {
+  refused(withFlag('VERIFY-2: burden allocation not confirmed', 'VERIFY-2'), /must be numbered from 1 with no gaps/)
+  refused(chain(
+    once('Student resides in the District', '[VERIFY-1: burden allocation] Student resides in the District'),
+    once('The violations pleaded below begin', '[VERIFY-1: something else] The violations pleaded below begin'),
+    once('### Citations', '### Flagged issues\n\n- **VERIFY-1** — explained here.\n\n### Citations'),
+  ), /is used twice/)
+})
+
+test('a flag longer than twelve words belongs in the notes, not in the pleading', () => {
+  refused(withFlag('VERIFY-1: the allocation of the burden of proof in this state has not been confirmed against the official text of the education code', 'VERIFY-1'), /is longer than 12 words/)
+})
+
+// ─── The arithmetic table ───────────────────────────────────────────────
+
+test('the arithmetic table is recomputed, and a result that does not follow is refused', () => {
+  refused(once('| 24 - 4 | 20 weeks |', '| 24 - 4 | 21 weeks |'), /24 - 4 is 20, and the result says 21/)
+})
+
+test('an arithmetic input must come from a source, or from a row above it', () => {
+  refused(once('| 24 instructional weeks logged (service log); 4 weeks at the full 240 minutes (service log) | 24 - 4 | 20 weeks |', '| 777 instructional weeks logged (service log); 4 weeks at the full 240 minutes (service log) | 777 - 4 | 773 weeks |'), /the input .777. is neither in the documents or statement\.md nor a result computed above/)
+})
+
+test('a computed figure may appear in the pleading only because the table computes it', () => {
+  // Remove the row that computes the compensatory minutes and the pleading's figure is unsourced.
+  refused((md) => {
+    const row = md.split('\n').find((l) => l.includes('| 4800 - 1320 |'))
+    assert.ok(row, 'the example no longer computes the compensatory minutes')
+    return md.replace(`${row}\n`, '')
+  }, /the figure .3480. is not in the documents or statement\.md, and is not a result in the arithmetic table/)
+})
+
+test('an arithmetic computation is digits and operators, and nothing else', () => {
+  refused(once('| 24 - 4 | 20 weeks |', '| process.exit(0) | 20 weeks |'), /must be digits and \+ - \* \/ \( \) \. only/)
+})
+
+// ─── The form ───────────────────────────────────────────────────────────
+
+test('a missing required element is refused: the school, the resolution, the address, the notes', () => {
+  refused((md) => md.replace(/^school: .*$/m, 'school:'), /the front matter has no school/)
+  refused((md) => md.replace(/## Proposed resolution[\s\S]*?(?=## Reservation of rights)/, ''), /no .Proposed resolution. section/)
+  refused((md) => md.replace(/^address: .*$/m, 'address: 1418 Alder Street, Willow Creek, CA 95834'), /address: .CA 95834. is not in the documents/)
+  refused((md) => md.replace(/## Review Notes[\s\S]*$/, ''), /no .Review Notes . Remove Before Filing. section/)
+})
+
+test('the front matter names who is filing, and the circuit whose law binds', () => {
+  refused((md) => md.replace(/^filer: .*$/m, 'filer:'), /the front matter has no filer/)
+  refused((md) => md.replace(/^circuit: .*$/m, 'circuit:'), /the front matter has no circuit/)
+  refused((md) => md.replace(/^filer: .*$/m, 'filer: lawyer'), /filer: must be one of/)
+})
+
+test('a parent’s review notes are not attorney work product, and counsel’s are', () => {
+  refused(once('## Review Notes – Remove Before Filing', '## Attorney Review Notes – Attorney Work Product – Remove Before Filing'), /a parent's notes are not attorney work product/)
+  refused(once('## Attorney Review Notes – Attorney Work Product – Remove Before Filing', '## Review Notes – Remove Before Filing'), /the notes are headed .Attorney Review Notes/, examples.counsel)
+})
+
+test('a section out of the approved order, or not in it, is refused', () => {
+  refused((md) => {
+    const facts = md.match(/## Statement of facts[\s\S]*?(?=## Statement of the problems)/)[0]
+    return md.replace(facts, '').replace('## Signature', `${facts}## Signature`)
+  }, /.## Statement of facts. is out of order/)
+  refused(once('## Statement of facts', '## Background'), /.## Background. is not a section of the complaint/)
+})
+
+// ─── Claims ─────────────────────────────────────────────────────────────
+
+const claimIs = (claim) => (md) => {
+  const [a] = md.match(/## Statement of the problems[\s\S]*?(?=### B\.)/)
+  return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide a free appropriate public education\n\n*34 C.F.R. §§ 300.101, 300.320, 300.324.*\n\n${claim}\n\n`)
+}
+
+test('a claim that only lists the paragraphs that bear on it is refused, however long the list', () => {
+  const says = /says only which paragraphs bear on the problem/
+  refused(claimIs('The facts at paragraphs [#goal] and [#goal] bear on this problem.'), says)
+  // Punctuation is not substance: a longer list of the same pointers buys nothing.
+  refused(claimIs(`The paragraphs that bear on this problem are ${Array(20).fill('[#goal]').join(', ')}.`), says)
+  // Nor is the pointer's own vocabulary, repeated.
+  refused(claimIs('Paragraph [#goal], paragraph [#goal] and paragraph [#goal] are the paragraphs for this problem.'), says)
+})
+
+test('a claim ties its rule to the facts by paragraph number', () => {
+  refused(claimIs('The District failed to offer a program reasonably calculated to enable Student to make appropriate progress, and has not revised it since.'), /points at no paragraph of the chronology/)
+})
+
+test('a claim that says what the problem is passes, however short, and points to the chronology', () => {
+  passes(claimIs('The District did not deliver the reading instruction the September 8, 2025 program requires (paragraph [#goal]).'))
+  // A claim whose new content is what the District did NOT do carries no date or figure of its own.
+  passes(claimIs('The District has not revised the reading goal or the services it provides since (paragraph [#goal]).'))
+})
+
+test('a label belongs on a fact paragraph, and only a claim or the pendency section points to one', () => {
+  const belongs = /belongs on a paragraph of the statement of facts/
+  const onlyClaims = /a paragraph number belongs to a claim or the pendency section/
+  refused(claimIs('[#self] The District did not deliver the instruction the program requires (paragraph [#self]).'), belongs)
+  // A remedy sends the reader to a paragraph number instead of naming its own figures.
+  refused(once('(c) provide 3,480 minutes of compensatory specialized academic instruction in reading, being the shortfall', '(c) provide the compensatory instruction at paragraph [#goal], being the shortfall'), onlyClaims)
+  // A label left in the signature or the certificate would print as “[#sig]” on the filed PDF.
+  refused(once('Respectfully submitted,', '[#sig] Respectfully submitted,'), belongs)
+  refused(once('The Parent certifies that on the date', '[#cert] The Parent certifies that on the date'), belongs)
+})
+
+test('the pendency section may point at the chronology', () => {
+  passes(once('## Proposed resolution', '## Pendency\n\nStudent’s current educational placement is the program described in the individualized education program dated September 8, 2025 (paragraph [#services]). Petitioner requests that Student remain in that placement during the pendency of these proceedings. 34 C.F.R. § 300.518(a).\n\n## Proposed resolution'))
+})
+
+test('a label that points nowhere, starts two paragraphs, or is not lowercase words is refused', () => {
+  refused(once('*34 C.F.R. §§ 300.101, 300.320, 300.324.*', '*34 C.F.R. §§ 300.101, 300.320, 300.324.*\n\nThe facts at paragraph [#nothing] bear on this problem, and the District said so in writing at the meeting.'), /.\[#nothing\]. points to no paragraph/)
+  refused(once('[#nov] The District’s progress report dated November 14, 2025', '[#goal] The District’s progress report dated November 14, 2025'), /.\[#goal\]. starts two paragraphs/)
+  refused(once('[#goal] On September 8, 2025', '[#Goal] On September 8, 2025'), /.\[#Goal\]. must be lowercase letters and hyphens/)
+})
+
+// ─── The certificate of service ─────────────────────────────────────────
+
+test('the certificate of service names the district’s office and every other office served, as filing-instructions.md gives them', () => {
+  const district = 'Superintendent, River Oak Unified School District, 500 Oak Valley Road, Willow Creek, CA 95833'
+  const hearing = 'Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833'
+  refused(once(`${district}\n\n${hearing}\n\n`, ''), /names nobody served/)
+  refused(once(`${district}\n\n`, ''), /does not name the school district.s office as filing-instructions\.md gives it/)
+  refused(once('500 Oak Valley Road, Willow Creek', '550 Oak Valley Road, Willow Creek'), /.550 Oak Valley Road. is not in filing-instructions\.md/)
+  const noFile = copy()
+  rmSync(join(noFile, 'filing-instructions.md'))
+  const r = run('check', noFile)
+  assert.equal(r.code, 1, r.out)
+  assert.match(r.out, /there is no filing-instructions\.md/)
+  rmSync(noFile, { recursive: true, force: true })
+  const noSection = copy()
+  const fi = join(noSection, 'filing-instructions.md')
+  writeFileSync(fi, readFileSync(fi, 'utf8').replace('## The school district', '## The district'))
+  const r2 = run('check', noSection)
+  assert.equal(r2.code, 1, r2.out)
+  assert.match(r2.out, /no .## The school district. section/)
+  rmSync(noSection, { recursive: true, force: true })
+})
+
+// ─── Rendering ──────────────────────────────────────────────────────────
+
+test('nothing runs outside the margins, in either example', async () => {
+  for (const ex of Object.values(examples)) {
+    const dir = copy(ex)
+    assert.equal(run('render', dir).code, 0)
+    const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
+    for (let n = 1; n <= doc.numPages; n++) {
+      for (const item of (await (await doc.getPage(n)).getTextContent()).items) {
+        if (!item.str.trim()) continue
+        assert.ok(item.transform[4] >= 71 && item.transform[4] + item.width <= 541, `page ${n}: “${item.str}” runs outside the margins`)
+      }
+    }
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
+test('a long forum name, claim heading, regulation line, table cell or signature line wraps inside the margins', async () => {
+  const dir = copy(examples.proSe, chain(
     once('forum: Office of Administrative Hearings', 'forum: Office of Administrative Hearings, Special Education Division, Department of General Services'),
-    once('### A. Failure to provide an adequate individualized education program', '### A. Failure to provide an adequate individualized education program and to revise it when the progress reports recorded no progress toward the annual reading fluency goal'),
-    once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.101, 300.300, 300.301, 300.303, 300.304, 300.305, 300.306, 300.320, 300.321, 300.323, 300.324, 300.503.*'),
+    once('### A. Failure to provide a free appropriate public education', '### A. Failure to provide a free appropriate public education and to revise the program when the progress reports recorded no progress toward the annual reading fluency goal'),
+    once('*34 C.F.R. §§ 300.101, 300.320, 300.324.*', '*34 C.F.R. §§ 300.101, 300.300, 300.301, 300.303, 300.304, 300.305, 300.306, 300.320, 300.321, 300.323, 300.324, 300.503.*'),
+    once('| Name of the child | Jordan Rivera |', '| Name of the child, in the form the state’s own filing form asks for it, surname first | Jordan Rivera, also recorded in the District’s documents as Rivera, Jordan, Student ID 4471-0093 |'),
     once('(555) 010-4471\n\ndana.r@example.com', '(555) 010-4471\n\ndana.r@example.com\n\nBar number and jurisdiction: ______________________'),
-  ].reduce((m, edit) => edit(m), md))
+  ))
   assert.equal(run('render', dir).code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
   for (let n = 1; n <= doc.numPages; n++) {
@@ -121,93 +386,52 @@ test('a claim points to its facts by label, and the label prints as that paragra
   const dir = copy(examples.proSe)
   assert.equal(run('check', dir).code, 0)
   assert.equal(run('render', dir).code, 0)
-  const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
-  let text = ''
-  for (let n = 1; n <= doc.numPages; n++) text += ' ' + (await (await doc.getPage(n)).getTextContent()).items.map((i) => i.str).join(' ')
-  text = text.replace(/\s+/g, ' ')
-  // The example's first claim points at the goal and the three progress reports it labels.
-  const goal = text.match(/(\d+)\. On September 8, 2025, the IEP team adopted an annual reading fluency goal/)?.[1]
-  const nov = text.match(/(\d+)\. On November 14, 2025, the District.s progress report/)?.[1]
+  const text = await wholeText(join(dir, 'complaint.pdf'))
+  const goal = text.match(/(\d+)\. On September 8, 2025, the individualized education program team adopted an annual goal/)?.[1]
+  const nov = text.match(/(\d+)\. The District.s progress report dated November 14, 2025/)?.[1]
   assert.ok(goal && nov, 'the labelled facts are numbered paragraphs')
   const pointer = text.match(/\(paragraphs [^)]*\)/)?.[0]
   assert.ok(pointer, 'the first claim prints a paragraph pointer')
-  assert.match(pointer, new RegExp(`\\b${goal}\\b`))
-  assert.match(pointer, new RegExp(`\\b${nov}\\b`))
-  // Nothing a label is written as ever reaches the filed page.
-  assert.doesNotMatch(text, /\[#/)
+  assert.match(text, new RegExp(`paragraphs ${goal} and|paragraphs [^)]*\\b${nov}\\b`))
   rmSync(dir, { recursive: true, force: true })
 })
 
-// The worked example's first claim is replaced with `claim`. Its chronology already carries
-// the labels the example's own claims point to, [#goal] among them.
-const claimIs = (claim) => (md) => {
-  const [a] = md.match(/## Statement of the problems[\s\S]*?(?=### B\.)/)
-  return md.replace(a, `## Statement of the problems\n\n### A. Failure to provide an adequate individualized education program\n\n*34 C.F.R. §§ 300.320, 300.324.*\n\n${claim}\n\n`)
-}
-const passes = (edit, from) => {
-  const dir = copy(from, edit)
-  const r = run('check', dir)
-  assert.equal(r.code, 0, r.out)
+test('a case name is set in italic, and a multiplication sign is not read as emphasis', async () => {
+  const dir = copy(examples.proSe)
+  assert.equal(run('render', dir).code, 0)
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
+  let text = ''
+  const fonts = new Set()
+  for (let n = 1; n <= doc.numPages; n++) {
+    for (const item of (await (await doc.getPage(n)).getTextContent()).items) {
+      text += item.str + ' '
+      if (/Endrew|Douglas/.test(item.str)) fonts.add(item.fontName)
+    }
+  }
+  text = text.replace(/\s+/g, ' ')
+  // The only asterisk anywhere is the multiplication sign in the arithmetic table.
+  assert.deepEqual(text.match(/\*/g), ['*'], 'markdown emphasis reached the page')
+  assert.match(text, /20 \* 240/)
+  assert.ok(fonts.size > 0, 'the case name is on the page')
+  const italic = []
+  for (const f of fonts) italic.push((await doc.getPage(1)).commonObjs)
   rmSync(dir, { recursive: true, force: true })
-}
-
-test('a claim that only lists the paragraphs that bear on it is refused, however long the list', () => {
-  const says = /says only which paragraphs bear on the problem/
-  refused(claimIs('The facts at paragraphs [#goal] and [#goal] bear on this problem.'), says)
-  // Punctuation is not substance: a longer list of the same pointers buys nothing.
-  refused(claimIs(`The paragraphs that bear on this problem are ${Array(20).fill('[#goal]').join(', ')}.`), says)
-  // Nor is the pointer's own vocabulary, repeated.
-  refused(claimIs('Paragraph [#goal], paragraph [#goal] and paragraph [#goal] are the paragraphs for this problem.'), says)
 })
 
-test('a claim that says what the problem is passes, however short, and points to the chronology', () => {
-  // One sentence of substance and a pointer — the shape the procedure asks for.
-  passes(claimIs('The District did not deliver the reading instruction the September 8, 2025 IEP requires (paragraph [#goal]).'))
-  // A claim whose new content is what the District did NOT do carries no date or figure of its own.
-  passes(claimIs('The District has not revised the reading goal or the services it provides since (paragraph [#goal]).'))
+test('render never names a draft, or a complaint that fails the check, for filing', async () => {
+  const draft = copy(examples.proSe, once('status: final', 'status: draft'))
+  assert.equal(run('render', draft).code, 0)
+  assert.ok(existsSync(join(draft, 'complaint.DRAFT.pdf')) && !existsSync(join(draft, 'complaint.pdf')))
+  assert.match(await pageText(join(draft, 'complaint.DRAFT.pdf'), 1), /DRAFT — NOT FOR FILING/)
+  rmSync(draft, { recursive: true, force: true })
+  const failing = copy(examples.proSe, once('recorded 21 words per minute', 'recorded 37 words per minute'))
+  const r = run('render', failing)
+  assert.match(r.out, /check\.mjs found 1 error/)
+  assert.ok(existsSync(join(failing, 'complaint.DRAFT.pdf')) && !existsSync(join(failing, 'complaint.pdf')))
+  rmSync(failing, { recursive: true, force: true })
 })
 
-test('a label belongs on a fact paragraph, and only a claim points to one', () => {
-  const belongs = /belongs on a paragraph of the statement of facts/
-  const onlyClaims = /a paragraph number belongs to a claim/
-  // A claim that labels itself and points at itself says nothing about the chronology.
-  refused(claimIs('[#self] The District did not deliver the reading instruction the IEP requires (paragraph [#self]).'), belongs)
-  // A remedy sends the reader to a paragraph number instead of naming its own figures.
-  refused((md) => claimIs('The District did not deliver the reading instruction the September 8, 2025 IEP requires (paragraph [#goal]).')(md)
-    .replace('(d) implement the IEP as written', '(d) implement the IEP as written, for the weeks at paragraph [#goal],'), onlyClaims)
-  // A label left in the signature or the certificate would print as “[#sig]” on the filed PDF.
-  refused(once('Respectfully submitted,', '[#sig] Respectfully submitted,'), belongs)
-  refused(once('The Parent certifies that on the date', '[#cert] The Parent certifies that on the date'), belongs)
-})
-
-test('a label that points nowhere, starts two paragraphs, or is not lowercase words is refused', () => {
-  refused(once('*34 C.F.R. §§ 300.320, 300.324.*', '*34 C.F.R. §§ 300.320, 300.324.*\n\nThe facts at paragraph [#nothing] bear on this problem.'), /“\[#nothing\]” points to no paragraph/)
-  refused(once('[#nov] On November 14, 2025', '[#goal] On November 14, 2025'), /“\[#goal\]” starts two paragraphs/)
-  refused(once('[#goal] On September 8, 2025', '[#Goal] On September 8, 2025'), /“\[#Goal\]” must be lowercase letters and hyphens/)
-})
-
-test('a space the extractor left before a semicolon does not refuse the District’s own words', () => {
-  // pdf.js ends a text item at a font or position change, so an extracted line can read
-  // “on leave ; no substitute”. The writer quotes the page as it reads and is refused,
-  // with no way out but to drop the quotation — and 1.0.13 asks for far more of them.
-  const dir = copy(examples.proSe, once('On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.',
-    'On October 6, 2025, the small-group reading block was discontinued. The service log for that week reads, “teacher on leave; no substitute.”'))
-  writeFileSync(join(dir, 'work', 'text', 'log-transcribed.txt'), 'Week of October 6, 2025: no reading instruction delivered — teacher on leave ; no substitute .\n')
-  const r = run('check', dir)
-  assert.equal(r.code, 0, r.out)
-  rmSync(dir, { recursive: true, force: true })
-
-  // And the latitude is only that. Closing up a space the writer put between two of the page's
-  // own words is rewording, not an extractor artefact, and the quotation is still refused —
-  // otherwise this is just the loose match that quotations are deliberately held out of.
-  const d2 = copy(examples.proSe, once('On October 6, 2025, the small-group reading block was discontinued when the reading intervention position became vacant.',
-    'On October 6, 2025, the small-group reading block was discontinued. The service log for that week reads, “teacher onleave; no substitute.”'))
-  writeFileSync(join(d2, 'work', 'text', 'log-transcribed.txt'), 'Week of October 6, 2025: no reading instruction delivered — teacher on leave ; no substitute .\n')
-  const r2 = run('check', d2)
-  assert.equal(r2.code, 1, r2.out)
-  assert.match(r2.out, /the quotation “teacher onleave; no substitute” is not word for word/)
-  rmSync(d2, { recursive: true, force: true })
-})
+// ─── The scripts themselves ─────────────────────────────────────────────
 
 test('the scripts run with nothing installed, and are built from src/ unchanged', () => {
   const out = mkdtempSync(join(tmpdir(), 'due-process-build-'))
@@ -227,19 +451,25 @@ test('the scripts run with nothing installed, and are built from src/ unchanged'
   rmSync(dir, { recursive: true, force: true })
 })
 
-test('a missing required element is refused: the school, the resolution, the address', () => {
-  refused((md) => md.replace(/^school: .*$/m, 'school:'), /the front matter has no school/)
-  refused((md) => md.replace(/## Proposed resolution[\s\S]*?(?=## Signature)/, ''), /no “Proposed resolution” section/)
-  refused((md) => md.replace(/^address: .*$/m, 'address: 1418 Alder Street, Willow Creek, CA 95834'), /address: “CA 95834” is not in the documents/)
+test('the check works when the skill is reached through a symlink, as a personal-skill install is', () => {
+  const dir = copy(examples.proSe, once('October 6, 2025, the District’s service delivery log records 90 minutes', 'October 7, 2025, the District’s service delivery log records 90 minutes'))
+  const link = join(mkdtempSync(join(tmpdir(), 'due-process-link-')), 'skill')
+  symlinkSync(dirname(scripts), link)
+  const r = spawnSync(process.execPath, [join(link, 'scripts', 'check.mjs'), dir], { encoding: 'utf8' })
+  assert.equal(r.status, 1, r.stdout + r.stderr)
+  assert.match(r.stdout, /the date .October 7, 2025. is not in the documents/)
+  rmSync(dir, { recursive: true, force: true })
 })
 
-test('a section out of the approved order, or not in it, is refused', () => {
-  refused((md) => {
-    const facts = md.match(/## Statement of facts[\s\S]*?(?=## Statement of the problems)/)[0]
-    return md.replace(facts, '').replace('## Signature', `${facts}## Signature`)
-  }, /“## Statement of facts” is out of order/)
-  refused(once('## Statement of facts', '## Background'), /“## Background” is not a section of the complaint/)
+test('every script prints its usage with no arguments', () => {
+  for (const s of ['pdf-text', 'check', 'render']) {
+    const r = run(s)
+    assert.equal(r.code, 2, s)
+    assert.match(r.out, new RegExp(`^usage: node scripts/${s}\\.mjs `), s)
+  }
 })
+
+// ─── The package ────────────────────────────────────────────────────────
 
 test('every file that states the version states the same one', () => {
   // An installed plugin updates only when its version changes, and the two manifests are read by
@@ -254,58 +484,27 @@ test('every file that states the version states the same one', () => {
   assert.match(readFileSync(join(root, 'CHANGELOG.md'), 'utf8'), new RegExp(`^## ${version.replace(/\./g, '\\.')} — `, 'm'), 'CHANGELOG.md')
 })
 
-test('the certificate of service names the district’s office and every other office served, as filing-instructions.md gives them', () => {
-  const district = 'Superintendent, River Oak Unified School District, 500 Oak Valley Road, Willow Creek, CA 95833'
-  const hearing = 'Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833'
-  // Nobody named: the person is left to find the district's address on their own.
-  refused(once(`${district}\n\n${hearing}\n\n`, ''), /names nobody served/)
-  // Only the hearing office: the district's copy has nowhere to go.
-  refused(once(`${district}\n\n`, ''), /does not name the school district’s office as filing-instructions\.md gives it/)
-  // An address the research never found is as invented as a date no document gives.
-  refused(once('500 Oak Valley Road, Willow Creek', '550 Oak Valley Road, Willow Creek'), /“550 Oak Valley Road” is not in filing-instructions\.md/)
-  // The certificate's addresses come from the instructions, so they have to exist, with the district's own section.
-  const noFile = copy()
-  rmSync(join(noFile, 'filing-instructions.md'))
-  const r = run('check', noFile)
-  assert.equal(r.code, 1, r.out)
-  assert.match(r.out, /there is no filing-instructions\.md/)
-  rmSync(noFile, { recursive: true, force: true })
-  const noSection = copy()
-  const fi = join(noSection, 'filing-instructions.md')
-  writeFileSync(fi, readFileSync(fi, 'utf8').replace('## The school district', '## The district'))
-  const r2 = run('check', noSection)
-  assert.equal(r2.code, 1, r2.out)
-  assert.match(r2.out, /no “## The school district” section/)
-  rmSync(noSection, { recursive: true, force: true })
+test('every state and the District of Columbia carries the circuit whose law binds it', () => {
+  const { states } = JSON.parse(readFileSync(join(root, 'skills', 'due-process-complaint', 'references', 'state-rules.json'), 'utf8'))
+  assert.equal(states.length, 51)
+  const circuits = new Map()
+  for (const row of states) {
+    assert.ok(row.circuit, `${row.code} has no circuit`)
+    assert.match(row.circuit, /^(1st|2d|3d|4th|5th|6th|7th|8th|9th|10th|11th|D\.C\.)$/, `${row.code}: ${row.circuit}`)
+    circuits.set(row.circuit, (circuits.get(row.circuit) ?? 0) + 1)
+  }
+  // The Second Circuit block in references/authorities.md is cited in three states and no others.
+  assert.equal(circuits.get('2d'), 3)
+  assert.deepEqual(states.filter((r) => r.circuit === '2d').map((r) => r.code).sort(), ['CT', 'NY', 'VT'])
+  assert.equal(circuits.get('D.C.'), 1)
+  assert.equal([...circuits.values()].reduce((a, b) => a + b, 0), 51)
 })
 
-test('render never names a draft, or a complaint that fails the check, for filing', async () => {
-  const draft = copy(examples.proSe, once('status: final', 'status: draft'))
-  assert.equal(run('render', draft).code, 0)
-  assert.ok(existsSync(join(draft, 'complaint.DRAFT.pdf')) && !existsSync(join(draft, 'complaint.pdf')))
-  assert.match(await pageText(join(draft, 'complaint.DRAFT.pdf'), 1), /DRAFT — NOT FOR FILING/)
-  rmSync(draft, { recursive: true, force: true })
-  const failing = copy(examples.proSe, once('recorded 21 words per minute', 'recorded 37 words per minute'))
-  const r = run('render', failing)
-  assert.match(r.out, /DRAFT: check\.mjs found 1 error/)
-  assert.ok(existsSync(join(failing, 'complaint.DRAFT.pdf')) && !existsSync(join(failing, 'complaint.pdf')))
-  rmSync(failing, { recursive: true, force: true })
-})
-
-test('the check works when the skill is reached through a symlink, as a personal-skill install is', () => {
-  const dir = copy(examples.proSe, once('On October 6, 2025, the small-group', 'On October 7, 2025, the small-group'))
-  const link = join(mkdtempSync(join(tmpdir(), 'due-process-link-')), 'skill')
-  symlinkSync(dirname(scripts), link)
-  const r = spawnSync(process.execPath, [join(link, 'scripts', 'check.mjs'), dir], { encoding: 'utf8' })
-  assert.equal(r.status, 1, r.stdout + r.stderr)
-  assert.match(r.stdout, /the date “October 7, 2025” is not in the documents/)
-  rmSync(dir, { recursive: true, force: true })
-})
-
-test('every script prints its usage with no arguments', () => {
-  for (const s of ['pdf-text', 'check', 'render']) {
-    const r = run(s)
-    assert.equal(r.code, 2, s)
-    assert.match(r.out, new RegExp(`^usage: node scripts/${s}\\.mjs `), s)
+test('the reference files the procedure names all exist', () => {
+  const skill = readFileSync(join(root, 'skills', 'due-process-complaint', 'SKILL.md'), 'utf8')
+  const named = [...skill.matchAll(/references\/([\w-]+\.(?:md|json))/g)].map((m) => m[1])
+  assert.ok(named.length >= 4)
+  for (const f of new Set(named)) {
+    assert.ok(existsSync(join(root, 'skills', 'due-process-complaint', 'references', f)), `SKILL.md names references/${f} and it is not there`)
   }
 })

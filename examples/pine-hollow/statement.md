@@ -14,6 +14,10 @@ from the service log the district sent on January 21, 2026, from the prior writt
 
 her expressive language remains at the 2nd percentile per the May 2025 CELF-5 and she has become reluctant to speak in class, per the IEP's present levels.
 
+## The filing
+
+counsel plans to file on June 1, 2026.
+
 ## Relief sought
 
 compensatory speech-language therapy, delivered individually, equal to the individual therapy minutes the IEP required and the District did not deliver individually from September 22, 2025 to the date of the order; an independent educational evaluation in speech-language and written expression at public expense; and restoration of individual speech-language therapy at 60 minutes per week as the IEP requires.

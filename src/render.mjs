@@ -7,11 +7,12 @@
 //   node scripts/render.mjs <case folder>
 //
 // The forum's name, a bracketed caption, consecutively numbered double-spaced
-// paragraphs, lettered remedies, the signature block on the right, the
-// certificate of service last. Only a complaint marked `status: final` that
-// passes check.mjs is written under those names; anything else is written as
-// complaint.DRAFT.pdf and complaint.DRAFT.docx, with DRAFT — NOT FOR FILING at
-// its head, so a draft cannot be filed by mistake.
+// paragraphs, tables where the form asks for one, lettered remedies, the
+// signature block on the right, the certificate of service, then a page break
+// and the review notes. Only a complaint marked `status: final` that passes
+// check.mjs with no flag left open is written under those names; anything else
+// is written as complaint.DRAFT.pdf and complaint.DRAFT.docx, with
+// DRAFT — NOT FOR FILING at its head, so a draft cannot be filed by mistake.
 
 import { rmSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
@@ -20,14 +21,15 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import { checkComplaint } from './check.mjs'
 
 if (!process.argv[2]) {
-  console.error('usage: node scripts/render.mjs <case folder>   — complaint.md → complaint.pdf and complaint.docx (complaint.DRAFT.* unless final and checked)')
+  console.error('usage: node scripts/render.mjs <case folder>   — complaint.md → complaint.pdf and complaint.docx (complaint.DRAFT.* unless final, checked, and every flag resolved)')
   process.exit(2)
 }
 const dir = resolve(process.argv[2])
-const { errors, parsed } = checkComplaint(dir)
+const { errors, openFlags, parsed } = checkComplaint(dir)
 if (!parsed) { console.error(errors[0]); process.exit(2) }
 const { meta, sections } = parsed
-const draft = meta.status !== 'final' || errors.length > 0
+const notFinal = meta.status !== 'final'
+const draft = notFinal || errors.length > 0 || openFlags.length > 0
 const BANNER = 'DRAFT — NOT FOR FILING'
 const base = draft ? 'complaint.DRAFT' : 'complaint'
 for (const ext of ['pdf', 'docx']) rmSync(join(dir, `${draft ? 'complaint' : 'complaint.DRAFT'}.${ext}`), { force: true })
@@ -36,7 +38,13 @@ for (const ext of ['pdf', 'docx']) rmSync(join(dir, `${draft ? 'complaint' : 'co
 // One convention of quotation marks throughout, and every numbered paragraph
 // ends like a sentence.
 const curly = (t) => String(t).replace(/(^|[\s(\[{—–-])"/g, '$1“').replace(/"/g, '”').replace(/(^|[\s(\[{—–-])'/g, '$1‘').replace(/'/g, '’')
-const P = (text, cls = null) => ({ text: curly(text), cls })
+// A source marker is read by check.mjs and printed as the page it names; the prose
+// already names the document. A statement source prints nothing: the sentence says it.
+const sources = (t) => String(t)
+  .replace(/\s*\[@[^\]]*?,\s*p\.\s*(\d+)\]/gi, ' (p. $1)')
+  .replace(/\s*\[@statement\]/gi, '')
+  .replace(/\s+([.,;:])/g, '$1')
+const P = (text, cls = null) => ({ text: curly(sources(text)), cls })
 const upper = (s) => String(s ?? '').trim().toUpperCase()
 const forum = String(meta.forum ?? '').trim()
 
@@ -50,7 +58,20 @@ const caption = {
   date: `Date: ${meta.date ?? ''}`,
 }
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
+const NUMERALS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV']
+const isTable = (block) => block.trimStart().startsWith('|')
+const breathe = (c) => (/^[\d+\-*/(). ]+$/.test(c) && c.length > 20 ? c.replace(/([+\-*/])/g, ' $1 ').replace(/\s+/g, ' ').trim() : c)
+// Markdown emphasis comes in pairs. A lone asterisk is a multiplication sign.
+const unemphasize = (t) => String(t).replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1')
+const cellText = (c) => breathe(unemphasize(curly(sources(c.trim()))))
+const tableOf = (block) => {
+  const lines = block.split('\n').map((l) => l.trim()).filter((l) => l.startsWith('|'))
+  const cells = lines.map((l) => l.replace(/^\|/, '').replace(/\|$/, '').split('|').map(cellText))
+  return cells.filter((row) => !row.every((c) => /^:?-{2,}:?$/.test(c) || c === ''))
+}
+const bulletsOf = (block) => block.split('\n').map((l) => l.trim()).filter(Boolean)
+  .map((l) => curly(sources(l.replace(/^[-*]\s*/, '').replace(/^\[([ xX])\]\s*/, (m, c) => (c === ' ' ? '[  ]  ' : '[x]  ')))))
+
 const body = []
 let numeral = 0
 let n = 0
@@ -69,8 +90,22 @@ for (const s of sections) {
     body.push({ id: s.key, heading: s.key === 'service' ? 'Certificate of service' : null, paragraphs: paras })
     continue
   }
+  // The review notes are work product. They sit after a page break, unnumbered, single spaced.
+  if (s.key === 'notes') {
+    const paras = []
+    for (const block of s.blocks) {
+      const text = block.replace(/\s*\n\s*/g, ' ').trim()
+      if (isTable(block)) paras.push({ cls: 'table', rows: tableOf(block) })
+      else if (text.startsWith('### ')) paras.push(P(text.slice(4), 'subheading'))
+      else if (/^[-*]\s/.test(block.trimStart())) paras.push({ cls: 'bullets', items: bulletsOf(block) })
+      else paras.push(P(text, 'note'))
+    }
+    body.push({ id: 'notes', heading: s.heading, pageBreak: true, paragraphs: paras })
+    continue
+  }
   const paras = []
   for (const block of s.blocks) {
+    if (isTable(block)) { paras.push({ cls: 'table', rows: tableOf(block) }); continue }
     const text = block.replace(/\s*\n\s*/g, ' ').trim()
     if (text.startsWith('### ')) paras.push(P(text.slice(4), 'subheading'))
     else if (/^\*[^*].*\*$/.test(text)) paras.push(P(text.slice(1, -1), 'cite'))
@@ -80,22 +115,55 @@ for (const s of sections) {
       const p = P(text.slice(label ? label[0].length : 0).replace(/^\d+\.\s+/, ''))
       p.n = ++n
       if (label) numbers.set(label[1], n)
-      if (!/[.!?:;][”’)]*$/.test(p.text)) p.text += '.'
+      if (!/[.!?:;][”’)\]]*$/.test(p.text)) p.text += '.'
       paras.push(p)
     }
   }
-  body.push({ id: s.key, heading: `${ROMAN[numeral++]}. ${s.heading}`, paragraphs: paras })
+  body.push({ id: s.key, heading: `${NUMERALS[numeral++] ?? numeral}. ${s.heading}`, paragraphs: paras })
 }
-for (const s of body) for (const p of s.paragraphs) p.text = p.text.replace(/\[#([^\]]*)\]/g, (m, name) => (numbers.has(name) ? String(numbers.get(name)) : m))
+for (const s of body) {
+  for (const p of s.paragraphs) {
+    if (p.text) p.text = p.text.replace(/\[#([^\]]*)\]/g, (m, name) => (numbers.has(name) ? String(numbers.get(name)) : m))
+    if (p.rows) p.rows = p.rows.map((row) => row.map((c) => c.replace(/\[#([^\]]*)\]/g, (m, name) => (numbers.has(name) ? String(numbers.get(name)) : m))))
+    if (p.items) p.items = p.items.map((c) => c.replace(/\[#([^\]]*)\]/g, (m, name) => (numbers.has(name) ? String(numbers.get(name)) : m)))
+  }
+}
 const title = `Due Process Complaint Notice — ${meta.student ?? ''}`
 
 // ─── Word ─────────────────────────────────────────────────────────────
 const IN = 1440 // twips
 const PT = 20
 const run = (text, opts = {}) => new TextRun({ text, font: 'Times New Roman', size: 24, ...opts })
+/** "*Case Name*, 123 U.S. 4" as its runs: a case name is italic, the citation around it is not. */
+const emphasisRuns = (text) => {
+  const out = []
+  const re = /\*\*([^*]+)\*\*|\*([^*]+)\*/g
+  let i = 0
+  let m
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > i) out.push({ t: text.slice(i, m.index), italic: false })
+    out.push({ t: m[1] ?? m[2], italic: true })
+    i = m.index + m[0].length
+  }
+  if (i < text.length) out.push({ t: text.slice(i), italic: false })
+  return out.length ? out : [{ t: String(text), italic: false }]
+}
+const wordRuns = (text, opts = {}) => emphasisRuns(text).map((r) => run(r.t, { ...opts, italics: r.italic || opts.italics }))
 const para = (children, opts = {}) => new Paragraph({ children: Array.isArray(children) ? children : [children], ...opts })
 const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' }
 const rule = { style: BorderStyle.SINGLE, size: 6, color: '000000' }
+const cellBorders = { top: rule, bottom: rule, left: rule, right: rule }
+const wordTable = (rows) => new Table({
+  width: { size: 6.5 * IN, type: WidthType.DXA },
+  rows: rows.map((row, i) => new TableRow({
+    tableHeader: i === 0,
+    children: row.map((c) => new TableCell({
+      borders: cellBorders,
+      margins: { top: 60, bottom: 60, left: 100, right: 100 },
+      children: [para(run(c, { bold: i === 0, size: 22 }), { spacing: { line: 240 } })],
+    })),
+  })),
+})
 const w = []
 if (draft) w.push(para(run(BANNER, { bold: true }), { alignment: AlignmentType.CENTER, spacing: { after: 12 * PT } }))
 for (const line of caption.court) w.push(para(run(line, { bold: true }), { alignment: AlignmentType.CENTER }))
@@ -136,7 +204,14 @@ const closingBlock = (paras) => {
   ]
 }
 for (const s of body) {
-  if (s.heading) w.push(para(run(s.heading.toUpperCase(), { bold: true }), { alignment: AlignmentType.CENTER, spacing: { before: 24 * PT, after: 8 * PT }, keepNext: true }))
+  if (s.heading) {
+    w.push(para(run(s.pageBreak ? s.heading : s.heading.toUpperCase(), { bold: true }), {
+      alignment: AlignmentType.CENTER,
+      spacing: { before: s.pageBreak ? 0 : 24 * PT, after: 8 * PT },
+      pageBreakBefore: Boolean(s.pageBreak),
+      keepNext: true,
+    }))
+  }
   if (s.id === 'signature') { w.push(...closingBlock(s.paragraphs)); continue }
   if (s.id === 'service') {
     const first = s.paragraphs.findIndex((p) => p.cls === 'dated')
@@ -145,12 +220,19 @@ for (const s of body) {
     continue
   }
   for (const p of s.paragraphs) {
+    if (p.cls === 'table') { w.push(wordTable(p.rows)); w.push(para([], { spacing: { after: 8 * PT } })); continue }
+    if (p.cls === 'bullets') {
+      for (const item of p.items) w.push(para(wordRuns(item, { size: 22 }), { indent: { left: 0.35 * IN, hanging: 0.2 * IN }, spacing: { after: 2 * PT, line: 260 } }))
+      w.push(para([], { spacing: { after: 6 * PT } }))
+      continue
+    }
     if (p.cls === 'subheading') w.push(para(run(p.text, { bold: true }), { spacing: { before: 18 * PT, after: 4 * PT }, keepNext: true }))
     else if (p.cls === 'cite') w.push(para(run(p.text, { italics: true }), { spacing: { after: 10 * PT }, keepNext: true }))
+    else if (p.cls === 'note') w.push(para(wordRuns(p.text, { size: 22 }), { spacing: { after: 8 * PT }, line: 260 }))
     else if (p.cls === 'relief') {
       const m = p.text.match(/^(\([a-z]\))\s+([\s\S]*)$/)
-      w.push(para(run(m ? `${m[1]}\t${m[2]}` : p.text), { indent: { left: 1.5 * IN, hanging: 0.5 * IN }, tabStops: [{ type: TabStopType.LEFT, position: 1.5 * IN }], spacing: { line: 480 }, keepLines: true, widowControl: true }))
-    } else w.push(para(run(`${p.n}.\t${p.text}`), { tabStops: [{ type: TabStopType.LEFT, position: 0.5 * IN }], spacing: { line: 480 }, widowControl: true }))
+      w.push(para(wordRuns(m ? `${m[1]}\t${m[2]}` : p.text), { indent: { left: 1.5 * IN, hanging: 0.5 * IN }, tabStops: [{ type: TabStopType.LEFT, position: 1.5 * IN }], spacing: { line: 480 }, keepLines: true, widowControl: true }))
+    } else w.push(para(wordRuns(`${p.n}.\t${p.text}`), { tabStops: [{ type: TabStopType.LEFT, position: 0.5 * IN }], spacing: { line: 480 }, widowControl: true }))
   }
 }
 writeFileSync(join(dir, `${base}.docx`), await Packer.toBuffer(new Document({
@@ -170,10 +252,15 @@ const pdf = await PDFDocument.create({ updateMetadata: false })
 pdf.setTitle(title)
 const F = { regular: await pdf.embedFont(StandardFonts.TimesRoman), bold: await pdf.embedFont(StandardFonts.TimesRomanBold), italic: await pdf.embedFont(StandardFonts.TimesRomanItalic) }
 const SIZE = 12
+const SMALL = 11
 const PAGE = { w: 612, h: 792, margin: 72 }
 const WIDTH = PAGE.w - 2 * PAGE.margin
 const SINGLE = 14
 const DOUBLE = 24
+// pdf-lib measures a line from the standard-font metrics and a viewer draws it from its own,
+// and the two disagree by up to about 1% of the line — 5pt on a long bold line of capitals,
+// which is enough to put it past the right margin. Keep a proportional margin of safety.
+const slack = (max) => Math.max(2, max * 0.015)
 // The standard fonts carry the WinAnsi characters; anything else prints as "?".
 const supported = new Set(F.regular.getCharacterSet())
 const replaced = new Set()
@@ -186,17 +273,69 @@ function wrap(text, font, size, first, rest = first) {
   let max = first
   for (const word of words) {
     const candidate = line ? `${line} ${word}` : word
-    if (width(candidate, font, size) <= max) { line = candidate; continue }
+    if (width(candidate, font, size) <= max - slack(max)) { line = candidate; continue }
     if (line) { out.push(line); max = rest }
     line = word
-    while (width(line, font, size) > max) { // a word longer than the line (an email address)
+    while (width(line, font, size) > max - slack(max)) { // a word longer than the line (an email address)
       let cut = line.length
-      while (cut > 1 && width(line.slice(0, cut), font, size) > max) cut--
+      while (cut > 1 && width(line.slice(0, cut), font, size) > max - slack(max)) cut--
       out.push(line.slice(0, cut)); line = line.slice(cut); max = rest
     }
   }
   if (line) out.push(line)
   return out.length ? out : ['']
+}
+
+// A pleading sets a case name in italic, so one line can carry two faces. Each token keeps
+// its face through the wrap, and a line is drawn as its segments.
+const faceOf = (italic) => (italic ? F.italic : F.regular)
+const runTokens = (text) => {
+  const out = []
+  for (const r of emphasisRuns(text)) {
+    for (const part of clean(r.t).split(/(\s+)/)) {
+      if (part === '') continue
+      out.push({ t: part, italic: r.italic, space: /^\s+$/.test(part) })
+    }
+  }
+  return out
+}
+function wrapRuns(text, size, first, rest = first) {
+  const tokens = runTokens(text)
+  const tw = (tok) => width(tok.t, faceOf(tok.italic), size)
+  const lines = []
+  let line = []
+  let w = 0
+  let max = first
+  const trim = () => { while (line.length && line.at(-1).space) { w -= tw(line.at(-1)); line.pop() } }
+  for (const tok of tokens) {
+    if (tok.space && line.length === 0) continue
+    const add = tw(tok)
+    if (!tok.space && line.length && w + add > max - slack(max)) { trim(); lines.push(line); line = []; w = 0; max = rest }
+    if (!tok.space && add > max - slack(max)) { // a token longer than the line (an email address)
+      let left = tok.t
+      while (width(left, faceOf(tok.italic), size) > max - slack(max) - w) {
+        let cut = left.length
+        while (cut > 1 && width(left.slice(0, cut), faceOf(tok.italic), size) > max - slack(max) - w) cut--
+        line.push({ t: left.slice(0, cut), italic: tok.italic })
+        lines.push(line); line = []; w = 0; max = rest
+        left = left.slice(cut)
+      }
+      if (left) { line.push({ t: left, italic: tok.italic }); w += width(left, faceOf(tok.italic), size) }
+      continue
+    }
+    line.push(tok); w += add
+  }
+  trim()
+  if (line.length) lines.push(line)
+  return lines.length ? lines : [[]]
+}
+const drawRuns = (segs, x, size = SIZE) => {
+  let cx = x
+  for (const seg of segs) {
+    const f = faceOf(seg.italic)
+    if (seg.t.trim()) page.drawText(clean(seg.t), { x: cx, y: y - size, size, font: f, color: rgb(0, 0, 0) })
+    cx += width(seg.t, f, size)
+  }
 }
 
 let page = null
@@ -217,6 +356,42 @@ const flow = (ls, leading, drawLine) => {
     drawLine(l, i)
     y -= leading
   })
+}
+// A table: columns weighted by what is in them, each cell wrapped, a rule under the header,
+// and a row that will not fit starting the next page with the header repeated.
+const PAD = 6
+function drawTable(rows) {
+  if (!rows.length) return
+  const cols = Math.max(...rows.map((r) => r.length))
+  const weight = Array.from({ length: cols }, (_, c) => Math.max(8, ...rows.map((r) => (r[c] ?? '').length)))
+  const total = weight.reduce((a, b) => a + b, 0)
+  const widths = weight.map((x) => Math.max(0.7 * 72, (WIDTH * x) / total))
+  const over = widths.reduce((a, b) => a + b, 0) - WIDTH
+  if (over > 0) { const big = widths.indexOf(Math.max(...widths)); widths[big] -= over }
+  const laid = rows.map((r, i) => {
+    const font = i === 0 ? F.bold : F.regular
+    const lines = widths.map((cw, c) => wrap(r[c] ?? '', font, SMALL, cw - 2 * PAD))
+    return { font, lines, height: Math.max(...lines.map((l) => l.length)) * SINGLE + 2 * PAD }
+  })
+  const header = laid[0]
+  const drawRow = ({ font, lines, height }) => {
+    let x = PAGE.margin
+    const top = y
+    lines.forEach((cellLines, c) => {
+      y = top - PAD
+      for (const l of cellLines) { draw(l, x + PAD, font, SMALL); y -= SINGLE }
+      x += widths[c]
+    })
+    y = top - height
+    page.drawLine({ start: { x: PAGE.margin, y }, end: { x: PAGE.margin + widths.reduce((a, b) => a + b, 0), y }, thickness: 0.5, color: rgb(0.6, 0.6, 0.6) })
+  }
+  ensure(header.height + (laid[1]?.height ?? 0))
+  drawRow(header)
+  for (const row of laid.slice(1)) {
+    if (room() < row.height) { newPage(); drawRow(header) }
+    drawRow(row)
+  }
+  y -= 8
 }
 
 newPage()
@@ -286,12 +461,16 @@ const leadIn = (paras, from) => {
     const p = paras[i]
     if (p.cls === 'subheading') { h += 18 + wrap(p.text, F.bold, SIZE, WIDTH).length * SINGLE + 4; continue }
     if (p.cls === 'cite') { h += wrap(p.text, F.italic, SIZE, WIDTH).length * SINGLE + 10; continue }
-    const ls = wrap(p.text, F.regular, SIZE, WIDTH - 36, WIDTH)
+    if (p.cls === 'bullets') return h + 2 * SINGLE
+    // A table's header row and its first row, with their padding.
+    if (p.cls === 'table') return h + 4 * SINGLE + 24
+    const ls = wrapRuns(p.text, SIZE, WIDTH - 36, WIDTH)
     return h + (ls.length <= 3 ? ls.length : 2) * DOUBLE
   }
   return h
 }
 for (const s of body) {
+  if (s.pageBreak) newPage()
   if (s.id === 'service') {
     // The certificate stays on one page.
     const first = s.paragraphs.findIndex((p) => p.cls === 'dated')
@@ -299,9 +478,9 @@ for (const s of body) {
     y -= 12
   }
   if (s.heading) {
-    const ls = wrap(s.heading.toUpperCase(), F.bold, SIZE, WIDTH)
-    ensure(24 + ls.length * SINGLE + 8 + (s.id === 'service' ? 0 : leadIn(s.paragraphs, 0)))
-    y -= 24
+    const ls = wrap(s.pageBreak ? s.heading : s.heading.toUpperCase(), F.bold, SIZE, WIDTH)
+    if (!s.pageBreak) ensure(24 + ls.length * SINGLE + 8 + (s.id === 'service' ? 0 : leadIn(s.paragraphs, 0)))
+    if (!s.pageBreak) y -= 24
     for (const l of ls) { drawCentered(l); y -= SINGLE }
     y -= 8
   }
@@ -327,6 +506,15 @@ for (const s of body) {
     continue
   }
   for (const [i, p] of s.paragraphs.entries()) {
+    if (p.cls === 'table') { drawTable(p.rows); continue }
+    if (p.cls === 'bullets') {
+      for (const item of p.items) {
+        flow(wrapRuns(item, SMALL, WIDTH - 36, WIDTH - 24), SINGLE, (l, k) => { if (k === 0) draw('·', PAGE.margin + 12, F.regular, SMALL); drawRuns(l, PAGE.margin + 24, SMALL) })
+        y -= 2
+      }
+      y -= 6
+      continue
+    }
     if (p.cls === 'subheading') {
       ensure(leadIn(s.paragraphs, i))
       y -= 18
@@ -336,11 +524,14 @@ for (const s of body) {
       ensure(leadIn(s.paragraphs, i))
       for (const l of wrap(p.text, F.italic, SIZE, WIDTH)) { draw(l, PAGE.margin, F.italic); y -= SINGLE }
       y -= 10
+    } else if (p.cls === 'note') {
+      flow(wrapRuns(p.text, SMALL, WIDTH), SINGLE, (l) => drawRuns(l, PAGE.margin, SMALL))
+      y -= 8
     } else if (p.cls === 'relief') {
       const m = p.text.match(/^(\([a-z]\))\s+([\s\S]*)$/)
-      flow(wrap(m ? m[2] : p.text, F.regular, SIZE, WIDTH - 108), DOUBLE, (l, k) => { if (k === 0 && m) draw(m[1], PAGE.margin + 72); draw(l, PAGE.margin + 108) })
+      flow(wrapRuns(m ? m[2] : p.text, SIZE, WIDTH - 108), DOUBLE, (l, k) => { if (k === 0 && m) draw(m[1], PAGE.margin + 72); drawRuns(l, PAGE.margin + 108) })
     } else {
-      flow(wrap(p.text, F.regular, SIZE, WIDTH - 36, WIDTH), DOUBLE, (l, k) => { if (k === 0) draw(`${p.n}.`, PAGE.margin); draw(l, k === 0 ? PAGE.margin + 36 : PAGE.margin) })
+      flow(wrapRuns(p.text, SIZE, WIDTH - 36, WIDTH), DOUBLE, (l, k) => { if (k === 0) draw(`${p.n}.`, PAGE.margin); drawRuns(l, k === 0 ? PAGE.margin + 36 : PAGE.margin) })
     }
   }
 }
@@ -351,5 +542,12 @@ pages.forEach((pg, i) => {
 writeFileSync(join(dir, `${base}.pdf`), await pdf.save())
 
 console.log(`rendered ${base}.pdf (${pages.length} page${pages.length === 1 ? '' : 's'}) and ${base}.docx`)
-if (draft) console.log(meta.status !== 'final' ? 'DRAFT: complaint.md is not marked status: final.' : `DRAFT: check.mjs found ${errors.length} error(s) — run it to see them.`)
+if (draft) {
+  const why = [
+    notFinal ? 'complaint.md is not marked status: final' : null,
+    errors.length ? `check.mjs found ${errors.length} error(s) — run it to see them` : null,
+    openFlags.length ? `${openFlags.length} flag(s) still open` : null,
+  ].filter(Boolean)
+  console.log(`DRAFT: ${why.join('; ')}.`)
+}
 if (replaced.size) console.log(`! ${[...replaced].map((ch) => `“${ch}”`).join(' ')} cannot be set in the PDF’s Times font and print as “?” — write the name in characters the PDF can carry, or file a PDF made from the Word file`)

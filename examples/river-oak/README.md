@@ -4,12 +4,14 @@ Everything here is invented — the student, the parent, the district, the schoo
 
 The case: a third-grader whose reading goal was carried forward unchanged, whose small-group reading instruction stopped in October when a position went vacant, and whose parent asked for a reevaluation in December and never received an assessment plan. The parent files in California, on her own.
 
+Four claims, because four is what the record supports. Each one ends by answering the reason the District gave in its own prior written notice. California sits in the Ninth Circuit, and this file carries no verified Ninth Circuit authority, so none is cited and the review notes say so.
+
 | File | What it is |
 |---|---|
 | `documents/` | The IEP, the progress reports, the service delivery log, the prior written notice, the correspondence. |
 | `statement.md` | The parent's own account, in her words. |
 | `filing-instructions.md` | How to file with California's Office of Administrative Hearings, each point with its official source — including that OAH accepts a complaint only once the district has been served. |
-| `complaint.md` | The complaint as drafted and checked. |
+| `complaint.md` | The complaint as drafted, checked and audited, with its review notes. |
 | `complaint.pdf`, `complaint.docx` | The complaint, rendered: to file, and to edit. |
 
 To run the check and render it yourself, from the repository root:

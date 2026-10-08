@@ -2,6 +2,32 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 2.0.0 — 2026-10-08
+
+The procedure now does what the owner's own Copilot Operating Guide for Word does, on all fifty states and the District of Columbia. Twelve changes, each decided against that guide.
+
+- **Case law.** `references/authorities.md` is new: three tiers of trust, the Supreme Court cases that bind everywhere with their pin cites, a Second Circuit block that applies in Connecticut, New York and Vermont and nowhere else, and the rule for every other circuit — research it, then cite it with a `[VERIFY-#]` flag, no quotation and no pin cite, until its text has been read in the session. **No citation is written that was not confirmed.** Where one cannot be confirmed on the open web, the person is offered the route of connecting a legal research service. Every state row now carries the `circuit` whose decisions bind it, so the binding law is read from data rather than recalled.
+- **Who is filing is asked first**, and the answer sets the register of the questions, the signature block, the fee reservation, the voice of the cover letter and the heading on the review notes. The reading, the claims, the research, the audit and the form of the pleading are the same for everyone.
+- **A fourteen-check audit before anything is handed over** (`references/audit.md`), carrying the guide's eleven and adding consistency, posture and a read of the rendered PDF. `check.mjs` still runs first and still refuses: the audit is what a program cannot read, not a replacement for one.
+- **An unsupported fact is written and flagged, not dropped.** `[MISSING-#]`, `[CONFLICT-#]`, `[VERIFY-#]` and `[COUNSEL-#]`, numbered in sequence within each kind, under twelve words in the pleading, each explained in the review notes. The check refuses a flag the notes do not explain, and **while any flag is open the files render as `complaint.DRAFT.*`** — so write-and-flag never produces something filable by accident.
+- **The arithmetic is done, shown and confirmed.** Every count, total and day span goes in a four-column table in the review notes with its inputs and its result. `check.mjs` **recomputes the table**, traces every input to a document or to a row above it, and permits a computed figure in the pleading only because the table computes it. The person is shown the table and asked to confirm it. A District total is never adopted unchecked.
+- **The sections are the guide's**: preliminary statement, required information as a table, jurisdiction and timeliness and burden, statement of facts, statement of the problems, pendency, proposed resolution, hearing requests, state additions, reservation of rights, signature, certificate of service, then a page break and the review notes.
+- **The claims are the guide's fifteen, plus the two it does not carry** — transition services and removal without the required protections — for eighteen in all, each with the parts it turns on and the regulation it goes under. Nothing was dropped to adopt the list.
+- **Each claim is an argument in four moves**: the rule with its authority, the facts by paragraph number, **the answer to the reason the District gave in the record**, and the harm. The check refuses a claim that says nothing of its own and a claim that ties to no paragraph.
+- **A source is machine-checked.** A fact paragraph ends with `[@stem, p. N]`, which prints as `(p. N)`; the check resolves the stem against the folder and refuses a document that is not there, a page it does not have, a fact with no source at all, and a fact passed off as the person's own words without saying so.
+- **Documents that disagree have a rule**: the latest-dated document is the student's current status unless the person says otherwise, and where a document and the person's statement conflict the statement is pleaded and `[CONFLICT-#]` is flagged. No conflicted fact is ever stated as established.
+- **The filing instructions and the cover letter are both asked about**, each on its own, before the handover.
+- **The burden of proof is researched, not assumed.** It is set by federal law and reassigned by some states, so the section that names it must read the filing state's own text first. One state's allocation is never carried into another state's complaint.
+
+Smaller things from the same work:
+
+- A parent's review notes are headed **Review Notes – Remove Before Filing**; only an attorney's or a legal aid organization's are attorney work product, and the check holds the heading to the filer. A claim of privilege nobody holds is a false claim.
+- A case name is set in italic in both the PDF and the Word file, and a lone asterisk is a multiplication sign rather than emphasis.
+- The renderer draws tables, bullet lists and checklists, and keeps a point and a half of slack in every column: pdf-lib measures a line from the standard-font metrics and a viewer draws it from its own, and the two disagree by up to about 1% — enough to put a long bold line past the right margin.
+- `references/review.md` is folded into `references/audit.md`.
+- Both worked examples are redrafted to the new form, with their review notes, their recomputed arithmetic, and the honest statement in each that no circuit authority was confirmed. Neither cites a case it did not verify.
+- The test suite is rewritten: 41 tests, each breaking one thing a model could plausibly get wrong.
+
 ## 1.0.18 — 2026-09-18
 
 - **What each claim turns on is written down, with its regulation** (`references/claims.md`), and the procedure reads it before recommending. Testing 1.0.17 on invented files found the rule sound but the legal reading loose: one run left out a transition claim because it measured the 16th birthday against the IEP meeting instead of the IEP's whole term, and another miscounted a records delay. The file states each claim's parts and the rules they rest on, each quoted from the regulation: transition services "not later than the first IEP to be in effect when the child turns 16"; records "in no case more than 45 days after the request has been made"; the 60-day initial evaluation; the 10-day manifestation determination; § 300.513(a)(2)'s three effects for a procedural claim.

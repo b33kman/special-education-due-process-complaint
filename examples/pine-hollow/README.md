@@ -4,12 +4,14 @@ Everything here is invented — the student, the parent, the district, the schoo
 
 The case: a seventh-grader whose IEP requires 60 minutes a week of individual speech-language therapy; from late September the district delivered 30 minutes a week in a group of three without amending the IEP; the parent asked in writing for an independent evaluation, and the district refused it in a prior written notice without filing for a hearing. An attorney files in North Carolina, where the time limit is one year and the forum is the Office of Administrative Hearings.
 
+Four claims. No case is cited: no claim here turns on the adequacy of the program as written, and no Fourth Circuit authority was confirmed, so none is written. The review notes say both. The arithmetic offers counsel two measures of the shortfall and says to plead one.
+
 | File | What it is |
 |---|---|
 | `documents/` | The IEP, the speech-language service log, the prior written notice refusing the evaluation, the correspondence. |
 | `statement.md` | Counsel's account of the case. |
 | `filing-instructions.md` | How to file with North Carolina's Office of Administrative Hearings, each point with its official source — including the county line and "___ Board of Education" respondent that the state's form uses, and the two addresses official pages give for the copy to the Department of Public Instruction. |
-| `complaint.md` | The complaint as drafted and checked. |
+| `complaint.md` | The complaint as drafted, checked and audited, with its Attorney Review Notes. |
 | `complaint.pdf`, `complaint.docx` | The complaint, rendered: to file, and to edit. |
 
 To run the check and render it yourself, from the repository root:

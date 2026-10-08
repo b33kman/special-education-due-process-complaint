@@ -1,9 +1,10 @@
 {
-  "_about": "What a filer needs for each of the 50 states and the District of Columbia: the office that receives a special education due process complaint, its official filing page, and how to reach it. Compiled from official state pages in August and September 2026 (the research behind Sped DPC) and trimmed to what a filer uses. Start from filingUrl, the state’s official page on filing a due process complaint, and confirm every value there before relying on it: pages, forms and addresses change. Contacts are offices, not people; where a state sends filings to a named staff member, the current contact is on filingUrl. filingEmail and filingFax are the office’s; acceptsEmail and acceptsFax say whether the official pages say a complaint may be filed that way (null: not stated). limitationsMonths is the state’s own window where the research found one; null means none was found, so the federal two years of 34 C.F.R. § 300.507(a)(2) applies unless the state’s page says otherwise. alsoServeDistrict: a copy goes to the school district as well. pageChecked records whether filingUrl opened when last checked.",
+  "_about": "What a filer needs for each of the 50 states and the District of Columbia: the office that receives a special education due process complaint, its official filing page, and how to reach it. Compiled from official state pages in August and September 2026 (the research behind Sped DPC) and trimmed to what a filer uses. Start from filingUrl, the state’s official page on filing a due process complaint, and confirm every value there before relying on it: pages, forms and addresses change. Contacts are offices, not people; where a state sends filings to a named staff member, the current contact is on filingUrl. filingEmail and filingFax are the office’s; acceptsEmail and acceptsFax say whether the official pages say a complaint may be filed that way (null: not stated). limitationsMonths is the state’s own window where the research found one; null means none was found, so the federal two years of 34 C.F.R. § 300.507(a)(2) applies unless the state’s page says otherwise. alsoServeDistrict: a copy goes to the school district as well. circuit is the United States Court of Appeals whose decisions bind a complaint filed in that state; references/authorities.md reads it to decide which case law is binding. pageChecked records whether filingUrl opened when last checked.",
   "states": [
     {
       "code": "AK",
       "name": "Alaska",
+      "circuit": "9th",
       "filingOffice": "Special Education Dispute Resolution, Alaska Department of Education & Early Development",
       "filingUrl": "https://educ.state.ak.us/sped",
       "filingAddress": "Special Education Dispute Resolution\nP.O. Box 110500\nJuneau, Alaska 99811-0500",
@@ -22,6 +23,7 @@
     {
       "code": "AL",
       "name": "Alabama",
+      "circuit": "11th",
       "filingOffice": "Special Education Services, Alabama State Department of Education",
       "filingUrl": "https://www.alabamaachieves.org/special-education/dispute-resolution/",
       "filingAddress": "SES DPH\nSpecial Education Services\nAlabama State Department of Education\nP.O. Box 30201\nMontgomery, AL 36130",
@@ -40,6 +42,7 @@
     {
       "code": "AR",
       "name": "Arkansas",
+      "circuit": "8th",
       "filingOffice": "Director, Office of Special Education, Arkansas Department of Education",
       "filingUrl": "https://dese.ade.arkansas.gov/Offices/special-education/dispute-resolution/due-process-hearings",
       "filingAddress": "Director, Office of Special Education\n1401 W. Capitol, Suite 450\nLittle Rock, Arkansas 72201",
@@ -58,6 +61,7 @@
     {
       "code": "AZ",
       "name": "Arizona",
+      "circuit": "9th",
       "filingOffice": "Arizona Department of Education, Exceptional Student Services, Dispute Resolution Unit",
       "filingUrl": "https://www.azed.gov/disputeresolution/due-process-hearing",
       "filingAddress": "Arizona Department of Education / Exceptional Student Services / Dispute Resolution Unit\n1535 West Jefferson Street, BIN #62\nPhoenix, Arizona 85007",
@@ -76,6 +80,7 @@
     {
       "code": "CA",
       "name": "California",
+      "circuit": "9th",
       "filingOffice": "Office of Administrative Hearings, Special Education Division",
       "filingUrl": "https://www.dgs.ca.gov/oah/case-types/special-education",
       "filingAddress": "Special Education Division\nOffice of Administrative Hearings\n2349 Gateway Oaks Drive, Suite 200\nSacramento, CA 95833",
@@ -94,6 +99,7 @@
     {
       "code": "CO",
       "name": "Colorado",
+      "circuit": "10th",
       "filingOffice": "Colorado Department of Education, Exceptional Student Services Unit, Dispute Resolution Office",
       "filingUrl": "https://ed.cde.state.co.us/spedlaw/dueprocess",
       "filingAddress": "Colorado Department of Education (CDE)\nExceptional Student Services Unit, Dispute Resolution Office\n201 E. Colfax Ave., Room 402, Denver, CO 80203",
@@ -112,6 +118,7 @@
     {
       "code": "CT",
       "name": "Connecticut",
+      "circuit": "2d",
       "filingOffice": "Connecticut State Department of Education, Bureau of Special Education, Due Process Unit",
       "filingUrl": "https://portal.ct.gov/SDE/Special-Education/Special-Education-Legal-and-Due-Process",
       "filingAddress": "CONNECTICUT STATE DEPARTMENT OF EDUCATION\nBUREAU OF SPECIAL EDUCATION\nDUE PROCESS UNIT\n450 Columbus Blvd., Suite 604\nP.O. Box 2219, Hartford, CT 06145-2219",
@@ -130,6 +137,7 @@
     {
       "code": "DC",
       "name": "District of Columbia",
+      "circuit": "D.C.",
       "filingOffice": "Office of the State Superintendent of Education, Office of Dispute Resolution",
       "filingUrl": "https://osse.dc.gov/service/office-dispute-resolution-odr",
       "filingAddress": "Office of Dispute Resolution\n1050 First Street, NE, 3rd Floor, Washington, DC 20002",
@@ -148,6 +156,7 @@
     {
       "code": "DE",
       "name": "Delaware",
+      "circuit": "3d",
       "filingOffice": "Secretary of Education, Delaware Department of Education",
       "filingUrl": "https://education.delaware.gov/legacy/home/instruction-and-assessment/exceptional-children/special-education/for-families/rights-and-disputes/",
       "filingAddress": "Secretary of Education\nDelaware Department of Education\nJohn G. Townsend Building\n401 Federal Street, Suite 2\nDover, Delaware 19901",
@@ -166,6 +175,7 @@
     {
       "code": "FL",
       "name": "Florida",
+      "circuit": "11th",
       "filingOffice": "Florida Department of Education, Bureau of Exceptional Education and Student Services",
       "filingUrl": "https://www.fldoe.org/academics/exceptional-student-edu/dispute-resolution/",
       "filingAddress": "Section Administrator\nFlorida Department of Education\nBureau of Exceptional Educational and Student Services\n325 West Gaines Street, Suite 614\nTallahassee, FL 32399-0400",
@@ -184,6 +194,7 @@
     {
       "code": "GA",
       "name": "Georgia",
+      "circuit": "11th",
       "filingOffice": "Georgia Department of Education, Division for Special Education Services and Supports",
       "filingUrl": "https://gadoe.org/special-education/due-process-hearings-and-decisions/",
       "filingAddress": "Georgia Department of Education\nDivision for Special Education Services and Supports\n205 Jesse Hill Jr. Drive, SE, 1562 Twin Towers East\nAtlanta, Georgia 30334",
@@ -202,6 +213,7 @@
     {
       "code": "HI",
       "name": "Hawaii",
+      "circuit": "9th",
       "filingOffice": "Hawaii State Department of Education",
       "filingUrl": "https://hawaiipublicschools.org/school-services/parent-rights/dispute-resolutions-and-mediations/",
       "filingAddress": "Complaints Management Program\nMonitoring and Compliance Branch\nP.O. Box 2360\nHonolulu, HI 96804",
@@ -220,6 +232,7 @@
     {
       "code": "IA",
       "name": "Iowa",
+      "circuit": "8th",
       "filingOffice": "Iowa Department of Education",
       "filingUrl": "https://educate.iowa.gov/pk-12/special-education/dispute-resolution",
       "filingAddress": "Iowa Department of Education\nGrimes State Office Building\n400 E. 14th St.\nDes Moines, IA 50319-0146",
@@ -238,6 +251,7 @@
     {
       "code": "ID",
       "name": "Idaho",
+      "circuit": "9th",
       "filingOffice": "Idaho Department of Education, Dispute Resolution Coordinator",
       "filingUrl": "https://www.sde.idaho.gov/about-us/departments/special-education/dispute-resolution/",
       "filingAddress": "Dispute Resolution Coordinator\nIdaho Department of Education\nPO Box 83720\nBoise, ID 83720-0027",
@@ -256,6 +270,7 @@
     {
       "code": "IL",
       "name": "Illinois",
+      "circuit": "7th",
       "filingOffice": "Illinois State Board of Education",
       "filingUrl": "https://www.isbe.net/Pages/Special-Education-Due-Process.aspx",
       "filingAddress": "Illinois State Board of Education\nSpecial Education Services Division\n100 North First Street, N-243\nSpringfield, Illinois 62777-0001",
@@ -274,6 +289,7 @@
     {
       "code": "IN",
       "name": "Indiana",
+      "circuit": "7th",
       "filingOffice": "Indiana Office of Administrative Law Proceedings",
       "filingUrl": "https://www.in.gov/oalp/idea-due-process-hearings/",
       "filingAddress": "Office of Administrative Law Proceedings\n100 North Senate Ave., Room N802\nIndianapolis, IN 46204-2745",
@@ -292,6 +308,7 @@
     {
       "code": "KS",
       "name": "Kansas",
+      "circuit": "10th",
       "filingOffice": "Kansas State Department of Education, Special Education and Title Services, Dispute Resolution",
       "filingUrl": "https://www.ksde.gov/policy-and-funding/special-education/special-education-law/dispute-resolution",
       "filingAddress": "KSDE, Special Education, & Title Services Dispute Resolution\n900 SW Jackson St. Suite 620\nTopeka, Kansas 66612",
@@ -310,6 +327,7 @@
     {
       "code": "KY",
       "name": "Kentucky",
+      "circuit": "6th",
       "filingOffice": "Kentucky Department of Education, Office of Legal Services",
       "filingUrl": "https://www.education.ky.gov/specialed/excep/Pages/Dispute_Resolution_Process.aspx",
       "filingAddress": "Kentucky Department of Education\nOffice of Legal Services\n300 Sower Blvd., 5th Floor\nFrankfort, KY 40601",
@@ -328,6 +346,7 @@
     {
       "code": "LA",
       "name": "Louisiana",
+      "circuit": "5th",
       "filingOffice": "Louisiana Department of Education, Legal Division",
       "filingUrl": "https://doe.louisiana.gov/families-and-students/family-support-resources/family-special-education-resources/dispute-resolution",
       "filingAddress": "Louisiana Department of Education\nAttention: Legal Division\nP.O. Box 94064\nBaton Rouge, Louisiana 70804-9064",
@@ -346,6 +365,7 @@
     {
       "code": "MA",
       "name": "Massachusetts",
+      "circuit": "1st",
       "filingOffice": "Bureau of Special Education Appeals",
       "filingUrl": "https://www.mass.gov/how-to/how-to-request-a-bsea-hearing",
       "filingAddress": "14 Summer Street, 4th Floor\nMalden, MA 02148",
@@ -364,6 +384,7 @@
     {
       "code": "MD",
       "name": "Maryland",
+      "circuit": "4th",
       "filingOffice": "Maryland Office of Administrative Hearings",
       "filingUrl": "https://marylandpublicschools.org/programs/Pages/Special-Education/FSDR/index.aspx",
       "filingAddress": "Office of Administrative Hearings\n11101 Gilroy Road\nHunt Valley, Maryland 21031",
@@ -382,6 +403,7 @@
     {
       "code": "ME",
       "name": "Maine",
+      "circuit": "1st",
       "filingOffice": "Maine Department of Education, Dispute Resolution Office, Office of Special Services and Inclusive Education",
       "filingUrl": "https://www.maine.gov/doe/learning/specialed/dueprocess",
       "filingAddress": "Dispute Resolution Office\nOffice of Special Services and Inclusive Education\nMaine Department of Education\n23 State House Station\nAugusta, ME 04333-0023",
@@ -400,6 +422,7 @@
     {
       "code": "MI",
       "name": "Michigan",
+      "circuit": "6th",
       "filingOffice": "Michigan Department of Education, Office of Special Education – Due Process Complaints",
       "filingUrl": "https://www.michigan.gov/mde/services/special-education/dispute-resolution-options",
       "filingAddress": "Michigan Department of Education\nOffice of Special Education – Due Process Complaints\n608 West Allegan\nP.O. Box 30008\nLansing, MI 48909",
@@ -418,6 +441,7 @@
     {
       "code": "MN",
       "name": "Minnesota",
+      "circuit": "8th",
       "filingOffice": "Minnesota Department of Education, Due Process Hearing Coordinator, Office of General Counsel",
       "filingUrl": "https://education.mn.gov/MDE/fam/sped/conf/due/",
       "filingAddress": "Minnesota Department of Education\nDue Process Hearing Coordinator\nOffice of General Counsel\n400 NE Stinson Blvd.\nMinneapolis, MN 55413",
@@ -436,6 +460,7 @@
     {
       "code": "MO",
       "name": "Missouri",
+      "circuit": "8th",
       "filingOffice": "Missouri Department of Elementary and Secondary Education, Office of Special Education – Compliance",
       "filingUrl": "https://dese.mo.gov/special-education/due-processchild-complaint",
       "filingAddress": "Missouri Department of Elementary and Secondary Education\nOffice of Special Education – Compliance\nP.O. Box 480, Jefferson City, MO 65102",
@@ -454,6 +479,7 @@
     {
       "code": "MS",
       "name": "Mississippi",
+      "circuit": "5th",
       "filingOffice": "Mississippi Department of Education, Office of Dispute Resolution",
       "filingUrl": "https://mdek12.org/specialeducation/dispute-resolution/",
       "filingAddress": "The Mississippi Department of Education\nAttention: Office of Dispute Resolution\n359 N. West Street\nSuite 301\nJackson, MS 39201",
@@ -472,6 +498,7 @@
     {
       "code": "MT",
       "name": "Montana",
+      "circuit": "9th",
       "filingOffice": "Montana Office of Public Instruction, Dispute Resolution Office",
       "filingUrl": "https://opi.mt.gov/Educators/School-Climate-Student-Wellness/Special-Education/Dispute-Resolution",
       "filingAddress": "Dispute Resolution Office\nSuperintendent of Public Instruction\nP.O. Box 202501\nHelena, MT 59620-2501",
@@ -490,6 +517,7 @@
     {
       "code": "NC",
       "name": "North Carolina",
+      "circuit": "4th",
       "filingOffice": "North Carolina Office of Administrative Hearings",
       "filingUrl": "https://www.oah.nc.gov/form-h-06e-special-education-petition-form",
       "filingAddress": "Office of Administrative Hearings\n1711 New Hope Church Road\nRaleigh, NC 27609",
@@ -508,6 +536,7 @@
     {
       "code": "ND",
       "name": "North Dakota",
+      "circuit": "8th",
       "filingOffice": "North Dakota Department of Public Instruction, Office of Specially Designed Services",
       "filingUrl": "https://www.nd.gov/dpi/education-programs/special-education",
       "filingAddress": "ND Department of Public Instruction (NDDPI)\nOffice of Specially Designed Services\nAttn: Director of Specially Designed Services\n600 East Boulevard Avenue, Dept. 201\nBismarck, ND 58505-0440",
@@ -526,6 +555,7 @@
     {
       "code": "NE",
       "name": "Nebraska",
+      "circuit": "8th",
       "filingOffice": "Nebraska Department of Education",
       "filingUrl": "https://www.education.ne.gov/sped/due-process/",
       "filingAddress": "Nebraska Department of Education\nState Office Building, 6th Floor\n301 Centennial Mall South\nLincoln, Nebraska 68509",
@@ -544,6 +574,7 @@
     {
       "code": "NH",
       "name": "New Hampshire",
+      "circuit": "1st",
       "filingOffice": "New Hampshire Department of Education, Governance Unit, Dispute Resolution and Constituent Complaints Section",
       "filingUrl": "https://www.education.nh.gov/who-we-are/deputy-commissioner/dispute-resolution-and-complaints",
       "filingAddress": "NH Department of Education\nGovernance Unit, Dispute Resolution and Constituent Complaints Section\n25 Hall Street\nConcord, NH 03301",
@@ -562,6 +593,7 @@
     {
       "code": "NJ",
       "name": "New Jersey",
+      "circuit": "3d",
       "filingOffice": "New Jersey Department of Education, Office of Special Education",
       "filingUrl": "https://www.nj.gov/education/specialed/policy/disputeresolution/",
       "filingAddress": "Director\nOffice of Special Education (OSE)\nNJ Department of Education\nP.O. Box 500\nTrenton, NJ 08625-0500",
@@ -580,6 +612,7 @@
     {
       "code": "NM",
       "name": "New Mexico",
+      "circuit": "10th",
       "filingOffice": "New Mexico Public Education Department, Office of Special Education",
       "filingUrl": "https://web.ped.nm.gov/bureaus/special-education/dispute-resolution/due-process-hearings/",
       "filingAddress": "Director of Special Education\nc/o Office of General Counsel\nNew Mexico Public Education Department\n300 Don Gaspar Ave\nSanta Fe, NM 87501",
@@ -598,6 +631,7 @@
     {
       "code": "NV",
       "name": "Nevada",
+      "circuit": "9th",
       "filingOffice": "Nevada Department of Education, Superintendent of Public Instruction",
       "filingUrl": "https://doe.nv.gov/offices/office-of-comprehensive-student-services/dispute-resolution/due-process-complaint",
       "filingAddress": null,
@@ -616,6 +650,7 @@
     {
       "code": "NY",
       "name": "New York",
+      "circuit": "2d",
       "filingOffice": "New York State Education Department, Office of Special Education",
       "filingUrl": "https://www.nysed.gov/special-education/due-process-hearing",
       "filingAddress": "New York State Education Department\nOffice of Special Education\nRoom 309 EB\n89 Washington Avenue\nAlbany, New York 12234\nAttention: Due Process Unit",
@@ -634,6 +669,7 @@
     {
       "code": "OH",
       "name": "Ohio",
+      "circuit": "6th",
       "filingOffice": "Ohio Department of Education and Workforce, Dispute Resolution",
       "filingUrl": "https://education.ohio.gov/Topics/Special-Education/Dispute-Resolution",
       "filingAddress": "Ohio Department of Education and Workforce\nDispute Resolution, Mail Stop 409\n25 South Front Street\nColumbus, OH 43215-4183",
@@ -652,6 +688,7 @@
     {
       "code": "OK",
       "name": "Oklahoma",
+      "circuit": "10th",
       "filingOffice": "Oklahoma State Department of Education, Office of Special Education Services",
       "filingUrl": "https://oklahoma.gov/education/services/special-education/dispute-resolution/due-process.html",
       "filingAddress": "Oklahoma State Department of Education\nOffice of Special Education Services\n2500 N. Lincoln Boulevard, Suite 412\nOklahoma City, OK 73105",
@@ -670,6 +707,7 @@
     {
       "code": "OR",
       "name": "Oregon",
+      "circuit": "9th",
       "filingOffice": "Oregon Department of Education, Office of Student Services, Dispute Resolution Section",
       "filingUrl": "https://www.oregon.gov/ode/rules-and-policies/pages/due-process-overview.aspx",
       "filingAddress": "Assistant Superintendent – Student Services\nPublic Service Building\n255 Capitol Street NE\nSalem, Oregon 97310-0203",
@@ -688,6 +726,7 @@
     {
       "code": "PA",
       "name": "Pennsylvania",
+      "circuit": "3d",
       "filingOffice": "Office for Dispute Resolution",
       "filingUrl": "https://odr-pa.org/due-process-complaint-notice/",
       "filingAddress": "Office for Dispute Resolution\n6340 Flank Drive\nHarrisburg, PA 17112-2764",
@@ -706,6 +745,7 @@
     {
       "code": "RI",
       "name": "Rhode Island",
+      "circuit": "1st",
       "filingOffice": "Rhode Island Department of Education, Dispute Resolution, Office of Student, Community and Academic Supports",
       "filingUrl": "https://ride.ri.gov/students-families/special-education/when-schools-and-families-do-not-agree",
       "filingAddress": "Dispute Resolution, Suite 500\nOffice of Student, Community and Academic Supports\nRI Dept. of Education\n255 Westminster Street\nProvidence, RI 02903",
@@ -724,6 +764,7 @@
     {
       "code": "SC",
       "name": "South Carolina",
+      "circuit": "4th",
       "filingOffice": "South Carolina Department of Education, Office of General Counsel",
       "filingUrl": "https://ed.sc.gov/districts-schools/special-education-services/parent-resources/dispute-resolution-information/due-process/due-process-hearing-request/",
       "filingAddress": "South Carolina Department of Education\nOffice of General Counsel\n1429 Senate Street, Room 1015\nColumbia, South Carolina 29201",
@@ -742,6 +783,7 @@
     {
       "code": "SD",
       "name": "South Dakota",
+      "circuit": "8th",
       "filingOffice": "South Dakota Department of Education, Special Education Programs",
       "filingUrl": "https://doe.sd.gov/sped/complaints.aspx",
       "filingAddress": "SD Department of Education\nSpecial Education Programs\n800 Governors Drive\nPierre, SD 57501-2294",
@@ -760,6 +802,7 @@
     {
       "code": "TN",
       "name": "Tennessee",
+      "circuit": "6th",
       "filingOffice": "Tennessee Department of Education, Office of General Counsel",
       "filingUrl": "https://www.tn.gov/education/legal-services/special-education-legal-services/legal-dispute-resolution-processes.html",
       "filingAddress": "Tennessee Department of Education\nOffice of General Counsel\nAndrew Johnson Tower, 9th Floor\n710 James Robertson Parkway\nNashville, Tennessee 37243",
@@ -778,6 +821,7 @@
     {
       "code": "TX",
       "name": "Texas",
+      "circuit": "5th",
       "filingOffice": "Texas Education Agency, Office of General Counsel, Special Education Due Process Hearing Program",
       "filingUrl": "https://tea.texas.gov/about-tea/government-relations-and-legal/special-education-hearings/due-process-hearings",
       "filingAddress": "Texas Education Agency\n1701 North Congress Ave\nAustin, Texas 78701",
@@ -796,6 +840,7 @@
     {
       "code": "UT",
       "name": "Utah",
+      "circuit": "10th",
       "filingOffice": "Utah State Board of Education",
       "filingUrl": "https://schools.utah.gov/specialeducation/programs/studentfamilyrights",
       "filingAddress": "State Director of Special Education\nUtah State Board of Education\n250 East 500 South\nPO Box 144200\nSalt Lake City, Utah 84114-4200",
@@ -814,6 +859,7 @@
     {
       "code": "VA",
       "name": "Virginia",
+      "circuit": "4th",
       "filingOffice": "Virginia Department of Education, Office of Dispute Resolution and Administrative Services",
       "filingUrl": "https://www.doe.virginia.gov/programs-services/special-education/resolving-disputes/special-education-due-process-hearings",
       "filingAddress": "Virginia Department of Education\nOffice of Dispute Resolution and Administrative Services\nP.O. Box 2120\nRichmond, Virginia 23218-2120",
@@ -832,6 +878,7 @@
     {
       "code": "VT",
       "name": "Vermont",
+      "circuit": "2d",
       "filingOffice": "Vermont Agency of Education",
       "filingUrl": "https://education.vermont.gov/mediation-due-process-and-administrative-complaints",
       "filingAddress": "Agency of Education\nSpecial Education Mediation Service\n1 National Life Drive, Davis 5\nMontpelier, VT 05620-2501",
@@ -850,6 +897,7 @@
     {
       "code": "WA",
       "name": "Washington",
+      "circuit": "9th",
       "filingOffice": "Washington State Office of Administrative Hearings",
       "filingUrl": "https://ospi.k12.wa.us/student-success/special-education/dispute-resolution/request-due-process-hearing",
       "filingAddress": "Office of Administrative Hearings (OAH)\nPO Box 42489\nOlympia, WA 98504-2489",
@@ -868,6 +916,7 @@
     {
       "code": "WI",
       "name": "Wisconsin",
+      "circuit": "7th",
       "filingOffice": "Wisconsin Department of Public Instruction",
       "filingUrl": "https://dpi.wi.gov/sped/dispute-resolution/due-process",
       "filingAddress": "DIRECTOR\nSPECIAL EDUCATION TEAM\nWISCONSIN DEPARTMENT OF PUBLIC INSTRUCTION\nPO BOX 7841\nMADISON, WI 53707-7841",
@@ -886,6 +935,7 @@
     {
       "code": "WV",
       "name": "West Virginia",
+      "circuit": "4th",
       "filingOffice": "West Virginia Department of Education, Division of Federal Programs & Support, Office of Special Education",
       "filingUrl": "https://wvde.us/academics/special-education/accountability-compliance/dispute-resolution",
       "filingAddress": "West Virginia Department of Education\nDivision of Federal Programs & Support\nOffice of Special Education\nBldg. 6, Suite 750\n1900 Kanawha Blvd. E.\nCharleston, WV 25305-0330",
@@ -904,6 +954,7 @@
     {
       "code": "WY",
       "name": "Wyoming",
+      "circuit": "10th",
       "filingOffice": "Wyoming Department of Education, Special Education Programs Division",
       "filingUrl": "https://edu.wyoming.gov/parents/special-education/dispute-resolution/",
       "filingAddress": "State Director of Special Education\nWDE Special Education Programs Division\n122 W. 25th St. Suite E200,\nCheyenne, Wyoming 82002",

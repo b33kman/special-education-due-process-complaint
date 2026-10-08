@@ -11,7 +11,7 @@
 
 **A free AI plugin for Claude and ChatGPT that writes a special education due process complaint from your child's IEP, school documents and other important information.**
 
-A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give the plugin the IEPs, evaluations, prior written notices, progress reports, service logs, emails and any private evaluations. It reads every page, checks the facts with you, lets you choose what to raise, looks up how to file in your state, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
+A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give the plugin the IEPs, evaluations, prior written notices, progress reports, service logs, emails and any private evaluations. It reads every page, checks the facts with you, lets you choose what to raise, answers the reasons the school gave in its own documents, looks up the law and how to file in your state, shows you its arithmetic, flags anything it could not verify, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
 
 It is for parents filing on their own (pro se), advocates, special education attorneys and legal aid organizations. It is not legal advice.
 
@@ -113,9 +113,11 @@ Click **Plugins** in the left sidebar, then **Personal**. The due process compla
 5. **Download your files** when it's finished:
    - **complaint.pdf** — the complaint to file
    - **complaint.docx** — the same complaint, to edit in Word
-   - **filing-instructions.md** — where and how to file in your state, including which office of your school district gets it and at what address
+   - **filing-instructions.md** — where and how to file in your state, including which office of your school district gets it and at what address, if you ask for it
 
-Until every check passes, the files are named **complaint.DRAFT** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
+Every complaint ends with **review notes** after a page break: the corrections made, every citation and whether it was verified, every flag and what it needs, the arithmetic with its inputs, and a checklist for whoever signs. **Remove the notes before you file.**
+
+Until every check passes and every flag is resolved, the files are named **complaint.DRAFT** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
 
 For the best results, choose the most capable model the app offers.
 
@@ -160,9 +162,10 @@ Each new version is listed on the [Releases page](https://github.com/b33kman/spe
 
 ## What it will not do
 
-- Choose the claims or what to ask for. You decide.
+- Choose the claims or what to ask for. It recommends every claim your documents support. You decide.
 - Say whether the complaint will win.
-- Fill a gap. If no document and nothing you said supports a fact, the complaint leaves it out.
+- Invent a fact. If no document and nothing you said supports one, it writes the fact and **flags** it for you to resolve, and the files stay marked DRAFT until you do.
+- Write a citation it has not checked. Anything it could not verify is cited with a **VERIFY** flag, with no quotation and no page number, for you to confirm. It cannot run a citator.
 - Guess a filing address or deadline. It confirms the state's on its official filing page, and the district's on the district's own website, every time.
 
 ## Privacy
@@ -179,10 +182,12 @@ It does the slow parts for you. It reads every page of every document, pulls out
 ### How is this different from asking a regular AI chat?
 A regular chat writes what sounds right. This plugin follows a set procedure built for due process complaints:
 
-- A script checks every date, number and quotation against your documents and refuses anything it can't find there.
+- A script checks every date, number and quotation against your documents and refuses anything it can't find there or flag for you.
 - It shows you the facts with the page each came from, and you choose the claims and what to ask for.
+- Each claim answers the reason the school gave in its own documents, rather than arguing past it.
 - It includes every element federal law requires (34 C.F.R. § 300.508(b)), and a complaint missing one stays a draft.
-- It uses your state's filing office, address and time limit, confirmed on the state's official page.
+- It uses your state's filing office, address and time limit, confirmed on the state's official page, and the law of the circuit your state sits in.
+- Its arithmetic is shown with its inputs and recomputed by a script, so no total goes in unchecked.
 - It produces a formatted pleading (caption, numbered paragraphs, signature block, certificate of service) as a PDF and a Word file, and marks drafts so they can't be filed by mistake.
 - It never predicts how your case will turn out.
 
@@ -192,10 +197,12 @@ Yes, as long as you check what it writes. A general AI chat can get dates, quota
 ### Will it hallucinate or make things up?
 It's built not to, and today's AI models are very capable, but no AI is perfect. The safeguards:
 
-- Every date, number and quotation is checked against your documents, and anything that isn't there is refused.
+- A script checks every date, number and quotation against your documents. Anything that isn't there is refused unless it is flagged for you to resolve.
+- Every count and total goes in a table with its inputs, and the script **recomputes it**. You are shown the table and asked to confirm it.
+- A case or statute is cited with a page number only if its text was read in that session. Everything else carries a VERIFY flag.
 - It shows you the facts it found, with the page each came from, and asks you to confirm or correct them.
-- It reviews the draft for errors a check can't catch, such as a fact that doesn't match its page.
-- The files stay marked DRAFT until the check passes.
+- It then runs a fourteen-point audit for the errors a script can't catch, and writes what it found into the review notes.
+- The files stay marked DRAFT until the check passes and every flag is resolved.
 
 Always read the whole complaint against your documents before you sign and file it. The person who signs is responsible for it.
 
@@ -205,7 +212,7 @@ Your documents go only to Claude or ChatGPT, and Anthropic or OpenAI keeps and p
 Both apps let you choose whether your chats are used to improve their AI: in Claude, in your [privacy settings](https://privacy.claude.com/en/articles/12109829-how-do-i-change-my-model-improvement-privacy-settings); in ChatGPT, under **Settings → Data Controls → Improve the model for everyone**. If you're an attorney using it for a client, make sure the app's terms fit your confidentiality duties.
 
 ### Is it legal advice? Will it tell me whether I'll win?
-No. It drafts from your documents and the facts you confirm. It suggests the claims your documents support best, but you choose, and it never predicts how the case will turn out. The person who signs the complaint is responsible for it.
+No. It drafts from your documents and the facts you confirm. It recommends the claims your documents support, but you choose, and it never predicts how the case will turn out. It cites law, and it flags every authority it could not verify so you can check it. The person who signs the complaint is responsible for it.
 
 ### Do I still need a lawyer?
 No. A parent can file a due process complaint without a lawyer. A special education attorney or advocate can help you decide what to raise and prepare for the hearing. For free help, your state's Parent Training and Information Center can point you to resources: [find your parent center](https://www.parentcenterhub.org/find-your-center/).
@@ -300,7 +307,9 @@ To update: `git pull`. What changed in each version is in [CHANGELOG.md](CHANGEL
 
 ### How it works
 
-The AI reads the PDFs, confirms the facts with the person filing, recommends every claim the record supports by the parts each claim requires (`references/claims.md`) and waits for them to choose the claims and relief, confirms the state's filing details from the bundled table against its official filing page, and drafts `complaint.md`, stating each fact once and pointing each claim to its fact paragraphs by label. `check.mjs` refuses any date, figure or quotation not in the documents or the person's statement, a missing required element, and sections out of order. The draft is then reviewed against `references/review.md`, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word, prints each label as its paragraph number, and names the files DRAFT unless the complaint is final and passes the check.
+The AI asks who is filing, reads the PDFs, confirms the facts in short groups and resolves what disagrees, recommends every claim the record supports by the parts each claim requires (`references/claims.md`) and waits for them to choose the claims and relief, confirms the state's filing details from the bundled table against its official filing page, researches the law for the filing state and the circuit on that state's row (`references/authorities.md`), and drafts `complaint.md` — each fact stated once with its source, each claim arguing the rule against the reason the district gave, each count in an arithmetic table.
+
+`check.mjs` refuses any date, figure or quotation that is neither in the documents or the person's statement nor flagged, a flag the notes do not explain, a source naming a document or page that is not there, a claim that ties to no paragraph, an arithmetic table that does not add up, a missing required element, and sections out of order. The draft is then audited against `references/audit.md` — fourteen checks, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word with the review notes after a page break, prints each label as its paragraph number, and names the files DRAFT unless the complaint is final, passes the check, and has no flag left open.
 
 The three scripts are self-contained files built from `src/` with `npm run build`, so they run on Node.js 20 or later with nothing to install, in Claude's and ChatGPT's code environments alike.
 
@@ -314,7 +323,7 @@ npm install && npm test
 
 After editing anything in `src/`, run `npm run build`; a test fails if the scripts in the skill are not the build of `src/`.
 
-Each test breaks a worked example in one way — an invented date, a figure that is only the tail of the real one, a quotation not on the page, a missing school, a section out of order, a label that points nowhere, a claim that only lists paragraph numbers, a paragraph pointer written into a remedy — and asserts the check refuses it, and that a draft is never given the name of the file to file. Others assert what must keep working: that text never runs outside the margins, that the shipped scripts are the build of `src/` unchanged, and that they run with nothing installed.
+Each test breaks a worked example in one way — an invented date, a figure that is only the tail of the real one, a quotation not on the page, a missing school, a section out of order, a label that points nowhere, a claim that only lists paragraph numbers, a paragraph pointer written into a remedy, a source naming a document that is not in the folder, a flag the notes do not explain, a flag numbered out of sequence, an arithmetic row whose result does not follow, an input traceable to nothing — and asserts the check refuses it, and that a draft is never given the name of the file to file. Others assert what must keep working: that an open flag keeps a passing complaint out of the files to file, that text never runs outside the margins in either example, that every state carries its circuit, that the shipped scripts are the build of `src/` unchanged, and that they run with nothing installed.
 
 ### Layout
 
@@ -323,7 +332,11 @@ Each test breaks a worked example in one way — an invented date, a figure that
 .codex-plugin/           OpenAI plugin manifest: the name and description ChatGPT shows
 skills/due-process-complaint/
   SKILL.md               the procedure the AI follows
-  references/            the exemplar (form and voice), the review checklist, the state table
+  references/claims.md   the eighteen claims and what each one turns on
+  references/authorities.md  what may be cited, and on whose word
+  references/exemplar.md the form and the voice of the document
+  references/audit.md    the fourteen checks before anything is handed over
+  references/state-rules.json  the 51-state filing table, with each state's circuit
   scripts/               pdf-text.mjs, check.mjs, render.mjs, built from src/ (do not edit)
 src/                     the scripts' source; build.mjs builds them
 examples/                two complete worked examples on invented documents

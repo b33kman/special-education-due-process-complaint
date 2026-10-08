@@ -7,16 +7,32 @@ import { existsSync, readdirSync, readFileSync, realpathSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 var FORM = [
-  { key: "introduction", re: /^introduction$/i, required: true },
-  { key: "contact", re: /^contact and residence information$/i, required: true },
-  { key: "facts", re: /^statement of facts$/i },
-  { key: "problems", re: /^statement of the problems$/i, required: true },
-  { key: "resolution", re: /^proposed resolution$/i, required: true },
+  { key: "preliminary", re: /^preliminary statement$/i, required: true, name: "\u201CPreliminary statement\u201D" },
+  { key: "required", re: /^required information$/i, required: true, name: "\u201CRequired information\u201D" },
+  { key: "jurisdiction", re: /^jurisdiction, timeliness and burden$/i, required: true, name: "\u201CJurisdiction, timeliness and burden\u201D" },
+  { key: "facts", re: /^statement of facts$/i, required: true, name: "\u201CStatement of facts\u201D" },
+  { key: "problems", re: /^statement of the problems$/i, required: true, name: "\u201CStatement of the problems\u201D" },
+  { key: "pendency", re: /^pendency$/i },
+  { key: "resolution", re: /^proposed resolution$/i, required: true, name: "\u201CProposed resolution\u201D" },
   { key: "hearing", re: /^requests concerning the hearing$/i },
   { key: "state", re: /^additional information required in .+$/i },
-  { key: "signature", re: /^signature$/i, required: true },
-  { key: "service", re: /^certificate of service$/i, required: true }
+  { key: "rights", re: /^reservation of rights$/i },
+  { key: "signature", re: /^signature$/i, required: true, name: "\u201CSignature\u201D" },
+  { key: "service", re: /^certificate of service$/i, required: true, name: "\u201CCertificate of service\u201D" },
+  { key: "notes", re: /^(?:attorney review notes\s*[–—-]\s*attorney work product\s*[–—-]\s*remove before filing|review notes\s*[–—-]\s*remove before filing)$/i, required: true, name: "\u201CReview Notes \u2013 Remove Before Filing\u201D" }
 ];
+var POINTER_SECTIONS = /* @__PURE__ */ new Set(["problems", "pendency"]);
+var FILERS = ["parent", "guardian", "student", "attorney", "advocate", "legal-aid"];
+var COUNSEL_FILERS = /* @__PURE__ */ new Set(["attorney", "legal-aid"]);
+var FLAG_KINDS = ["MISSING", "CONFLICT", "VERIFY", "COUNSEL"];
+var FLAG_RE = new RegExp(`\\[(${FLAG_KINDS.join("|")})-(\\d+)(?::\\s*([^\\]]*))?\\]`, "g");
+var MAX_FLAG_WORDS = 12;
+var isTable = (block) => block.trimStart().startsWith("|");
+function tableRows(block) {
+  const lines = block.split("\n").map((l) => l.trim()).filter((l) => l.startsWith("|"));
+  const cells = lines.map((l) => l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim()));
+  return cells.filter((row) => !row.every((c) => /^:?-{2,}:?$/.test(c) || c === ""));
+}
 function parseComplaint(md) {
   const text = String(md).replace(/\r\n/g, "\n");
   const meta = {};
@@ -75,34 +91,89 @@ function monthsIn(text) {
   }
   return out;
 }
+var stripMarkers = (t) => String(t).replace(FLAG_RE, " ").replace(/\[@[^\]]*\]/g, " ").replace(/\[#[^\]]*\]/g, " ");
 function claimsIn(block) {
-  let t = block.replace(/^\([a-z]\)\s+/, "").replace(/\[#[^\]]*\]/g, " ");
+  let t = stripMarkers(block.replace(/^\([a-z]\)\s+/, ""));
   const quotes = [...t.matchAll(/(\(?)["“]([^"“”]{2,})["”](\)?)/g)].filter((m) => !(m[1] && m[3])).map((m) => m[2].replace(/[.,;:]+$/, ""));
   const dates = [...t.matchAll(new RegExp(`\\b(${MONTHS.join("|")})\\s+(\\d{1,2}),\\s+(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${Number(m[2])}/${m[3]}` }));
   for (const d of dates) t = t.replace(d.text, " ");
   const months = [...t.matchAll(new RegExp(`\\b(${MONTHS.join("|")})\\s+(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${m[2]}` }));
   for (const m of months) t = t.replace(m.text, " ");
-  t = t.replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, " ").replace(/§+\s*[\d.()a-z,–\s-]+/gi, " ");
-  const numbers = [...t.matchAll(/(?<![\w.]|[A-Za-z]-)(\$?\d[\d,]*(?:\.\d+)?%?)(?:\s+([a-z]+))?/gi)].map((m) => ({ n: m[1].replace(/,/g, ""), unit: m[2] ?? "" }));
+  t = t.replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, " ").replace(/§+\s*[\d.()a-z,–\s-]+/gi, " ").replace(/\b\d+\s+(?:U\.?S\.?|F\.(?:\s?\d\w*|\s?App'x|\s?Supp\.?\s?\d?\w*)|S\.\s?Ct\.|N\.E\.|N\.W\.|P\.|A\.|So\.)\s?\d*[\w.']*[^.;)]*\)/g, " ").replace(/\b\d+\s+(?:U\.?S\.?|F\.\s?\d\w*|F\.\s?App'x|S\.\s?Ct\.)\s+at\s+[\d,\s\u2013-]+/g, " ");
+  const numbers = [...t.matchAll(/(?<![\w.]|[A-Za-z]-)(\$?\d[\d,]*(?:\.\d+)?%?)(?:\s+([a-z]+))?/gi)].map((m) => ({ n: m[1].replace(/,/g, ""), unit: unitOf(m[2]) }));
   return { dates, months, numbers, quotes };
 }
+var NOT_A_UNIT = /* @__PURE__ */ new Set(["and", "or", "to", "through", "of", "in", "on", "at", "by", "for", "with", "the", "a", "an", "as", "from", "that", "which", "was", "were", "is", "are", "than", "but", "so", "if", "when", "while", "before", "after"]);
+var unitOf = (word) => word && !NOT_A_UNIT.has(word.toLowerCase()) ? word : "";
 var figureIn = (n, text) => new RegExp(`${n.startsWith("$") ? "\\$\\s?" : ""}(?<![\\d.])${escapeRe(n.replace(/[$%]/g, ""))}(?![\\d])${n.endsWith("%") ? "\\s?(?:%|percent)" : ""}`, "i").test(String(text).replace(/,/g, ""));
+var ARITHMETIC_HEADER = ["what", "inputs", "computation", "result"];
+var SAFE_EXPRESSION = /^[\d+\-*/(). ]+$/;
+var leadingNumber = (s) => {
+  const m = String(s).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : null;
+};
+function auditArithmetic(notesSection, sources) {
+  const errors = [];
+  const results = [];
+  if (!notesSection) return { errors, results };
+  for (const block of notesSection.blocks.filter(isTable)) {
+    const rows = tableRows(block);
+    if (!rows.length) continue;
+    const header = rows[0].map((c) => c.replace(/\*/g, "").toLowerCase());
+    if (ARITHMETIC_HEADER.some((h, i) => header[i] !== h)) continue;
+    for (const row of rows.slice(1)) {
+      const [what, inputs, computation, result] = row;
+      const where = `the arithmetic table, \u201C${what}\u201D`;
+      if (!SAFE_EXPRESSION.test(computation)) {
+        errors.push(`${where}: the computation \u201C${computation}\u201D must be digits and + - * / ( ) . only`);
+        continue;
+      }
+      for (const { n } of [...inputs.replace(/\([^)]*\)/g, " ").matchAll(/(\$?\d[\d,]*(?:\.\d+)?%?)/g)].map((m) => ({ n: m[1].replace(/,/g, "") }))) {
+        if (!figureIn(n, sources) && !results.includes(n.replace(/[$%]/g, ""))) {
+          errors.push(`${where}: the input \u201C${n}\u201D is neither in the documents or statement.md nor a result computed above`);
+        }
+      }
+      let value;
+      try {
+        value = Function(`"use strict"; return (${computation})`)();
+      } catch {
+        errors.push(`${where}: the computation \u201C${computation}\u201D does not evaluate`);
+        continue;
+      }
+      const stated = leadingNumber(result);
+      if (stated === null) {
+        errors.push(`${where}: the result \u201C${result}\u201D does not lead with a number`);
+        continue;
+      }
+      if (!Number.isFinite(value) || Math.abs(value - stated) > 5e-3) {
+        errors.push(`${where}: ${computation} is ${value}, and the result says ${stated}`);
+        continue;
+      }
+      results.push(String(stated));
+    }
+  }
+  return { errors, results };
+}
 function checkComplaint(dir) {
   const errors = [];
   const statementOnly = [];
+  const onFlag = [];
   const file = join(dir, "complaint.md");
-  if (!existsSync(file)) return { errors: ["there is no complaint.md in the case folder"], statementOnly, parsed: null };
+  if (!existsSync(file)) return { errors: ["there is no complaint.md in the case folder"], statementOnly, onFlag, openFlags: [], parsed: null };
   const parsed = parseComplaint(readFileSync(file, "utf8"));
   const { meta, sections } = parsed;
   const textDir = join(dir, "work", "text");
-  const documents = existsSync(textDir) ? readdirSync(textDir).filter((f) => f.endsWith(".txt")).map((f) => readFileSync(join(textDir, f), "utf8")).join("\n") : "";
+  const textFiles = existsSync(textDir) ? readdirSync(textDir).filter((f) => f.endsWith(".txt")) : [];
+  const textOf = new Map(textFiles.map((f) => [f, readFileSync(join(textDir, f), "utf8")]));
+  const documents = [...textOf.values()].join("\n");
   if (!documents) errors.push("no document text in work/text/ \u2014 run pdf-text.mjs first");
   const statement = existsSync(join(dir, "statement.md")) ? readFileSync(join(dir, "statement.md"), "utf8") : "";
   const sources = `${documents}
 ${statement}`;
-  for (const k of ["forum", "state", "petitioner", "respondent", "date", "student", "address", "school"]) {
+  for (const k of ["forum", "state", "circuit", "filer", "petitioner", "respondent", "date", "student", "address", "school"]) {
     if (!meta[k]) errors.push(`the front matter has no ${k}:`);
   }
+  if (meta.filer && !FILERS.includes(meta.filer)) errors.push(`filer: must be one of ${FILERS.join(", ")}`);
   if (!["draft", "final"].includes(meta.status)) errors.push("the front matter needs status: draft or status: final");
   let last = -1;
   for (const s of sections) {
@@ -113,19 +184,58 @@ ${statement}`;
   }
   for (const f of FORM.filter((x) => x.required)) {
     const s = sections.find((x) => x.key === f.key);
-    if (!s) errors.push(`the complaint has no ${f.key === "problems" ? "\u201CStatement of the problems\u201D" : f.key === "resolution" ? "\u201CProposed resolution\u201D" : `\u201C${f.re.source.replace(/[\^$\\/i]/g, "")}\u201D`} section`);
+    if (!s) errors.push(`the complaint has no ${f.name} section`);
     else if (!s.blocks.some((b) => !/^\*.*\*$/.test(b) && !b.startsWith("###"))) errors.push(`the \u201C${s.heading}\u201D section is empty`);
   }
-  const body = sections.filter((s) => !["signature", "service"].includes(s.key));
-  const bodyText = body.flatMap((s) => s.blocks).join("\n");
-  const intro = sections.find((s) => s.key === "introduction")?.blocks.join("\n") ?? "";
-  const contact = sections.find((s) => s.key === "contact")?.blocks.join("\n") ?? "";
-  if (meta.student && !contains(intro, meta.student)) errors.push(`the introduction does not name the child as the front matter does (\u201C${meta.student}\u201D)`);
-  if (meta.address && !contains(contact, meta.address)) errors.push(`the contact and residence section does not give the address as the front matter does (\u201C${meta.address}\u201D)`);
-  if (meta.school && !contains(bodyText, meta.school)) errors.push(`the complaint does not name the school (\u201C${meta.school}\u201D)`);
+  const notes = sections.find((s) => s.key === "notes");
+  if (notes && meta.filer) {
+    const isCounselHeading = /attorney work product/i.test(notes.heading);
+    const shouldBe = COUNSEL_FILERS.has(meta.filer);
+    if (shouldBe && !isCounselHeading) errors.push(`filer: ${meta.filer} \u2014 the notes are headed \u201CAttorney Review Notes \u2013 Attorney Work Product \u2013 Remove Before Filing\u201D`);
+    if (!shouldBe && isCounselHeading) errors.push(`filer: ${meta.filer} \u2014 a ${meta.filer}'s notes are not attorney work product; head them \u201CReview Notes \u2013 Remove Before Filing\u201D`);
+  }
+  const pleading = sections.filter((s) => !["signature", "service", "notes"].includes(s.key));
+  const pleadingText = pleading.flatMap((s) => s.blocks).join("\n");
+  const preliminary = sections.find((s) => s.key === "preliminary")?.blocks.join("\n") ?? "";
+  const required = sections.find((s) => s.key === "required")?.blocks.join("\n") ?? "";
+  if (meta.student && !contains(preliminary, meta.student)) errors.push(`the preliminary statement does not name the child as the front matter does (\u201C${meta.student}\u201D)`);
+  if (meta.address && !contains(required, meta.address)) errors.push(`the required information section does not give the address as the front matter does (\u201C${meta.address}\u201D)`);
+  if (meta.school && !contains(pleadingText, meta.school)) errors.push(`the complaint does not name the school (\u201C${meta.school}\u201D)`);
   for (const [k, parts] of [["student", String(meta.student ?? "").split(/\s+/)], ["address", String(meta.address ?? "").split(/,\s*/)], ["school", [meta.school]]]) {
     for (const part of parts.filter(Boolean)) if (!contains(sources, part)) errors.push(`${k}: \u201C${part}\u201D is not in the documents or statement.md`);
   }
+  const notesText = notes ? notes.blocks.join("\n") : "";
+  const flagsByKind = new Map(FLAG_KINDS.map((k) => [k, /* @__PURE__ */ new Set()]));
+  const openFlags = [];
+  for (const s of sections) {
+    if (s.key === "notes") continue;
+    for (const block of s.blocks) {
+      for (const m of [...block.matchAll(FLAG_RE)]) {
+        const [, kind, num, text] = m;
+        const id = `${kind}-${num}`;
+        if (flagsByKind.get(kind).has(num)) errors.push(`the flag \u201C[${id}]\u201D is used twice`);
+        flagsByKind.get(kind).add(num);
+        openFlags.push(`${id}${text ? `: ${text.trim()}` : ""} \u2014 ${s.heading}`);
+        if (text && text.trim().split(/\s+/).length > MAX_FLAG_WORDS) {
+          errors.push(`the flag \u201C[${id}]\u201D is longer than ${MAX_FLAG_WORDS} words \u2014 shorten it and explain it in the review notes`);
+        }
+        if (!notesText.includes(id)) errors.push(`the flag \u201C[${id}]\u201D is not explained in the review notes`);
+      }
+    }
+  }
+  for (const [kind, nums] of flagsByKind) {
+    const sorted = [...nums].map(Number).sort((a, b) => a - b);
+    for (const [i, n] of sorted.entries()) {
+      if (n !== i + 1) {
+        errors.push(`the ${kind} flags must be numbered from 1 with no gaps \u2014 ${sorted.join(", ")}`);
+        break;
+      }
+    }
+  }
+  const flagged = (block) => {
+    FLAG_RE.lastIndex = 0;
+    return FLAG_RE.test(block);
+  };
   const labels = /* @__PURE__ */ new Set();
   for (const s of sections) {
     for (const block of s.blocks) {
@@ -143,8 +253,48 @@ ${statement}`;
   for (const s of sections) {
     for (const block of s.blocks) {
       for (const m of block.replace(/^\[#[^\]]*\]/, "").matchAll(/\[#([^\]]*)\]/g)) {
-        if (s.key !== "problems") errors.push(`${s.heading}: \u201C[#${m[1]}]\u201D points at a paragraph of the chronology \u2014 a paragraph number belongs to a claim, and a remedy names its own figures`);
+        if (!POINTER_SECTIONS.has(s.key)) errors.push(`${s.heading}: \u201C[#${m[1]}]\u201D points at a paragraph of the chronology \u2014 a paragraph number belongs to a claim or the pendency section, and a remedy names its own figures`);
         else if (!labels.has(m[1])) errors.push(`${s.heading}: \u201C[#${m[1]}]\u201D points to no paragraph \u2014 start the paragraph it means with [#${m[1]}]`);
+      }
+    }
+  }
+  const resolveStem = (stem) => {
+    const want = stem.toLowerCase().replace(/[\s_-]/g, "");
+    return textFiles.filter((f) => f.toLowerCase().replace(/\.txt$/, "").replace(/[\s_-]/g, "").startsWith(want));
+  };
+  const REPORTS = /\b(?:the Parent|the Parents|the Student|Petitioner|Counsel|the person filing)\b[^.]{0,40}?\b(?:report|reports|reported|states|stated|says|said|recalls|recalled|describes|described)\b/i;
+  const facts = sections.find((s) => s.key === "facts");
+  for (const s of sections) {
+    if (s.key === "notes") continue;
+    for (const block of s.blocks) {
+      for (const m of block.matchAll(/\[@([^\]]*)\]/g)) {
+        const body = m[1].trim();
+        if (/^statement$/i.test(body)) {
+          if (!REPORTS.test(stripMarkers(block))) {
+            errors.push(`${s.heading}: a paragraph sourced to [@statement] must say so in its own words \u2014 \u201Cthe Parent reports\u201D, \u201CCounsel states\u201D`);
+          }
+          continue;
+        }
+        const parts = body.match(/^(.*?),\s*p\.\s*(\d+)$/i);
+        if (!parts) {
+          errors.push(`${s.heading}: the source \u201C[@${body}]\u201D must read [@stem, p. N] or [@statement]`);
+          continue;
+        }
+        const [, stem, page] = parts;
+        const hits = resolveStem(stem);
+        if (hits.length === 0) errors.push(`${s.heading}: the source \u201C[@${body}]\u201D names no document in the case folder`);
+        else if (hits.length > 1) errors.push(`${s.heading}: the source \u201C[@${body}]\u201D matches ${hits.length} documents \u2014 give more of the name`);
+        else if (!new RegExp(`^--- page ${Number(page)} ---$`, "m").test(textOf.get(hits[0]))) {
+          errors.push(`${s.heading}: the source \u201C[@${body}]\u201D names a page ${hits[0].replace(/\.txt$/, "")} does not have`);
+        }
+      }
+    }
+  }
+  if (facts) {
+    for (const block of facts.blocks) {
+      if (isTable(block) || /^\*.*\*$/.test(block) || block.startsWith("###")) continue;
+      if (!/\[@[^\]]*\]/.test(block) && !flagged(block)) {
+        errors.push(`Statement of facts: \u201C${block.slice(0, 60)}\u2026\u201D says where nothing came from \u2014 end it with [@stem, p. N] or [@statement]`);
       }
     }
   }
@@ -152,18 +302,23 @@ ${statement}`;
   if (problems) {
     let claim = null;
     let words = 0;
+    let pointers = 0;
     const claimDone = () => {
-      if (claim && words < 10) errors.push(`\u201C${claim}\u201D says only which paragraphs bear on the problem \u2014 say what the problem is, with its key dates and figures`);
+      if (!claim) return;
+      if (words < 10) errors.push(`\u201C${claim}\u201D says only which paragraphs bear on the problem \u2014 say what the problem is, with its key dates and figures`);
+      else if (pointers === 0) errors.push(`\u201C${claim}\u201D points at no paragraph of the chronology \u2014 apply the rule to the facts by paragraph number`);
     };
     for (const block of problems.blocks) {
       if (block.startsWith("###")) {
         claimDone();
         claim = block.replace(/^#+\s*/, "").trim();
         words = 0;
+        pointers = 0;
         continue;
       }
       if (/^\*.*\*$/.test(block)) continue;
-      words += (block.replace(/\[#[^\]]*\]/g, " ").replace(/\bparagraphs?\b/gi, " ").match(/[A-Za-z0-9][A-Za-z0-9''’-]*/g) ?? []).length;
+      pointers += [...block.matchAll(/\[#[^\]]*\]/g)].length;
+      words += (stripMarkers(block).replace(/\bparagraphs?\b/gi, " ").match(/[A-Za-z0-9][A-Za-z0-9''’-]*/g) ?? []).length;
     }
     claimDone();
   }
@@ -176,7 +331,7 @@ ${statement}`;
     const instructionsFile = join(dir, "filing-instructions.md");
     const instructions = existsSync(instructionsFile) ? readFileSync(instructionsFile, "utf8") : "";
     if (!served.length) errors.push("the certificate of service names nobody served \u2014 under \u201CServed on:\u201D, give each office the complaint goes to, with its address, as filing-instructions.md gives it");
-    else if (!instructions) errors.push("there is no filing-instructions.md \u2014 the offices on the certificate of service, and their addresses, come from it (step 4)");
+    else if (!instructions) errors.push("there is no filing-instructions.md \u2014 the offices on the certificate of service, and their addresses, come from it (step 5)");
     else {
       for (const office of served) for (const part of partsOf(office)) if (!contains(instructions, part)) errors.push(`Certificate of service: \u201C${part}\u201D is not in filing-instructions.md`);
       const district = instructions.split(/^## /m).find((chunk) => /^the school district\b/i.test(chunk));
@@ -184,61 +339,87 @@ ${statement}`;
       else if (!served.some((office) => partsOf(office).every((part) => contains(district, part)))) errors.push("the certificate of service does not name the school district\u2019s office as filing-instructions.md gives it");
     }
   }
+  const arithmetic = auditArithmetic(notes, sources);
+  errors.push(...arithmetic.errors);
+  const computed = new Set(arithmetic.results);
   const docDates = datesIn(documents), stmtDates = datesIn(statement);
   const docMonths = monthsIn(documents), stmtMonths = monthsIn(statement);
-  for (const s of body) {
+  for (const s of pleading) {
     for (const block of s.blocks) {
       if (block.startsWith("###") || /^\*.*\*$/.test(block)) continue;
-      const where = `${s.heading}: \u201C${block.slice(0, 80)}${block.length > 80 ? "\u2026" : ""}\u201D`;
-      const { dates, months, numbers, quotes } = claimsIn(block);
-      for (const d of dates) {
-        if (docDates.has(d.key)) continue;
-        if (stmtDates.has(d.key)) statementOnly.push(`${d.text} \u2014 ${where}`);
-        else errors.push(`${where} \u2014 the date \u201C${d.text}\u201D is not in the documents or statement.md`);
-      }
-      for (const m of months) {
-        if (docMonths.has(m.key)) continue;
-        if (stmtMonths.has(m.key)) statementOnly.push(`${m.text} \u2014 ${where}`);
-        else errors.push(`${where} \u2014 \u201C${m.text}\u201D is not in the documents or statement.md`);
-      }
-      for (const { n, unit } of numbers) {
-        const withUnit = unit && !/%$/.test(n) ? `${n} ${unit}` : "";
-        if (withUnit ? contains(documents, withUnit) : figureIn(n, documents)) continue;
-        if (withUnit ? contains(statement, withUnit) : figureIn(n, statement)) {
-          statementOnly.push(`${withUnit || n} \u2014 ${where}`);
-          continue;
+      const texts = isTable(block) ? tableRows(block).slice(1).flat() : [block];
+      const where = `${s.heading}: \u201C${stripMarkers(block).trim().slice(0, 80)}${block.length > 80 ? "\u2026" : ""}\u201D`;
+      const excused = flagged(block);
+      const note = (what) => {
+        (excused ? onFlag : statementOnly).push(`${what} \u2014 ${where}`);
+      };
+      const refuse = (message) => {
+        if (excused) onFlag.push(`${message} \u2014 ${where}`);
+        else errors.push(`${where} \u2014 ${message}`);
+      };
+      for (const text of texts) {
+        const { dates, months, numbers, quotes } = claimsIn(text);
+        for (const d of dates) {
+          if (docDates.has(d.key)) continue;
+          if (stmtDates.has(d.key)) note(d.text);
+          else refuse(`the date \u201C${d.text}\u201D is not in the documents or statement.md`);
         }
-        if (figureIn(n, documents)) continue;
-        if (figureIn(n, statement)) statementOnly.push(`${n} \u2014 ${where}`);
-        else errors.push(`${where} \u2014 the figure \u201C${n}\u201D is not in the documents or statement.md`);
-      }
-      for (const q of quotes) {
-        if (quotedIn(documents, q)) continue;
-        if (quotedIn(statement, q)) statementOnly.push(`\u201C${q}\u201D \u2014 ${where}`);
-        else errors.push(`${where} \u2014 the quotation \u201C${q}\u201D is not word for word in the documents or statement.md`);
+        for (const m of months) {
+          if (docMonths.has(m.key)) continue;
+          if (stmtMonths.has(m.key)) note(m.text);
+          else refuse(`\u201C${m.text}\u201D is not in the documents or statement.md`);
+        }
+        for (const { n, unit } of numbers) {
+          const withUnit = unit && !/%$/.test(n) ? `${n} ${unit}` : "";
+          if (withUnit ? contains(documents, withUnit) : figureIn(n, documents)) continue;
+          if (computed.has(n.replace(/[$%]/g, ""))) continue;
+          if (withUnit ? contains(statement, withUnit) : figureIn(n, statement)) {
+            note(withUnit || n);
+            continue;
+          }
+          if (figureIn(n, documents)) continue;
+          if (figureIn(n, statement)) {
+            note(n);
+            continue;
+          }
+          refuse(`the figure \u201C${n}\u201D is not in the documents or statement.md, and is not a result in the arithmetic table`);
+        }
+        for (const q of quotes) {
+          if (quotedIn(documents, q)) continue;
+          if (quotedIn(statement, q)) note(`\u201C${q}\u201D`);
+          else refuse(`the quotation \u201C${q}\u201D is not word for word in the documents or statement.md`);
+        }
       }
     }
   }
-  return { errors, statementOnly, parsed };
+  return { errors, statementOnly, onFlag, openFlags, parsed };
 }
 var self = fileURLToPath(import.meta.url);
 if (basename(self) === "check.mjs" && process.argv[1] && realpathSync(process.argv[1]) === realpathSync(self)) {
   if (!process.argv[2]) {
-    console.error("usage: node scripts/check.mjs <case folder>   \u2014 every date, figure and quotation in complaint.md against the documents and statement.md; the required elements; the form");
+    console.error("usage: node scripts/check.mjs <case folder>   \u2014 every date, figure and quotation in complaint.md against the documents and statement.md; the flags; the arithmetic; the required elements; the form");
     process.exit(2);
   }
-  const { errors, statementOnly } = checkComplaint(resolve(process.argv[2]));
+  const { errors, statementOnly, onFlag, openFlags } = checkComplaint(resolve(process.argv[2]));
   for (const e of errors) console.log(`\u2717 ${e}`);
-  if (statementOnly.length) {
-    console.log("\nFrom statement.md, not from any document \u2014 tell the person signing:");
-    for (const s of statementOnly) console.log(`  \xB7 ${s}`);
-  }
+  const list = (title, items) => {
+    if (!items.length) return;
+    console.log(`
+${title}`);
+    for (const s of items) console.log(`  \xB7 ${s}`);
+  };
+  list("From statement.md, not from any document \u2014 tell the person signing:", statementOnly);
+  list("Resting on a flag, not on a source \u2014 the person resolves each of these:", onFlag);
+  list("Flags still open \u2014 the complaint renders as DRAFT until they are resolved:", openFlags);
   console.log(errors.length ? `
 ${errors.length} error(s). Fix each from the sources and run again.` : "\ncheck passed.");
   process.exit(errors.length ? 1 : 0);
 }
 export {
+  FILERS,
+  FLAG_KINDS,
   FORM,
+  auditArithmetic,
   checkComplaint,
   parseComplaint
 };
