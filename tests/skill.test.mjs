@@ -513,6 +513,37 @@ test('every script prints its usage with no arguments', () => {
   }
 })
 
+test('the exemplar the model copies would itself pass the form the check enforces', async () => {
+  // A heading in references/exemplar.md that check.mjs rejects would make every complaint
+  // written from it fail, and the notes heading has to match the filer the exemplar declares.
+  const { FORM, parseComplaint, FILERS } = await import(pathToFileURL(join(root, 'src', 'check.mjs')).href)
+  const ex = readFileSync(join(root, 'skills', 'due-process-complaint', 'references', 'exemplar.md'), 'utf8')
+  const block = ex.match(/```markdown\n([\s\S]*?)\n```/)?.[1]
+  assert.ok(block, 'the exemplar still carries one fenced markdown document')
+  const { meta, sections } = parseComplaint(block)
+  for (const key of ['forum', 'state', 'circuit', 'filer', 'petitioner', 'respondent', 'date', 'student', 'address', 'school', 'status']) {
+    assert.ok(meta[key] !== undefined, `the exemplar's front matter has no ${key}:`)
+  }
+  assert.ok(FILERS.includes(meta.filer), `filer: ${meta.filer}`)
+  const keys = sections.map((s) => {
+    const hit = FORM.find((f) => f.re.test(s.heading))
+    assert.ok(hit, `“## ${s.heading}” is not a section check.mjs accepts`)
+    return hit.key
+  })
+  const order = FORM.map((f) => f.key)
+  let last = -1
+  for (const k of keys) {
+    const at = order.indexOf(k)
+    assert.ok(at > last, `the exemplar's “${k}” section is out of the order check.mjs enforces`)
+    last = at
+  }
+  for (const f of FORM.filter((x) => x.required)) assert.ok(keys.includes(f.key), `the exemplar has no ${f.key} section`)
+  // A parent holds no attorney work product, and check.mjs refuses the wrong heading for the filer.
+  const notes = sections.find((s) => s.key === 'notes')
+  const counsel = ['attorney', 'legal-aid'].includes(meta.filer)
+  assert.equal(/attorney work product/i.test(notes.heading), counsel, `filer: ${meta.filer} with notes headed “${notes.heading}”`)
+})
+
 // ─── The package ────────────────────────────────────────────────────────
 
 test('every file that states the version states the same one', () => {

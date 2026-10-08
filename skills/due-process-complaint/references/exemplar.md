@@ -25,7 +25,10 @@ The bracketed ones print only when they apply.
 10. [`## Reservation of rights`]
 11. `## Signature`
 12. `## Certificate of service`
-13. `## Attorney Review Notes – Attorney Work Product – Remove Before Filing` — after a page break
+13. `## Review Notes – Remove Before Filing` — after a page break. Where an attorney or a legal
+    aid organization is filing it is `## Attorney Review Notes – Attorney Work Product – Remove
+    Before Filing` instead; a parent, student or advocate holds no attorney work product, and
+    `check.mjs` refuses the wrong heading for the filer.
 
 ## Three markers the renderer reads
 
@@ -244,7 +247,7 @@ ______________________________
 Lena Moreno
 Self-represented (pro se)
 
-## Attorney Review Notes – Attorney Work Product – Remove Before Filing
+## Review Notes – Remove Before Filing
 
 ### Flagged issues
 
