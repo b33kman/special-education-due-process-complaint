@@ -6,10 +6,11 @@ description: Use when someone wants an IDEA special education due process compla
 # Drafting a due process complaint
 
 You draft a complete due process complaint under 34 C.F.R. § 300.508 from the documents the person
-gives you, in the form of a pleading, audit it, and deliver `complaint.pdf` (to file) and
-`complaint.docx` (to edit). You do the reading, the research, the drafting and the checking. Three
-small scripts help: one reads the PDFs, one checks that nothing on the complaint is invented, one
-sets the pleading.
+gives you, in the form of a pleading, audit it, and deliver it as `complaint.docx` — the Word
+document they edit, take the review notes out of, sign and file. A PDF is offered once the
+complaint is final, and written only if they want one. You do the reading, the research, the
+drafting and the checking. Three small scripts help: one reads the PDFs, one checks that nothing on
+the complaint is invented, one sets the pleading.
 
 Four reference files carry the substance. Open each when its step says to:
 
@@ -289,10 +290,17 @@ verification checklist into the review notes as that file specifies.
 
 ## 9. Render, confirm the arithmetic, and ask about the extras
 
-Run `render.mjs <case>`. While `status` is `draft`, or the check fails, or **any flag is still open**, it
-writes `complaint.DRAFT.pdf` and `complaint.DRAFT.docx`, marked DRAFT — NOT FOR FILING. Look at the PDF.
+Run `render.mjs <case>`. It writes `complaint.docx`, the Word document. While `status` is `draft`, or
+the check fails, or **any flag is still open**, it writes `complaint.DRAFT.docx` instead, marked
+DRAFT — NOT FOR FILING.
 
-Then, before anything is handed over, three questions — each on its own, each waited for:
+**Look at the pleading as a page before you hand it over.** `render.mjs <case> --pdf` writes the same
+document as a PDF for exactly that: open it and read it, checking what `references/audit.md` § 14
+lists — nothing missing, cut off, reordered or garbled, the caption intact, the tables aligned, page
+numbers there, no heading stranded at the foot of a page. Do that on the draft, while there is still
+something to fix.
+
+Then, before anything is handed over, four questions — each on its own, each waited for:
 
 1. **The arithmetic.** Show them the table: what was counted, from which document, and the result. Ask
    them to confirm it. A number they have not seen is a number nobody checked.
@@ -302,6 +310,10 @@ Then, before anything is handed over, three questions — each on its own, each 
    here, before the handover: once the handover is announced the work reads as finished, and a question
    after it gets dropped. Ask whatever the filing route; even where the state takes the complaint through
    a portal, the district is served separately and a letter goes with that copy.
+4. **A PDF.** Ask this last, once the complaint is final: *"Do you want a PDF of the complaint as well
+   as the Word file?"* Some offices take a PDF, some want the editable document, and a portal may ask
+   for either. If they do, run `render.mjs <case> --pdf`. If they don't, the Word file is the
+   deliverable and no PDF is written.
 
 If they want a letter, write it as a one-page Word file from the caption and `filing-instructions.md`,
 with nothing in it the complaint doesn't say, addressed to the office the complaint is filed with and
@@ -314,21 +326,27 @@ copied to the district's office where that is a different one. Who signs it deci
   the caption, what is enclosed and on whose behalf, who else was served and by what method, and a
   request for acknowledgment; the signature block as on the complaint.
 
-Once the facts, the claims, the relief and the arithmetic are all confirmed and every flag they intend to
-resolve is resolved, set `status: final` and run `render.mjs` again for `complaint.pdf` and
-`complaint.docx`.
+Once the facts, the claims, the relief and the arithmetic are all confirmed and **every flag is
+resolved**, set `status: final` and run `render.mjs` again for `complaint.docx`, adding `--pdf` if they
+asked for one. A flag left open keeps the files named `complaint.DRAFT.*`, and that is deliberate: a
+`[COUNSEL-#]` placeholder in the relief is a blank nobody has filled, and the document is not ready to
+file with it printed on the page.
 
 ## 10. Hand over
 
-Give the person the files they asked for and tell them which to file and which to edit; what rests on
-their statement alone; every flag still open and what each needs; anything the audit left for them to
-decide; and how to file, from `filing-instructions.md` — including which office of the district gets it,
-where, and whether before, with or after the state.
+Give the person `complaint.docx`, the PDF if they asked for one, `review-notes.md`, and the filing
+instructions and cover letter if they asked for those. Tell them: what rests on their statement alone;
+every flag still open and what each needs; anything the audit left for them to decide; and how to file,
+from `filing-instructions.md` — including which office of the district gets it, where, and whether
+before, with or after the state, and that § 300.508(a)(2) requires a copy to the State educational
+agency.
 
 Tell them plainly:
 
-- **Remove the review notes before filing.** They sit after the page break and are not part of the
-  pleading.
+- **The Word file is the complaint.** `complaint.docx` is what they edit, sign and file.
+- **The review notes are a separate file** — `review-notes.md` — and are not in the complaint. They
+  are work product: their own account of what the District will argue and of what is still
+  unconfirmed. Do not send them to anyone.
 - Every authority marked `[VERIFY-#]` needs checking, and you cannot run a citator.
 - They chose the claims, and you say nothing about how the complaint will fare.
 - The person who signs the complaint is responsible for it.

@@ -1,10 +1,13 @@
 // Sets <case>/complaint.md as a filed pleading, in the form of
 // references/exemplar.md:
 //
-//   complaint.pdf   — to file: Letter, one-inch margins, Times 12, page numbers
-//   complaint.docx  — the same document, to edit in Word
+//   complaint.docx  — the document: Letter, one-inch margins, Times 12, page numbers
+//   complaint.pdf   — the same document as a PDF, only when asked for with --pdf
 //
-//   node scripts/render.mjs <case folder>
+//   node scripts/render.mjs <case folder> [--pdf]
+//
+// The Word file is what is handed over: it is what the person edits, removes the review notes
+// from, and files. A PDF is offered once the complaint is final, and written on request.
 //
 // The forum's name, a bracketed caption, consecutively numbered double-spaced
 // paragraphs, tables where the form asks for one, lettered remedies, the
@@ -21,10 +24,13 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import { checkComplaint } from './check.mjs'
 
 if (!process.argv[2]) {
-  console.error('usage: node scripts/render.mjs <case folder>   — complaint.md → complaint.pdf and complaint.docx (complaint.DRAFT.* unless final, checked, and every flag resolved)')
+  console.error('usage: node scripts/render.mjs <case folder> [--pdf]   — complaint.md → complaint.docx, and complaint.pdf with --pdf (complaint.DRAFT.* unless final, checked, and every flag resolved)')
   process.exit(2)
 }
 const dir = resolve(process.argv[2])
+// The Word file is the deliverable. The PDF is written when it is asked for: once the complaint is
+// final, and while drafting whenever the pleading needs looking at as a page.
+const wantsPdf = process.argv.slice(3).includes('--pdf')
 const { errors, openFlags, parsed } = checkComplaint(dir)
 if (!parsed) { console.error(errors[0]); process.exit(2) }
 const { meta, sections } = parsed
@@ -33,6 +39,8 @@ const draft = notFinal || errors.length > 0 || openFlags.length > 0
 const BANNER = 'DRAFT — NOT FOR FILING'
 const base = draft ? 'complaint.DRAFT' : 'complaint'
 for (const ext of ['pdf', 'docx']) rmSync(join(dir, `${draft ? 'complaint' : 'complaint.DRAFT'}.${ext}`), { force: true })
+// A PDF left over from an earlier render would outlive the Word file it no longer matches.
+if (!wantsPdf) rmSync(join(dir, `${base}.pdf`), { force: true })
 
 // The review notes are work product: the person's own account of what the District will argue,
 // of what could not be verified, and of what they still have to decide. While the complaint is a
@@ -260,8 +268,11 @@ writeFileSync(join(dir, `${base}.docx`), await Packer.toBuffer(new Document({
   }],
 })))
 
-// ─── PDF ──────────────────────────────────────────────────────────────
+// ─── PDF, on request ─────────────────────────────────────────────────
 // Nothing on the filed document says what produced it, its properties included.
+const replaced = new Set()
+let pdfPages = 0
+if (wantsPdf) {
 const pdf = await PDFDocument.create({ updateMetadata: false })
 pdf.setTitle(title)
 const F = { regular: await pdf.embedFont(StandardFonts.TimesRoman), bold: await pdf.embedFont(StandardFonts.TimesRomanBold), italic: await pdf.embedFont(StandardFonts.TimesRomanItalic) }
@@ -277,7 +288,6 @@ const DOUBLE = 24
 const slack = (max) => Math.max(2, max * 0.015)
 // The standard fonts carry the WinAnsi characters; anything else prints as "?".
 const supported = new Set(F.regular.getCharacterSet())
-const replaced = new Set()
 const clean = (s) => [...String(s ?? '')].map((ch) => (supported.has(ch.codePointAt(0)) ? ch : (replaced.add(ch), '?'))).join('')
 const width = (s, font = F.regular, size = SIZE) => font.widthOfTextAtSize(s, size)
 function wrap(text, font, size, first, rest = first) {
@@ -562,6 +572,8 @@ pages.forEach((pg, i) => {
   pg.drawText(label, { x: (PAGE.w - width(label, F.regular, 11)) / 2, y: 36, size: 11, font: F.regular, color: rgb(0, 0, 0) })
 })
 writeFileSync(join(dir, `${base}.pdf`), await pdf.save())
+pdfPages = pages.length
+}
 
 if (!draft && notesHeading) {
   const md = readFileSync(join(dir, 'complaint.md'), 'utf8').replace(/\r\n/g, '\n')
@@ -569,7 +581,7 @@ if (!draft && notesHeading) {
   if (at >= 0) writeFileSync(join(dir, 'review-notes.md'), `${md.slice(at).trim()}\n`)
 }
 
-console.log(`rendered ${base}.pdf (${pages.length} page${pages.length === 1 ? '' : 's'}) and ${base}.docx`)
+console.log(`rendered ${base}.docx${wantsPdf ? ` and ${base}.pdf (${pdfPages} page${pdfPages === 1 ? '' : 's'})` : ''}`)
 if (!draft && notesHeading) console.log(`the review notes are review-notes.md, beside the complaint and not in it — work product, not for filing`)
 if (draft) {
   const why = [

@@ -9,9 +9,9 @@
 [![Claude plugin](https://img.shields.io/badge/Claude-plugin-d97757)](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)
 [![ChatGPT plugin](https://img.shields.io/badge/ChatGPT-plugin-10a37f)](https://developers.openai.com/plugins/build/plugins)
 
-**A free AI plugin for Claude and ChatGPT that writes a special education due process complaint from your child's IEP, school documents and other important information.**
+**A free AI plugin for Claude, ChatGPT and any other app that reads plugins or skills. It writes a special education due process complaint from your child's IEP, school documents and other important information.**
 
-A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give the plugin the IEPs, evaluations, prior written notices, progress reports, service logs, emails and any private evaluations. It reads every page, checks the facts with you, lets you choose what to raise, answers the reasons the school gave in its own documents, looks up the law and how to file in your state, shows you its arithmetic, flags anything it could not verify, and gives you the complaint as a **PDF to file** and a **Word file to edit**. It works for all 50 states and the District of Columbia.
+A due process complaint is the written request that starts a hearing when a family and the school disagree about a child's special education under the Individuals with Disabilities Education Act (IDEA). Give the plugin the IEPs, evaluations, prior written notices, progress reports, service logs, emails and any private evaluations. It reads every page, checks the facts with you, lets you choose what to raise, answers the reasons the school gave in its own documents, looks up the law and how to file in your state, shows you its arithmetic, flags anything it could not verify, and gives you the complaint as a **Word document** to edit, sign and file. Ask for a **PDF** as well and it writes one. It works for all 50 states and the District of Columbia.
 
 It is for parents filing on their own (pro se), advocates, special education attorneys and legal aid organizations. It is not legal advice.
 
@@ -111,13 +111,12 @@ Click **Plugins** in the left sidebar, then **Personal**. The due process compla
 
 4. **Answer the questions.** It shows you the facts it found and the page each came from, and asks you to confirm them. You choose the problems to raise and what you want the school to do. Where the app has no checkboxes, answer with the numbers of the options you want.
 5. **Download your files** when it's finished:
-   - **complaint.pdf** — the complaint to file
-   - **complaint.docx** — the same complaint, to edit in Word
+   - **complaint.docx** — the complaint, as a Word document to edit, sign and file
+   - **review-notes.md** — the corrections made, every citation and whether it was verified, every flag and what it needs, the arithmetic with its inputs, and a checklist for whoever signs. This is your working file. **Don't send it to anyone.**
    - **filing-instructions.md** — where and how to file in your state, including which office of your school district gets it and at what address, if you ask for it
+   - **complaint.pdf** — only if you ask. It asks you once the complaint is final, because some offices take a PDF and some want the editable document.
 
-Every complaint ends with **review notes** after a page break: the corrections made, every citation and whether it was verified, every flag and what it needs, the arithmetic with its inputs, and a checklist for whoever signs. **Remove the notes before you file.**
-
-Until every check passes and every flag is resolved, the files are named **complaint.DRAFT** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake.
+Until every check passes and every flag is resolved, the document is named **complaint.DRAFT.docx** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake. While it is a draft the review notes sit inside it, behind that banner; once it's final they come out into their own file, so the complaint you file can't carry them.
 
 For the best results, choose the most capable model the app offers.
 
@@ -188,7 +187,7 @@ A regular chat writes what sounds right. This plugin follows a set procedure bui
 - It includes every element federal law requires (34 C.F.R. § 300.508(b)), and a complaint missing one stays a draft.
 - It uses your state's filing office, address and time limit, confirmed on the state's official page, and the law of the circuit your state sits in.
 - Its arithmetic is shown with its inputs and recomputed by a script, so no total goes in unchecked.
-- It produces a formatted pleading (caption, numbered paragraphs, signature block, certificate of service) as a PDF and a Word file, and marks drafts so they can't be filed by mistake.
+- It produces a formatted pleading (caption, numbered paragraphs, signature block, certificate of service) as a Word document, with a PDF if you want one, and marks drafts so they can't be filed by mistake.
 - It never predicts how your case will turn out.
 
 ### Can I use AI to write a due process complaint?
@@ -309,7 +308,7 @@ To update: `git pull`. What changed in each version is in [CHANGELOG.md](CHANGEL
 
 The AI asks who is filing, reads the PDFs, confirms the facts in short groups and resolves what disagrees, recommends every claim the record supports by the parts each claim requires (`references/claims.md`) and waits for them to choose the claims and relief, confirms the state's filing details from the bundled table against its official filing page, researches the law for the filing state and the circuit on that state's row (`references/authorities.md`), and drafts `complaint.md` — each fact stated once with its source, each claim arguing the rule against the reason the district gave, each count in an arithmetic table.
 
-`check.mjs` refuses any date, figure or quotation that is neither in the documents or the person's statement nor flagged, a flag the notes do not explain, a source naming a document or page that is not there, a claim that ties to no paragraph, an arithmetic table that does not add up, a missing required element, and sections out of order. The draft is then audited against `references/audit.md` — fourteen checks, by a fresh subagent where available. `render.mjs` sets the pleading as PDF and Word with the review notes after a page break, prints each label as its paragraph number, and names the files DRAFT unless the complaint is final, passes the check, and has no flag left open.
+`check.mjs` refuses any date, figure or quotation that is neither in the documents or the person's statement nor flagged, a flag the notes do not explain, a source naming a document or page that is not there, a claim that ties to no paragraph, an arithmetic table that does not add up, a missing required element, and sections out of order. The draft is then audited against `references/audit.md` — fourteen checks, by a fresh subagent where available. `render.mjs` sets the pleading as a Word document — and as a PDF with `--pdf`, which is also how the pleading gets looked at as a page before handover — prints each label as its paragraph number, keeps the review notes inside a draft and out of a final complaint, and names the file DRAFT unless the complaint is final, passes the check, and has no flag left open.
 
 The three scripts are self-contained files built from `src/` with `npm run build`, so they run on Node.js 20 or later with nothing to install, in Claude's and ChatGPT's code environments alike.
 

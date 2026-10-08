@@ -14,8 +14,8 @@ abstract: >-
   person's own statement, or an authority read in the session; anything unverified is flagged
   for the person signing. The arithmetic is shown and confirmed, the filing state's details are
   confirmed on its official filing page, the school district's office and address are looked up and
-  printed on the certificate of service, and the draft is audited before it is delivered as
-  a PDF to file and a Word file to edit.
+  printed on the certificate of service, and the draft is audited before it is delivered as a Word
+  document to edit, sign and file, with a PDF on request.
 authors:
   - given-names: Mark
     family-names: Beekman

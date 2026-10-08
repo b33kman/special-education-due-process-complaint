@@ -18,8 +18,8 @@ const scripts = join(root, 'skills', 'due-process-complaint', 'scripts')
 const examples = { proSe: join(root, 'examples', 'river-oak'), counsel: join(root, 'examples', 'pine-hollow') }
 const pdfjs = await import(pathToFileURL(join(root, 'node_modules', 'pdfjs-dist', 'legacy', 'build', 'pdf.mjs')).href)
 
-const run = (script, dir) => {
-  const r = spawnSync(process.execPath, [join(scripts, `${script}.mjs`), ...(dir ? [dir] : [])], { encoding: 'utf8' })
+const run = (script, dir, ...args) => {
+  const r = spawnSync(process.execPath, [join(scripts, `${script}.mjs`), ...(dir ? [dir] : []), ...args], { encoding: 'utf8' })
   return { code: r.status, out: `${r.stdout ?? ''}${r.stderr ?? ''}` }
 }
 function copy(from = examples.proSe, edit) {
@@ -87,7 +87,7 @@ test('both worked examples pass the check and render as the files to file, in th
     const dir = copy(ex)
     const c = run('check', dir)
     assert.equal(c.code, 0, c.out)
-    const r = run('render', dir)
+    const r = run('render', dir, '--pdf')
     assert.equal(r.code, 0, r.out)
     assert.ok(existsSync(join(dir, 'complaint.pdf')) && existsSync(join(dir, 'complaint.docx')))
     assert.ok(!existsSync(join(dir, 'complaint.DRAFT.pdf')))
@@ -130,7 +130,7 @@ test('both worked examples pass the check and render as the files to file, in th
 
 test('the two examples are a parent filing pro se and an attorney filing, and each says so', async () => {
   const proSe = copy(examples.proSe)
-  assert.equal(run('render', proSe).code, 0)
+  assert.equal(run('render', proSe, '--pdf').code, 0)
   const a = await wholeText(join(proSe, 'complaint.pdf'))
   assert.match(a, /Self-represented \(pro se\)/)
   const aNotes = readFileSync(join(proSe, 'review-notes.md'), 'utf8')
@@ -139,7 +139,7 @@ test('the two examples are a parent filing pro se and an attorney filing, and ea
   rmSync(proSe, { recursive: true, force: true })
 
   const counsel = copy(examples.counsel)
-  assert.equal(run('render', counsel).code, 0)
+  assert.equal(run('render', counsel, '--pdf').code, 0)
   const b = await wholeText(join(counsel, 'complaint.pdf'))
   assert.match(b, /Attorney for Petitioner and the Parent/)
   assert.match(b, /Bar No\./)
@@ -228,7 +228,7 @@ test('a flag carries an unsupported fact onto the page, and the check reports wh
 test('an open flag keeps a final, passing complaint out of the files to file', () => {
   const dir = copy(examples.proSe, withFlag('VERIFY-1: burden allocation not confirmed', 'VERIFY-1'))
   assert.equal(run('check', dir).code, 0)
-  const r = run('render', dir)
+  const r = run('render', dir, '--pdf')
   assert.equal(r.code, 0, r.out)
   assert.match(r.out, /1 flag\(s\) still open/)
   assert.ok(existsSync(join(dir, 'complaint.DRAFT.pdf')) && !existsSync(join(dir, 'complaint.pdf')))
@@ -514,7 +514,7 @@ test('the certificate of service names the district’s office and every other o
 test('nothing runs outside the margins, in either example', async () => {
   for (const ex of Object.values(examples)) {
     const dir = copy(ex)
-    assert.equal(run('render', dir).code, 0)
+    assert.equal(run('render', dir, '--pdf').code, 0)
     const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
     for (let n = 1; n <= doc.numPages; n++) {
       for (const item of (await (await doc.getPage(n)).getTextContent()).items) {
@@ -534,7 +534,7 @@ test('a long forum name, claim heading, regulation line, table cell or signature
     once('| Name of the child | Jordan Rivera |', '| Name of the child, in the form the state’s own filing form asks for it, surname first | Jordan Rivera, also recorded in the District’s documents as Rivera, Jordan, Student ID 4471-0093 |'),
     once('(555) 010-4471\n\ndana.r@example.com', '(555) 010-4471\n\ndana.r@example.com\n\nBar number and jurisdiction: ______________________'),
   ))
-  assert.equal(run('render', dir).code, 0)
+  assert.equal(run('render', dir, '--pdf').code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
   for (let n = 1; n <= doc.numPages; n++) {
     for (const item of (await (await doc.getPage(n)).getTextContent()).items) {
@@ -548,7 +548,7 @@ test('a long forum name, claim heading, regulation line, table cell or signature
 test('a claim points to its facts by label, and the label prints as that paragraph’s number', async () => {
   const dir = copy(examples.proSe)
   assert.equal(run('check', dir).code, 0)
-  assert.equal(run('render', dir).code, 0)
+  assert.equal(run('render', dir, '--pdf').code, 0)
   const text = await wholeText(join(dir, 'complaint.pdf'))
   const goal = text.match(/(\d+)\. On September 8, 2025, the individualized education program team adopted an annual goal/)?.[1]
   const nov = text.match(/(\d+)\. The District.s progress report dated November 14, 2025/)?.[1]
@@ -561,7 +561,7 @@ test('a claim points to its facts by label, and the label prints as that paragra
 
 test('a case name is drawn in a different face, and emphasis never reaches the page', async () => {
   const dir = copy(examples.proSe)
-  assert.equal(run('render', dir).code, 0)
+  assert.equal(run('render', dir, '--pdf').code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
   const items = []
   for (let n = 1; n <= doc.numPages; n++) items.push(...(await (await doc.getPage(n)).getTextContent()).items)
@@ -579,7 +579,7 @@ test('a case name is drawn in a different face, and emphasis never reaches the p
   // The arithmetic table's multiplication sign is not emphasis, and survives into the draft
   // where the table is rendered.
   const drafted = copy(examples.proSe, once('status: final', 'status: draft'))
-  assert.equal(run('render', drafted).code, 0)
+  assert.equal(run('render', drafted, '--pdf').code, 0)
   const draftText = await wholeText(join(drafted, 'complaint.DRAFT.pdf'))
   assert.match(draftText, /20 \* 240/, 'a lone asterisk is a multiplication sign, not emphasis')
   assert.deepEqual(draftText.match(/\*/g), ['*'], 'the only asterisk in the draft is that one')
@@ -588,7 +588,7 @@ test('a case name is drawn in a different face, and emphasis never reaches the p
 
 test('a draft carries the review notes behind its banner, and a final carries none', async () => {
   const draft = copy(examples.proSe, once('status: final', 'status: draft'))
-  assert.equal(run('render', draft).code, 0)
+  assert.equal(run('render', draft, '--pdf').code, 0)
   const text = await wholeText(join(draft, 'complaint.DRAFT.pdf'))
   assert.match(text, /DRAFT . NOT FOR FILING/)
   assert.match(text, /Remove Before Filing/, 'a draft is where the notes get read and acted on')
@@ -600,20 +600,38 @@ test('a draft carries the review notes behind its banner, and a final carries no
   rmSync(draft, { recursive: true, force: true })
 
   const final = copy(examples.proSe)
-  assert.equal(run('render', final).code, 0)
+  assert.equal(run('render', final, '--pdf').code, 0)
   assert.ok(existsSync(join(final, 'review-notes.md')), 'a final render writes the notes beside the complaint')
   assert.doesNotMatch(await wholeText(join(final, 'complaint.pdf')), /Remove Before Filing/)
   rmSync(final, { recursive: true, force: true })
 })
 
+test('the Word file is the deliverable and the PDF is written only when it is asked for', () => {
+  const dir = copy()
+  const plain = run('render', dir)
+  assert.equal(plain.code, 0, plain.out)
+  assert.match(plain.out, /^rendered complaint\.docx$/m)
+  assert.ok(existsSync(join(dir, 'complaint.docx')), 'the Word document is the deliverable')
+  assert.ok(!existsSync(join(dir, 'complaint.pdf')), 'a PDF was written without being asked for')
+  // Asked for, it is written beside the Word file.
+  const withPdf = run('render', dir, '--pdf')
+  assert.equal(withPdf.code, 0, withPdf.out)
+  assert.match(withPdf.out, /rendered complaint\.docx and complaint\.pdf \(\d+ pages\)/)
+  assert.ok(existsSync(join(dir, 'complaint.pdf')))
+  // And a later render that is not asked for one does not leave the stale PDF behind.
+  assert.equal(run('render', dir).code, 0)
+  assert.ok(!existsSync(join(dir, 'complaint.pdf')), 'a PDF outlived the document it no longer matches')
+  rmSync(dir, { recursive: true, force: true })
+})
+
 test('render never names a draft, or a complaint that fails the check, for filing', async () => {
   const draft = copy(examples.proSe, once('status: final', 'status: draft'))
-  assert.equal(run('render', draft).code, 0)
+  assert.equal(run('render', draft, '--pdf').code, 0)
   assert.ok(existsSync(join(draft, 'complaint.DRAFT.pdf')) && !existsSync(join(draft, 'complaint.pdf')))
   assert.match(await pageText(join(draft, 'complaint.DRAFT.pdf'), 1), /DRAFT — NOT FOR FILING/)
   rmSync(draft, { recursive: true, force: true })
   const failing = copy(examples.proSe, once('recorded 21 words per minute', 'recorded 37 words per minute'))
-  const r = run('render', failing)
+  const r = run('render', failing, '--pdf')
   assert.match(r.out, /check\.mjs found 1 error/)
   assert.ok(existsSync(join(failing, 'complaint.DRAFT.pdf')) && !existsSync(join(failing, 'complaint.pdf')))
   rmSync(failing, { recursive: true, force: true })
@@ -622,7 +640,7 @@ test('render never names a draft, or a complaint that fails the check, for filin
 test('the Word file carries the whole document, and neither file names the software', () => {
   for (const ex of Object.values(examples)) {
     const dir = copy(ex)
-    assert.equal(run('render', dir).code, 0)
+    assert.equal(run('render', dir, '--pdf').code, 0)
     const entries = zipEntries(join(dir, 'complaint.docx'))
     const document = entries.get('word/document.xml')
     assert.ok(document && document.length > 10000, 'word/document.xml is there and is not a stub')
@@ -656,7 +674,7 @@ test('the scripts run with nothing installed, and are built from src/ unchanged'
   const dir = mkdtempSync(join(tmpdir(), 'due-process-bare-'))
   for (const f of ['documents', 'complaint.md', 'statement.md', 'filing-instructions.md']) cpSync(join(examples.proSe, f), join(dir, f), { recursive: true })
   for (const s of ['pdf-text', 'check', 'render']) {
-    const r = spawnSync(process.execPath, [join(out, `${s}.mjs`), dir], { encoding: 'utf8' })
+    const r = spawnSync(process.execPath, [join(out, `${s}.mjs`), dir, ...(s === 'render' ? ['--pdf'] : [])], { encoding: 'utf8' })
     assert.equal(r.status, 0, `${s}: ${r.stdout}${r.stderr}`)
     assert.doesNotMatch(r.stdout + r.stderr, /Warning|Cannot find/, `${s} printed a warning`)
   }

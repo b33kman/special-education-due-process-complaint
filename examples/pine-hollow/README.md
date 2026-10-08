@@ -12,12 +12,14 @@ Four claims. No case is cited: no claim here turns on the adequacy of the progra
 | `statement.md` | Counsel's account of the case. |
 | `filing-instructions.md` | How to file with North Carolina's Office of Administrative Hearings, each point with its official source — including the county line and "___ Board of Education" respondent that the state's form uses, and the two addresses official pages give for the copy to the Department of Public Instruction. |
 | `complaint.md` | The complaint as drafted, checked and audited, with its Attorney Review Notes. |
-| `complaint.pdf`, `complaint.docx` | The complaint, rendered: to file, and to edit. |
+| `complaint.docx` | The complaint as the skill delivers it: a Word document to edit, sign and file. |
+| `complaint.pdf` | The same document as a PDF. The skill writes one only when asked; both are here so the finished complaint can be read in the browser. |
+| `review-notes.md` | The review notes, which a final render keeps out of the complaint. Work product. |
 
 To run the check and render it yourself, from the repository root:
 
 ```bash
 node skills/due-process-complaint/scripts/pdf-text.mjs examples/pine-hollow
 node skills/due-process-complaint/scripts/check.mjs examples/pine-hollow
-node skills/due-process-complaint/scripts/render.mjs examples/pine-hollow
+node skills/due-process-complaint/scripts/render.mjs examples/pine-hollow --pdf
 ```

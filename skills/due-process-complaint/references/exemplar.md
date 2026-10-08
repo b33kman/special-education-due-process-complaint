@@ -52,8 +52,9 @@ states". `check.mjs` requires the reporting phrase.
 `[COUNSEL-4]` where a quantity is the person's to supply. Numbered in sequence within each kind from
 1, no gaps, each number used once. Under twelve words inside the pleading; the full explanation goes
 in the Attorney Review Notes under the same number, and `check.mjs` refuses a marker the notes do
-not explain. **While any flag is open the files render as `complaint.DRAFT.*`**, marked
-DRAFT — NOT FOR FILING, so nothing half-answered is filed by mistake.
+not explain. **While any flag is open the document renders as `complaint.DRAFT.docx`**, marked
+DRAFT — NOT FOR FILING, so nothing half-answered is filed by mistake. Every flag is resolved before
+the complaint is final: a `[COUNSEL-#]` placeholder is a blank nobody has filled, and it prints.
 
 A flag is how an unsupported fact reaches the page. Write the fact, flag what is missing, and let the
 person resolve it. What you must never do is write it unflagged.

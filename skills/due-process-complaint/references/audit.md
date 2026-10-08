@@ -147,12 +147,15 @@ filer named in the front matter matches the signature block: a `parent` filer si
   34 C.F.R. § 300.507(a)(2) named, and nothing said about whether an exception applies. That is the
   person's decision and a hearing officer's to make.
 
-## 14. The rendered files
+## 14. The rendered document
 
-After rendering, read the PDF. Nothing missing, cut off, reordered or garbled; the caption intact;
-the tables aligned; page numbers present; no heading stranded at the foot of a page; the page break
-before the Attorney Review Notes in place. Nothing on the filed document names the software, its
-properties included.
+`render.mjs <case> --pdf` writes the same document as a PDF. **Open it and read it**, because this is
+the check nothing else makes: the Word file is the deliverable, but a PDF is what you can look at.
+Nothing missing, cut off, reordered or garbled; the caption intact; the tables aligned; page numbers
+present; no heading stranded at the foot of a page; and, on a draft, the page break before the review
+notes in place. Nothing on the document names the software, its properties included.
+
+Do this while the complaint is still a draft, when there is something to be done about what you find.
 
 ## Reporting what you find
 

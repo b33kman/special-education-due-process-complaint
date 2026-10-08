@@ -140,7 +140,7 @@ function __generator(thisArg, body2) {
   var _ = { label: 0, sent: function() {
     if (t[0] & 1) throw t[1];
     return t[1];
-  }, trys: [], ops: [] }, f, y2, t, g;
+  }, trys: [], ops: [] }, f, y, t, g;
   return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
     return this;
   }), g;
@@ -152,8 +152,8 @@ function __generator(thisArg, body2) {
   function step(op) {
     if (f) throw new TypeError("Generator is already executing.");
     while (_) try {
-      if (f = 1, y2 && (t = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t = y2["return"]) && t.call(y2), 0) : y2.next) && !(t = t.call(y2, op[1])).done) return t;
-      if (y2 = 0, t) op = [op[0] & 2, t.value];
+      if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+      if (y = 0, t) op = [op[0] & 2, t.value];
       switch (op[0]) {
         case 0:
         case 1:
@@ -164,7 +164,7 @@ function __generator(thisArg, body2) {
           return { value: op[1], done: false };
         case 5:
           _.label++;
-          y2 = op[1];
+          y = op[1];
           op = [0];
           continue;
         case 7:
@@ -197,7 +197,7 @@ function __generator(thisArg, body2) {
       op = body2.call(thisArg, _);
     } catch (e) {
       op = [6, e];
-      y2 = 0;
+      y = 0;
     } finally {
       f = t = 0;
     }
@@ -562,11 +562,11 @@ var require_strings = __commonJS({
         if (exports.isNewlineChar(word)) {
           pushCurrLine();
         } else {
-          var width2 = computeWidthOfText(word);
-          if (currWidth + width2 > maxWidth)
+          var width = computeWidthOfText(word);
+          if (currWidth + width > maxWidth)
             pushCurrLine();
           currLine += word;
-          currWidth += width2;
+          currWidth += width;
         }
       }
       pushCurrLine();
@@ -2413,15 +2413,15 @@ var require_deflate = __commonJS({
       if (!strm) {
         return Z_STREAM_ERROR;
       }
-      var wrap2 = 1;
+      var wrap = 1;
       if (level === Z_DEFAULT_COMPRESSION) {
         level = 6;
       }
       if (windowBits < 0) {
-        wrap2 = 0;
+        wrap = 0;
         windowBits = -windowBits;
       } else if (windowBits > 15) {
-        wrap2 = 2;
+        wrap = 2;
         windowBits -= 16;
       }
       if (memLevel < 1 || memLevel > MAX_MEM_LEVEL || method !== Z_DEFLATED || windowBits < 8 || windowBits > 15 || level < 0 || level > 9 || strategy < 0 || strategy > Z_FIXED) {
@@ -2433,7 +2433,7 @@ var require_deflate = __commonJS({
       var s = new DeflateState();
       strm.state = s;
       s.strm = strm;
-      s.wrap = wrap2;
+      s.wrap = wrap;
       s.gzhead = null;
       s.w_bits = windowBits;
       s.w_size = 1 << s.w_bits;
@@ -2726,7 +2726,7 @@ var require_deflate = __commonJS({
       var dictLength = dictionary.length;
       var s;
       var str, n2;
-      var wrap2;
+      var wrap;
       var avail;
       var next;
       var input;
@@ -2735,16 +2735,16 @@ var require_deflate = __commonJS({
         return Z_STREAM_ERROR;
       }
       s = strm.state;
-      wrap2 = s.wrap;
-      if (wrap2 === 2 || wrap2 === 1 && s.status !== INIT_STATE || s.lookahead) {
+      wrap = s.wrap;
+      if (wrap === 2 || wrap === 1 && s.status !== INIT_STATE || s.lookahead) {
         return Z_STREAM_ERROR;
       }
-      if (wrap2 === 1) {
+      if (wrap === 1) {
         strm.adler = adler32(strm.adler, dictionary, dictLength, 0);
       }
       s.wrap = 0;
       if (dictLength >= s.w_size) {
-        if (wrap2 === 0) {
+        if (wrap === 0) {
           zero(s.head);
           s.strstart = 0;
           s.block_start = 0;
@@ -2784,7 +2784,7 @@ var require_deflate = __commonJS({
       strm.next_in = next;
       strm.input = input;
       strm.avail_in = avail;
-      s.wrap = wrap2;
+      s.wrap = wrap;
       return Z_OK;
     }
     exports.deflateInit = deflateInit;
@@ -3804,17 +3804,17 @@ var require_inflate = __commonJS({
       return inflateResetKeep(strm);
     }
     function inflateReset2(strm, windowBits) {
-      var wrap2;
+      var wrap;
       var state;
       if (!strm || !strm.state) {
         return Z_STREAM_ERROR;
       }
       state = strm.state;
       if (windowBits < 0) {
-        wrap2 = 0;
+        wrap = 0;
         windowBits = -windowBits;
       } else {
-        wrap2 = (windowBits >> 4) + 1;
+        wrap = (windowBits >> 4) + 1;
         if (windowBits < 48) {
           windowBits &= 15;
         }
@@ -3825,7 +3825,7 @@ var require_inflate = __commonJS({
       if (state.window !== null && state.wbits !== windowBits) {
         state.window = null;
       }
-      state.wrap = wrap2;
+      state.wrap = wrap;
       state.wbits = windowBits;
       return inflateReset(strm);
     }
@@ -5403,10 +5403,10 @@ var require_Font = __commonJS({
             return acc;
           }, {});
           font.KernPairXAmounts = font.KernPairs.reduce(function(acc, _a) {
-            var name1 = _a[0], name2 = _a[1], width2 = _a[2];
+            var name1 = _a[0], name2 = _a[1], width = _a[2];
             if (!acc[name1])
               acc[name1] = {};
-            acc[name1][name2] = width2;
+            acc[name1][name2] = width;
             return acc;
           }, {});
           fontCache[fontName] = font;
@@ -6488,10 +6488,10 @@ var require_PDFArray = __commonJS({
           var upperRightX = this.lookup(2, PDFNumber_1.default).asNumber();
           var upperRightY = this.lookup(3, PDFNumber_1.default).asNumber();
           var x = lowerLeftX;
-          var y2 = lowerLeftY;
-          var width2 = upperRightX - lowerLeftX;
+          var y = lowerLeftY;
+          var width = upperRightX - lowerLeftX;
           var height = upperRightY - lowerLeftY;
-          return { x, y: y2, width: width2, height };
+          return { x, y, width, height };
         };
         PDFArray2.prototype.asArray = function() {
           return this.array.slice();
@@ -6530,11 +6530,11 @@ var require_PDFArray = __commonJS({
           buffer[offset++] = CharCodes_1.default.RightSquareBracket;
           return offset - initialOffset;
         };
-        PDFArray2.prototype.scalePDFNumbers = function(x, y2) {
+        PDFArray2.prototype.scalePDFNumbers = function(x, y) {
           for (var idx = 0, len = this.size(); idx < len; idx++) {
             var el = this.lookup(idx);
             if (el instanceof PDFNumber_1.default) {
-              var factor = idx % 2 === 0 ? x : y2;
+              var factor = idx % 2 === 0 ? x : y;
               this.set(idx, PDFNumber_1.default.of(el.asNumber() * factor));
             }
           }
@@ -9615,16 +9615,16 @@ var require_JpegEmbedder = __commonJS({
     var JpegEmbedder = (
       /** @class */
       (function() {
-        function JpegEmbedder2(imageData, bitsPerComponent, width2, height, colorSpace) {
+        function JpegEmbedder2(imageData, bitsPerComponent, width, height, colorSpace) {
           this.imageData = imageData;
           this.bitsPerComponent = bitsPerComponent;
-          this.width = width2;
+          this.width = width;
           this.height = height;
           this.colorSpace = colorSpace;
         }
         JpegEmbedder2.for = function(imageData) {
           return tslib_1.__awaiter(this, void 0, void 0, function() {
-            var dataView, soi, pos, marker, bitsPerComponent, height, width2, channelByte, channelName, colorSpace;
+            var dataView, soi, pos, marker, bitsPerComponent, height, width, channelByte, channelName, colorSpace;
             return tslib_1.__generator(this, function(_a) {
               dataView = new DataView(imageData.buffer);
               soi = dataView.getUint16(0);
@@ -9644,14 +9644,14 @@ var require_JpegEmbedder = __commonJS({
               bitsPerComponent = dataView.getUint8(pos++);
               height = dataView.getUint16(pos);
               pos += 2;
-              width2 = dataView.getUint16(pos);
+              width = dataView.getUint16(pos);
               pos += 2;
               channelByte = dataView.getUint8(pos++);
               channelName = ChannelToColorSpace[channelByte];
               if (!channelName)
                 throw new Error("Unknown JPEG channel.");
               colorSpace = channelName;
-              return [2, new JpegEmbedder2(imageData, bitsPerComponent, width2, height, colorSpace)];
+              return [2, new JpegEmbedder2(imageData, bitsPerComponent, width, height, colorSpace)];
             });
           });
         };
@@ -9774,8 +9774,8 @@ var require_UPNG = __commonJS({
         }
       } else if (ctype == 3) {
         var p = out.tabs["PLTE"], ap = out.tabs["tRNS"], tl = ap ? ap.length : 0;
-        if (depth == 1) for (var y2 = 0; y2 < h; y2++) {
-          var s0 = y2 * bpl, t0 = y2 * w2;
+        if (depth == 1) for (var y = 0; y < h; y++) {
+          var s0 = y * bpl, t0 = y * w2;
           for (var i = 0; i < w2; i++) {
             var qi = t0 + i << 2, j = data[s0 + (i >> 3)] >> 7 - ((i & 7) << 0) & 1, cj = 3 * j;
             bf[qi] = p[cj];
@@ -9784,8 +9784,8 @@ var require_UPNG = __commonJS({
             bf[qi + 3] = j < tl ? ap[j] : 255;
           }
         }
-        if (depth == 2) for (var y2 = 0; y2 < h; y2++) {
-          var s0 = y2 * bpl, t0 = y2 * w2;
+        if (depth == 2) for (var y = 0; y < h; y++) {
+          var s0 = y * bpl, t0 = y * w2;
           for (var i = 0; i < w2; i++) {
             var qi = t0 + i << 2, j = data[s0 + (i >> 2)] >> 6 - ((i & 3) << 1) & 3, cj = 3 * j;
             bf[qi] = p[cj];
@@ -9794,8 +9794,8 @@ var require_UPNG = __commonJS({
             bf[qi + 3] = j < tl ? ap[j] : 255;
           }
         }
-        if (depth == 4) for (var y2 = 0; y2 < h; y2++) {
-          var s0 = y2 * bpl, t0 = y2 * w2;
+        if (depth == 4) for (var y = 0; y < h; y++) {
+          var s0 = y * bpl, t0 = y * w2;
           for (var i = 0; i < w2; i++) {
             var qi = t0 + i << 2, j = data[s0 + (i >> 1)] >> 4 - ((i & 1) << 2) & 15, cj = 3 * j;
             bf[qi] = p[cj];
@@ -9828,8 +9828,8 @@ var require_UPNG = __commonJS({
         }
       } else if (ctype == 0) {
         var tr = out.tabs["tRNS"] ? out.tabs["tRNS"] : -1;
-        for (var y2 = 0; y2 < h; y2++) {
-          var off = y2 * bpl, to = y2 * w2;
+        for (var y = 0; y < h; y++) {
+          var off = y * bpl, to = y * w2;
           if (depth == 1) for (var x = 0; x < w2; x++) {
             var gr = 255 * (data[off + (x >>> 3)] >>> 7 - (x & 7) & 1), al = gr == tr * 255 ? 0 : 255;
             bf32[to + x] = al << 24 | gr << 16 | gr << 8 | gr;
@@ -10275,10 +10275,10 @@ var require_UPNG = __commonJS({
         }
         var bpll = Math.ceil(sw * bpp / 8);
         UPNG.decode._filterZero(data, out, di, sw, sh);
-        var y2 = 0, row = starting_row[pass];
+        var y = 0, row = starting_row[pass];
         while (row < h) {
           var col = starting_col[pass];
-          var cdi = di + y2 * bpll << 3;
+          var cdi = di + y * bpll << 3;
           while (col < w2) {
             if (bpp == 1) {
               var val = data[cdi >> 3];
@@ -10302,7 +10302,7 @@ var require_UPNG = __commonJS({
             cdi += bpp;
             col += ci;
           }
-          y2++;
+          y++;
           row += ri;
         }
         if (sw * sh != 0) di += sh * (1 + bpll);
@@ -10320,9 +10320,9 @@ var require_UPNG = __commonJS({
       var i = 0, di = 1, type = data[off], x = 0;
       if (type > 1) data[off] = [0, 0, 1][type - 2];
       if (type == 3) for (x = bpp; x < bpl; x++) data[x + 1] = data[x + 1] + (data[x + 1 - bpp] >>> 1) & 255;
-      for (var y2 = 0; y2 < h; y2++) {
-        i = off + y2 * bpl;
-        di = i + y2 + 1;
+      for (var y = 0; y < h; y++) {
+        i = off + y * bpl;
+        di = i + y + 1;
         type = data[di - 1];
         x = 0;
         if (type == 0) for (; x < bpl; x++) data[i + x] = data[di + x];
@@ -10415,13 +10415,13 @@ var require_UPNG = __commonJS({
     UPNG._copyTile = function(sb, sw, sh, tb, tw, th, xoff, yoff, mode) {
       var w2 = Math.min(sw, tw), h = Math.min(sh, th);
       var si = 0, ti = 0;
-      for (var y2 = 0; y2 < h; y2++) for (var x = 0; x < w2; x++) {
+      for (var y = 0; y < h; y++) for (var x = 0; x < w2; x++) {
         if (xoff >= 0 && yoff >= 0) {
-          si = y2 * sw + x << 2;
-          ti = (yoff + y2) * tw + xoff + x << 2;
+          si = y * sw + x << 2;
+          ti = (yoff + y) * tw + xoff + x << 2;
         } else {
-          si = (-yoff + y2) * sw - xoff + x << 2;
-          ti = y2 * tw + x << 2;
+          si = (-yoff + y) * sw - xoff + x << 2;
+          ti = y * tw + x << 2;
         }
         if (mode == 0) {
           tb[ti] = sb[si];
@@ -10718,8 +10718,8 @@ var require_UPNG = __commonJS({
           bpl = Math.ceil(depth * nw / 8);
           var nimg = new Uint8Array(bpl * nh);
           var inj = inds[j];
-          for (var y2 = 0; y2 < nh; y2++) {
-            var i = y2 * bpl, ii = y2 * nw;
+          for (var y = 0; y < nh; y++) {
+            var i = y * bpl, ii = y * nw;
             if (depth == 8) for (var x = 0; x < nw; x++) nimg[i + x] = inj[ii + x];
             else if (depth == 4) for (var x = 0; x < nw; x++) nimg[i + (x >> 1)] |= inj[ii + x] << 4 - (x & 1) * 4;
             else if (depth == 2) for (var x = 0; x < nw; x++) nimg[i + (x >> 2)] |= inj[ii + x] << 6 - (x & 3) * 2;
@@ -10763,13 +10763,13 @@ var require_UPNG = __commonJS({
           for (var it = 0; it < tlim; it++) {
             var pimg = new Uint8Array(bufs[j - 1 - it]), p32 = new Uint32Array(bufs[j - 1 - it]);
             var mix = w2, miy = h, max = -1, may = -1;
-            for (var y2 = 0; y2 < h; y2++) for (var x = 0; x < w2; x++) {
-              var i = y2 * w2 + x;
+            for (var y = 0; y < h; y++) for (var x = 0; x < w2; x++) {
+              var i = y * w2 + x;
               if (cimg32[i] != p32[i]) {
                 if (x < mix) mix = x;
                 if (x > max) max = x;
-                if (y2 < miy) miy = y2;
-                if (y2 > may) may = y2;
+                if (y < miy) miy = y;
+                if (y > may) may = y;
               }
             }
             if (max == -1) mix = miy = max = may = 0;
@@ -10840,8 +10840,8 @@ var require_UPNG = __commonJS({
       var pimg = new U8(bufs[i - 1]), pimg32 = new U32(bufs[i - 1]), nimg = i + 1 < bufs.length ? new U8(bufs[i + 1]) : null;
       var cimg = new U8(bufs[i]), cimg32 = new U32(cimg.buffer);
       var mix = w2, miy = h, max = -1, may = -1;
-      for (var y2 = 0; y2 < r.height; y2++) for (var x = 0; x < r.width; x++) {
-        var cx = r.x + x, cy = r.y + y2;
+      for (var y = 0; y < r.height; y++) for (var x = 0; x < r.width; x++) {
+        var cx = r.x + x, cy = r.y + y;
         var j = cy * w2 + cx, cc = cimg32[j];
         if (cc == 0 || frms[i - 1].dispose == 0 && pimg32[j] == cc && (nimg == null || nimg[j * 4 + 3] != 0)) {
         } else {
@@ -10884,7 +10884,7 @@ var require_UPNG = __commonJS({
       };
       var CMPR = levelZero && UZIP != null ? UZIP : _pako.default;
       for (var i = 0; i < ftry.length; i++) {
-        for (var y2 = 0; y2 < h; y2++) UPNG.encode._filterLine(data, img, y2, bpl, bpp, ftry[i]);
+        for (var y = 0; y < h; y++) UPNG.encode._filterLine(data, img, y, bpl, bpp, ftry[i]);
         fls.push(CMPR["deflate"](data, opts));
       }
       var ti, tsize = 1e9;
@@ -10894,8 +10894,8 @@ var require_UPNG = __commonJS({
       }
       return fls[ti];
     };
-    UPNG.encode._filterLine = function(data, img, y2, bpl, bpp, type) {
-      var i = y2 * bpl, di = i + y2, paeth = UPNG.decode._paeth;
+    UPNG.encode._filterLine = function(data, img, y, bpl, bpp, type) {
+      var i = y * bpl, di = i + y, paeth = UPNG.decode._paeth;
       data[di] = type;
       di++;
       if (type == 0) {
@@ -10904,7 +10904,7 @@ var require_UPNG = __commonJS({
       } else if (type == 1) {
         for (var x = 0; x < bpp; x++) data[di + x] = img[i + x];
         for (var x = bpp; x < bpl; x++) data[di + x] = img[i + x] - img[i + x - bpp] + 256 & 255;
-      } else if (y2 == 0) {
+      } else if (y == 0) {
         for (var x = 0; x < bpp; x++) data[di + x] = img[i + x];
         if (type == 2) for (var x = bpp; x < bpl; x++) data[di + x] = img[i + x];
         if (type == 3) for (var x = bpp; x < bpl; x++) data[di + x] = img[i + x] - (img[i + x - bpp] >> 1) + 256 & 255;
@@ -11137,11 +11137,11 @@ var require_UPNG = __commonJS({
       multVec: function(m, v) {
         return [m[0] * v[0] + m[1] * v[1] + m[2] * v[2] + m[3] * v[3], m[4] * v[0] + m[5] * v[1] + m[6] * v[2] + m[7] * v[3], m[8] * v[0] + m[9] * v[1] + m[10] * v[2] + m[11] * v[3], m[12] * v[0] + m[13] * v[1] + m[14] * v[2] + m[15] * v[3]];
       },
-      dot: function(x, y2) {
-        return x[0] * y2[0] + x[1] * y2[1] + x[2] * y2[2] + x[3] * y2[3];
+      dot: function(x, y) {
+        return x[0] * y[0] + x[1] * y[1] + x[2] * y[2] + x[3] * y[3];
       },
-      sml: function(a, y2) {
-        return [a * y2[0], a * y2[1], a * y2[2], a * y2[3]];
+      sml: function(a, y) {
+        return [a * y[0], a * y[1], a * y[2], a * y[3]];
       }
     };
     UPNG.encode.concatRGBA = function(bufs) {
@@ -12862,11 +12862,11 @@ var require_PDFPageEmbedder = __commonJS({
     var PDFContentStream_1 = tslib_1.__importDefault(require_PDFContentStream());
     var CharCodes_1 = tslib_1.__importDefault(require_CharCodes());
     var utils_1 = require_utils3();
-    var fullPageBoundingBox = function(page2) {
-      var mediaBox = page2.MediaBox();
-      var width2 = mediaBox.lookup(2, PDFNumber_1.default).asNumber() - mediaBox.lookup(0, PDFNumber_1.default).asNumber();
+    var fullPageBoundingBox = function(page) {
+      var mediaBox = page.MediaBox();
+      var width = mediaBox.lookup(2, PDFNumber_1.default).asNumber() - mediaBox.lookup(0, PDFNumber_1.default).asNumber();
       var height = mediaBox.lookup(3, PDFNumber_1.default).asNumber() - mediaBox.lookup(1, PDFNumber_1.default).asNumber();
-      return { left: 0, bottom: 0, right: width2, top: height };
+      return { left: 0, bottom: 0, right: width, top: height };
     };
     var boundingBoxAdjustedMatrix = function(bb) {
       return [1, 0, 0, 1, -bb.left, -bb.bottom];
@@ -12874,35 +12874,35 @@ var require_PDFPageEmbedder = __commonJS({
     var PDFPageEmbedder = (
       /** @class */
       (function() {
-        function PDFPageEmbedder2(page2, boundingBox, transformationMatrix) {
-          this.page = page2;
-          var bb = boundingBox !== null && boundingBox !== void 0 ? boundingBox : fullPageBoundingBox(page2);
+        function PDFPageEmbedder2(page, boundingBox, transformationMatrix) {
+          this.page = page;
+          var bb = boundingBox !== null && boundingBox !== void 0 ? boundingBox : fullPageBoundingBox(page);
           this.width = bb.right - bb.left;
           this.height = bb.top - bb.bottom;
           this.boundingBox = bb;
           this.transformationMatrix = transformationMatrix !== null && transformationMatrix !== void 0 ? transformationMatrix : boundingBoxAdjustedMatrix(bb);
         }
-        PDFPageEmbedder2.for = function(page2, boundingBox, transformationMatrix) {
+        PDFPageEmbedder2.for = function(page, boundingBox, transformationMatrix) {
           return tslib_1.__awaiter(this, void 0, void 0, function() {
             return tslib_1.__generator(this, function(_a) {
-              return [2, new PDFPageEmbedder2(page2, boundingBox, transformationMatrix)];
+              return [2, new PDFPageEmbedder2(page, boundingBox, transformationMatrix)];
             });
           });
         };
         PDFPageEmbedder2.prototype.embedIntoContext = function(context, ref) {
           return tslib_1.__awaiter(this, void 0, void 0, function() {
-            var _a, Contents, Resources, decodedContents, _b, left2, bottom, right2, top2, xObject;
+            var _a, Contents, Resources, decodedContents, _b, left2, bottom, right2, top, xObject;
             return tslib_1.__generator(this, function(_c) {
               _a = this.page.normalizedEntries(), Contents = _a.Contents, Resources = _a.Resources;
               if (!Contents)
                 throw new errors_1.MissingPageContentsEmbeddingError();
               decodedContents = this.decodeContents(Contents);
-              _b = this.boundingBox, left2 = _b.left, bottom = _b.bottom, right2 = _b.right, top2 = _b.top;
+              _b = this.boundingBox, left2 = _b.left, bottom = _b.bottom, right2 = _b.right, top = _b.top;
               xObject = context.flateStream(decodedContents, {
                 Type: "XObject",
                 Subtype: "Form",
                 FormType: 1,
-                BBox: [left2, bottom, right2, top2],
+                BBox: [left2, bottom, right2, top],
                 Matrix: this.transformationMatrix,
                 Resources
               });
@@ -13361,8 +13361,8 @@ var require_BorderStyle = __commonJS({
           var _a, _b;
           return (_b = (_a = this.W()) === null || _a === void 0 ? void 0 : _a.asNumber()) !== null && _b !== void 0 ? _b : 1;
         };
-        BorderStyle3.prototype.setWidth = function(width2) {
-          var W = this.dict.context.obj(width2);
+        BorderStyle3.prototype.setWidth = function(width) {
+          var W = this.dict.context.obj(width);
           this.dict.set(PDFName_1.default.of("W"), W);
         };
         BorderStyle3.fromDict = function(dict) {
@@ -13409,8 +13409,8 @@ var require_PDFAnnotation = __commonJS({
           return (_a = Rect === null || Rect === void 0 ? void 0 : Rect.asRectangle()) !== null && _a !== void 0 ? _a : { x: 0, y: 0, width: 0, height: 0 };
         };
         PDFAnnotation2.prototype.setRectangle = function(rect) {
-          var x = rect.x, y2 = rect.y, width2 = rect.width, height = rect.height;
-          var Rect = this.dict.context.obj([x, y2, x + width2, y2 + height]);
+          var x = rect.x, y = rect.y, width = rect.width, height = rect.height;
+          var Rect = this.dict.context.obj([x, y, x + width, y + height]);
           this.dict.set(PDFName_1.default.of("Rect"), Rect);
         };
         PDFAnnotation2.prototype.getAppearanceState = function() {
@@ -13678,8 +13678,8 @@ var require_PDFWidgetAnnotation = __commonJS({
             return P2;
           return void 0;
         };
-        PDFWidgetAnnotation2.prototype.setP = function(page2) {
-          this.dict.set(PDFName_1.default.of("P"), page2);
+        PDFWidgetAnnotation2.prototype.setP = function(page) {
+          this.dict.set(PDFName_1.default.of("P"), page);
         };
         PDFWidgetAnnotation2.prototype.setDefaultAppearance = function(appearance) {
           this.dict.set(PDFName_1.default.of("DA"), PDFString_1.default.of(appearance));
@@ -14783,10 +14783,10 @@ var require_PDFCatalog = __commonJS({
         PDFCatalog2.prototype.removeLeafNode = function(index) {
           this.Pages().removeLeafNode(index);
         };
-        PDFCatalog2.withContextAndPages = function(context, pages2) {
+        PDFCatalog2.withContextAndPages = function(context, pages) {
           var dict = /* @__PURE__ */ new Map();
           dict.set(PDFName_1.default.of("Type"), PDFName_1.default.of("Catalog"));
-          dict.set(PDFName_1.default.of("Pages"), pages2);
+          dict.set(PDFName_1.default.of("Pages"), pages);
           return new PDFCatalog2(dict, context);
         };
         PDFCatalog2.fromMapWithContext = function(map, context) {
@@ -16337,19 +16337,19 @@ var require_rotations = __commonJS({
       if (degreeAngle === void 0) {
         degreeAngle = 0;
       }
-      var x = rectangle.x, y2 = rectangle.y, w2 = rectangle.width, h = rectangle.height;
+      var x = rectangle.x, y = rectangle.y, w2 = rectangle.width, h = rectangle.height;
       var r = exports.reduceRotation(degreeAngle);
       var b = borderWidth / 2;
       if (r === 0)
-        return { x: x - b, y: y2 - b, width: w2, height: h };
+        return { x: x - b, y: y - b, width: w2, height: h };
       else if (r === 90)
-        return { x: x - h + b, y: y2 - b, width: h, height: w2 };
+        return { x: x - h + b, y: y - b, width: h, height: w2 };
       else if (r === 180)
-        return { x: x - w2 + b, y: y2 - h + b, width: w2, height: h };
+        return { x: x - w2 + b, y: y - h + b, width: w2, height: h };
       else if (r === 270)
-        return { x: x - b, y: y2 - w2 + b, width: h, height: w2 };
+        return { x: x - b, y: y - w2 + b, width: h, height: w2 };
       else
-        return { x: x - b, y: y2 - b, width: w2, height: h };
+        return { x: x - b, y: y - b, width: w2, height: h };
     };
   }
 });
@@ -16436,8 +16436,8 @@ var require_operators = __commonJS({
     exports.popGraphicsState = function() {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.PopGraphicsState);
     };
-    exports.setLineWidth = function(width2) {
-      return core_1.PDFOperator.of(core_1.PDFOperatorNames.SetLineWidth, [objects_1.asPDFNumber(width2)]);
+    exports.setLineWidth = function(width) {
+      return core_1.PDFOperator.of(core_1.PDFOperatorNames.SetLineWidth, [objects_1.asPDFNumber(width)]);
     };
     exports.appendBezierCurve = function(x1, y1, x2, y2, x3, y3) {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.AppendBezierCurve, [
@@ -16466,11 +16466,11 @@ var require_operators = __commonJS({
     exports.lineTo = function(xPos, yPos) {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.LineTo, [objects_1.asPDFNumber(xPos), objects_1.asPDFNumber(yPos)]);
     };
-    exports.rectangle = function(xPos, yPos, width2, height) {
+    exports.rectangle = function(xPos, yPos, width, height) {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.AppendRectangle, [
         objects_1.asPDFNumber(xPos),
         objects_1.asPDFNumber(yPos),
-        objects_1.asPDFNumber(width2),
+        objects_1.asPDFNumber(width),
         objects_1.asPDFNumber(height)
       ]);
     };
@@ -16492,8 +16492,8 @@ var require_operators = __commonJS({
     exports.nextLine = function() {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.NextLine);
     };
-    exports.moveText = function(x, y2) {
-      return core_1.PDFOperator.of(core_1.PDFOperatorNames.MoveText, [objects_1.asPDFNumber(x), objects_1.asPDFNumber(y2)]);
+    exports.moveText = function(x, y) {
+      return core_1.PDFOperator.of(core_1.PDFOperatorNames.MoveText, [objects_1.asPDFNumber(x), objects_1.asPDFNumber(y)]);
     };
     exports.showText = function(text) {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.ShowText, [text]);
@@ -16546,11 +16546,11 @@ var require_operators = __commonJS({
         objects_1.asPDFNumber(f)
       ]);
     };
-    exports.rotateAndSkewTextRadiansAndTranslate = function(rotationAngle, xSkewAngle, ySkewAngle, x, y2) {
-      return exports.setTextMatrix(cos(objects_1.asNumber(rotationAngle)), sin(objects_1.asNumber(rotationAngle)) + tan(objects_1.asNumber(xSkewAngle)), -sin(objects_1.asNumber(rotationAngle)) + tan(objects_1.asNumber(ySkewAngle)), cos(objects_1.asNumber(rotationAngle)), x, y2);
+    exports.rotateAndSkewTextRadiansAndTranslate = function(rotationAngle, xSkewAngle, ySkewAngle, x, y) {
+      return exports.setTextMatrix(cos(objects_1.asNumber(rotationAngle)), sin(objects_1.asNumber(rotationAngle)) + tan(objects_1.asNumber(xSkewAngle)), -sin(objects_1.asNumber(rotationAngle)) + tan(objects_1.asNumber(ySkewAngle)), cos(objects_1.asNumber(rotationAngle)), x, y);
     };
-    exports.rotateAndSkewTextDegreesAndTranslate = function(rotationAngle, xSkewAngle, ySkewAngle, x, y2) {
-      return exports.rotateAndSkewTextRadiansAndTranslate(rotations_1.degreesToRadians(objects_1.asNumber(rotationAngle)), rotations_1.degreesToRadians(objects_1.asNumber(xSkewAngle)), rotations_1.degreesToRadians(objects_1.asNumber(ySkewAngle)), x, y2);
+    exports.rotateAndSkewTextDegreesAndTranslate = function(rotationAngle, xSkewAngle, ySkewAngle, x, y) {
+      return exports.rotateAndSkewTextRadiansAndTranslate(rotations_1.degreesToRadians(objects_1.asNumber(rotationAngle)), rotations_1.degreesToRadians(objects_1.asNumber(xSkewAngle)), rotations_1.degreesToRadians(objects_1.asNumber(ySkewAngle)), x, y);
     };
     exports.drawObject = function(name) {
       return core_1.PDFOperator.of(core_1.PDFOperatorNames.DrawObject, [objects_1.asPDFName(name)]);
@@ -16924,9 +16924,9 @@ var require_svgPath = __commonJS({
         return cmd;
       }
     };
-    var solveArc = function(x, y2, coords) {
+    var solveArc = function(x, y, coords) {
       var rx = coords[0], ry = coords[1], rot = coords[2], large = coords[3], sweep = coords[4], ex = coords[5], ey = coords[6];
-      var segs = arcToSegments(ex, ey, rx, ry, large, sweep, rot, x, y2);
+      var segs = arcToSegments(ex, ey, rx, ry, large, sweep, rot, x, y);
       var cmds = [];
       for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
         var seg = segs_1[_i];
@@ -16935,14 +16935,14 @@ var require_svgPath = __commonJS({
       }
       return cmds;
     };
-    var arcToSegments = function(x, y2, rx, ry, large, sweep, rotateX, ox, oy) {
+    var arcToSegments = function(x, y, rx, ry, large, sweep, rotateX, ox, oy) {
       var th = rotateX * (Math.PI / 180);
       var sinTh = Math.sin(th);
       var cosTh = Math.cos(th);
       rx = Math.abs(rx);
       ry = Math.abs(ry);
-      px = cosTh * (ox - x) * 0.5 + sinTh * (oy - y2) * 0.5;
-      py = cosTh * (oy - y2) * 0.5 - sinTh * (ox - x) * 0.5;
+      px = cosTh * (ox - x) * 0.5 + sinTh * (oy - y) * 0.5;
+      py = cosTh * (oy - y) * 0.5 - sinTh * (ox - x) * 0.5;
       var pl = px * px / (rx * rx) + py * py / (ry * ry);
       if (pl > 1) {
         pl = Math.sqrt(pl);
@@ -16955,8 +16955,8 @@ var require_svgPath = __commonJS({
       var a11 = cosTh / ry;
       var x0 = a00 * ox + a01 * oy;
       var y0 = a10 * ox + a11 * oy;
-      var x1 = a00 * x + a01 * y2;
-      var y1 = a10 * x + a11 * y2;
+      var x1 = a00 * x + a01 * y;
+      var y1 = a10 * x + a11 * y;
       var d = (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0);
       var sfactorSq = 1 / d - 0.25;
       if (sfactorSq < 0) {
@@ -17121,22 +17121,22 @@ var require_operations = __commonJS({
     var KAPPA = 4 * ((Math.sqrt(2) - 1) / 3);
     exports.drawEllipsePath = function(config) {
       var x = objects_1.asNumber(config.x);
-      var y2 = objects_1.asNumber(config.y);
+      var y = objects_1.asNumber(config.y);
       var xScale = objects_1.asNumber(config.xScale);
       var yScale = objects_1.asNumber(config.yScale);
       x -= xScale;
-      y2 -= yScale;
+      y -= yScale;
       var ox = xScale * KAPPA;
       var oy = yScale * KAPPA;
       var xe = x + xScale * 2;
-      var ye = y2 + yScale * 2;
+      var ye = y + yScale * 2;
       var xm = x + xScale;
-      var ym = y2 + yScale;
+      var ym = y + yScale;
       return [
         operators_1.pushGraphicsState(),
         operators_1.moveTo(x, ym),
-        operators_1.appendBezierCurve(x, ym - oy, xm - ox, y2, xm, y2),
-        operators_1.appendBezierCurve(xm + ox, y2, xe, ym - oy, xe, ym),
+        operators_1.appendBezierCurve(x, ym - oy, xm - ox, y, xm, y),
+        operators_1.appendBezierCurve(xm + ox, y, xe, ym - oy, xe, ym),
         operators_1.appendBezierCurve(xe, ym + oy, xm + ox, ye, xm, ye),
         operators_1.appendBezierCurve(xm - ox, ye, x, ym + oy, x, ym),
         operators_1.popGraphicsState()
@@ -17148,19 +17148,19 @@ var require_operations = __commonJS({
       var xScale = objects_1.asNumber(config.xScale);
       var yScale = objects_1.asNumber(config.yScale);
       var x = -xScale;
-      var y2 = -yScale;
+      var y = -yScale;
       var ox = xScale * KAPPA;
       var oy = yScale * KAPPA;
       var xe = x + xScale * 2;
-      var ye = y2 + yScale * 2;
+      var ye = y + yScale * 2;
       var xm = x + xScale;
-      var ym = y2 + yScale;
+      var ym = y + yScale;
       return [
         operators_1.translate(centerX, centerY),
         operators_1.rotateRadians(rotations_1.toRadians(config.rotate)),
         operators_1.moveTo(x, ym),
-        operators_1.appendBezierCurve(x, ym - oy, xm - ox, y2, xm, y2),
-        operators_1.appendBezierCurve(xm + ox, y2, xe, ym - oy, xe, ym),
+        operators_1.appendBezierCurve(x, ym - oy, xm - ox, y, xm, y),
+        operators_1.appendBezierCurve(xm + ox, y, xe, ym - oy, xe, ym),
         operators_1.appendBezierCurve(xe, ym + oy, xm + ox, ye, xm, ye),
         operators_1.appendBezierCurve(xm - ox, ye, x, ym + oy, x, ym)
       ];
@@ -17262,11 +17262,11 @@ var require_operations = __commonJS({
       });
       if (!options.filled)
         return outline;
-      var width2 = objects_1.asNumber(options.width);
+      var width = objects_1.asNumber(options.width);
       var height = objects_1.asNumber(options.height);
-      var checkMarkSize = Math.min(width2, height) / 2;
+      var checkMarkSize = Math.min(width, height) / 2;
       var checkMark = exports.drawCheckMark({
-        x: width2 / 2,
+        x: width / 2,
         y: height / 2,
         size: checkMarkSize,
         thickness: options.thickness,
@@ -17275,9 +17275,9 @@ var require_operations = __commonJS({
       return tslib_1.__spreadArrays([operators_1.pushGraphicsState()], outline, checkMark, [operators_1.popGraphicsState()]);
     };
     exports.drawRadioButton = function(options) {
-      var width2 = objects_1.asNumber(options.width);
+      var width = objects_1.asNumber(options.width);
       var height = objects_1.asNumber(options.height);
-      var outlineScale = Math.min(width2, height) / 2;
+      var outlineScale = Math.min(width, height) / 2;
       var outline = exports.drawEllipse({
         x: options.x,
         y: options.y,
@@ -17302,13 +17302,13 @@ var require_operations = __commonJS({
     };
     exports.drawButton = function(options) {
       var x = objects_1.asNumber(options.x);
-      var y2 = objects_1.asNumber(options.y);
-      var width2 = objects_1.asNumber(options.width);
+      var y = objects_1.asNumber(options.y);
+      var width = objects_1.asNumber(options.width);
       var height = objects_1.asNumber(options.height);
       var background = exports.drawRectangle({
         x,
-        y: y2,
-        width: width2,
+        y,
+        width,
         height,
         borderWidth: options.borderWidth,
         color: options.color,
@@ -17334,22 +17334,22 @@ var require_operations = __commonJS({
         operators_1.setFontAndSize(options.font, options.size)
       ];
       for (var idx = 0, len = lines.length; idx < len; idx++) {
-        var _a = lines[idx], encoded = _a.encoded, x = _a.x, y2 = _a.y;
-        operators.push(operators_1.rotateAndSkewTextRadiansAndTranslate(rotations_1.toRadians(options.rotate), rotations_1.toRadians(options.xSkew), rotations_1.toRadians(options.ySkew), x, y2), operators_1.showText(encoded));
+        var _a = lines[idx], encoded = _a.encoded, x = _a.x, y = _a.y;
+        operators.push(operators_1.rotateAndSkewTextRadiansAndTranslate(rotations_1.toRadians(options.rotate), rotations_1.toRadians(options.xSkew), rotations_1.toRadians(options.ySkew), x, y), operators_1.showText(encoded));
       }
       operators.push(operators_1.endText());
       return operators;
     };
     exports.drawTextField = function(options) {
       var x = objects_1.asNumber(options.x);
-      var y2 = objects_1.asNumber(options.y);
-      var width2 = objects_1.asNumber(options.width);
+      var y = objects_1.asNumber(options.y);
+      var width = objects_1.asNumber(options.width);
       var height = objects_1.asNumber(options.height);
       var borderWidth = objects_1.asNumber(options.borderWidth);
       var padding = objects_1.asNumber(options.padding);
       var clipX = x + borderWidth / 2 + padding;
-      var clipY = y2 + borderWidth / 2 + padding;
-      var clipWidth = width2 - (borderWidth / 2 + padding) * 2;
+      var clipY = y + borderWidth / 2 + padding;
+      var clipWidth = width - (borderWidth / 2 + padding) * 2;
       var clipHeight = height - (borderWidth / 2 + padding) * 2;
       var clippingArea = [
         operators_1.moveTo(clipX, clipY),
@@ -17362,8 +17362,8 @@ var require_operations = __commonJS({
       ];
       var background = exports.drawRectangle({
         x,
-        y: y2,
-        width: width2,
+        y,
+        width,
         height,
         borderWidth: options.borderWidth,
         color: options.color,
@@ -17395,15 +17395,15 @@ var require_operations = __commonJS({
     };
     exports.drawOptionList = function(options) {
       var x = objects_1.asNumber(options.x);
-      var y2 = objects_1.asNumber(options.y);
-      var width2 = objects_1.asNumber(options.width);
+      var y = objects_1.asNumber(options.y);
+      var width = objects_1.asNumber(options.width);
       var height = objects_1.asNumber(options.height);
       var lineHeight = objects_1.asNumber(options.lineHeight);
       var borderWidth = objects_1.asNumber(options.borderWidth);
       var padding = objects_1.asNumber(options.padding);
       var clipX = x + borderWidth / 2 + padding;
-      var clipY = y2 + borderWidth / 2 + padding;
-      var clipWidth = width2 - (borderWidth / 2 + padding) * 2;
+      var clipY = y + borderWidth / 2 + padding;
+      var clipWidth = width - (borderWidth / 2 + padding) * 2;
       var clipHeight = height - (borderWidth / 2 + padding) * 2;
       var clippingArea = [
         operators_1.moveTo(clipX, clipY),
@@ -17416,8 +17416,8 @@ var require_operations = __commonJS({
       ];
       var background = exports.drawRectangle({
         x,
-        y: y2,
-        width: width2,
+        y,
+        width,
         height,
         borderWidth: options.borderWidth,
         color: options.color,
@@ -17432,7 +17432,7 @@ var require_operations = __commonJS({
         highlights.push.apply(highlights, exports.drawRectangle({
           x: line.x - padding,
           y: line.y - (lineHeight - line.height) / 2,
-          width: width2 - borderWidth,
+          width: width - borderWidth,
           height: line.height + (lineHeight - line.height) / 2,
           borderWidth: 0,
           color: options.selectedColor,
@@ -17767,10 +17767,10 @@ var require_layout = __commonJS({
       while (lastWhitespaceIdx > 0) {
         var line = input.substring(0, lastWhitespaceIdx);
         var encoded = font.encodeText(line);
-        var width2 = font.widthOfTextAtSize(line, fontSize);
-        if (width2 < maxWidth) {
+        var width = font.widthOfTextAtSize(line, fontSize);
+        if (width < maxWidth) {
           var remainder = input.substring(lastWhitespaceIdx) || void 0;
-          return { line, encoded, width: width2, remainder };
+          return { line, encoded, width, remainder };
         }
         lastWhitespaceIdx = (_a = lastIndexOfWhitespace(line)) !== null && _a !== void 0 ? _a : 0;
       }
@@ -17794,22 +17794,22 @@ var require_layout = __commonJS({
       var minY = bounds.y;
       var maxX = bounds.x + bounds.width;
       var maxY = bounds.y + bounds.height;
-      var y2 = bounds.y + bounds.height;
+      var y = bounds.y + bounds.height;
       for (var idx = 0, len = lines.length; idx < len; idx++) {
         var prevRemainder = lines[idx];
         while (prevRemainder !== void 0) {
-          var _b = splitOutLines(prevRemainder, bounds.width, font, fontSize), line = _b.line, encoded = _b.encoded, width2 = _b.width, remainder = _b.remainder;
-          var x = alignment === alignment_1.TextAlignment.Left ? bounds.x : alignment === alignment_1.TextAlignment.Center ? bounds.x + bounds.width / 2 - width2 / 2 : alignment === alignment_1.TextAlignment.Right ? bounds.x + bounds.width - width2 : bounds.x;
-          y2 -= lineHeight;
+          var _b = splitOutLines(prevRemainder, bounds.width, font, fontSize), line = _b.line, encoded = _b.encoded, width = _b.width, remainder = _b.remainder;
+          var x = alignment === alignment_1.TextAlignment.Left ? bounds.x : alignment === alignment_1.TextAlignment.Center ? bounds.x + bounds.width / 2 - width / 2 : alignment === alignment_1.TextAlignment.Right ? bounds.x + bounds.width - width : bounds.x;
+          y -= lineHeight;
           if (x < minX)
             minX = x;
-          if (y2 < minY)
-            minY = y2;
-          if (x + width2 > maxX)
-            maxX = x + width2;
-          if (y2 + height > maxY)
-            maxY = y2 + height;
-          textLines.push({ text: line, encoded, width: width2, height, x, y: y2 });
+          if (y < minY)
+            minY = y;
+          if (x + width > maxX)
+            maxX = x + width;
+          if (y + height > maxY)
+            maxY = y + height;
+          textLines.push({ text: line, encoded, width, height, x, y });
           prevRemainder = remainder === null || remainder === void 0 ? void 0 : remainder.trim();
         }
       }
@@ -17836,7 +17836,7 @@ var require_layout = __commonJS({
       }
       var cellWidth = bounds.width / cellCount;
       var height = font.heightAtSize(fontSize, { descender: false });
-      var y2 = bounds.y + (bounds.height / 2 - height / 2);
+      var y = bounds.y + (bounds.height / 2 - height / 2);
       var cells = [];
       var minX = bounds.x;
       var minY = bounds.y;
@@ -17847,18 +17847,18 @@ var require_layout = __commonJS({
       while (cellOffset < cellCount) {
         var _b = utils_1.charAtIndex(line, charOffset), char = _b[0], charLength = _b[1];
         var encoded = font.encodeText(char);
-        var width2 = font.widthOfTextAtSize(char, fontSize);
+        var width = font.widthOfTextAtSize(char, fontSize);
         var cellCenter = bounds.x + (cellWidth * cellOffset + cellWidth / 2);
-        var x = cellCenter - width2 / 2;
+        var x = cellCenter - width / 2;
         if (x < minX)
           minX = x;
-        if (y2 < minY)
-          minY = y2;
-        if (x + width2 > maxX)
-          maxX = x + width2;
-        if (y2 + height > maxY)
-          maxY = y2 + height;
-        cells.push({ text: line, encoded, width: width2, height, x, y: y2 });
+        if (y < minY)
+          minY = y;
+        if (x + width > maxX)
+          maxX = x + width;
+        if (y + height > maxY)
+          maxY = y + height;
+        cells.push({ text: line, encoded, width, height, x, y });
         cellOffset += 1;
         charOffset += charLength;
       }
@@ -17880,14 +17880,14 @@ var require_layout = __commonJS({
         fontSize = computeFontSize([line], font, bounds);
       }
       var encoded = font.encodeText(line);
-      var width2 = font.widthOfTextAtSize(line, fontSize);
+      var width = font.widthOfTextAtSize(line, fontSize);
       var height = font.heightAtSize(fontSize, { descender: false });
-      var x = alignment === alignment_1.TextAlignment.Left ? bounds.x : alignment === alignment_1.TextAlignment.Center ? bounds.x + bounds.width / 2 - width2 / 2 : alignment === alignment_1.TextAlignment.Right ? bounds.x + bounds.width - width2 : bounds.x;
-      var y2 = bounds.y + (bounds.height / 2 - height / 2);
+      var x = alignment === alignment_1.TextAlignment.Left ? bounds.x : alignment === alignment_1.TextAlignment.Center ? bounds.x + bounds.width / 2 - width / 2 : alignment === alignment_1.TextAlignment.Right ? bounds.x + bounds.width - width : bounds.x;
+      var y = bounds.y + (bounds.height / 2 - height / 2);
       return {
         fontSize,
-        line: { text: line, encoded, width: width2, height, x, y: y2 },
-        bounds: { x, y: y2, width: width2, height }
+        line: { text: line, encoded, width, height, x, y },
+        bounds: { x, y, width, height }
       };
     };
   }
@@ -17957,7 +17957,7 @@ var require_appearances = __commonJS({
       var bs = widget.getBorderStyle();
       var borderWidth = (_a = bs === null || bs === void 0 ? void 0 : bs.getWidth()) !== null && _a !== void 0 ? _a : 0;
       var rotation = rotations_1.reduceRotation(ap === null || ap === void 0 ? void 0 : ap.getRotation());
-      var _d = rotations_1.adjustDimsForRotation(rectangle, rotation), width2 = _d.width, height = _d.height;
+      var _d = rotations_1.adjustDimsForRotation(rectangle, rotation), width = _d.width, height = _d.height;
       var rotate = operations_1.rotateInPlace(tslib_1.__assign(tslib_1.__assign({}, rectangle), { rotation }));
       var black = colors_1.rgb(0, 0, 0);
       var borderColor = (_b = colors_1.componentsToColor(ap === null || ap === void 0 ? void 0 : ap.getBorderColor())) !== null && _b !== void 0 ? _b : black;
@@ -17972,7 +17972,7 @@ var require_appearances = __commonJS({
       var options = {
         x: 0 + borderWidth / 2,
         y: 0 + borderWidth / 2,
-        width: width2 - borderWidth,
+        width: width - borderWidth,
         height: height - borderWidth,
         thickness: 1.5,
         borderWidth,
@@ -17999,7 +17999,7 @@ var require_appearances = __commonJS({
       var bs = widget.getBorderStyle();
       var borderWidth = (_a = bs === null || bs === void 0 ? void 0 : bs.getWidth()) !== null && _a !== void 0 ? _a : 0;
       var rotation = rotations_1.reduceRotation(ap === null || ap === void 0 ? void 0 : ap.getRotation());
-      var _d = rotations_1.adjustDimsForRotation(rectangle, rotation), width2 = _d.width, height = _d.height;
+      var _d = rotations_1.adjustDimsForRotation(rectangle, rotation), width = _d.width, height = _d.height;
       var rotate = operations_1.rotateInPlace(tslib_1.__assign(tslib_1.__assign({}, rectangle), { rotation }));
       var black = colors_1.rgb(0, 0, 0);
       var borderColor = (_b = colors_1.componentsToColor(ap === null || ap === void 0 ? void 0 : ap.getBorderColor())) !== null && _b !== void 0 ? _b : black;
@@ -18012,9 +18012,9 @@ var require_appearances = __commonJS({
         updateDefaultAppearance(radioGroup.acroField, textColor);
       }
       var options = {
-        x: width2 / 2,
+        x: width / 2,
         y: height / 2,
-        width: width2 - borderWidth,
+        width: width - borderWidth,
         height: height - borderWidth,
         borderWidth,
         borderColor,
@@ -18045,7 +18045,7 @@ var require_appearances = __commonJS({
       var downText = (_c = (_b = captions === null || captions === void 0 ? void 0 : captions.down) !== null && _b !== void 0 ? _b : normalText) !== null && _c !== void 0 ? _c : "";
       var borderWidth = (_d = bs === null || bs === void 0 ? void 0 : bs.getWidth()) !== null && _d !== void 0 ? _d : 0;
       var rotation = rotations_1.reduceRotation(ap === null || ap === void 0 ? void 0 : ap.getRotation());
-      var _f = rotations_1.adjustDimsForRotation(rectangle, rotation), width2 = _f.width, height = _f.height;
+      var _f = rotations_1.adjustDimsForRotation(rectangle, rotation), width = _f.width, height = _f.height;
       var rotate = operations_1.rotateInPlace(tslib_1.__assign(tslib_1.__assign({}, rectangle), { rotation }));
       var black = colors_1.rgb(0, 0, 0);
       var borderColor = colors_1.componentsToColor(ap === null || ap === void 0 ? void 0 : ap.getBorderColor());
@@ -18054,7 +18054,7 @@ var require_appearances = __commonJS({
       var bounds = {
         x: borderWidth,
         y: borderWidth,
-        width: width2 - borderWidth * 2,
+        width: width - borderWidth * 2,
         height: height - borderWidth * 2
       };
       var normalLayout = layout_1.layoutSinglelineText(normalText, {
@@ -18079,7 +18079,7 @@ var require_appearances = __commonJS({
       var options = {
         x: 0 + borderWidth / 2,
         y: 0 + borderWidth / 2,
-        width: width2 - borderWidth,
+        width: width - borderWidth,
         height: height - borderWidth,
         borderWidth,
         borderColor,
@@ -18104,7 +18104,7 @@ var require_appearances = __commonJS({
       var text = (_a = textField.getText()) !== null && _a !== void 0 ? _a : "";
       var borderWidth = (_b = bs === null || bs === void 0 ? void 0 : bs.getWidth()) !== null && _b !== void 0 ? _b : 0;
       var rotation = rotations_1.reduceRotation(ap === null || ap === void 0 ? void 0 : ap.getRotation());
-      var _e = rotations_1.adjustDimsForRotation(rectangle, rotation), width2 = _e.width, height = _e.height;
+      var _e = rotations_1.adjustDimsForRotation(rectangle, rotation), width = _e.width, height = _e.height;
       var rotate = operations_1.rotateInPlace(tslib_1.__assign(tslib_1.__assign({}, rectangle), { rotation }));
       var black = colors_1.rgb(0, 0, 0);
       var borderColor = colors_1.componentsToColor(ap === null || ap === void 0 ? void 0 : ap.getBorderColor());
@@ -18115,7 +18115,7 @@ var require_appearances = __commonJS({
       var bounds = {
         x: borderWidth + padding,
         y: borderWidth + padding,
-        width: width2 - (borderWidth + padding) * 2,
+        width: width - (borderWidth + padding) * 2,
         height: height - (borderWidth + padding) * 2
       };
       if (textField.isMultiline()) {
@@ -18155,7 +18155,7 @@ var require_appearances = __commonJS({
       var options = {
         x: 0 + borderWidth / 2,
         y: 0 + borderWidth / 2,
-        width: width2 - borderWidth,
+        width: width - borderWidth,
         height: height - borderWidth,
         borderWidth: borderWidth !== null && borderWidth !== void 0 ? borderWidth : 0,
         borderColor,
@@ -18180,7 +18180,7 @@ var require_appearances = __commonJS({
       var text = (_a = dropdown.getSelected()[0]) !== null && _a !== void 0 ? _a : "";
       var borderWidth = (_b = bs === null || bs === void 0 ? void 0 : bs.getWidth()) !== null && _b !== void 0 ? _b : 0;
       var rotation = rotations_1.reduceRotation(ap === null || ap === void 0 ? void 0 : ap.getRotation());
-      var _d = rotations_1.adjustDimsForRotation(rectangle, rotation), width2 = _d.width, height = _d.height;
+      var _d = rotations_1.adjustDimsForRotation(rectangle, rotation), width = _d.width, height = _d.height;
       var rotate = operations_1.rotateInPlace(tslib_1.__assign(tslib_1.__assign({}, rectangle), { rotation }));
       var black = colors_1.rgb(0, 0, 0);
       var borderColor = colors_1.componentsToColor(ap === null || ap === void 0 ? void 0 : ap.getBorderColor());
@@ -18189,7 +18189,7 @@ var require_appearances = __commonJS({
       var bounds = {
         x: borderWidth + padding,
         y: borderWidth + padding,
-        width: width2 - (borderWidth + padding) * 2,
+        width: width - (borderWidth + padding) * 2,
         height: height - (borderWidth + padding) * 2
       };
       var _e = layout_1.layoutSinglelineText(text, {
@@ -18207,7 +18207,7 @@ var require_appearances = __commonJS({
       var options = {
         x: 0 + borderWidth / 2,
         y: 0 + borderWidth / 2,
-        width: width2 - borderWidth,
+        width: width - borderWidth,
         height: height - borderWidth,
         borderWidth: borderWidth !== null && borderWidth !== void 0 ? borderWidth : 0,
         borderColor,
@@ -18231,7 +18231,7 @@ var require_appearances = __commonJS({
       var bs = widget.getBorderStyle();
       var borderWidth = (_a = bs === null || bs === void 0 ? void 0 : bs.getWidth()) !== null && _a !== void 0 ? _a : 0;
       var rotation = rotations_1.reduceRotation(ap === null || ap === void 0 ? void 0 : ap.getRotation());
-      var _c = rotations_1.adjustDimsForRotation(rectangle, rotation), width2 = _c.width, height = _c.height;
+      var _c = rotations_1.adjustDimsForRotation(rectangle, rotation), width = _c.width, height = _c.height;
       var rotate = operations_1.rotateInPlace(tslib_1.__assign(tslib_1.__assign({}, rectangle), { rotation }));
       var black = colors_1.rgb(0, 0, 0);
       var borderColor = colors_1.componentsToColor(ap === null || ap === void 0 ? void 0 : ap.getBorderColor());
@@ -18250,7 +18250,7 @@ var require_appearances = __commonJS({
       var bounds = {
         x: borderWidth + padding,
         y: borderWidth + padding,
-        width: width2 - (borderWidth + padding) * 2,
+        width: width - (borderWidth + padding) * 2,
         height: height - (borderWidth + padding) * 2
       };
       var _d = layout_1.layoutMultilineText(text, {
@@ -18275,7 +18275,7 @@ var require_appearances = __commonJS({
       return tslib_1.__spreadArrays(rotate, operations_1.drawOptionList({
         x: 0 + borderWidth / 2,
         y: 0 + borderWidth / 2,
-        width: width2 - borderWidth,
+        width: width - borderWidth,
         height: height - borderWidth,
         borderWidth: borderWidth !== null && borderWidth !== void 0 ? borderWidth : 0,
         borderColor,
@@ -18466,10 +18466,10 @@ var require_PDFImage = __commonJS({
           utils_1.assertIs(factor, "factor", ["number"]);
           return { width: this.width * factor, height: this.height * factor };
         };
-        PDFImage2.prototype.scaleToFit = function(width2, height) {
-          utils_1.assertIs(width2, "width", ["number"]);
+        PDFImage2.prototype.scaleToFit = function(width, height) {
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
-          var imgWidthScale = width2 / this.width;
+          var imgWidthScale = width / this.width;
           var imgHeightScale = height / this.height;
           var scale = Math.min(imgWidthScale, imgHeightScale);
           return this.scale(scale);
@@ -18636,14 +18636,14 @@ var require_PDFField = __commonJS({
           var degreesAngle = rotations_1.toDegrees(options.rotate);
           var caption2 = options.caption;
           var x = options.x;
-          var y2 = options.y;
-          var width2 = options.width + borderWidth;
+          var y = options.y;
+          var width = options.width + borderWidth;
           var height = options.height + borderWidth;
           var hidden = Boolean(options.hidden);
           var pageRef = options.page;
           utils_1.assertMultiple(degreesAngle, "degreesAngle", 90);
           var widget = core_1.PDFWidgetAnnotation.create(this.doc.context, this.ref);
-          var rect = rotations_1.rotateRectangle({ x, y: y2, width: width2, height }, borderWidth, degreesAngle);
+          var rect = rotations_1.rotateRectangle({ x, y, width, height }, borderWidth, degreesAngle);
           widget.setRectangle(rect);
           if (pageRef)
             widget.setP(pageRef);
@@ -18702,11 +18702,11 @@ var require_PDFField = __commonJS({
         PDFField2.prototype.createAppearanceStream = function(widget, appearance, font) {
           var _a;
           var context = this.acroField.dict.context;
-          var _b = widget.getRectangle(), width2 = _b.width, height = _b.height;
+          var _b = widget.getRectangle(), width = _b.width, height = _b.height;
           var Resources = font && { Font: (_a = {}, _a[font.name] = font.ref, _a) };
           var stream = context.formXObject(appearance, {
             Resources,
-            BBox: context.obj([0, 0, width2, height]),
+            BBox: context.obj([0, 0, width, height]),
             Matrix: context.obj([1, 0, 0, 1, 0, 0])
           });
           var streamRef = context.register(stream);
@@ -18806,9 +18806,9 @@ var require_PDFCheckBox = __commonJS({
           var onValue = this.acroField.getOnValue();
           return !!onValue && onValue === this.acroField.getValue();
         };
-        PDFCheckBox2.prototype.addToPage = function(page2, options) {
+        PDFCheckBox2.prototype.addToPage = function(page, options) {
           var _a, _b, _c, _d, _e, _f;
-          utils_1.assertIs(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
+          utils_1.assertIs(page, "page", [[PDFPage_1.default, "PDFPage"]]);
           PDFField_1.assertFieldAppearanceOptions(options);
           if (!options)
             options = {};
@@ -18831,13 +18831,13 @@ var require_PDFCheckBox = __commonJS({
             borderWidth: (_e = options.borderWidth) !== null && _e !== void 0 ? _e : 0,
             rotate: (_f = options.rotate) !== null && _f !== void 0 ? _f : rotations_1.degrees(0),
             hidden: options.hidden,
-            page: page2.ref
+            page: page.ref
           });
           var widgetRef = this.doc.context.register(widget.dict);
           this.acroField.addWidget(widgetRef);
           widget.setAppearanceState(core_1.PDFName.of("Off"));
           this.updateWidgetAppearance(widget, core_1.PDFName.of("Yes"));
-          page2.node.addAnnot(widgetRef);
+          page.node.addAnnot(widgetRef);
         };
         PDFCheckBox2.prototype.needsAppearancesUpdate = function() {
           var _a;
@@ -19027,9 +19027,9 @@ var require_PDFDropdown = __commonJS({
         PDFDropdown2.prototype.disableSelectOnClick = function() {
           this.acroField.setFlagTo(core_1.AcroChoiceFlags.CommitOnSelChange, false);
         };
-        PDFDropdown2.prototype.addToPage = function(page2, options) {
+        PDFDropdown2.prototype.addToPage = function(page, options) {
           var _a, _b, _c, _d, _e, _f, _g;
-          utils_1.assertIs(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
+          utils_1.assertIs(page, "page", [[PDFPage_1.default, "PDFPage"]]);
           PDFField_1.assertFieldAppearanceOptions(options);
           if (!options)
             options = {};
@@ -19052,13 +19052,13 @@ var require_PDFDropdown = __commonJS({
             borderWidth: (_e = options.borderWidth) !== null && _e !== void 0 ? _e : 0,
             rotate: (_f = options.rotate) !== null && _f !== void 0 ? _f : rotations_1.degrees(0),
             hidden: options.hidden,
-            page: page2.ref
+            page: page.ref
           });
           var widgetRef = this.doc.context.register(widget.dict);
           this.acroField.addWidget(widgetRef);
           var font = (_g = options.font) !== null && _g !== void 0 ? _g : this.doc.getForm().getDefaultFont();
           this.updateWidgetAppearance(widget, font);
-          page2.node.addAnnot(widgetRef);
+          page.node.addAnnot(widgetRef);
         };
         PDFDropdown2.prototype.needsAppearancesUpdate = function() {
           var _a;
@@ -19223,9 +19223,9 @@ var require_PDFOptionList = __commonJS({
         PDFOptionList2.prototype.disableSelectOnClick = function() {
           this.acroField.setFlagTo(core_1.AcroChoiceFlags.CommitOnSelChange, false);
         };
-        PDFOptionList2.prototype.addToPage = function(page2, options) {
+        PDFOptionList2.prototype.addToPage = function(page, options) {
           var _a, _b, _c, _d, _e, _f, _g;
-          utils_1.assertIs(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
+          utils_1.assertIs(page, "page", [[PDFPage_1.default, "PDFPage"]]);
           PDFField_1.assertFieldAppearanceOptions(options);
           if (!options)
             options = {};
@@ -19248,13 +19248,13 @@ var require_PDFOptionList = __commonJS({
             borderWidth: (_e = options.borderWidth) !== null && _e !== void 0 ? _e : 0,
             rotate: (_f = options.rotate) !== null && _f !== void 0 ? _f : rotations_1.degrees(0),
             hidden: options.hidden,
-            page: page2.ref
+            page: page.ref
           });
           var widgetRef = this.doc.context.register(widget.dict);
           this.acroField.addWidget(widgetRef);
           var font = (_g = options.font) !== null && _g !== void 0 ? _g : this.doc.getForm().getDefaultFont();
           this.updateWidgetAppearance(widget, font);
-          page2.node.addAnnot(widgetRef);
+          page.node.addAnnot(widgetRef);
         };
         PDFOptionList2.prototype.needsAppearancesUpdate = function() {
           var _a;
@@ -19396,10 +19396,10 @@ var require_PDFRadioGroup = __commonJS({
         PDFRadioGroup2.prototype.disableMutualExclusion = function() {
           this.acroField.setFlagTo(core_1.AcroButtonFlags.RadiosInUnison, true);
         };
-        PDFRadioGroup2.prototype.addOptionToPage = function(option, page2, options) {
+        PDFRadioGroup2.prototype.addOptionToPage = function(option, page, options) {
           var _a, _b, _c, _d, _e, _f, _g, _h, _j;
           utils_1.assertIs(option, "option", ["string"]);
-          utils_1.assertIs(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
+          utils_1.assertIs(page, "page", [[PDFPage_1.default, "PDFPage"]]);
           PDFField_1.assertFieldAppearanceOptions(options);
           var widget = this.createWidget({
             x: (_a = options === null || options === void 0 ? void 0 : options.x) !== null && _a !== void 0 ? _a : 0,
@@ -19412,13 +19412,13 @@ var require_PDFRadioGroup = __commonJS({
             borderWidth: (_h = options === null || options === void 0 ? void 0 : options.borderWidth) !== null && _h !== void 0 ? _h : 1,
             rotate: (_j = options === null || options === void 0 ? void 0 : options.rotate) !== null && _j !== void 0 ? _j : rotations_1.degrees(0),
             hidden: options === null || options === void 0 ? void 0 : options.hidden,
-            page: page2.ref
+            page: page.ref
           });
           var widgetRef = this.doc.context.register(widget.dict);
           var apStateValue = this.acroField.addWidgetWithOpt(widgetRef, core_1.PDFHexString.fromText(option), !this.isMutuallyExclusive());
           widget.setAppearanceState(core_1.PDFName.of("Off"));
           this.updateWidgetAppearance(widget, apStateValue);
-          page2.node.addAnnot(widgetRef);
+          page.node.addAnnot(widgetRef);
         };
         PDFRadioGroup2.prototype.needsAppearancesUpdate = function() {
           var _a;
@@ -19664,9 +19664,9 @@ var require_PDFTextField = __commonJS({
         PDFTextField2.prototype.disableRichFormatting = function() {
           this.acroField.setFlagTo(core_1.AcroTextFlags.RichText, false);
         };
-        PDFTextField2.prototype.addToPage = function(page2, options) {
+        PDFTextField2.prototype.addToPage = function(page, options) {
           var _a, _b, _c, _d, _e, _f, _g;
-          utils_1.assertIs(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
+          utils_1.assertIs(page, "page", [[PDFPage_1.default, "PDFPage"]]);
           PDFField_1.assertFieldAppearanceOptions(options);
           if (!options)
             options = {};
@@ -19689,13 +19689,13 @@ var require_PDFTextField = __commonJS({
             borderWidth: (_e = options.borderWidth) !== null && _e !== void 0 ? _e : 0,
             rotate: (_f = options.rotate) !== null && _f !== void 0 ? _f : rotations_1.degrees(0),
             hidden: options.hidden,
-            page: page2.ref
+            page: page.ref
           });
           var widgetRef = this.doc.context.register(widget.dict);
           this.acroField.addWidget(widgetRef);
           var font = (_g = options.font) !== null && _g !== void 0 ? _g : this.doc.getForm().getDefaultFont();
           this.updateWidgetAppearance(widget, font);
-          page2.node.addAnnot(widgetRef);
+          page.node.addAnnot(widgetRef);
         };
         PDFTextField2.prototype.needsAppearancesUpdate = function() {
           var _a;
@@ -19951,9 +19951,9 @@ var require_PDFForm = __commonJS({
             var widgets = field.acroField.getWidgets();
             for (var j = 0, lenWidgets = widgets.length; j < lenWidgets; j++) {
               var widget = widgets[j];
-              var page2 = this.findWidgetPage(widget);
+              var page = this.findWidgetPage(widget);
               var widgetRef = this.findWidgetAppearanceRef(field, widget);
-              var xObjectKey = page2.node.newXObject("FlatWidget", widgetRef);
+              var xObjectKey = page.node.newXObject("FlatWidget", widgetRef);
               var rectangle = widget.getRectangle();
               var operators = tslib_1.__spreadArrays([
                 operators_1.pushGraphicsState(),
@@ -19962,23 +19962,23 @@ var require_PDFForm = __commonJS({
                 operators_1.drawObject(xObjectKey),
                 operators_1.popGraphicsState()
               ]).filter(Boolean);
-              page2.pushOperators.apply(page2, operators);
+              page.pushOperators.apply(page, operators);
             }
             this.removeField(field);
           }
         };
         PDFForm2.prototype.removeField = function(field) {
           var widgets = field.acroField.getWidgets();
-          var pages2 = /* @__PURE__ */ new Set();
+          var pages = /* @__PURE__ */ new Set();
           for (var i = 0, len = widgets.length; i < len; i++) {
             var widget = widgets[i];
             var widgetRef = this.findWidgetAppearanceRef(field, widget);
-            var page2 = this.findWidgetPage(widget);
-            pages2.add(page2);
-            page2.node.removeAnnot(widgetRef);
+            var page = this.findWidgetPage(widget);
+            pages.add(page);
+            page.node.removeAnnot(widgetRef);
           }
-          pages2.forEach(function(page3) {
-            return page3.node.removeAnnot(field.ref);
+          pages.forEach(function(page2) {
+            return page2.node.removeAnnot(field.ref);
           });
           this.acroForm.removeField(field.acroField);
           var fieldKids = field.acroField.normalizedEntries().Kids;
@@ -20019,20 +20019,20 @@ var require_PDFForm = __commonJS({
         };
         PDFForm2.prototype.findWidgetPage = function(widget) {
           var pageRef = widget.P();
-          var page2 = this.doc.getPages().find(function(x) {
+          var page = this.doc.getPages().find(function(x) {
             return x.ref === pageRef;
           });
-          if (page2 === void 0) {
+          if (page === void 0) {
             var widgetRef = this.doc.context.getObjectRef(widget.dict);
             if (widgetRef === void 0) {
               throw new Error("Could not find PDFRef for PDFObject");
             }
-            page2 = this.doc.findPageForAnnotationRef(widgetRef);
-            if (page2 === void 0) {
+            page = this.doc.findPageForAnnotationRef(widgetRef);
+            if (page === void 0) {
               throw new Error("Could not find page for PDFRef " + widgetRef);
             }
           }
-          return page2;
+          return page;
         };
         PDFForm2.prototype.findWidgetAppearanceRef = function(field, widget) {
           var _a;
@@ -20422,18 +20422,18 @@ var require_PDFDocument = __commonJS({
           var _this = this;
           this.defaultWordBreaks = [" "];
           this.computePages = function() {
-            var pages2 = [];
+            var pages = [];
             _this.catalog.Pages().traverse(function(node, ref) {
               if (node instanceof core_1.PDFPageLeaf) {
-                var page2 = _this.pageMap.get(node);
-                if (!page2) {
-                  page2 = PDFPage_1.default.of(node, ref, _this);
-                  _this.pageMap.set(node, page2);
+                var page = _this.pageMap.get(node);
+                if (!page) {
+                  page = PDFPage_1.default.of(node, ref, _this);
+                  _this.pageMap.set(node, page);
                 }
-                pages2.push(page2);
+                pages.push(page);
               }
             });
-            return pages2;
+            return pages;
           };
           this.getOrCreateForm = function() {
             var acroForm = _this.catalog.getOrCreateAcroForm();
@@ -20457,7 +20457,7 @@ var require_PDFDocument = __commonJS({
           if (updateMetadata)
             this.updateInfoDict();
         }
-        PDFDocument3.load = function(pdf2, options) {
+        PDFDocument3.load = function(pdf, options) {
           if (options === void 0) {
             options = {};
           }
@@ -20467,11 +20467,11 @@ var require_PDFDocument = __commonJS({
               switch (_f.label) {
                 case 0:
                   _a = options.ignoreEncryption, ignoreEncryption = _a === void 0 ? false : _a, _b = options.parseSpeed, parseSpeed = _b === void 0 ? PDFDocumentOptions_1.ParseSpeeds.Slow : _b, _c = options.throwOnInvalidObject, throwOnInvalidObject = _c === void 0 ? false : _c, _d = options.updateMetadata, updateMetadata = _d === void 0 ? true : _d, _e = options.capNumbers, capNumbers = _e === void 0 ? false : _e;
-                  utils_1.assertIs(pdf2, "pdf", ["string", Uint8Array, ArrayBuffer]);
+                  utils_1.assertIs(pdf, "pdf", ["string", Uint8Array, ArrayBuffer]);
                   utils_1.assertIs(ignoreEncryption, "ignoreEncryption", ["boolean"]);
                   utils_1.assertIs(parseSpeed, "parseSpeed", ["number"]);
                   utils_1.assertIs(throwOnInvalidObject, "throwOnInvalidObject", ["boolean"]);
-                  bytes = utils_1.toUint8Array(pdf2);
+                  bytes = utils_1.toUint8Array(pdf);
                   return [4, core_1.PDFParser.forBytesWithOptions(bytes, parseSpeed, throwOnInvalidObject, capNumbers).parseDocument()];
                 case 1:
                   context = _f.sent();
@@ -20622,9 +20622,9 @@ var require_PDFDocument = __commonJS({
           return this.pageCache.access();
         };
         PDFDocument3.prototype.getPage = function(index) {
-          var pages2 = this.getPages();
-          utils_1.assertRange(index, "index", 0, pages2.length - 1);
-          return pages2[index];
+          var pages = this.getPages();
+          utils_1.assertRange(index, "index", 0, pages.length - 1);
+          return pages[index];
         };
         PDFDocument3.prototype.getPageIndices = function() {
           return utils_1.range(0, this.getPageCount());
@@ -20637,27 +20637,27 @@ var require_PDFDocument = __commonJS({
           this.catalog.removeLeafNode(index);
           this.pageCount = pageCount - 1;
         };
-        PDFDocument3.prototype.addPage = function(page2) {
-          utils_1.assertIs(page2, "page", ["undefined", [PDFPage_1.default, "PDFPage"], Array]);
-          return this.insertPage(this.getPageCount(), page2);
+        PDFDocument3.prototype.addPage = function(page) {
+          utils_1.assertIs(page, "page", ["undefined", [PDFPage_1.default, "PDFPage"], Array]);
+          return this.insertPage(this.getPageCount(), page);
         };
-        PDFDocument3.prototype.insertPage = function(index, page2) {
+        PDFDocument3.prototype.insertPage = function(index, page) {
           var pageCount = this.getPageCount();
           utils_1.assertRange(index, "index", 0, pageCount);
-          utils_1.assertIs(page2, "page", ["undefined", [PDFPage_1.default, "PDFPage"], Array]);
-          if (!page2 || Array.isArray(page2)) {
-            var dims = Array.isArray(page2) ? page2 : sizes_1.PageSizes.A4;
-            page2 = PDFPage_1.default.create(this);
-            page2.setSize.apply(page2, dims);
-          } else if (page2.doc !== this) {
+          utils_1.assertIs(page, "page", ["undefined", [PDFPage_1.default, "PDFPage"], Array]);
+          if (!page || Array.isArray(page)) {
+            var dims = Array.isArray(page) ? page : sizes_1.PageSizes.A4;
+            page = PDFPage_1.default.create(this);
+            page.setSize.apply(page, dims);
+          } else if (page.doc !== this) {
             throw new errors_1.ForeignPageError();
           }
-          var parentRef = this.catalog.insertLeafNode(page2.ref, index);
-          page2.node.setParent(parentRef);
-          this.pageMap.set(page2.node, page2);
+          var parentRef = this.catalog.insertLeafNode(page.ref, index);
+          page.node.setParent(parentRef);
+          this.pageMap.set(page.node, page);
           this.pageCache.invalidate();
           this.pageCount = pageCount + 1;
-          return page2;
+          return page;
         };
         PDFDocument3.prototype.copyPages = function(srcDoc, indices) {
           return tslib_1.__awaiter(this, void 0, void 0, function() {
@@ -20854,7 +20854,7 @@ var require_PDFDocument = __commonJS({
             });
           });
         };
-        PDFDocument3.prototype.embedPdf = function(pdf2, indices) {
+        PDFDocument3.prototype.embedPdf = function(pdf, indices) {
           if (indices === void 0) {
             indices = [0];
           }
@@ -20863,18 +20863,18 @@ var require_PDFDocument = __commonJS({
             return tslib_1.__generator(this, function(_b) {
               switch (_b.label) {
                 case 0:
-                  utils_1.assertIs(pdf2, "pdf", [
+                  utils_1.assertIs(pdf, "pdf", [
                     "string",
                     Uint8Array,
                     ArrayBuffer,
                     [PDFDocument3, "PDFDocument"]
                   ]);
                   utils_1.assertIs(indices, "indices", [Array]);
-                  if (!(pdf2 instanceof PDFDocument3)) return [3, 1];
-                  _a = pdf2;
+                  if (!(pdf instanceof PDFDocument3)) return [3, 1];
+                  _a = pdf;
                   return [3, 3];
                 case 1:
-                  return [4, PDFDocument3.load(pdf2)];
+                  return [4, PDFDocument3.load(pdf)];
                 case 2:
                   _a = _b.sent();
                   _b.label = 3;
@@ -20886,14 +20886,14 @@ var require_PDFDocument = __commonJS({
             });
           });
         };
-        PDFDocument3.prototype.embedPage = function(page2, boundingBox, transformationMatrix) {
+        PDFDocument3.prototype.embedPage = function(page, boundingBox, transformationMatrix) {
           return tslib_1.__awaiter(this, void 0, void 0, function() {
             var embeddedPage;
             return tslib_1.__generator(this, function(_a) {
               switch (_a.label) {
                 case 0:
-                  utils_1.assertIs(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
-                  return [4, this.embedPages([page2], [boundingBox], [transformationMatrix])];
+                  utils_1.assertIs(page, "page", [[PDFPage_1.default, "PDFPage"]]);
+                  return [4, this.embedPages([page], [boundingBox], [transformationMatrix])];
                 case 1:
                   embeddedPage = _a.sent()[0];
                   return [2, embeddedPage];
@@ -20901,7 +20901,7 @@ var require_PDFDocument = __commonJS({
             });
           });
         };
-        PDFDocument3.prototype.embedPages = function(pages2, boundingBoxes, transformationMatrices) {
+        PDFDocument3.prototype.embedPages = function(pages, boundingBoxes, transformationMatrices) {
           if (boundingBoxes === void 0) {
             boundingBoxes = [];
           }
@@ -20909,33 +20909,33 @@ var require_PDFDocument = __commonJS({
             transformationMatrices = [];
           }
           return tslib_1.__awaiter(this, void 0, void 0, function() {
-            var idx, len, currPage, nextPage, context, maybeCopyPage, embeddedPages, idx, len, page2, box, matrix, embedder, ref;
+            var idx, len, currPage, nextPage, context, maybeCopyPage, embeddedPages, idx, len, page, box, matrix, embedder, ref;
             var _a;
             return tslib_1.__generator(this, function(_b) {
               switch (_b.label) {
                 case 0:
-                  if (pages2.length === 0)
+                  if (pages.length === 0)
                     return [2, []];
-                  for (idx = 0, len = pages2.length - 1; idx < len; idx++) {
-                    currPage = pages2[idx];
-                    nextPage = pages2[idx + 1];
+                  for (idx = 0, len = pages.length - 1; idx < len; idx++) {
+                    currPage = pages[idx];
+                    nextPage = pages[idx + 1];
                     if (currPage.node.context !== nextPage.node.context) {
                       throw new core_1.PageEmbeddingMismatchedContextError();
                     }
                   }
-                  context = pages2[0].node.context;
+                  context = pages[0].node.context;
                   maybeCopyPage = context === this.context ? function(p) {
                     return p;
                   } : core_1.PDFObjectCopier.for(context, this.context).copy;
-                  embeddedPages = new Array(pages2.length);
-                  idx = 0, len = pages2.length;
+                  embeddedPages = new Array(pages.length);
+                  idx = 0, len = pages.length;
                   _b.label = 1;
                 case 1:
                   if (!(idx < len)) return [3, 4];
-                  page2 = maybeCopyPage(pages2[idx].node);
+                  page = maybeCopyPage(pages[idx].node);
                   box = boundingBoxes[idx];
                   matrix = transformationMatrices[idx];
-                  return [4, core_1.PDFPageEmbedder.for(page2, box, matrix)];
+                  return [4, core_1.PDFPageEmbedder.for(page, box, matrix)];
                 case 2:
                   embedder = _b.sent();
                   ref = this.context.nextRef();
@@ -21030,12 +21030,12 @@ var require_PDFDocument = __commonJS({
           });
         };
         PDFDocument3.prototype.findPageForAnnotationRef = function(ref) {
-          var pages2 = this.getPages();
-          for (var idx = 0, len = pages2.length; idx < len; idx++) {
-            var page2 = pages2[idx];
-            var annotations = page2.node.Annots();
+          var pages = this.getPages();
+          for (var idx = 0, len = pages.length; idx < len; idx++) {
+            var page = pages[idx];
+            var annotations = page.node.Annots();
             if ((annotations === null || annotations === void 0 ? void 0 : annotations.indexOf(ref)) !== void 0) {
-              return page2;
+              return page;
             }
           }
           return void 0;
@@ -21169,11 +21169,11 @@ var require_PDFPage = __commonJS({
           var Rotate = this.node.Rotate();
           return rotations_1.degrees(Rotate ? Rotate.asNumber() : 0);
         };
-        PDFPage2.prototype.setSize = function(width2, height) {
-          utils_1.assertIs(width2, "width", ["number"]);
+        PDFPage2.prototype.setSize = function(width, height) {
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
           var mediaBox = this.getMediaBox();
-          this.setMediaBox(mediaBox.x, mediaBox.y, width2, height);
+          this.setMediaBox(mediaBox.x, mediaBox.y, width, height);
           var cropBox = this.getCropBox();
           var bleedBox = this.getBleedBox();
           var trimBox = this.getTrimBox();
@@ -21183,69 +21183,69 @@ var require_PDFPage = __commonJS({
           var hasTrimBox = this.node.TrimBox();
           var hasArtBox = this.node.ArtBox();
           if (hasCropBox && utils_1.rectanglesAreEqual(cropBox, mediaBox)) {
-            this.setCropBox(mediaBox.x, mediaBox.y, width2, height);
+            this.setCropBox(mediaBox.x, mediaBox.y, width, height);
           }
           if (hasBleedBox && utils_1.rectanglesAreEqual(bleedBox, mediaBox)) {
-            this.setBleedBox(mediaBox.x, mediaBox.y, width2, height);
+            this.setBleedBox(mediaBox.x, mediaBox.y, width, height);
           }
           if (hasTrimBox && utils_1.rectanglesAreEqual(trimBox, mediaBox)) {
-            this.setTrimBox(mediaBox.x, mediaBox.y, width2, height);
+            this.setTrimBox(mediaBox.x, mediaBox.y, width, height);
           }
           if (hasArtBox && utils_1.rectanglesAreEqual(artBox, mediaBox)) {
-            this.setArtBox(mediaBox.x, mediaBox.y, width2, height);
+            this.setArtBox(mediaBox.x, mediaBox.y, width, height);
           }
         };
-        PDFPage2.prototype.setWidth = function(width2) {
-          utils_1.assertIs(width2, "width", ["number"]);
-          this.setSize(width2, this.getSize().height);
+        PDFPage2.prototype.setWidth = function(width) {
+          utils_1.assertIs(width, "width", ["number"]);
+          this.setSize(width, this.getSize().height);
         };
         PDFPage2.prototype.setHeight = function(height) {
           utils_1.assertIs(height, "height", ["number"]);
           this.setSize(this.getSize().width, height);
         };
-        PDFPage2.prototype.setMediaBox = function(x, y2, width2, height) {
+        PDFPage2.prototype.setMediaBox = function(x, y, width, height) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
-          utils_1.assertIs(width2, "width", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
-          var mediaBox = this.doc.context.obj([x, y2, x + width2, y2 + height]);
+          var mediaBox = this.doc.context.obj([x, y, x + width, y + height]);
           this.node.set(core_1.PDFName.MediaBox, mediaBox);
         };
-        PDFPage2.prototype.setCropBox = function(x, y2, width2, height) {
+        PDFPage2.prototype.setCropBox = function(x, y, width, height) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
-          utils_1.assertIs(width2, "width", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
-          var cropBox = this.doc.context.obj([x, y2, x + width2, y2 + height]);
+          var cropBox = this.doc.context.obj([x, y, x + width, y + height]);
           this.node.set(core_1.PDFName.CropBox, cropBox);
         };
-        PDFPage2.prototype.setBleedBox = function(x, y2, width2, height) {
+        PDFPage2.prototype.setBleedBox = function(x, y, width, height) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
-          utils_1.assertIs(width2, "width", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
-          var bleedBox = this.doc.context.obj([x, y2, x + width2, y2 + height]);
+          var bleedBox = this.doc.context.obj([x, y, x + width, y + height]);
           this.node.set(core_1.PDFName.BleedBox, bleedBox);
         };
-        PDFPage2.prototype.setTrimBox = function(x, y2, width2, height) {
+        PDFPage2.prototype.setTrimBox = function(x, y, width, height) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
-          utils_1.assertIs(width2, "width", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
-          var trimBox = this.doc.context.obj([x, y2, x + width2, y2 + height]);
+          var trimBox = this.doc.context.obj([x, y, x + width, y + height]);
           this.node.set(core_1.PDFName.TrimBox, trimBox);
         };
-        PDFPage2.prototype.setArtBox = function(x, y2, width2, height) {
+        PDFPage2.prototype.setArtBox = function(x, y, width, height) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
-          utils_1.assertIs(width2, "width", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
+          utils_1.assertIs(width, "width", ["number"]);
           utils_1.assertIs(height, "height", ["number"]);
-          var artBox = this.doc.context.obj([x, y2, x + width2, y2 + height]);
+          var artBox = this.doc.context.obj([x, y, x + width, y + height]);
           this.node.set(core_1.PDFName.ArtBox, artBox);
         };
         PDFPage2.prototype.getSize = function() {
-          var _a = this.getMediaBox(), width2 = _a.width, height = _a.height;
-          return { width: width2, height };
+          var _a = this.getMediaBox(), width = _a.width, height = _a.height;
+          return { width, height };
         };
         PDFPage2.prototype.getWidth = function() {
           return this.getSize().width;
@@ -21277,45 +21277,45 @@ var require_PDFPage = __commonJS({
           var artBox = this.node.ArtBox();
           return (_a = artBox === null || artBox === void 0 ? void 0 : artBox.asRectangle()) !== null && _a !== void 0 ? _a : this.getCropBox();
         };
-        PDFPage2.prototype.translateContent = function(x, y2) {
+        PDFPage2.prototype.translateContent = function(x, y) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
           this.node.normalize();
           this.getContentStream();
-          var start = this.createContentStream(operators_1.pushGraphicsState(), operators_1.translate(x, y2));
+          var start = this.createContentStream(operators_1.pushGraphicsState(), operators_1.translate(x, y));
           var startRef = this.doc.context.register(start);
           var end = this.createContentStream(operators_1.popGraphicsState());
           var endRef = this.doc.context.register(end);
           this.node.wrapContentStreams(startRef, endRef);
         };
-        PDFPage2.prototype.scale = function(x, y2) {
+        PDFPage2.prototype.scale = function(x, y) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
-          this.setSize(this.getWidth() * x, this.getHeight() * y2);
-          this.scaleContent(x, y2);
-          this.scaleAnnotations(x, y2);
+          utils_1.assertIs(y, "y", ["number"]);
+          this.setSize(this.getWidth() * x, this.getHeight() * y);
+          this.scaleContent(x, y);
+          this.scaleAnnotations(x, y);
         };
-        PDFPage2.prototype.scaleContent = function(x, y2) {
+        PDFPage2.prototype.scaleContent = function(x, y) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
           this.node.normalize();
           this.getContentStream();
-          var start = this.createContentStream(operators_1.pushGraphicsState(), operators_1.scale(x, y2));
+          var start = this.createContentStream(operators_1.pushGraphicsState(), operators_1.scale(x, y));
           var startRef = this.doc.context.register(start);
           var end = this.createContentStream(operators_1.popGraphicsState());
           var endRef = this.doc.context.register(end);
           this.node.wrapContentStreams(startRef, endRef);
         };
-        PDFPage2.prototype.scaleAnnotations = function(x, y2) {
+        PDFPage2.prototype.scaleAnnotations = function(x, y) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
           var annots = this.node.Annots();
           if (!annots)
             return;
           for (var idx = 0; idx < annots.size(); idx++) {
             var annot = annots.lookup(idx);
             if (annot instanceof core_1.PDFDict)
-              this.scaleAnnot(annot, x, y2);
+              this.scaleAnnot(annot, x, y);
           }
         };
         PDFPage2.prototype.resetPosition = function() {
@@ -21349,11 +21349,11 @@ var require_PDFPage = __commonJS({
         PDFPage2.prototype.getY = function() {
           return this.y;
         };
-        PDFPage2.prototype.moveTo = function(x, y2) {
+        PDFPage2.prototype.moveTo = function(x, y) {
           utils_1.assertIs(x, "x", ["number"]);
-          utils_1.assertIs(y2, "y", ["number"]);
+          utils_1.assertIs(y, "y", ["number"]);
           this.x = x;
-          this.y = y2;
+          this.y = y;
         };
         PDFPage2.prototype.moveDown = function(yDecrease) {
           utils_1.assertIs(yDecrease, "yDecrease", ["number"]);
@@ -21764,19 +21764,19 @@ var require_PDFPage = __commonJS({
           var key = this.node.newExtGState("GS", graphicsState);
           return key;
         };
-        PDFPage2.prototype.scaleAnnot = function(annot, x, y2) {
+        PDFPage2.prototype.scaleAnnot = function(annot, x, y) {
           var selectors = ["RD", "CL", "Vertices", "QuadPoints", "L", "Rect"];
           for (var idx = 0, len = selectors.length; idx < len; idx++) {
             var list = annot.lookup(core_1.PDFName.of(selectors[idx]));
             if (list instanceof core_1.PDFArray)
-              list.scalePDFNumbers(x, y2);
+              list.scalePDFNumbers(x, y);
           }
           var inkLists = annot.lookup(core_1.PDFName.of("InkList"));
           if (inkLists instanceof core_1.PDFArray) {
             for (var idx = 0, len = inkLists.size(); idx < len; idx++) {
               var arr = inkLists.lookup(idx);
               if (arr instanceof core_1.PDFArray)
-                arr.scalePDFNumbers(x, y2);
+                arr.scalePDFNumbers(x, y);
             }
           }
         };
@@ -21841,10 +21841,10 @@ var require_PDFButton = __commonJS({
           this.acroField.setFontSize(fontSize);
           this.markAsDirty();
         };
-        PDFButton2.prototype.addToPage = function(text, page2, options) {
+        PDFButton2.prototype.addToPage = function(text, page, options) {
           var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
           utils_1.assertOrUndefined(text, "text", ["string"]);
-          utils_1.assertOrUndefined(page2, "page", [[PDFPage_1.default, "PDFPage"]]);
+          utils_1.assertOrUndefined(page, "page", [[PDFPage_1.default, "PDFPage"]]);
           PDFField_1.assertFieldAppearanceOptions(options);
           var widget = this.createWidget({
             x: ((_a = options === null || options === void 0 ? void 0 : options.x) !== null && _a !== void 0 ? _a : 0) - ((_b = options === null || options === void 0 ? void 0 : options.borderWidth) !== null && _b !== void 0 ? _b : 0) / 2,
@@ -21858,13 +21858,13 @@ var require_PDFButton = __commonJS({
             rotate: (_k = options === null || options === void 0 ? void 0 : options.rotate) !== null && _k !== void 0 ? _k : rotations_1.degrees(0),
             caption: text,
             hidden: options === null || options === void 0 ? void 0 : options.hidden,
-            page: page2.ref
+            page: page.ref
           });
           var widgetRef = this.doc.context.register(widget.dict);
           this.acroField.addWidget(widgetRef);
           var font = (_l = options === null || options === void 0 ? void 0 : options.font) !== null && _l !== void 0 ? _l : this.doc.getForm().getDefaultFont();
           this.updateWidgetAppearance(widget, font);
-          page2.node.addAnnot(widgetRef);
+          page.node.addAnnot(widgetRef);
         };
         PDFButton2.prototype.needsAppearancesUpdate = function() {
           var _a;
@@ -23076,14 +23076,14 @@ var require_buffer = /* @__PURE__ */ __commonJSMin(((exports) => {
     if (!Buffer2.isBuffer(a) || !Buffer2.isBuffer(b)) throw new TypeError('The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array');
     if (a === b) return 0;
     var x = a.length;
-    var y2 = b.length;
-    for (var i = 0, len = Math.min(x, y2); i < len; ++i) if (a[i] !== b[i]) {
+    var y = b.length;
+    for (var i = 0, len = Math.min(x, y); i < len; ++i) if (a[i] !== b[i]) {
       x = a[i];
-      y2 = b[i];
+      y = b[i];
       break;
     }
-    if (x < y2) return -1;
-    if (y2 < x) return 1;
+    if (x < y) return -1;
+    if (y < x) return 1;
     return 0;
   };
   Buffer2.isEncoding = function isEncoding(encoding) {
@@ -23259,17 +23259,17 @@ var require_buffer = /* @__PURE__ */ __commonJSMin(((exports) => {
     thisEnd >>>= 0;
     if (this === target) return 0;
     var x = thisEnd - thisStart;
-    var y2 = end - start;
-    var len = Math.min(x, y2);
+    var y = end - start;
+    var len = Math.min(x, y);
     var thisCopy = this.slice(thisStart, thisEnd);
     var targetCopy = target.slice(start, end);
     for (var i = 0; i < len; ++i) if (thisCopy[i] !== targetCopy[i]) {
       x = thisCopy[i];
-      y2 = targetCopy[i];
+      y = targetCopy[i];
       break;
     }
-    if (x < y2) return -1;
-    if (y2 < x) return 1;
+    if (x < y) return -1;
+    if (y < x) return 1;
     return 0;
   };
   function bidirectionalIndexOf(buffer, val, byteOffset, encoding, dir2) {
@@ -27287,7 +27287,7 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
       state.emittedReadable = false;
     }
     state.needReadable = !state.flowing && !state.ended && state.length <= state.highWaterMark;
-    flow2(stream);
+    flow(stream);
   }
   function maybeReadMore(stream, state) {
     if (!state.readingMore) {
@@ -27405,7 +27405,7 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
       if (state.awaitDrain) state.awaitDrain--;
       if (state.awaitDrain === 0 && EElistenerCount(src, "data")) {
         state.flowing = true;
-        flow2(src);
+        flow(src);
       }
     };
   }
@@ -27499,7 +27499,7 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
     if (!state.reading) stream.read(0);
     state.resumeScheduled = false;
     stream.emit("resume");
-    flow2(stream);
+    flow(stream);
     if (state.flowing && !state.reading) stream.read(0);
   }
   Readable.prototype.pause = function() {
@@ -27512,7 +27512,7 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
     this._readableState.paused = true;
     return this;
   };
-  function flow2(stream) {
+  function flow(stream) {
     var state = stream._readableState;
     debug("flow", state.flowing);
     while (state.flowing && stream.read() !== null) ;
@@ -27926,10 +27926,10 @@ var require_sax = /* @__PURE__ */ __commonJSMin(((exports) => {
       emit(parser, "onready");
     }
     if (!Object.create) Object.create = function(o) {
-      function F2() {
+      function F() {
       }
-      F2.prototype = o;
-      return new F2();
+      F.prototype = o;
+      return new F();
     };
     if (!Object.keys) Object.keys = function(o) {
       var a = [];
@@ -30715,22 +30715,22 @@ var require_common$1 = /* @__PURE__ */ __commonJSMin(((exports) => {
 }));
 var require_common = /* @__PURE__ */ __commonJSMin(((exports) => {
   var rotr32 = require_utils().rotr32;
-  function ft_1(s, x, y2, z) {
-    if (s === 0) return ch32(x, y2, z);
-    if (s === 1 || s === 3) return p32(x, y2, z);
-    if (s === 2) return maj32(x, y2, z);
+  function ft_1(s, x, y, z) {
+    if (s === 0) return ch32(x, y, z);
+    if (s === 1 || s === 3) return p32(x, y, z);
+    if (s === 2) return maj32(x, y, z);
   }
   exports.ft_1 = ft_1;
-  function ch32(x, y2, z) {
-    return x & y2 ^ ~x & z;
+  function ch32(x, y, z) {
+    return x & y ^ ~x & z;
   }
   exports.ch32 = ch32;
-  function maj32(x, y2, z) {
-    return x & y2 ^ x & z ^ y2 & z;
+  function maj32(x, y, z) {
+    return x & y ^ x & z ^ y & z;
   }
   exports.maj32 = maj32;
-  function p32(x, y2, z) {
-    return x ^ y2 ^ z;
+  function p32(x, y, z) {
+    return x ^ y ^ z;
   }
   exports.p32 = p32;
   function s0_256(x) {
@@ -31465,12 +31465,12 @@ var require_ripemd = /* @__PURE__ */ __commonJSMin(((exports) => {
     if (enc === "hex") return utils.toHex32(this.h, "little");
     else return utils.split32(this.h, "little");
   };
-  function f(j, x, y2, z) {
-    if (j <= 15) return x ^ y2 ^ z;
-    else if (j <= 31) return x & y2 | ~x & z;
-    else if (j <= 47) return (x | ~y2) ^ z;
-    else if (j <= 63) return x & z | y2 & ~z;
-    else return x ^ (y2 | ~z);
+  function f(j, x, y, z) {
+    if (j <= 15) return x ^ y ^ z;
+    else if (j <= 31) return x & y | ~x & z;
+    else if (j <= 47) return (x | ~y) ^ z;
+    else if (j <= 63) return x & z | y & ~z;
+    else return x ^ (y | ~z);
   }
   function K(j) {
     if (j <= 15) return 0;
@@ -32692,17 +32692,17 @@ var Paragraph = class extends FileChild {
     return this;
   }
 };
-var createGridCol = (width2) => new BuilderElement({
+var createGridCol = (width) => new BuilderElement({
   name: "w:gridCol",
-  attributes: width2 !== void 0 ? { width: {
+  attributes: width !== void 0 ? { width: {
     key: "w:w",
-    value: twipsMeasureValue(width2)
+    value: twipsMeasureValue(width)
   } } : void 0
 });
 var TableGrid = class extends XmlComponent {
   constructor(widths, revision) {
     super("w:tblGrid");
-    for (const width2 of widths) this.root.push(createGridCol(width2));
+    for (const width of widths) this.root.push(createGridCol(width));
     if (revision) this.root.push(new TableGridChange(revision));
   }
 };
@@ -32790,10 +32790,10 @@ var createVerticalAlign = (value) => new BuilderElement({
     value
   } }
 });
-var buildMarginChildren = ({ marginUnitType = WidthType.DXA, top: top2, left: left2, bottom, right: right2 }) => [
+var buildMarginChildren = ({ marginUnitType = WidthType.DXA, top, left: left2, bottom, right: right2 }) => [
   {
     name: "w:top",
-    size: top2
+    size: top
   },
   {
     name: "w:left",
@@ -33129,11 +33129,11 @@ var TablePropertiesChange = class extends XmlComponent {
   }
 };
 var Table = class extends FileChild {
-  constructor({ rows, width: width2, columnWidths = Array(Math.max(...rows.map((row) => row.CellCount))).fill(100), columnWidthsRevision, margins, indent, float, layout, style, borders, alignment, visuallyRightToLeft, tableLook, cellSpacing, revision }) {
+  constructor({ rows, width, columnWidths = Array(Math.max(...rows.map((row) => row.CellCount))).fill(100), columnWidthsRevision, margins, indent, float, layout, style, borders, alignment, visuallyRightToLeft, tableLook, cellSpacing, revision }) {
     super("w:tbl");
     this.root.push(new TableProperties({
       borders: borders !== null && borders !== void 0 ? borders : {},
-      width: width2 !== null && width2 !== void 0 ? width2 : { size: 100 },
+      width: width !== null && width !== void 0 ? width : { size: 100 },
       indent,
       float,
       layout,
@@ -33590,12 +33590,12 @@ var PageBorders = class extends IgnoreIfEmptyXmlComponent {
     if (options.pageBorderRight) this.root.push(createBorderElement("w:right", options.pageBorderRight));
   }
 };
-var createPageMargin = (top2, right2, bottom, left2, header, footer, gutter) => new BuilderElement({
+var createPageMargin = (top, right2, bottom, left2, header, footer, gutter) => new BuilderElement({
   name: "w:pgMar",
   attributes: {
     top: {
       key: "w:top",
-      value: signedTwipsMeasureValue(top2)
+      value: signedTwipsMeasureValue(top)
     },
     right: {
       key: "w:right",
@@ -33654,8 +33654,8 @@ var PageOrientation = {
   */
   LANDSCAPE: "landscape"
 };
-var createPageSize = ({ width: width2, height, orientation, code }) => {
-  const widthTwips = twipsMeasureValue(width2);
+var createPageSize = ({ width, height, orientation, code }) => {
+  const widthTwips = twipsMeasureValue(width);
   const heightTwips = twipsMeasureValue(height);
   return new BuilderElement({
     name: "w:pgSz",
@@ -33723,22 +33723,22 @@ var sectionPageSizeDefaults = {
   ORIENTATION: PageOrientation.PORTRAIT
 };
 var SectionProperties = class extends XmlComponent {
-  constructor({ page: { size: { width: width2 = sectionPageSizeDefaults.WIDTH, height = sectionPageSizeDefaults.HEIGHT, orientation = sectionPageSizeDefaults.ORIENTATION, code } = {}, margin: { top: top2 = sectionMarginDefaults.TOP, right: right2 = sectionMarginDefaults.RIGHT, bottom = sectionMarginDefaults.BOTTOM, left: left2 = sectionMarginDefaults.LEFT, header = sectionMarginDefaults.HEADER, footer = sectionMarginDefaults.FOOTER, gutter = sectionMarginDefaults.GUTTER } = {}, pageNumbers = {}, borders, textDirection } = {}, grid: { linePitch = 360, charSpace, type: gridType } = {}, headerWrapperGroup = {}, footerWrapperGroup = {}, lineNumbers, titlePage, verticalAlign, column: column2, type, revision } = {}) {
+  constructor({ page: { size: { width = sectionPageSizeDefaults.WIDTH, height = sectionPageSizeDefaults.HEIGHT, orientation = sectionPageSizeDefaults.ORIENTATION, code } = {}, margin: { top = sectionMarginDefaults.TOP, right: right2 = sectionMarginDefaults.RIGHT, bottom = sectionMarginDefaults.BOTTOM, left: left2 = sectionMarginDefaults.LEFT, header = sectionMarginDefaults.HEADER, footer = sectionMarginDefaults.FOOTER, gutter = sectionMarginDefaults.GUTTER } = {}, pageNumbers = {}, borders, textDirection } = {}, grid: { linePitch = 360, charSpace, type: gridType } = {}, headerWrapperGroup = {}, footerWrapperGroup = {}, lineNumbers, titlePage, verticalAlign, column, type, revision } = {}) {
     super("w:sectPr");
     this.addHeaderFooterGroup(HeaderFooterType.HEADER, headerWrapperGroup);
     this.addHeaderFooterGroup(HeaderFooterType.FOOTER, footerWrapperGroup);
     if (type) this.root.push(createSectionType(type));
     this.root.push(createPageSize({
-      width: width2,
+      width,
       height,
       orientation,
       code
     }));
-    this.root.push(createPageMargin(top2, right2, bottom, left2, header, footer, gutter));
+    this.root.push(createPageMargin(top, right2, bottom, left2, header, footer, gutter));
     if (borders) this.root.push(new PageBorders(borders));
     if (lineNumbers) this.root.push(createLineNumberType(lineNumbers));
     this.root.push(createPageNumberType(pageNumbers));
-    if (column2) this.root.push(createColumns(column2));
+    if (column) this.root.push(createColumns(column));
     if (verticalAlign) this.root.push(createVerticalAlign(verticalAlign));
     if (titlePage !== void 0) this.root.push(new OnOffElement("w:titlePg", titlePage));
     if (textDirection) this.root.push(new PageTextDirection(textDirection));
@@ -35833,7 +35833,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
           return n3;
         }
         function n2(e2, t2, r2, n3, i2, s2) {
-          var a, o, h = e2.file, u = e2.compression, l = s2 !== O.utf8encode, f = I.transformTo("string", s2(h.name)), c = I.transformTo("string", O.utf8encode(h.name)), d = h.comment, p = I.transformTo("string", s2(d)), m = I.transformTo("string", O.utf8encode(d)), _ = c.length !== h.name.length, g = m.length !== d.length, b = "", v = "", y2 = "", w2 = h.dir, k = h.date, x = {
+          var a, o, h = e2.file, u = e2.compression, l = s2 !== O.utf8encode, f = I.transformTo("string", s2(h.name)), c = I.transformTo("string", O.utf8encode(h.name)), d = h.comment, p = I.transformTo("string", s2(d)), m = I.transformTo("string", O.utf8encode(d)), _ = c.length !== h.name.length, g = m.length !== d.length, b = "", v = "", y = "", w2 = h.dir, k = h.date, x = {
             crc32: 0,
             compressedSize: 0,
             uncompressedSize: 0
@@ -35847,7 +35847,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
             return e3 || (r3 = t3 ? 16893 : 33204), (65535 & r3) << 16;
           })(h.unixPermissions, w2)) : (C = 20, z |= (function(e3) {
             return 63 & (e3 || 0);
-          })(h.dosPermissions)), a = k.getUTCHours(), a <<= 6, a |= k.getUTCMinutes(), a <<= 5, a |= k.getUTCSeconds() / 2, o = k.getUTCFullYear() - 1980, o <<= 4, o |= k.getUTCMonth() + 1, o <<= 5, o |= k.getUTCDate(), _ && (v = A(1, 1) + A(B(f), 4) + c, b += "up" + A(v.length, 2) + v), g && (y2 = A(1, 1) + A(B(p), 4) + m, b += "uc" + A(y2.length, 2) + y2);
+          })(h.dosPermissions)), a = k.getUTCHours(), a <<= 6, a |= k.getUTCMinutes(), a <<= 5, a |= k.getUTCSeconds() / 2, o = k.getUTCFullYear() - 1980, o <<= 4, o |= k.getUTCMonth() + 1, o <<= 5, o |= k.getUTCDate(), _ && (v = A(1, 1) + A(B(f), 4) + c, b += "up" + A(v.length, 2) + v), g && (y = A(1, 1) + A(B(p), 4) + m, b += "uc" + A(y.length, 2) + y);
           var E = "";
           return E += "\n\0", E += A(S, 2), E += u.magic, E += A(a, 2), E += A(o, 2), E += A(x.crc32, 4), E += A(x.compressedSize, 4), E += A(x.uncompressedSize, 4), E += A(f.length, 2), E += A(b.length, 2), {
             fileRecord: R.LOCAL_FILE_HEADER + E + f + b,
@@ -37539,7 +37539,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
       }, {}],
       46: [function(e, t, r) {
         "use strict";
-        var h, c = e("../utils/common"), u = e("./trees"), d = e("./adler32"), p = e("./crc32"), n2 = e("./messages"), l = 0, f = 4, m = 0, _ = -2, g = -1, b = 4, i = 2, v = 8, y2 = 9, s = 286, a = 30, o = 19, w2 = 2 * s + 1, k = 15, x = 3, S = 258, z = S + x + 1, C = 42, E = 113, A = 1, I = 2, O = 3, B = 4;
+        var h, c = e("../utils/common"), u = e("./trees"), d = e("./adler32"), p = e("./crc32"), n2 = e("./messages"), l = 0, f = 4, m = 0, _ = -2, g = -1, b = 4, i = 2, v = 8, y = 9, s = 286, a = 30, o = 19, w2 = 2 * s + 1, k = 15, x = 3, S = 258, z = S + x + 1, C = 42, E = 113, A = 1, I = 2, O = 3, B = 4;
         function R(e2, t2) {
           return e2.msg = n2[t2], t2;
         }
@@ -37549,12 +37549,12 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
         function D(e2) {
           for (var t2 = e2.length; 0 <= --t2; ) e2[t2] = 0;
         }
-        function F2(e2) {
+        function F(e2) {
           var t2 = e2.state, r2 = t2.pending;
           r2 > e2.avail_out && (r2 = e2.avail_out), 0 !== r2 && (c.arraySet(e2.output, t2.pending_buf, t2.pending_out, r2, e2.next_out), e2.next_out += r2, t2.pending_out += r2, e2.total_out += r2, e2.avail_out -= r2, t2.pending -= r2, 0 === t2.pending && (t2.pending_out = 0));
         }
         function N(e2, t2) {
-          u._tr_flush_block(e2, 0 <= e2.block_start ? e2.block_start : -1, e2.strstart - e2.block_start, t2), e2.block_start = e2.strstart, F2(e2.strm);
+          u._tr_flush_block(e2, 0 <= e2.block_start ? e2.block_start : -1, e2.strstart - e2.block_start, t2), e2.block_start = e2.strstart, F(e2.strm);
         }
         function U(e2, t2) {
           e2.pending_buf[e2.pending++] = t2;
@@ -37640,7 +37640,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
         function Y(e2, t2, r2, n3, i2, s2) {
           if (!e2) return _;
           var a2 = 1;
-          if (t2 === g && (t2 = 6), n3 < 0 ? (a2 = 0, n3 = -n3) : 15 < n3 && (a2 = 2, n3 -= 16), i2 < 1 || y2 < i2 || r2 !== v || n3 < 8 || 15 < n3 || t2 < 0 || 9 < t2 || s2 < 0 || b < s2) return R(e2, _);
+          if (t2 === g && (t2 = 6), n3 < 0 ? (a2 = 0, n3 = -n3) : 15 < n3 && (a2 = 2, n3 -= 16), i2 < 1 || y < i2 || r2 !== v || n3 < 8 || 15 < n3 || t2 < 0 || 9 < t2 || s2 < 0 || b < s2) return R(e2, _);
           8 === n3 && (n3 = 9);
           var o2 = new H();
           return (e2.state = o2).strm = e2, o2.wrap = a2, o2.gzhead = null, o2.w_bits = n3, o2.w_size = 1 << o2.w_bits, o2.w_mask = o2.w_size - 1, o2.hash_bits = i2 + 7, o2.hash_size = 1 << o2.hash_bits, o2.hash_mask = o2.hash_size - 1, o2.hash_shift = ~~((o2.hash_bits + x - 1) / x), o2.window = new c.Buf8(2 * o2.w_size), o2.head = new c.Buf16(o2.hash_size), o2.prev = new c.Buf16(o2.w_size), o2.lit_bufsize = 1 << i2 + 6, o2.pending_buf_size = 4 * o2.lit_bufsize, o2.pending_buf = new c.Buf8(o2.pending_buf_size), o2.d_buf = 1 * o2.lit_bufsize, o2.l_buf = 3 * o2.lit_bufsize, o2.level = t2, o2.strategy = s2, o2.method = r2, K(e2);
@@ -37683,13 +37683,13 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
             a2 |= (2 <= n3.strategy || n3.level < 2 ? 0 : n3.level < 6 ? 1 : 6 === n3.level ? 2 : 3) << 6, 0 !== n3.strstart && (a2 |= 32), a2 += 31 - a2 % 31, n3.status = E, P2(n3, a2), 0 !== n3.strstart && (P2(n3, e2.adler >>> 16), P2(n3, 65535 & e2.adler)), e2.adler = 1;
           }
           if (69 === n3.status) if (n3.gzhead.extra) {
-            for (i2 = n3.pending; n3.gzindex < (65535 & n3.gzhead.extra.length) && (n3.pending !== n3.pending_buf_size || (n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), F2(e2), i2 = n3.pending, n3.pending !== n3.pending_buf_size)); ) U(n3, 255 & n3.gzhead.extra[n3.gzindex]), n3.gzindex++;
+            for (i2 = n3.pending; n3.gzindex < (65535 & n3.gzhead.extra.length) && (n3.pending !== n3.pending_buf_size || (n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), F(e2), i2 = n3.pending, n3.pending !== n3.pending_buf_size)); ) U(n3, 255 & n3.gzhead.extra[n3.gzindex]), n3.gzindex++;
             n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), n3.gzindex === n3.gzhead.extra.length && (n3.gzindex = 0, n3.status = 73);
           } else n3.status = 73;
           if (73 === n3.status) if (n3.gzhead.name) {
             i2 = n3.pending;
             do {
-              if (n3.pending === n3.pending_buf_size && (n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), F2(e2), i2 = n3.pending, n3.pending === n3.pending_buf_size)) {
+              if (n3.pending === n3.pending_buf_size && (n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), F(e2), i2 = n3.pending, n3.pending === n3.pending_buf_size)) {
                 s2 = 1;
                 break;
               }
@@ -37700,7 +37700,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
           if (91 === n3.status) if (n3.gzhead.comment) {
             i2 = n3.pending;
             do {
-              if (n3.pending === n3.pending_buf_size && (n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), F2(e2), i2 = n3.pending, n3.pending === n3.pending_buf_size)) {
+              if (n3.pending === n3.pending_buf_size && (n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), F(e2), i2 = n3.pending, n3.pending === n3.pending_buf_size)) {
                 s2 = 1;
                 break;
               }
@@ -37708,8 +37708,8 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
             } while (0 !== s2);
             n3.gzhead.hcrc && n3.pending > i2 && (e2.adler = p(e2.adler, n3.pending_buf, n3.pending - i2, i2)), 0 === s2 && (n3.status = 103);
           } else n3.status = 103;
-          if (103 === n3.status && (n3.gzhead.hcrc ? (n3.pending + 2 > n3.pending_buf_size && F2(e2), n3.pending + 2 <= n3.pending_buf_size && (U(n3, 255 & e2.adler), U(n3, e2.adler >> 8 & 255), e2.adler = 0, n3.status = E)) : n3.status = E), 0 !== n3.pending) {
-            if (F2(e2), 0 === e2.avail_out) return n3.last_flush = -1, m;
+          if (103 === n3.status && (n3.gzhead.hcrc ? (n3.pending + 2 > n3.pending_buf_size && F(e2), n3.pending + 2 <= n3.pending_buf_size && (U(n3, 255 & e2.adler), U(n3, e2.adler >> 8 & 255), e2.adler = 0, n3.status = E)) : n3.status = E), 0 !== n3.pending) {
+            if (F(e2), 0 === e2.avail_out) return n3.last_flush = -1, m;
           } else if (0 === e2.avail_in && T(t2) <= T(r2) && t2 !== f) return R(e2, -5);
           if (666 === n3.status && 0 !== e2.avail_in) return R(e2, -5);
           if (0 !== e2.avail_in || 0 !== n3.lookahead || t2 !== l && 666 !== n3.status) {
@@ -37740,9 +37740,9 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
               return e3.insert = 0, t3 === f ? (N(e3, true), 0 === e3.strm.avail_out ? O : B) : e3.last_lit && (N(e3, false), 0 === e3.strm.avail_out) ? A : I;
             })(n3, t2) : h[n3.level].func(n3, t2);
             if (o2 !== O && o2 !== B || (n3.status = 666), o2 === A || o2 === O) return 0 === e2.avail_out && (n3.last_flush = -1), m;
-            if (o2 === I && (1 === t2 ? u._tr_align(n3) : 5 !== t2 && (u._tr_stored_block(n3, 0, 0, false), 3 === t2 && (D(n3.head), 0 === n3.lookahead && (n3.strstart = 0, n3.block_start = 0, n3.insert = 0))), F2(e2), 0 === e2.avail_out)) return n3.last_flush = -1, m;
+            if (o2 === I && (1 === t2 ? u._tr_align(n3) : 5 !== t2 && (u._tr_stored_block(n3, 0, 0, false), 3 === t2 && (D(n3.head), 0 === n3.lookahead && (n3.strstart = 0, n3.block_start = 0, n3.insert = 0))), F(e2), 0 === e2.avail_out)) return n3.last_flush = -1, m;
           }
-          return t2 !== f ? m : n3.wrap <= 0 ? 1 : (2 === n3.wrap ? (U(n3, 255 & e2.adler), U(n3, e2.adler >> 8 & 255), U(n3, e2.adler >> 16 & 255), U(n3, e2.adler >> 24 & 255), U(n3, 255 & e2.total_in), U(n3, e2.total_in >> 8 & 255), U(n3, e2.total_in >> 16 & 255), U(n3, e2.total_in >> 24 & 255)) : (P2(n3, e2.adler >>> 16), P2(n3, 65535 & e2.adler)), F2(e2), 0 < n3.wrap && (n3.wrap = -n3.wrap), 0 !== n3.pending ? m : 1);
+          return t2 !== f ? m : n3.wrap <= 0 ? 1 : (2 === n3.wrap ? (U(n3, 255 & e2.adler), U(n3, e2.adler >> 8 & 255), U(n3, e2.adler >> 16 & 255), U(n3, e2.adler >> 24 & 255), U(n3, 255 & e2.total_in), U(n3, e2.total_in >> 8 & 255), U(n3, e2.total_in >> 16 & 255), U(n3, e2.total_in >> 24 & 255)) : (P2(n3, e2.adler >>> 16), P2(n3, 65535 & e2.adler)), F(e2), 0 < n3.wrap && (n3.wrap = -n3.wrap), 0 !== n3.pending ? m : 1);
         }, r.deflateEnd = function(e2) {
           var t2;
           return e2 && e2.state ? (t2 = e2.state.status) !== C && 69 !== t2 && 73 !== t2 && 91 !== t2 && 103 !== t2 && t2 !== E && 666 !== t2 ? R(e2, _) : (e2.state = null, t2 === E ? R(e2, -3) : m) : _;
@@ -37772,59 +37772,59 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
       48: [function(e, t, r) {
         "use strict";
         t.exports = function(e2, t2) {
-          var r2 = e2.state, n2 = e2.next_in, i, s, a, o, h, u, l, f, c, d, p, m, _, g, b, v, y2, w2, k, x, S, z = e2.input, C;
+          var r2 = e2.state, n2 = e2.next_in, i, s, a, o, h, u, l, f, c, d, p, m, _, g, b, v, y, w2, k, x, S, z = e2.input, C;
           i = n2 + (e2.avail_in - 5), s = e2.next_out, C = e2.output, a = s - (t2 - e2.avail_out), o = s + (e2.avail_out - 257), h = r2.dmax, u = r2.wsize, l = r2.whave, f = r2.wnext, c = r2.window, d = r2.hold, p = r2.bits, m = r2.lencode, _ = r2.distcode, g = (1 << r2.lenbits) - 1, b = (1 << r2.distbits) - 1;
           e: do {
             p < 15 && (d += z[n2++] << p, p += 8, d += z[n2++] << p, p += 8), v = m[d & g];
             t: for (; ; ) {
-              if (d >>>= y2 = v >>> 24, p -= y2, 0 === (y2 = v >>> 16 & 255)) C[s++] = 65535 & v;
+              if (d >>>= y = v >>> 24, p -= y, 0 === (y = v >>> 16 & 255)) C[s++] = 65535 & v;
               else {
-                if (!(16 & y2)) {
-                  if (0 == (64 & y2)) {
-                    v = m[(65535 & v) + (d & (1 << y2) - 1)];
+                if (!(16 & y)) {
+                  if (0 == (64 & y)) {
+                    v = m[(65535 & v) + (d & (1 << y) - 1)];
                     continue t;
                   }
-                  if (32 & y2) {
+                  if (32 & y) {
                     r2.mode = 12;
                     break e;
                   }
                   e2.msg = "invalid literal/length code", r2.mode = 30;
                   break e;
                 }
-                w2 = 65535 & v, (y2 &= 15) && (p < y2 && (d += z[n2++] << p, p += 8), w2 += d & (1 << y2) - 1, d >>>= y2, p -= y2), p < 15 && (d += z[n2++] << p, p += 8, d += z[n2++] << p, p += 8), v = _[d & b];
+                w2 = 65535 & v, (y &= 15) && (p < y && (d += z[n2++] << p, p += 8), w2 += d & (1 << y) - 1, d >>>= y, p -= y), p < 15 && (d += z[n2++] << p, p += 8, d += z[n2++] << p, p += 8), v = _[d & b];
                 r: for (; ; ) {
-                  if (d >>>= y2 = v >>> 24, p -= y2, !(16 & (y2 = v >>> 16 & 255))) {
-                    if (0 == (64 & y2)) {
-                      v = _[(65535 & v) + (d & (1 << y2) - 1)];
+                  if (d >>>= y = v >>> 24, p -= y, !(16 & (y = v >>> 16 & 255))) {
+                    if (0 == (64 & y)) {
+                      v = _[(65535 & v) + (d & (1 << y) - 1)];
                       continue r;
                     }
                     e2.msg = "invalid distance code", r2.mode = 30;
                     break e;
                   }
-                  if (k = 65535 & v, p < (y2 &= 15) && (d += z[n2++] << p, (p += 8) < y2 && (d += z[n2++] << p, p += 8)), h < (k += d & (1 << y2) - 1)) {
+                  if (k = 65535 & v, p < (y &= 15) && (d += z[n2++] << p, (p += 8) < y && (d += z[n2++] << p, p += 8)), h < (k += d & (1 << y) - 1)) {
                     e2.msg = "invalid distance too far back", r2.mode = 30;
                     break e;
                   }
-                  if (d >>>= y2, p -= y2, (y2 = s - a) < k) {
-                    if (l < (y2 = k - y2) && r2.sane) {
+                  if (d >>>= y, p -= y, (y = s - a) < k) {
+                    if (l < (y = k - y) && r2.sane) {
                       e2.msg = "invalid distance too far back", r2.mode = 30;
                       break e;
                     }
                     if (S = c, (x = 0) === f) {
-                      if (x += u - y2, y2 < w2) {
-                        for (w2 -= y2; C[s++] = c[x++], --y2; ) ;
+                      if (x += u - y, y < w2) {
+                        for (w2 -= y; C[s++] = c[x++], --y; ) ;
                         x = s - k, S = C;
                       }
-                    } else if (f < y2) {
-                      if (x += u + f - y2, (y2 -= f) < w2) {
-                        for (w2 -= y2; C[s++] = c[x++], --y2; ) ;
+                    } else if (f < y) {
+                      if (x += u + f - y, (y -= f) < w2) {
+                        for (w2 -= y; C[s++] = c[x++], --y; ) ;
                         if (x = 0, f < w2) {
-                          for (w2 -= y2 = f; C[s++] = c[x++], --y2; ) ;
+                          for (w2 -= y = f; C[s++] = c[x++], --y; ) ;
                           x = s - k, S = C;
                         }
                       }
-                    } else if (x += f - y2, y2 < w2) {
-                      for (w2 -= y2; C[s++] = c[x++], --y2; ) ;
+                    } else if (x += f - y, y < w2) {
+                      for (w2 -= y; C[s++] = c[x++], --y; ) ;
                       x = s - k, S = C;
                     }
                     for (; 2 < w2; ) C[s++] = S[x++], C[s++] = S[x++], C[s++] = S[x++], w2 -= 3;
@@ -37844,7 +37844,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
       }, {}],
       49: [function(e, t, r) {
         "use strict";
-        var I = e("../utils/common"), O = e("./adler32"), B = e("./crc32"), R = e("./inffast"), T = e("./inftrees"), D = 1, F2 = 2, N = 0, U = -2, P2 = 1, n2 = 852, i = 592;
+        var I = e("../utils/common"), O = e("./adler32"), B = e("./crc32"), R = e("./inffast"), T = e("./inftrees"), D = 1, F = 2, N = 0, U = -2, P2 = 1, n2 = 852, i = 592;
         function L(e2) {
           return (e2 >>> 24 & 255) + (e2 >>> 8 & 65280) + ((65280 & e2) << 8) + ((255 & e2) << 24);
         }
@@ -37876,7 +37876,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
             for (; t2 < 280; ) e2.lens[t2++] = 7;
             for (; t2 < 288; ) e2.lens[t2++] = 8;
             for (T(D, e2.lens, 0, 288, l, 0, e2.work, { bits: 9 }), t2 = 0; t2 < 32; ) e2.lens[t2++] = 5;
-            T(F2, e2.lens, 0, 32, f, 0, e2.work, { bits: 5 }), c = false;
+            T(F, e2.lens, 0, 32, f, 0, e2.work, { bits: 5 }), c = false;
           }
           e2.lencode = l, e2.lenbits = 9, e2.distcode = f, e2.distbits = 5;
         }
@@ -37887,7 +37887,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
         r.inflateReset = o, r.inflateReset2 = h, r.inflateResetKeep = a, r.inflateInit = function(e2) {
           return u(e2, 15);
         }, r.inflateInit2 = u, r.inflate = function(e2, t2) {
-          var r2, n3, i2, s2, a2, o2, h2, u2, l2, f2, c2, d, p, m, _, g, b, v, y2, w2, k, x, S, z, C = 0, E = new I.Buf8(4), A = [
+          var r2, n3, i2, s2, a2, o2, h2, u2, l2, f2, c2, d, p, m, _, g, b, v, y, w2, k, x, S, z, C = 0, E = new I.Buf8(4), A = [
             16,
             17,
             18,
@@ -38132,7 +38132,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
                 e2.msg = "invalid literal/lengths set", r2.mode = 30;
                 break;
               }
-              if (r2.distbits = 6, r2.distcode = r2.distdyn, S = { bits: r2.distbits }, x = T(F2, r2.lens, r2.nlen, r2.ndist, r2.distcode, 0, r2.work, S), r2.distbits = S.bits, x) {
+              if (r2.distbits = 6, r2.distcode = r2.distdyn, S = { bits: r2.distbits }, x = T(F, r2.lens, r2.nlen, r2.ndist, r2.distcode, 0, r2.work, S), r2.distbits = S.bits, x) {
                 e2.msg = "invalid distances set", r2.mode = 30;
                 break;
               }
@@ -38149,7 +38149,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
                 o2--, u2 += n3[s2++] << l2, l2 += 8;
               }
               if (g && 0 == (240 & g)) {
-                for (v = _, y2 = g, w2 = b; g = (C = r2.lencode[w2 + ((u2 & (1 << v + y2) - 1) >> v)]) >>> 16 & 255, b = 65535 & C, !(v + (_ = C >>> 24) <= l2); ) {
+                for (v = _, y = g, w2 = b; g = (C = r2.lencode[w2 + ((u2 & (1 << v + y) - 1) >> v)]) >>> 16 & 255, b = 65535 & C, !(v + (_ = C >>> 24) <= l2); ) {
                   if (0 === o2) break e;
                   o2--, u2 += n3[s2++] << l2, l2 += 8;
                 }
@@ -38183,7 +38183,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
                 o2--, u2 += n3[s2++] << l2, l2 += 8;
               }
               if (0 == (240 & g)) {
-                for (v = _, y2 = g, w2 = b; g = (C = r2.distcode[w2 + ((u2 & (1 << v + y2) - 1) >> v)]) >>> 16 & 255, b = 65535 & C, !(v + (_ = C >>> 24) <= l2); ) {
+                for (v = _, y = g, w2 = b; g = (C = r2.distcode[w2 + ((u2 & (1 << v + y) - 1) >> v)]) >>> 16 & 255, b = 65535 & C, !(v + (_ = C >>> 24) <= l2); ) {
                   if (0 === o2) break e;
                   o2--, u2 += n3[s2++] << l2, l2 += 8;
                 }
@@ -38282,7 +38282,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
       }],
       50: [function(e, t, r) {
         "use strict";
-        var D = e("../utils/common"), F2 = [
+        var D = e("../utils/common"), F = [
           3,
           4,
           5,
@@ -38414,26 +38414,26 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
           64
         ];
         t.exports = function(e2, t2, r2, n2, i, s, a, o) {
-          var h, u, l, f, c, d, p, m, _, g = o.bits, b = 0, v = 0, y2 = 0, w2 = 0, k = 0, x = 0, S = 0, z = 0, C = 0, E = 0, A = null, I = 0, O = new D.Buf16(16), B = new D.Buf16(16), R = null, T = 0;
+          var h, u, l, f, c, d, p, m, _, g = o.bits, b = 0, v = 0, y = 0, w2 = 0, k = 0, x = 0, S = 0, z = 0, C = 0, E = 0, A = null, I = 0, O = new D.Buf16(16), B = new D.Buf16(16), R = null, T = 0;
           for (b = 0; b <= 15; b++) O[b] = 0;
           for (v = 0; v < n2; v++) O[t2[r2 + v]]++;
           for (k = g, w2 = 15; 1 <= w2 && 0 === O[w2]; w2--) ;
           if (w2 < k && (k = w2), 0 === w2) return i[s++] = 20971520, i[s++] = 20971520, o.bits = 1, 0;
-          for (y2 = 1; y2 < w2 && 0 === O[y2]; y2++) ;
-          for (k < y2 && (k = y2), b = z = 1; b <= 15; b++) if (z <<= 1, (z -= O[b]) < 0) return -1;
+          for (y = 1; y < w2 && 0 === O[y]; y++) ;
+          for (k < y && (k = y), b = z = 1; b <= 15; b++) if (z <<= 1, (z -= O[b]) < 0) return -1;
           if (0 < z && (0 === e2 || 1 !== w2)) return -1;
           for (B[1] = 0, b = 1; b < 15; b++) B[b + 1] = B[b] + O[b];
           for (v = 0; v < n2; v++) 0 !== t2[r2 + v] && (a[B[t2[r2 + v]]++] = v);
-          if (d = 0 === e2 ? (A = R = a, 19) : 1 === e2 ? (A = F2, I -= 257, R = N, T -= 257, 256) : (A = U, R = P2, -1), b = y2, c = s, S = v = E = 0, l = -1, f = (C = 1 << (x = k)) - 1, 1 === e2 && 852 < C || 2 === e2 && 592 < C) return 1;
+          if (d = 0 === e2 ? (A = R = a, 19) : 1 === e2 ? (A = F, I -= 257, R = N, T -= 257, 256) : (A = U, R = P2, -1), b = y, c = s, S = v = E = 0, l = -1, f = (C = 1 << (x = k)) - 1, 1 === e2 && 852 < C || 2 === e2 && 592 < C) return 1;
           for (; ; ) {
-            for (p = b - S, _ = a[v] < d ? (m = 0, a[v]) : a[v] > d ? (m = R[T + a[v]], A[I + a[v]]) : (m = 96, 0), h = 1 << b - S, y2 = u = 1 << x; i[c + (E >> S) + (u -= h)] = p << 24 | m << 16 | _ | 0, 0 !== u; ) ;
+            for (p = b - S, _ = a[v] < d ? (m = 0, a[v]) : a[v] > d ? (m = R[T + a[v]], A[I + a[v]]) : (m = 96, 0), h = 1 << b - S, y = u = 1 << x; i[c + (E >> S) + (u -= h)] = p << 24 | m << 16 | _ | 0, 0 !== u; ) ;
             for (h = 1 << b - 1; E & h; ) h >>= 1;
             if (0 !== h ? (E &= h - 1, E += h) : E = 0, v++, 0 == --O[b]) {
               if (b === w2) break;
               b = t2[r2 + a[v]];
             }
             if (k < b && (E & f) !== l) {
-              for (0 === S && (S = k), c += y2, z = 1 << (x = b - S); x + S < w2 && !((z -= O[x + S]) <= 0); ) x++, z <<= 1;
+              for (0 === S && (S = k), c += y, z = 1 << (x = b - S); x + S < w2 && !((z -= O[x + S]) <= 0); ) x++, z <<= 1;
               if (C += 1 << x, 1 === e2 && 852 < C || 2 === e2 && 592 < C) return 1;
               i[l = E & f] = k << 24 | x << 16 | c - s | 0;
             }
@@ -38461,7 +38461,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
         function n2(e2) {
           for (var t2 = e2.length; 0 <= --t2; ) e2[t2] = 0;
         }
-        var s = 0, a = 29, u = 256, l = u + 1 + a, f = 30, c = 19, _ = 2 * l + 1, g = 15, d = 16, p = 7, m = 256, b = 16, v = 17, y2 = 18, w2 = [
+        var s = 0, a = 29, u = 256, l = u + 1 + a, f = 30, c = 19, _ = 2 * l + 1, g = 15, d = 16, p = 7, m = 256, b = 16, v = 17, y = 18, w2 = [
           0,
           0,
           0,
@@ -38576,7 +38576,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
         function D(e2, t2, r2, n3, i2) {
           this.static_tree = e2, this.extra_bits = t2, this.extra_base = r2, this.elems = n3, this.max_length = i2, this.has_stree = e2 && e2.length;
         }
-        function F2(e2, t2) {
+        function F(e2, t2) {
           this.dyn_tree = e2, this.max_code = 0, this.stat_desc = t2;
         }
         function N(e2) {
@@ -38647,13 +38647,13 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
         }
         function X(e2, t2, r2) {
           var n3, i2, s2 = -1, a2 = t2[1], o2 = 0, h2 = 7, u2 = 4;
-          for (0 === a2 && (h2 = 138, u2 = 3), t2[2 * (r2 + 1) + 1] = 65535, n3 = 0; n3 <= r2; n3++) i2 = a2, a2 = t2[2 * (n3 + 1) + 1], ++o2 < h2 && i2 === a2 || (o2 < u2 ? e2.bl_tree[2 * i2] += o2 : 0 !== i2 ? (i2 !== s2 && e2.bl_tree[2 * i2]++, e2.bl_tree[2 * b]++) : o2 <= 10 ? e2.bl_tree[2 * v]++ : e2.bl_tree[2 * y2]++, s2 = i2, u2 = (o2 = 0) === a2 ? (h2 = 138, 3) : i2 === a2 ? (h2 = 6, 3) : (h2 = 7, 4));
+          for (0 === a2 && (h2 = 138, u2 = 3), t2[2 * (r2 + 1) + 1] = 65535, n3 = 0; n3 <= r2; n3++) i2 = a2, a2 = t2[2 * (n3 + 1) + 1], ++o2 < h2 && i2 === a2 || (o2 < u2 ? e2.bl_tree[2 * i2] += o2 : 0 !== i2 ? (i2 !== s2 && e2.bl_tree[2 * i2]++, e2.bl_tree[2 * b]++) : o2 <= 10 ? e2.bl_tree[2 * v]++ : e2.bl_tree[2 * y]++, s2 = i2, u2 = (o2 = 0) === a2 ? (h2 = 138, 3) : i2 === a2 ? (h2 = 6, 3) : (h2 = 7, 4));
         }
         function V(e2, t2, r2) {
           var n3, i2, s2 = -1, a2 = t2[1], o2 = 0, h2 = 7, u2 = 4;
           for (0 === a2 && (h2 = 138, u2 = 3), n3 = 0; n3 <= r2; n3++) if (i2 = a2, a2 = t2[2 * (n3 + 1) + 1], !(++o2 < h2 && i2 === a2)) {
             if (o2 < u2) for (; L(e2, i2, e2.bl_tree), 0 != --o2; ) ;
-            else 0 !== i2 ? (i2 !== s2 && (L(e2, i2, e2.bl_tree), o2--), L(e2, b, e2.bl_tree), P2(e2, o2 - 3, 2)) : o2 <= 10 ? (L(e2, v, e2.bl_tree), P2(e2, o2 - 3, 3)) : (L(e2, y2, e2.bl_tree), P2(e2, o2 - 11, 7));
+            else 0 !== i2 ? (i2 !== s2 && (L(e2, i2, e2.bl_tree), o2--), L(e2, b, e2.bl_tree), P2(e2, o2 - 3, 2)) : o2 <= 10 ? (L(e2, v, e2.bl_tree), P2(e2, o2 - 3, 3)) : (L(e2, y, e2.bl_tree), P2(e2, o2 - 11, 7));
             s2 = i2, u2 = (o2 = 0) === a2 ? (h2 = 138, 3) : i2 === a2 ? (h2 = 6, 3) : (h2 = 7, 4);
           }
         }
@@ -38677,7 +38677,7 @@ var require_jszip_min = /* @__PURE__ */ __commonJSMin(((exports, module) => {
             for (; e3 <= 287; ) z[2 * e3 + 1] = 8, e3++, s2[8]++;
             for (Z(z, l + 1, s2), e3 = 0; e3 < f; e3++) C[2 * e3 + 1] = 5, C[2 * e3] = j(e3, 5);
             O = new D(z, w2, u + 1, l, g), B = new D(C, k, 0, f, g), R = new D(new Array(0), x, 0, c, p);
-          })(), q = true), e2.l_desc = new F2(e2.dyn_ltree, O), e2.d_desc = new F2(e2.dyn_dtree, B), e2.bl_desc = new F2(e2.bl_tree, R), e2.bi_buf = 0, e2.bi_valid = 0, W(e2);
+          })(), q = true), e2.l_desc = new F(e2.dyn_ltree, O), e2.d_desc = new F(e2.dyn_dtree, B), e2.bl_desc = new F(e2.bl_tree, R), e2.bi_buf = 0, e2.bi_valid = 0, W(e2);
         }, r._tr_stored_block = J, r._tr_flush_block = function(e2, t2, r2, n3) {
           var i2, s2, a2 = 0;
           0 < e2.level ? (2 === e2.strm.data_type && (e2.strm.data_type = (function(e3) {
@@ -40227,10 +40227,10 @@ function citationsIn(text) {
   return out;
 }
 var nameNeedle = (name) => name.replace(/[*_]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
-function tier1For(key, circuit, { page: page2, short, before } = {}) {
+function tier1For(key, circuit, { page, short, before } = {}) {
   const hit = TIER1.find((c) => citeKey(c.volume, c.reporter) === key);
   if (!hit) return { listed: false, inScope: false };
-  if (!short && page2 !== void 0 && page2 !== hit.page) {
+  if (!short && page !== void 0 && page !== hit.page) {
     return { listed: false, inScope: false, wrongPage: hit.page, name: hit.name };
   }
   if (before !== void 0) {
@@ -40307,7 +40307,7 @@ function datesIn(text) {
   const out = /* @__PURE__ */ new Set();
   const add = (mm, dd, yy) => {
     if (mm < 1 || mm > 12 || dd < 1 || dd > 31) return;
-    for (const y2 of String(yy).length === 4 ? [yy] : [`20${yy}`, `19${yy}`]) out.add(`${Number(mm)}/${Number(dd)}/${y2}`);
+    for (const y of String(yy).length === 4 ? [yy] : [`20${yy}`, `19${yy}`]) out.add(`${Number(mm)}/${Number(dd)}/${y}`);
   };
   const t = String(text ?? "");
   for (const m of t.matchAll(new RegExp(`\\b(${MONTH_ALT})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4}|\\d{2})\\b`, "gi"))) add(monthNumber(m[1]), Number(m[2]), m[3]);
@@ -40321,8 +40321,8 @@ function monthsIn(text) {
   for (const m of t.matchAll(new RegExp(`\\b(${MONTH_ALT})\\.?,?\\s+(\\d{4})\\b`, "gi"))) out.add(`${monthNumber(m[1])}/${m[2]}`);
   for (const m of t.matchAll(/(?<![\d/])(\d{1,2})\s*\/\s*(\d{4})(?![\d/])/g)) out.add(`${Number(m[1])}/${m[2]}`);
   for (const d of datesIn(t)) {
-    const [mm, , y2] = d.split("/");
-    out.add(`${mm}/${y2}`);
+    const [mm, , y] = d.split("/");
+    out.add(`${mm}/${y}`);
   }
   return out;
 }
@@ -40548,11 +40548,11 @@ ${statement}`;
           errors2.push(`${s.heading}: the source \u201C[@${body2}]\u201D must read [@stem, p. N], [@statement] or [@law]`);
           continue;
         }
-        const [, stem, page2] = parts;
+        const [, stem, page] = parts;
         const hits = resolveStem(stem);
         if (hits.length === 0) errors2.push(`${s.heading}: the source \u201C[@${body2}]\u201D names no document in the case folder`);
         else if (hits.length > 1) errors2.push(`${s.heading}: the source \u201C[@${body2}]\u201D matches ${hits.length} documents \u2014 give more of the name`);
-        else if (!new RegExp(`^--- page ${Number(page2)} ---$`, "m").test(textOf.get(hits[0]))) {
+        else if (!new RegExp(`^--- page ${Number(page)} ---$`, "m").test(textOf.get(hits[0]))) {
           errors2.push(`${s.heading}: the source \u201C[@${body2}]\u201D names a page ${hits[0].replace(/\.txt$/, "")} does not have`);
         }
       }
@@ -40717,10 +40717,11 @@ ${errors2.length} error(s). Fix each from the sources and run again.` : "\ncheck
 
 // src/render.mjs
 if (!process.argv[2]) {
-  console.error("usage: node scripts/render.mjs <case folder>   \u2014 complaint.md \u2192 complaint.pdf and complaint.docx (complaint.DRAFT.* unless final, checked, and every flag resolved)");
+  console.error("usage: node scripts/render.mjs <case folder> [--pdf]   \u2014 complaint.md \u2192 complaint.docx, and complaint.pdf with --pdf (complaint.DRAFT.* unless final, checked, and every flag resolved)");
   process.exit(2);
 }
 var dir = resolve2(process.argv[2]);
+var wantsPdf = process.argv.slice(3).includes("--pdf");
 var { errors, openFlags, parsed } = checkComplaint(dir);
 if (!parsed) {
   console.error(errors[0]);
@@ -40732,6 +40733,7 @@ var draft = notFinal || errors.length > 0 || openFlags.length > 0;
 var BANNER = "DRAFT \u2014 NOT FOR FILING";
 var base = draft ? "complaint.DRAFT" : "complaint";
 for (const ext of ["pdf", "docx"]) rmSync(join2(dir, `${draft ? "complaint" : "complaint.DRAFT"}.${ext}`), { force: true });
+if (!wantsPdf) rmSync(join2(dir, `${base}.pdf`), { force: true });
 var notesHeading = sections.find((s) => s.key === "notes")?.heading ?? "";
 var rendered = draft ? sections : sections.filter((s) => s.key !== "notes");
 rmSync(join2(dir, "review-notes.md"), { force: true });
@@ -40767,10 +40769,10 @@ var numbers = /* @__PURE__ */ new Map();
 for (const s of rendered) {
   if (s.key === "signature" || s.key === "service") {
     const paras2 = [];
-    let closing2 = s.key === "signature";
+    let closing = s.key === "signature";
     for (const block of s.blocks) {
-      if (/^dated:/i.test(block)) closing2 = true;
-      if (!closing2) {
+      if (/^dated:/i.test(block)) closing = true;
+      if (!closing) {
         paras2.push(P(block.replace(/\s*\n\s*/g, " "), /^(method of service|name and address|served on)/i.test(block) ? "method" : null));
         continue;
       }
@@ -40946,375 +40948,377 @@ writeFileSync(join2(dir, `${base}.docx`), await Packer.toBuffer(new File({
     children: w
   }]
 })));
-var pdf = await import_pdf_lib.PDFDocument.create({ updateMetadata: false });
-pdf.setTitle(title);
-var F = { regular: await pdf.embedFont(import_pdf_lib.StandardFonts.TimesRoman), bold: await pdf.embedFont(import_pdf_lib.StandardFonts.TimesRomanBold), italic: await pdf.embedFont(import_pdf_lib.StandardFonts.TimesRomanItalic) };
-var SIZE = 12;
-var SMALL = 11;
-var PAGE = { w: 612, h: 792, margin: 72 };
-var WIDTH = PAGE.w - 2 * PAGE.margin;
-var SINGLE = 14;
-var DOUBLE = 24;
-var slack = (max) => Math.max(2, max * 0.015);
-var supported = new Set(F.regular.getCharacterSet());
 var replaced = /* @__PURE__ */ new Set();
-var clean = (s) => [...String(s ?? "")].map((ch) => supported.has(ch.codePointAt(0)) ? ch : (replaced.add(ch), "?")).join("");
-var width = (s, font = F.regular, size = SIZE) => font.widthOfTextAtSize(s, size);
-function wrap(text, font, size, first, rest = first) {
-  const words = clean(text).split(/\s+/).filter(Boolean);
-  const out = [];
-  let line = "";
-  let max = first;
-  for (const word of words) {
-    const candidate = line ? `${line} ${word}` : word;
-    if (width(candidate, font, size) <= max - slack(max)) {
-      line = candidate;
-      continue;
+var pdfPages = 0;
+if (wantsPdf) {
+  let wrap = function(text, font, size, first, rest = first) {
+    const words = clean(text).split(/\s+/).filter(Boolean);
+    const out = [];
+    let line = "";
+    let max = first;
+    for (const word of words) {
+      const candidate = line ? `${line} ${word}` : word;
+      if (width(candidate, font, size) <= max - slack(max)) {
+        line = candidate;
+        continue;
+      }
+      if (line) {
+        out.push(line);
+        max = rest;
+      }
+      line = word;
+      while (width(line, font, size) > max - slack(max)) {
+        let cut = line.length;
+        while (cut > 1 && width(line.slice(0, cut), font, size) > max - slack(max)) cut--;
+        out.push(line.slice(0, cut));
+        line = line.slice(cut);
+        max = rest;
+      }
     }
-    if (line) {
-      out.push(line);
-      max = rest;
-    }
-    line = word;
-    while (width(line, font, size) > max - slack(max)) {
-      let cut = line.length;
-      while (cut > 1 && width(line.slice(0, cut), font, size) > max - slack(max)) cut--;
-      out.push(line.slice(0, cut));
-      line = line.slice(cut);
-      max = rest;
-    }
-  }
-  if (line) out.push(line);
-  return out.length ? out : [""];
-}
-var faceOf = (italic) => italic ? F.italic : F.regular;
-var runTokens = (text) => {
-  const out = [];
-  for (const r of emphasisRuns(text)) {
-    for (const part of clean(r.t).split(/(\s+)/)) {
-      if (part === "") continue;
-      out.push({ t: part, italic: r.italic, space: /^\s+$/.test(part) });
-    }
-  }
-  return out;
-};
-function wrapRuns(text, size, first, rest = first) {
-  const tokens = runTokens(text);
-  const tw = (tok) => width(tok.t, faceOf(tok.italic), size);
-  const lines = [];
-  let line = [];
-  let w2 = 0;
-  let max = first;
-  const trim = () => {
-    while (line.length && line.at(-1).space) {
-      w2 -= tw(line.at(-1));
-      line.pop();
-    }
-  };
-  for (const tok of tokens) {
-    if (tok.space && line.length === 0) continue;
-    const add = tw(tok);
-    if (!tok.space && line.length && w2 + add > max - slack(max)) {
-      trim();
-      lines.push(line);
-      line = [];
-      w2 = 0;
-      max = rest;
-    }
-    if (!tok.space && add > max - slack(max)) {
-      let left2 = tok.t;
-      while (width(left2, faceOf(tok.italic), size) > max - slack(max) - w2) {
-        let cut = left2.length;
-        while (cut > 1 && width(left2.slice(0, cut), faceOf(tok.italic), size) > max - slack(max) - w2) cut--;
-        line.push({ t: left2.slice(0, cut), italic: tok.italic });
+    if (line) out.push(line);
+    return out.length ? out : [""];
+  }, wrapRuns = function(text, size, first, rest = first) {
+    const tokens = runTokens(text);
+    const tw = (tok) => width(tok.t, faceOf(tok.italic), size);
+    const lines = [];
+    let line = [];
+    let w2 = 0;
+    let max = first;
+    const trim = () => {
+      while (line.length && line.at(-1).space) {
+        w2 -= tw(line.at(-1));
+        line.pop();
+      }
+    };
+    for (const tok of tokens) {
+      if (tok.space && line.length === 0) continue;
+      const add = tw(tok);
+      if (!tok.space && line.length && w2 + add > max - slack(max)) {
+        trim();
         lines.push(line);
         line = [];
         w2 = 0;
         max = rest;
-        left2 = left2.slice(cut);
       }
-      if (left2) {
-        line.push({ t: left2, italic: tok.italic });
-        w2 += width(left2, faceOf(tok.italic), size);
-      }
-      continue;
-    }
-    line.push(tok);
-    w2 += add;
-  }
-  trim();
-  if (line.length) lines.push(line);
-  return lines.length ? lines : [[]];
-}
-var drawRuns = (segs, x, size = SIZE) => {
-  const runs = [];
-  for (const seg of segs) {
-    const last = runs.at(-1);
-    if (last && last.italic === seg.italic) last.t += seg.t;
-    else runs.push({ t: seg.t, italic: seg.italic });
-  }
-  let cx = x;
-  for (const r of runs) {
-    const f = faceOf(r.italic);
-    if (r.t.trim()) page.drawText(clean(r.t), { x: cx, y: y - size, size, font: f, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
-    cx += width(r.t, f, size);
-  }
-};
-var page = null;
-var y = 0;
-var pages = [];
-var newPage = () => {
-  page = pdf.addPage([PAGE.w, PAGE.h]);
-  pages.push(page);
-  y = PAGE.h - PAGE.margin;
-};
-var room = () => y - PAGE.margin;
-var ensure = (height) => {
-  if (room() < height) newPage();
-};
-var draw = (text, x, font = F.regular, size = SIZE) => page.drawText(clean(text), { x, y: y - size, size, font, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
-var drawCentered = (text, font = F.bold) => draw(text, PAGE.margin + (WIDTH - width(clean(text), font)) / 2, font);
-var flow = (ls, leading, drawLine) => {
-  if (room() < (ls.length <= 3 ? ls.length : 2) * leading) newPage();
-  ls.forEach((l, i) => {
-    if (room() < leading || ls.length > 3 && i === ls.length - 2 && room() < 2 * leading) newPage();
-    drawLine(l, i);
-    y -= leading;
-  });
-};
-var PAD = 6;
-function drawTable(rows) {
-  if (!rows.length) return;
-  const cols = Math.max(...rows.map((r) => r.length));
-  const weight = Array.from({ length: cols }, (_, c) => Math.max(8, ...rows.map((r) => (r[c] ?? "").length)));
-  const total = weight.reduce((a, b) => a + b, 0);
-  const widths = weight.map((x) => Math.max(0.7 * 72, WIDTH * x / total));
-  const over = widths.reduce((a, b) => a + b, 0) - WIDTH;
-  if (over > 0) {
-    const big = widths.indexOf(Math.max(...widths));
-    widths[big] -= over;
-  }
-  const laid = rows.map((r, i) => {
-    const font = i === 0 ? F.bold : F.regular;
-    const lines = widths.map((cw, c) => wrap(r[c] ?? "", font, SMALL, cw - 2 * PAD));
-    return { font, lines, height: Math.max(...lines.map((l) => l.length)) * SINGLE + 2 * PAD };
-  });
-  const header = laid[0];
-  const drawRow = ({ font, lines, height }) => {
-    let x = PAGE.margin;
-    const top2 = y;
-    lines.forEach((cellLines, c) => {
-      y = top2 - PAD;
-      for (const l of cellLines) {
-        draw(l, x + PAD, font, SMALL);
-        y -= SINGLE;
-      }
-      x += widths[c];
-    });
-    y = top2 - height;
-    page.drawLine({ start: { x: PAGE.margin, y }, end: { x: PAGE.margin + widths.reduce((a, b) => a + b, 0), y }, thickness: 0.5, color: (0, import_pdf_lib.rgb)(0.6, 0.6, 0.6) });
-  };
-  ensure(header.height + (laid[1]?.height ?? 0));
-  drawRow(header);
-  for (const row of laid.slice(1)) {
-    if (room() < row.height) {
-      newPage();
-      drawRow(header);
-    }
-    drawRow(row);
-  }
-  y -= 8;
-}
-newPage();
-if (draft) {
-  drawCentered(BANNER);
-  y -= SINGLE + 6;
-}
-for (const line of caption.court) for (const l of wrap(line, F.bold, SIZE, WIDTH)) {
-  drawCentered(l);
-  y -= SINGLE;
-}
-y -= 18;
-var leftW = 3.5 * 72;
-var gap = 0.35 * 72;
-var leftInner = leftW - 0.3 * 72;
-var rightX = PAGE.margin + leftW + gap;
-var rightW = WIDTH - leftW - gap;
-var column = (items, cw) => items.map((it) => ({ ...it, lines: wrap(it.text, it.font ?? F.regular, SIZE, cw) }));
-var leftItems = column([
-  ...caption.county ? [{ text: caption.county, font: F.bold }] : [],
-  { text: "In the Matter of:" },
-  { text: caption.petitioner },
-  { text: "Petitioner,", align: "right" },
-  { text: "v.", indent: 0.5 * 72 },
-  { text: caption.respondent },
-  { text: "Respondent.", align: "right" }
-], leftInner);
-var rightItems = column([
-  { text: "Case No. ____________" },
-  { text: caption.title, font: F.bold },
-  ...caption.cites.map((text) => ({ text })),
-  { text: caption.date }
-], rightW);
-var colHeight = (items) => items.reduce((h, it, i) => h + it.lines.length * SINGLE + (i < items.length - 1 ? 12 : 0), 0);
-var top = y;
-var drawColumn = (items, x, cw) => {
-  y = top;
-  items.forEach((it, i) => {
-    for (const l of it.lines) {
-      const lx = it.align === "right" ? x + cw - 0.4 * 72 - width(clean(l), it.font ?? F.regular) : x + (it.indent ?? 0);
-      draw(l, lx, it.font ?? F.regular);
-      y -= SINGLE;
-    }
-    if (i < items.length - 1) y -= 12;
-  });
-};
-var leftH = colHeight(leftItems) + 16;
-drawColumn(leftItems, PAGE.margin, leftInner);
-drawColumn(rightItems, rightX, rightW);
-page.drawLine({ start: { x: PAGE.margin + leftW, y: top }, end: { x: PAGE.margin + leftW, y: top - leftH }, thickness: 0.75, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
-page.drawLine({ start: { x: PAGE.margin, y: top - leftH }, end: { x: PAGE.margin + leftW, y: top - leftH }, thickness: 0.75, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
-y = top - Math.max(leftH, colHeight(rightItems)) - 24;
-var closing = (paras) => {
-  const dated = paras.find((p) => p.cls === "dated");
-  const rest = paras.filter((p) => p.cls !== "dated");
-  const blockX = PAGE.w - PAGE.margin - 3.25 * 72;
-  const lines = rest.map((p) => ({ p, ls: wrap(p.text, F.regular, SIZE, PAGE.w - PAGE.margin - blockX) }));
-  ensure(SINGLE + lines.reduce((h, { p, ls }) => h + ls.length * (p.cls === "lead" ? 45 : 15), 0) + 42);
-  y -= 30;
-  const startY = y;
-  draw(dated?.text ?? "", PAGE.margin);
-  y = startY;
-  for (const { p, ls } of lines) for (const l of ls) {
-    draw(l, blockX);
-    y -= p.cls === "lead" ? 45 : 15;
-  }
-};
-var leadIn = (paras, from) => {
-  let h = 0;
-  for (let i = from; i < paras.length; i++) {
-    const p = paras[i];
-    if (p.cls === "subheading") {
-      h += 18 + wrap(p.text, F.bold, SIZE, WIDTH).length * SINGLE + 4;
-      continue;
-    }
-    if (p.cls === "cite") {
-      h += wrap(p.text, F.italic, SIZE, WIDTH).length * SINGLE + 10;
-      continue;
-    }
-    if (p.cls === "bullets") return h + 2 * SINGLE;
-    if (p.cls === "table") return h + 4 * SINGLE + 24;
-    const ls = wrapRuns(p.text, SIZE, WIDTH - 36, WIDTH);
-    return h + (ls.length <= 3 ? ls.length : 2) * DOUBLE;
-  }
-  return h;
-};
-for (const s of body) {
-  if (s.pageBreak) newPage();
-  if (s.id === "service") {
-    const first = s.paragraphs.findIndex((p) => p.cls === "dated");
-    ensure(SINGLE + 32 + s.paragraphs.slice(0, first).reduce((h, p) => h + wrap(p.text, F.regular, SIZE, WIDTH).length * SINGLE + 12, 0) + 30 + 15 * 6 + 36);
-    y -= 12;
-  }
-  if (s.heading) {
-    const ls = wrap(s.pageBreak ? s.heading : s.heading.toUpperCase(), F.bold, SIZE, WIDTH);
-    if (!s.pageBreak) ensure(24 + ls.length * SINGLE + 8 + (s.id === "service" ? 0 : leadIn(s.paragraphs, 0)));
-    if (!s.pageBreak) y -= 24;
-    for (const l of ls) {
-      drawCentered(l);
-      y -= SINGLE;
-    }
-    y -= 8;
-  }
-  if (s.id === "signature") {
-    closing(s.paragraphs);
-    continue;
-  }
-  if (s.id === "service") {
-    const first = s.paragraphs.findIndex((p) => p.cls === "dated");
-    for (const p of s.paragraphs.slice(0, first < 0 ? void 0 : first)) {
-      if (p.cls === "method" && p.text.includes("[")) {
-        const rows = [];
-        for (const item of p.text.split(/\s{2,}(?=\[)/)) {
-          const next = rows.length ? `${rows.at(-1)}   ${item}` : item;
-          if (rows.length && width(clean(next)) <= WIDTH) rows[rows.length - 1] = next;
-          else rows.push(item);
+      if (!tok.space && add > max - slack(max)) {
+        let left2 = tok.t;
+        while (width(left2, faceOf(tok.italic), size) > max - slack(max) - w2) {
+          let cut = left2.length;
+          while (cut > 1 && width(left2.slice(0, cut), faceOf(tok.italic), size) > max - slack(max) - w2) cut--;
+          line.push({ t: left2.slice(0, cut), italic: tok.italic });
+          lines.push(line);
+          line = [];
+          w2 = 0;
+          max = rest;
+          left2 = left2.slice(cut);
         }
-        ensure(rows.length * SINGLE);
-        for (const r of rows) {
-          draw(r, PAGE.margin);
+        if (left2) {
+          line.push({ t: left2, italic: tok.italic });
+          w2 += width(left2, faceOf(tok.italic), size);
+        }
+        continue;
+      }
+      line.push(tok);
+      w2 += add;
+    }
+    trim();
+    if (line.length) lines.push(line);
+    return lines.length ? lines : [[]];
+  }, drawTable = function(rows) {
+    if (!rows.length) return;
+    const cols = Math.max(...rows.map((r) => r.length));
+    const weight = Array.from({ length: cols }, (_, c) => Math.max(8, ...rows.map((r) => (r[c] ?? "").length)));
+    const total = weight.reduce((a, b) => a + b, 0);
+    const widths = weight.map((x) => Math.max(0.7 * 72, WIDTH * x / total));
+    const over = widths.reduce((a, b) => a + b, 0) - WIDTH;
+    if (over > 0) {
+      const big = widths.indexOf(Math.max(...widths));
+      widths[big] -= over;
+    }
+    const laid = rows.map((r, i) => {
+      const font = i === 0 ? F.bold : F.regular;
+      const lines = widths.map((cw, c) => wrap(r[c] ?? "", font, SMALL, cw - 2 * PAD));
+      return { font, lines, height: Math.max(...lines.map((l) => l.length)) * SINGLE + 2 * PAD };
+    });
+    const header = laid[0];
+    const drawRow = ({ font, lines, height }) => {
+      let x = PAGE.margin;
+      const top2 = y;
+      lines.forEach((cellLines, c) => {
+        y = top2 - PAD;
+        for (const l of cellLines) {
+          draw(l, x + PAD, font, SMALL);
           y -= SINGLE;
         }
-      } else if (p.cls === "method" && width(clean(p.text)) <= WIDTH) {
-        ensure(SINGLE);
-        draw(p.text, PAGE.margin);
-        y -= SINGLE;
-      } else flow(wrap(p.text, F.regular, SIZE, WIDTH), SINGLE, (l) => draw(l, PAGE.margin));
-      y -= p.cls === "method" ? 6 : 12;
+        x += widths[c];
+      });
+      y = top2 - height;
+      page.drawLine({ start: { x: PAGE.margin, y }, end: { x: PAGE.margin + widths.reduce((a, b) => a + b, 0), y }, thickness: 0.5, color: (0, import_pdf_lib.rgb)(0.6, 0.6, 0.6) });
+    };
+    ensure(header.height + (laid[1]?.height ?? 0));
+    drawRow(header);
+    for (const row of laid.slice(1)) {
+      if (room() < row.height) {
+        newPage();
+        drawRow(header);
+      }
+      drawRow(row);
     }
-    if (first >= 0) closing(s.paragraphs.slice(first));
-    continue;
+    y -= 8;
+  };
+  const pdf = await import_pdf_lib.PDFDocument.create({ updateMetadata: false });
+  pdf.setTitle(title);
+  const F = { regular: await pdf.embedFont(import_pdf_lib.StandardFonts.TimesRoman), bold: await pdf.embedFont(import_pdf_lib.StandardFonts.TimesRomanBold), italic: await pdf.embedFont(import_pdf_lib.StandardFonts.TimesRomanItalic) };
+  const SIZE = 12;
+  const SMALL = 11;
+  const PAGE = { w: 612, h: 792, margin: 72 };
+  const WIDTH = PAGE.w - 2 * PAGE.margin;
+  const SINGLE = 14;
+  const DOUBLE = 24;
+  const slack = (max) => Math.max(2, max * 0.015);
+  const supported = new Set(F.regular.getCharacterSet());
+  const clean = (s) => [...String(s ?? "")].map((ch) => supported.has(ch.codePointAt(0)) ? ch : (replaced.add(ch), "?")).join("");
+  const width = (s, font = F.regular, size = SIZE) => font.widthOfTextAtSize(s, size);
+  const faceOf = (italic) => italic ? F.italic : F.regular;
+  const runTokens = (text) => {
+    const out = [];
+    for (const r of emphasisRuns(text)) {
+      for (const part of clean(r.t).split(/(\s+)/)) {
+        if (part === "") continue;
+        out.push({ t: part, italic: r.italic, space: /^\s+$/.test(part) });
+      }
+    }
+    return out;
+  };
+  const drawRuns = (segs, x, size = SIZE) => {
+    const runs = [];
+    for (const seg of segs) {
+      const last = runs.at(-1);
+      if (last && last.italic === seg.italic) last.t += seg.t;
+      else runs.push({ t: seg.t, italic: seg.italic });
+    }
+    let cx = x;
+    for (const r of runs) {
+      const f = faceOf(r.italic);
+      if (r.t.trim()) page.drawText(clean(r.t), { x: cx, y: y - size, size, font: f, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
+      cx += width(r.t, f, size);
+    }
+  };
+  let page = null;
+  let y = 0;
+  const pages = [];
+  const newPage = () => {
+    page = pdf.addPage([PAGE.w, PAGE.h]);
+    pages.push(page);
+    y = PAGE.h - PAGE.margin;
+  };
+  const room = () => y - PAGE.margin;
+  const ensure = (height) => {
+    if (room() < height) newPage();
+  };
+  const draw = (text, x, font = F.regular, size = SIZE) => page.drawText(clean(text), { x, y: y - size, size, font, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
+  const drawCentered = (text, font = F.bold) => draw(text, PAGE.margin + (WIDTH - width(clean(text), font)) / 2, font);
+  const flow = (ls, leading, drawLine) => {
+    if (room() < (ls.length <= 3 ? ls.length : 2) * leading) newPage();
+    ls.forEach((l, i) => {
+      if (room() < leading || ls.length > 3 && i === ls.length - 2 && room() < 2 * leading) newPage();
+      drawLine(l, i);
+      y -= leading;
+    });
+  };
+  const PAD = 6;
+  newPage();
+  if (draft) {
+    drawCentered(BANNER);
+    y -= SINGLE + 6;
   }
-  for (const [i, p] of s.paragraphs.entries()) {
-    if (p.cls === "table") {
-      drawTable(p.rows);
-      continue;
-    }
-    if (p.cls === "bullets") {
-      for (const item of p.items) {
-        flow(wrapRuns(item, SMALL, WIDTH - 36, WIDTH - 24), SINGLE, (l, k) => {
-          if (k === 0) draw("\xB7", PAGE.margin + 12, F.regular, SMALL);
-          drawRuns(l, PAGE.margin + 24, SMALL);
-        });
-        y -= 2;
-      }
-      y -= 6;
-      continue;
-    }
-    if (p.cls === "subheading") {
-      ensure(leadIn(s.paragraphs, i));
-      y -= 18;
-      for (const l of wrap(p.text, F.bold, SIZE, WIDTH)) {
-        draw(l, PAGE.margin, F.bold);
+  for (const line of caption.court) for (const l of wrap(line, F.bold, SIZE, WIDTH)) {
+    drawCentered(l);
+    y -= SINGLE;
+  }
+  y -= 18;
+  const leftW = 3.5 * 72;
+  const gap = 0.35 * 72;
+  const leftInner = leftW - 0.3 * 72;
+  const rightX = PAGE.margin + leftW + gap;
+  const rightW = WIDTH - leftW - gap;
+  const column = (items, cw) => items.map((it) => ({ ...it, lines: wrap(it.text, it.font ?? F.regular, SIZE, cw) }));
+  const leftItems = column([
+    ...caption.county ? [{ text: caption.county, font: F.bold }] : [],
+    { text: "In the Matter of:" },
+    { text: caption.petitioner },
+    { text: "Petitioner,", align: "right" },
+    { text: "v.", indent: 0.5 * 72 },
+    { text: caption.respondent },
+    { text: "Respondent.", align: "right" }
+  ], leftInner);
+  const rightItems = column([
+    { text: "Case No. ____________" },
+    { text: caption.title, font: F.bold },
+    ...caption.cites.map((text) => ({ text })),
+    { text: caption.date }
+  ], rightW);
+  const colHeight = (items) => items.reduce((h, it, i) => h + it.lines.length * SINGLE + (i < items.length - 1 ? 12 : 0), 0);
+  const top = y;
+  const drawColumn = (items, x, cw) => {
+    y = top;
+    items.forEach((it, i) => {
+      for (const l of it.lines) {
+        const lx = it.align === "right" ? x + cw - 0.4 * 72 - width(clean(l), it.font ?? F.regular) : x + (it.indent ?? 0);
+        draw(l, lx, it.font ?? F.regular);
         y -= SINGLE;
       }
-      y -= 4;
-    } else if (p.cls === "cite") {
-      ensure(leadIn(s.paragraphs, i));
-      for (const l of wrap(p.text, F.italic, SIZE, WIDTH)) {
-        draw(l, PAGE.margin, F.italic);
+      if (i < items.length - 1) y -= 12;
+    });
+  };
+  const leftH = colHeight(leftItems) + 16;
+  drawColumn(leftItems, PAGE.margin, leftInner);
+  drawColumn(rightItems, rightX, rightW);
+  page.drawLine({ start: { x: PAGE.margin + leftW, y: top }, end: { x: PAGE.margin + leftW, y: top - leftH }, thickness: 0.75, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
+  page.drawLine({ start: { x: PAGE.margin, y: top - leftH }, end: { x: PAGE.margin + leftW, y: top - leftH }, thickness: 0.75, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
+  y = top - Math.max(leftH, colHeight(rightItems)) - 24;
+  const closing = (paras) => {
+    const dated = paras.find((p) => p.cls === "dated");
+    const rest = paras.filter((p) => p.cls !== "dated");
+    const blockX = PAGE.w - PAGE.margin - 3.25 * 72;
+    const lines = rest.map((p) => ({ p, ls: wrap(p.text, F.regular, SIZE, PAGE.w - PAGE.margin - blockX) }));
+    ensure(SINGLE + lines.reduce((h, { p, ls }) => h + ls.length * (p.cls === "lead" ? 45 : 15), 0) + 42);
+    y -= 30;
+    const startY = y;
+    draw(dated?.text ?? "", PAGE.margin);
+    y = startY;
+    for (const { p, ls } of lines) for (const l of ls) {
+      draw(l, blockX);
+      y -= p.cls === "lead" ? 45 : 15;
+    }
+  };
+  const leadIn = (paras, from) => {
+    let h = 0;
+    for (let i = from; i < paras.length; i++) {
+      const p = paras[i];
+      if (p.cls === "subheading") {
+        h += 18 + wrap(p.text, F.bold, SIZE, WIDTH).length * SINGLE + 4;
+        continue;
+      }
+      if (p.cls === "cite") {
+        h += wrap(p.text, F.italic, SIZE, WIDTH).length * SINGLE + 10;
+        continue;
+      }
+      if (p.cls === "bullets") return h + 2 * SINGLE;
+      if (p.cls === "table") return h + 4 * SINGLE + 24;
+      const ls = wrapRuns(p.text, SIZE, WIDTH - 36, WIDTH);
+      return h + (ls.length <= 3 ? ls.length : 2) * DOUBLE;
+    }
+    return h;
+  };
+  for (const s of body) {
+    if (s.pageBreak) newPage();
+    if (s.id === "service") {
+      const first = s.paragraphs.findIndex((p) => p.cls === "dated");
+      ensure(SINGLE + 32 + s.paragraphs.slice(0, first).reduce((h, p) => h + wrap(p.text, F.regular, SIZE, WIDTH).length * SINGLE + 12, 0) + 30 + 15 * 6 + 36);
+      y -= 12;
+    }
+    if (s.heading) {
+      const ls = wrap(s.pageBreak ? s.heading : s.heading.toUpperCase(), F.bold, SIZE, WIDTH);
+      if (!s.pageBreak) ensure(24 + ls.length * SINGLE + 8 + (s.id === "service" ? 0 : leadIn(s.paragraphs, 0)));
+      if (!s.pageBreak) y -= 24;
+      for (const l of ls) {
+        drawCentered(l);
         y -= SINGLE;
       }
-      y -= 10;
-    } else if (p.cls === "note") {
-      flow(wrapRuns(p.text, SMALL, WIDTH), SINGLE, (l) => drawRuns(l, PAGE.margin, SMALL));
       y -= 8;
-    } else if (p.cls === "relief") {
-      const m = p.text.match(/^(\([a-z]\))\s+([\s\S]*)$/);
-      flow(wrapRuns(m ? m[2] : p.text, SIZE, WIDTH - 108), DOUBLE, (l, k) => {
-        if (k === 0 && m) draw(m[1], PAGE.margin + 72);
-        drawRuns(l, PAGE.margin + 108);
-      });
-    } else {
-      flow(wrapRuns(p.text, SIZE, WIDTH - 36, WIDTH), DOUBLE, (l, k) => {
-        if (k === 0) draw(`${p.n}.`, PAGE.margin);
-        drawRuns(l, k === 0 ? PAGE.margin + 36 : PAGE.margin);
-      });
+    }
+    if (s.id === "signature") {
+      closing(s.paragraphs);
+      continue;
+    }
+    if (s.id === "service") {
+      const first = s.paragraphs.findIndex((p) => p.cls === "dated");
+      for (const p of s.paragraphs.slice(0, first < 0 ? void 0 : first)) {
+        if (p.cls === "method" && p.text.includes("[")) {
+          const rows = [];
+          for (const item of p.text.split(/\s{2,}(?=\[)/)) {
+            const next = rows.length ? `${rows.at(-1)}   ${item}` : item;
+            if (rows.length && width(clean(next)) <= WIDTH) rows[rows.length - 1] = next;
+            else rows.push(item);
+          }
+          ensure(rows.length * SINGLE);
+          for (const r of rows) {
+            draw(r, PAGE.margin);
+            y -= SINGLE;
+          }
+        } else if (p.cls === "method" && width(clean(p.text)) <= WIDTH) {
+          ensure(SINGLE);
+          draw(p.text, PAGE.margin);
+          y -= SINGLE;
+        } else flow(wrap(p.text, F.regular, SIZE, WIDTH), SINGLE, (l) => draw(l, PAGE.margin));
+        y -= p.cls === "method" ? 6 : 12;
+      }
+      if (first >= 0) closing(s.paragraphs.slice(first));
+      continue;
+    }
+    for (const [i, p] of s.paragraphs.entries()) {
+      if (p.cls === "table") {
+        drawTable(p.rows);
+        continue;
+      }
+      if (p.cls === "bullets") {
+        for (const item of p.items) {
+          flow(wrapRuns(item, SMALL, WIDTH - 36, WIDTH - 24), SINGLE, (l, k) => {
+            if (k === 0) draw("\xB7", PAGE.margin + 12, F.regular, SMALL);
+            drawRuns(l, PAGE.margin + 24, SMALL);
+          });
+          y -= 2;
+        }
+        y -= 6;
+        continue;
+      }
+      if (p.cls === "subheading") {
+        ensure(leadIn(s.paragraphs, i));
+        y -= 18;
+        for (const l of wrap(p.text, F.bold, SIZE, WIDTH)) {
+          draw(l, PAGE.margin, F.bold);
+          y -= SINGLE;
+        }
+        y -= 4;
+      } else if (p.cls === "cite") {
+        ensure(leadIn(s.paragraphs, i));
+        for (const l of wrap(p.text, F.italic, SIZE, WIDTH)) {
+          draw(l, PAGE.margin, F.italic);
+          y -= SINGLE;
+        }
+        y -= 10;
+      } else if (p.cls === "note") {
+        flow(wrapRuns(p.text, SMALL, WIDTH), SINGLE, (l) => drawRuns(l, PAGE.margin, SMALL));
+        y -= 8;
+      } else if (p.cls === "relief") {
+        const m = p.text.match(/^(\([a-z]\))\s+([\s\S]*)$/);
+        flow(wrapRuns(m ? m[2] : p.text, SIZE, WIDTH - 108), DOUBLE, (l, k) => {
+          if (k === 0 && m) draw(m[1], PAGE.margin + 72);
+          drawRuns(l, PAGE.margin + 108);
+        });
+      } else {
+        flow(wrapRuns(p.text, SIZE, WIDTH - 36, WIDTH), DOUBLE, (l, k) => {
+          if (k === 0) draw(`${p.n}.`, PAGE.margin);
+          drawRuns(l, k === 0 ? PAGE.margin + 36 : PAGE.margin);
+        });
+      }
     }
   }
+  pages.forEach((pg, i) => {
+    const label = String(i + 1);
+    pg.drawText(label, { x: (PAGE.w - width(label, F.regular, 11)) / 2, y: 36, size: 11, font: F.regular, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
+  });
+  writeFileSync(join2(dir, `${base}.pdf`), await pdf.save());
+  pdfPages = pages.length;
 }
-pages.forEach((pg, i) => {
-  const label = String(i + 1);
-  pg.drawText(label, { x: (PAGE.w - width(label, F.regular, 11)) / 2, y: 36, size: 11, font: F.regular, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
-});
-writeFileSync(join2(dir, `${base}.pdf`), await pdf.save());
 if (!draft && notesHeading) {
   const md = readFileSync2(join2(dir, "complaint.md"), "utf8").replace(/\r\n/g, "\n");
   const at = md.indexOf(`## ${notesHeading}`);
   if (at >= 0) writeFileSync(join2(dir, "review-notes.md"), `${md.slice(at).trim()}
 `);
 }
-console.log(`rendered ${base}.pdf (${pages.length} page${pages.length === 1 ? "" : "s"}) and ${base}.docx`);
+console.log(`rendered ${base}.docx${wantsPdf ? ` and ${base}.pdf (${pdfPages} page${pdfPages === 1 ? "" : "s"})` : ""}`);
 if (!draft && notesHeading) console.log(`the review notes are review-notes.md, beside the complaint and not in it \u2014 work product, not for filing`);
 if (draft) {
   const why = [
