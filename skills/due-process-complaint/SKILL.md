@@ -41,6 +41,11 @@ Four reference files carry the substance. Open each when its step says to:
 You do not predict how the complaint will fare, in the document or in chat. No likelihood, no
 case-strength, no "strong" or "weak" claim. Nothing on the complaint names the software.
 
+**Confidentiality.** Put on the complaint only the identifying information it requires or the person
+authorises. Never surface a name, address, date of birth or school from anywhere but this case's own
+documents and this conversation. Search the web for the district and the state's rules, never for the
+student. Where you draft a template rather than a case, use placeholders.
+
 ## Setting up
 
 This works in Claude (Chat, Cowork and Claude Code), in ChatGPT and Codex, and in other apps that
@@ -85,7 +90,11 @@ leave one out to fit.
 Take anything they already said, and wait for the rest. Ask a parent in plain words and an attorney
 in the terms of art. If the planned filing date is already past, say so and ask for the real one: the
 limitations period is counted from it. Where a question goes unanswered, use a `[COUNSEL-#]`
-placeholder and carry on.
+placeholder and carry on with the draft; every flag is resolved before the complaint is final.
+
+**If a reply is cut off** and they say "continue", pick up from the last numbered paragraph you wrote
+rather than starting again. The paragraphs are numbered consecutively across the whole pleading, so
+re-drafting from the top renumbers everything they have already read.
 
 **What changes with who they are, and what does not.** The reading, the claims, the research, the
 audit and the form of the pleading are the same for everyone. What changes: the signature block (pro
@@ -101,6 +110,19 @@ process it in batches and note what each document carries before moving on.
 A page with no text layer, or a document that is not a PDF (an email, a photo of a letter), is read by
 eye and transcribed word for word into `<case>/work/text/<name>-transcribed.txt` — the check reads
 every text file there, and a fact from a document must never be passed off as the person's statement.
+
+**Write the page headers the way `pdf-text.mjs` does**, because a source marker names a page and the
+check looks for that line:
+
+```
+--- page 1 ---
+the first page, word for word
+
+--- page 2 ---
+the second page
+```
+
+Without them a transcribed document can be read but not cited by page, and `[@stem, p. 1]` is refused.
 
 Then cross-check the file against itself:
 
@@ -186,6 +208,11 @@ open it (for a PDF, download it into a scratch folder's `documents/`, never the 
 `pdf-text.mjs`) and note anything it asks for beyond § 300.508(b). Copy every address and number as the
 official page writes it; where the page and the row differ, the page wins. If the page won't load, use
 the row and tell the person which details could not be confirmed today.
+
+**Describe the forum and the hearing body as they operate now**, from the state's own page: the office
+that hears the case, what it is called, and what it calls the document. Where you cannot confirm it,
+flag **[VERIFY-#]** on the caption rather than saying it in passing — a detail only spoken about
+leaves nothing on the page and no reason for the document to stay a draft.
 
 **The State educational agency.** 34 C.F.R. § 300.508(a)(2) requires the party filing to forward a
 copy of the complaint to the SEA, in every state. In most states the complaint is filed with the SEA

@@ -157,8 +157,13 @@ function claimsIn(block) {
   for (const m of months) t = t.replace(m.text, ' ')
   // Citations, section letters and form codes ("CELF-5", "H-06E") are not facts about the child.
   t = t
-    .replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, ' ')
+    // A citation list carries on past its first item: "34 C.F.R. ss 300.303, 300.304" left
+    // 300.304 behind, which then read as a figure about the child.
+    .replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*(?:\s*,\s*[\d][\w.()–-]*)*/g, ' ')
     .replace(/§+\s*[\d.()a-z,–\s-]+/gi, ' ')
+    // A state statute is as often written in words: "Education Code section 56505",
+    // "Gen. Stat. section 115C-109.6". Without this its number read as a figure.
+    .replace(/\bsections?\s+[\d][\w.()–-]*(?:\s*,\s*[\d][\w.()–-]*)*/gi, ' ')
     // A reporter citation in a claim is an authority, checked against references/authorities.md
     // and references/audit.md § 3, not a fact about this student. The volume and the pages are
     // bounded explicitly, and so is the court-and-year parenthetical: an earlier version stopped
@@ -250,8 +255,9 @@ export function checkComplaint(dir) {
   const statementOnly = []
   const onFlag = []
   const onLaw = []
+  const looselyTraced = []
   const file = join(dir, 'complaint.md')
-  if (!existsSync(file)) return { errors: ['there is no complaint.md in the case folder'], statementOnly, onFlag, onLaw, openFlags: [], parsed: null }
+  if (!existsSync(file)) return { errors: ['there is no complaint.md in the case folder'], statementOnly, onFlag, onLaw, looselyTraced, openFlags: [], parsed: null }
   const parsed = parseComplaint(readFileSync(file, 'utf8'))
   const { meta, sections } = parsed
 
@@ -543,6 +549,14 @@ export function checkComplaint(dir) {
           if (withUnit ? contains(documents, withUnit) : figureIn(n, documents)) continue
           if (computed.has(n.replace(/[$%]/g, ''))) continue
           if (withUnit ? contains(statement, withUnit) : figureIn(n, statement)) { note(withUnit || n); continue }
+          // The phrase with its unit is nowhere. The bare figure may still be somewhere — "15" is
+          // in "09/15/2025" and in "15%" — but that is not the same figure as "15 days". It is not
+          // refused, because refusing every such figure would refuse correct ones; it is reported,
+          // so the looseness is on the page rather than silent.
+          if (withUnit && (figureIn(n, documents) || figureIn(n, statement))) {
+            looselyTraced.push(`${withUnit} — only “${n}” appears anywhere, and not with that unit — ${where}`)
+            continue
+          }
           if (figureIn(n, documents)) continue
           if (figureIn(n, statement)) { note(n); continue }
           refuse(`the figure “${n}” is not in the documents or statement.md, and is not a result in the arithmetic table`)
@@ -556,7 +570,7 @@ export function checkComplaint(dir) {
       }
     }
   }
-  return { errors, statementOnly, onFlag, onLaw, openFlags, parsed }
+  return { errors, statementOnly, onFlag, onLaw, looselyTraced, openFlags, parsed }
 }
 
 // ─── Command line ───────────────────────────────────────────────────────
@@ -569,7 +583,7 @@ if (basename(self) === 'check.mjs' && process.argv[1] && realpathSync(process.ar
     console.error('usage: node scripts/check.mjs <case folder>   — every date, figure and quotation in complaint.md against the documents and statement.md; the flags; the arithmetic; the required elements; the form')
     process.exit(2)
   }
-  const { errors, statementOnly, onFlag, onLaw, openFlags } = checkComplaint(resolve(process.argv[2]))
+  const { errors, statementOnly, onFlag, onLaw, looselyTraced, openFlags } = checkComplaint(resolve(process.argv[2]))
   for (const e of errors) console.log(`✗ ${e}`)
   const list = (title, items) => {
     if (!items.length) return
@@ -579,6 +593,7 @@ if (basename(self) === 'check.mjs' && process.argv[1] && realpathSync(process.ar
   list('From statement.md, not from any document — tell the person signing:', statementOnly)
   list('Resting on a flag, not on a source — the person resolves each of these:', onFlag)
   list('Quoted as the law — confirm each against the authority itself (references/audit.md § 8):', onLaw)
+  list('Traced only by the bare number, not by the figure with its unit — check each one:', looselyTraced)
   list('Flags still open — the complaint renders as DRAFT until they are resolved:', openFlags)
   console.log(errors.length ? `\n${errors.length} error(s). Fix each from the sources and run again.` : '\ncheck passed.')
   process.exit(errors.length ? 1 : 0)

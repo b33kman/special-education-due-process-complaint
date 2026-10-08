@@ -1,6 +1,6 @@
 # Authorities: what may be cited, and on whose word
 
-Read this before you draft the claims (step 5). It governs every case, statute and regulation that
+Read this before you research the law and draft the claims (steps 6 and 7 of `SKILL.md`). It governs every case, statute and regulation that
 reaches the complaint.
 
 One rule stands over the rest: **never write a citation, pin cite, quotation or holding you have not

@@ -165,8 +165,25 @@ test('a quotation that is not word for word in a source is refused', () => {
 })
 
 test('a figure from the person’s own statement passes, and is listed as resting on it', () => {
-  const out = passes(once('within 15 days to adopt measurable reading goals', 'within 15 days to adopt measurable reading goals'))
-  assert.match(out, /From statement\.md, not from any document[\s\S]*15 days/)
+  // The worked example asks for a meeting "within 15 days", which is the Parent's own choice and
+  // appears in statement.md and in no document. It passes, and it is reported.
+  const dir = copy()
+  const r = run('check', dir)
+  assert.equal(r.code, 0, r.out)
+  assert.match(r.out, /From statement\.md, not from any document[\s\S]*15 days/)
+  rmSync(dir, { recursive: true, force: true })
+  // Take the line out of statement.md and "15 days" is no longer sourced as a phrase. A bare 15
+  // is still in the documents — in "09/15/2025" and in "15% of the instructional day" — so it is
+  // not refused, because refusing every such figure would refuse correct ones. It is reported,
+  // which is the point: the looseness is on the page rather than silent.
+  const d2 = copy()
+  const st = join(d2, 'statement.md')
+  writeFileSync(st, readFileSync(st, 'utf8').replace('within 15 days', 'promptly'))
+  const r2 = run('check', d2)
+  assert.equal(r2.code, 0, r2.out)
+  assert.match(r2.out, /Traced only by the bare number[\s\S]*15 days/)
+  assert.doesNotMatch(r2.out, /From statement\.md, not from any document[\s\S]*15 days/)
+  rmSync(d2, { recursive: true, force: true })
 })
 
 test('a space the extractor left before a semicolon does not refuse the District’s own words', () => {
@@ -265,10 +282,10 @@ test('an arithmetic input must come from a source, or from a row above it', () =
 test('a computed figure may appear in the pleading only because the table computes it', () => {
   // Remove the row that computes the compensatory minutes and the pleading's figure is unsourced.
   refused((md) => {
-    const row = md.split('\n').find((l) => l.includes('| 4800 - 1320 |'))
+    const row = md.split('\n').find((l) => l.includes('| 3600 - 1155 |'))
     assert.ok(row, 'the example no longer computes the compensatory minutes')
     return md.replace(`${row}\n`, '')
-  }, /the figure .3480. is not in the documents or statement\.md, and is not a result in the arithmetic table/)
+  }, /the figure .2445. is not in the documents or statement\.md, and is not a result in the arithmetic table/)
 })
 
 test('an arithmetic computation is digits and operators, and nothing else', () => {
@@ -329,7 +346,7 @@ test('a date is checked whatever form it is written in', () => {
 })
 
 test('the arithmetic computation may use only its own inputs, and nothing inert', () => {
-  refused(once('| 4800 - 1320 | 3480 minutes |', '| 1160 * 3 | 3480 minutes |'), /the computation uses 1160, which is not one of its inputs or a result computed above/)
+  refused(once('| 3600 - 1155 | 2445 minutes |', '| 3601 - 1156 | 2445 minutes |'), /the computation uses 3601, which is not one of its inputs or a result computed above/)
   refused(once('| 24 - 4 | 20 weeks |', '| 24 - 4 /*- 10*/ | 20 weeks |'), /must be digits and \+ - \* \/ \( \) \. only/)
   refused(once('| 24 - 4 | 20 weeks |', '| 24 - 4 | weeks below the minimum: 20 |'), /the result .weeks below the minimum: 20. does not lead with a number/)
 })
@@ -470,7 +487,7 @@ test('a label belongs on a fact paragraph, and only a claim or the pendency sect
   const onlyClaims = /a paragraph number belongs to a claim or the pendency section/
   refused(claimIs('[#self] The District did not deliver the instruction the program requires (paragraph [#self]).'), belongs)
   // A remedy sends the reader to a paragraph number instead of naming its own figures.
-  refused(once('(c) provide 3,480 minutes of compensatory specialized academic instruction in reading, being the shortfall', '(c) provide the compensatory instruction at paragraph [#goal], being the shortfall'), onlyClaims)
+  refused(once('(c) provide 2,445 minutes of compensatory specialized academic instruction in reading, being the shortfall', '(c) provide the compensatory instruction at paragraph [#goal], being the shortfall'), onlyClaims)
   // A label left in the signature or the certificate would print as “[#sig]” on the filed PDF.
   refused(once('Respectfully submitted,', '[#sig] Respectfully submitted,'), belongs)
   refused(once('The Parent certifies that on the date', '[#cert] The Parent certifies that on the date'), belongs)

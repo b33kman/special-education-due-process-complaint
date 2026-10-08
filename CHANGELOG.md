@@ -19,6 +19,87 @@ The procedure now does what the owner's own Copilot Operating Guide for Word doe
 - **The filing instructions and the cover letter are both asked about**, each on its own, before the handover.
 - **The burden of proof is researched, not assumed.** It is set by federal law and reassigned by some states, so the section that names it must read the filing state's own text first. One state's allocation is never carried into another state's complaint.
 
+**The complaint is a Word document.** `render.mjs` writes `complaint.docx`; a PDF is offered once the
+complaint is final and written with `--pdf`. Some offices take a PDF, some want the editable
+document, and a portal may ask for either. `--pdf` is also how the pleading gets looked at as a page
+before handover, which is a check nothing else makes.
+
+**The review notes are not in the complaint it renders for filing.** An adversarial read of the
+shipped PDFs found them inside `complaint.pdf`: the petitioner's own list of the District's best
+arguments, the admission that the circuit standard and the burden of proof were never confirmed, and
+in one example "choose one and do not plead both". A page break and a heading saying "Remove Before
+Filing" are an instruction to a human, not a guard. While the complaint is a draft the notes stay in
+it, behind the banner, where they get read and acted on; once it is final they are written beside it
+as `review-notes.md`.
+
+**What four adversarial reviewers found after the work above, all reproduced before being fixed:**
+
+- The citation guard keyed on volume and reporter alone, so a fabricated case name on a real citation
+  passed. It compares the name and the first page now, reads the italic regulation line it had been
+  skipping, and knows the state reporters, so a fabricated state case is caught by the citation rule
+  rather than by the figure check with a message about an unsourced number.
+- `[@law]` blanked every quotation in its paragraph, which made it a general escape. It blanks
+  nothing now: a quotation it covers is listed for the audit, the paragraph must carry a numbered
+  citation, and a paragraph attributing its words to a document is refused.
+- The arithmetic table's computation was free of its own inputs, so `1160 * 3` legitimised 3,480 in
+  the pleading. Every number in a computation is now one of that row's inputs or a result above it,
+  a comment cannot sit inside one, and the result must lead with its number. The limitations-cutoff
+  row is gone: a table of digits cannot express a calendar cutoff, and `2026 - 2 | 2024` certified a
+  year while saying nothing about the day.
+- The date rule read only "Month D, YYYY" with the full month name, so "Sept. 8, 2024" and
+  "12/2/2026" were never checked against anything.
+- A citation list stopped at its first item, and a statute written in words ("Education Code
+  section 56505") was not stripped at all, so their numbers read as figures about the child.
+- A figure with a unit matched only by its bare number — "15 days" against "09/15/2025" — passed
+  silently. It still passes, because refusing every such figure would refuse correct ones, but it is
+  reported now.
+- `references/exemplar.md` declared `filer: parent` and headed its notes "Attorney Work Product",
+  which `check.mjs` refuses for a parent. Every complaint written from the exemplar would have been
+  refused on that line. A test now runs the exemplar's own document through the real parser.
+- The Word file's properties said "Un-named", the writer's default, which a reader sees in File >
+  Info on a filed pleading.
+
+**Ten citations, each verified against primary text:**
+
+- § 300.502(b)(3) was cited for reimbursement of a parent-obtained independent evaluation. (b)(3) is
+  the provision that **denies** public expense once the agency prevails; the route is
+  § 300.502(b)(2)(ii).
+- `claims.md` stated as settled that a request for a functional behavior assessment is a request for
+  an evaluation. The Second Circuit held the opposite in *D.S. v. Trumbull*, which this file makes
+  Tier 1 for Connecticut, New York and Vermont.
+- *Trumbull* carried no adverse-authority parenthetical, which `authorities.md` itself requires.
+- *Carter*'s pin cite was 15; the holding is at 14.
+- § 300.507(a)(1) was quoted and is not quotable as written; it is paraphrased.
+- The required-information table claimed § 300.508(b)(1)–(3) for a date of birth and a parent
+  contact. That provision is the name, the address of residence and the school; each row now says
+  what asks for it.
+- § 300.111 (child find) and § 300.301 (initial evaluations) led a claim pleading a reevaluation.
+- Claim 2's range swept in §§ 300.119 and 300.120, which are SEA duties.
+- 34 C.F.R. § 300.508(a)(2) requires a copy to the State educational agency in every state and
+  nothing carried it. `filing-instructions.md` must now answer who the SEA is.
+- `audit.md` said the notes heading is "exactly" the attorney one while `SKILL.md` pointed at
+  `audit.md` for the parent variant.
+
+**Both worked examples were redrafted again** against a hostile read. River Oak's compensatory demand
+had counted five weeks its own log attributes to the school calendar — a minimum day, a school
+closure, a two-day week and two holidays — so about 30% of the figure was the calendar rather than
+the vacancy; those weeks are disclosed and excluded, and the figure is 2,445 rather than 3,480. Pine
+Hollow asked for 1,080 individual minutes while crediting none of the 450 group minutes delivered,
+which with the restoration remedy would have given more therapy than the program ever required; it
+asks for the 570-minute shortfall, delivered individually, and the alternative measure is in the
+notes with the reason it is not pleaded. Pine Hollow had also pleaded the Parent's own IEP input as a
+District record and then relied on it as a District admission, which was claim A's load-bearing fact.
+Both reservations of rights asked for what § 300.508(d)(3) and § 300.511(d) do not allow, and Pine
+Hollow reserved attorneys' fees without saying that a court, not a hearing officer, awards them.
+
+**Rules the owner's guide carries and this skill had not:** § 7's confidentiality rules; § 8's
+"continue from the last numbered paragraph" where a reply is cut off; § 9's `[VERIFY-#]` on a forum
+that could not be confirmed; and the `--- page N ---` format a hand-transcribed document needs before
+it can be cited by page. Three drafting rules were added from the hostile read: a figure the complaint
+works out is written in digits, because a number spelled as a word is invisible to the check; a log's
+own annotations are pleaded with the figure they qualify; and a parent's words inside a District
+document are the parent's.
+
 Smaller things from the same work:
 
 - A parent's review notes are headed **Review Notes – Remove Before Filing**; only an attorney's or a legal aid organization's are attorney work product, and the check holds the heading to the filer. A claim of privilege nobody holds is a false claim.
@@ -26,7 +107,7 @@ Smaller things from the same work:
 - The renderer draws tables, bullet lists and checklists, and keeps a point and a half of slack in every column: pdf-lib measures a line from the standard-font metrics and a viewer draws it from its own, and the two disagree by up to about 1% — enough to put a long bold line past the right margin.
 - `references/review.md` is folded into `references/audit.md`.
 - Both worked examples are redrafted to the new form, with their review notes, their recomputed arithmetic, and the honest statement in each that no circuit authority was confirmed. Neither cites a case it did not verify.
-- The test suite is rewritten: 41 tests, each breaking one thing a model could plausibly get wrong.
+- The test suite is rewritten: 58 tests, each breaking one thing a model could plausibly get wrong, and 39 mutations of the new assertions were run against them. All 39 were killed.
 
 ## 1.0.18 — 2026-09-18
 

@@ -40341,7 +40341,7 @@ function claimsIn(block) {
   for (const d of dates) t = t.replace(d.text, " ");
   const months = [...t.matchAll(new RegExp(`\\b(${MONTH_ALT})\\.?\\s+(\\d{4})\\b`, "gi"))].map((m) => ({ text: m[0], key: `${monthNumber(m[1])}/${m[2]}` }));
   for (const m of months) t = t.replace(m.text, " ");
-  t = t.replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*/g, " ").replace(/§+\s*[\d.()a-z,–\s-]+/gi, " ").replace(CITATION_LONG, " ").replace(CITATION_SHORT, " ");
+  t = t.replace(/\b\d+\s+(?:C\.F\.R|U\.S\.C)\.?\s*(?:§+\s*)?[\w.()–-]*(?:\s*,\s*[\d][\w.()–-]*)*/g, " ").replace(/§+\s*[\d.()a-z,–\s-]+/gi, " ").replace(/\bsections?\s+[\d][\w.()–-]*(?:\s*,\s*[\d][\w.()–-]*)*/gi, " ").replace(CITATION_LONG, " ").replace(CITATION_SHORT, " ");
   const numbers2 = [...t.matchAll(/(?<![\w.]|[A-Za-z]-)(\$?\d[\d,]*(?:\.\d+)?%?)(?:\s+([a-z]+))?/gi)].map((m) => ({ n: m[1].replace(/,/g, ""), unit: unitOf(m[2]) }));
   return { dates, months, numbers: numbers2, quotes };
 }
@@ -40411,8 +40411,9 @@ function checkComplaint(dir2) {
   const statementOnly = [];
   const onFlag = [];
   const onLaw = [];
+  const looselyTraced = [];
   const file = join(dir2, "complaint.md");
-  if (!existsSync(file)) return { errors: ["there is no complaint.md in the case folder"], statementOnly, onFlag, onLaw, openFlags: [], parsed: null };
+  if (!existsSync(file)) return { errors: ["there is no complaint.md in the case folder"], statementOnly, onFlag, onLaw, looselyTraced, openFlags: [], parsed: null };
   const parsed2 = parseComplaint(readFileSync(file, "utf8"));
   const { meta: meta2, sections: sections2 } = parsed2;
   const textDir = join(dir2, "work", "text");
@@ -40668,6 +40669,10 @@ ${statement}`;
             note(withUnit || n2);
             continue;
           }
+          if (withUnit && (figureIn(n2, documents) || figureIn(n2, statement))) {
+            looselyTraced.push(`${withUnit} \u2014 only \u201C${n2}\u201D appears anywhere, and not with that unit \u2014 ${where}`);
+            continue;
+          }
           if (figureIn(n2, documents)) continue;
           if (figureIn(n2, statement)) {
             note(n2);
@@ -40690,7 +40695,7 @@ ${statement}`;
       }
     }
   }
-  return { errors: errors2, statementOnly, onFlag, onLaw, openFlags: openFlags2, parsed: parsed2 };
+  return { errors: errors2, statementOnly, onFlag, onLaw, looselyTraced, openFlags: openFlags2, parsed: parsed2 };
 }
 var self2 = fileURLToPath(import.meta.url);
 if (basename(self2) === "check.mjs" && process.argv[1] && realpathSync(process.argv[1]) === realpathSync(self2)) {
@@ -40698,7 +40703,7 @@ if (basename(self2) === "check.mjs" && process.argv[1] && realpathSync(process.a
     console.error("usage: node scripts/check.mjs <case folder>   \u2014 every date, figure and quotation in complaint.md against the documents and statement.md; the flags; the arithmetic; the required elements; the form");
     process.exit(2);
   }
-  const { errors: errors2, statementOnly, onFlag, onLaw, openFlags: openFlags2 } = checkComplaint(resolve(process.argv[2]));
+  const { errors: errors2, statementOnly, onFlag, onLaw, looselyTraced, openFlags: openFlags2 } = checkComplaint(resolve(process.argv[2]));
   for (const e of errors2) console.log(`\u2717 ${e}`);
   const list = (title2, items) => {
     if (!items.length) return;
@@ -40709,6 +40714,7 @@ ${title2}`);
   list("From statement.md, not from any document \u2014 tell the person signing:", statementOnly);
   list("Resting on a flag, not on a source \u2014 the person resolves each of these:", onFlag);
   list("Quoted as the law \u2014 confirm each against the authority itself (references/audit.md \xA7 8):", onLaw);
+  list("Traced only by the bare number, not by the figure with its unit \u2014 check each one:", looselyTraced);
   list("Flags still open \u2014 the complaint renders as DRAFT until they are resolved:", openFlags2);
   console.log(errors2.length ? `
 ${errors2.length} error(s). Fix each from the sources and run again.` : "\ncheck passed.");

@@ -327,6 +327,29 @@ right. `check.mjs` recomputes the table. The person confirms it before the compl
 that matches the period and the extent of the violation. Never double-count across claims. Where the
 quantity is the person's to choose, write `[COUNSEL-#]`.
 
+**A figure the complaint works out is written in digits, and only in digits.** `check.mjs` reads
+digits; a number spelled as a word is invisible to it. One draft said its three measurements "move
+four words per minute across five months" — the movement was two and the span three months and
+twenty days, and nothing caught it, because "four" and "five" are words. Where a document spells a
+figure, the complaint spells it as the document does and claims nothing from it. Where the complaint
+computes one, it is digits, and it is a `Result` in the arithmetic table.
+
+**A log's own annotations are pleaded with the figure they qualify.** Where a service log records a
+week as "0 (holiday week)" or "45 (minimum day schedule)", the complaint says so. Counting that week
+at the full required amount, and leaving the annotation out, puts the school calendar inside the
+compensatory demand and hands the District the arithmetic.
+
+**Credit what was delivered.** Where the District delivered the wrong thing rather than nothing — a
+group session where the programme says individual — a remedy for the full required amount ignores
+what the student received. Say which measure the remedy uses, plead one measure and not two, and put
+the alternative in the review notes.
+
+**A parent's words inside a District document are the parent's.** An IEP's "Parent input" or "Parent
+concerns" block, a signature-page exception, a parent's quoted email: all of those are the person
+speaking, recorded by the District. Attribute them to the Parent. The District's own admission is what
+the District wrote in its own voice, and only that carries a part of a claim about what the District
+did.
+
 **Dates in full** ("October 14, 2025"), and figures exactly as the documents give them. A week is
 pleaded as a week ("in the week of September 22, 2025"), a month as a month ("in November 2025").
 

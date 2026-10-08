@@ -1,6 +1,6 @@
 # The post-draft audit
 
-Run this after `check.mjs` passes and before you hand anything over (step 7). `check.mjs` is a
+Run this after `check.mjs` passes and before you hand anything over (steps 8 and 9 of `SKILL.md`). `check.mjs` is a
 program: it catches an unsourced date, figure or quotation, a missing required element, a section out
 of order, a broken paragraph pointer, and an arithmetic table that does not add up. This audit
 catches what a program cannot read.
@@ -28,7 +28,11 @@ on the page rather than what you meant.
 
 - Recompute every count, total, percentage and day span.
 - Every one appears in the arithmetic table, with its inputs and its result.
-- Every input traces to a document or to `statement.md`.
+- Every input traces to a document or to `statement.md`, and every number in a computation is one of
+  that row's inputs or a result computed above it.
+- Where a source annotates a figure — a week logged "0 (holiday week)", "45 (minimum day schedule)" —
+  the complaint carries the annotation, or the count silently charges the District for the school
+  calendar.
 - Never adopt the District's own total unchecked. Recompute it from its own entries and say so where
   the two differ.
 
@@ -43,7 +47,12 @@ The table lives in the Attorney Review Notes and takes exactly these four column
 A figure that appears in the pleading and in no document has to be a `Result` in this table, or
 `check.mjs` refuses it.
 
-**Show the person the table and ask them to confirm it** before the complaint is final (step 7).
+**Show the person the table and ask them to confirm it** before the complaint is final (step 9).
+
+**Every figure the complaint works out is in digits**, because `check.mjs` reads digits and a number
+spelled as a word is invisible to it. Recompute any comparison written in prose by hand: "moved four
+words per minute across five months" is two assertions, both arithmetic, and neither reaches the
+table.
 A number they have not seen is a number nobody checked.
 
 ## 3. Citation verification
