@@ -11,6 +11,7 @@ import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { spawnSync } from 'node:child_process'
+import { inflateRawSync } from 'node:zlib'
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)))
 const scripts = join(root, 'skills', 'due-process-complaint', 'scripts')
@@ -55,6 +56,22 @@ const withFlag = (marker, explanation = marker) => chain(
 async function pageText(file, n) {
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(file)), isEvalSupported: false }).promise
   return (await (await doc.getPage(n < 0 ? doc.numPages : n)).getTextContent()).items.map((i) => i.str).join(' ')
+}
+/** A zip's text entries, from its local file headers. The Word file is a zip; nothing is installed. */
+function zipEntries(file) {
+  const buf = readFileSync(file)
+  const out = new Map()
+  for (let i = 0; i + 30 <= buf.length; i++) {
+    if (buf.readUInt32LE(i) !== 0x04034b50) continue
+    const method = buf.readUInt16LE(i + 8)
+    const compressed = buf.readUInt32LE(i + 18)
+    const nameLen = buf.readUInt16LE(i + 26)
+    const name = buf.subarray(i + 30, i + 30 + nameLen).toString('utf8')
+    const start = i + 30 + nameLen + buf.readUInt16LE(i + 28)
+    if (!compressed) continue
+    try { out.set(name, (method === 8 ? inflateRawSync(buf.subarray(start, start + compressed)) : buf.subarray(start, start + compressed)).toString('utf8')) } catch { /* not text */ }
+  }
+  return out
 }
 async function wholeText(file) {
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(file)), isEvalSupported: false }).promise
@@ -429,6 +446,33 @@ test('render never names a draft, or a complaint that fails the check, for filin
   assert.match(r.out, /check\.mjs found 1 error/)
   assert.ok(existsSync(join(failing, 'complaint.DRAFT.pdf')) && !existsSync(join(failing, 'complaint.pdf')))
   rmSync(failing, { recursive: true, force: true })
+})
+
+test('the Word file carries the whole document, and neither file names the software', () => {
+  for (const ex of Object.values(examples)) {
+    const dir = copy(ex)
+    assert.equal(run('render', dir).code, 0)
+    const entries = zipEntries(join(dir, 'complaint.docx'))
+    const document = entries.get('word/document.xml')
+    assert.ok(document && document.length > 10000, 'word/document.xml is there and is not a stub')
+    assert.match(document, /Review Notes/, 'the review notes are in the Word file')
+    assert.match(document, /pageBreakBefore/, 'the notes start on a new page')
+    assert.match(document, /<w:tbl>/, 'the required-information and arithmetic tables are tables')
+    assert.match(document, /<w:i\b/, 'a case name or regulation line is set in italic')
+    // Nothing on the filed document says what produced it, its properties included. Left unset,
+    // the Word writer stamps "Un-named" into lastModifiedBy, which a reader sees in File > Info.
+    const core = entries.get('docProps/core.xml') ?? ''
+    assert.doesNotMatch(core, /lastModifiedBy>[^<]/, 'the Word properties name a last editor')
+    assert.doesNotMatch(core, /dc:creator>[^<]/, 'the Word properties name a creator')
+    const everything = [...entries.values()].join('\n')
+    const pdf = readFileSync(join(dir, 'complaint.pdf')).toString('latin1')
+    for (const name of ['Un-named', 'pdf-lib', 'PDFKit', 'Anthropic', 'Claude', 'ChatGPT', 'OpenAI', 'due-process-complaint', 'Beekman']) {
+      assert.ok(!everything.includes(name), `the Word file names ${name}`)
+      assert.ok(!pdf.includes(name), `the PDF names ${name}`)
+    }
+    for (const key of ['/Producer', '/Creator']) assert.ok(!pdf.includes(key), `the PDF carries ${key}`)
+    rmSync(dir, { recursive: true, force: true })
+  }
 })
 
 // ─── The scripts themselves ─────────────────────────────────────────────

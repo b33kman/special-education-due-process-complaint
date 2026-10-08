@@ -40704,7 +40704,11 @@ for (const s of body) {
   }
 }
 writeFileSync(join2(dir, `${base}.docx`), await Packer.toBuffer(new File({
+  // Nothing on the filed document says what produced it, its properties included. Left unset,
+  // the Word writer stamps "Un-named" into lastModifiedBy, which a reader sees in File > Info.
   creator: "",
+  lastModifiedBy: "",
+  description: "",
   title,
   styles: { default: { document: { run: { font: "Times New Roman", size: 24 } } } },
   sections: [{
