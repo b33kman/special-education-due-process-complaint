@@ -103,8 +103,17 @@ test('both worked examples pass the check and render as the files to file, in th
     for (const heading of ['REQUIRED INFORMATION', 'JURISDICTION, TIMELINESS AND BURDEN', 'STATEMENT OF FACTS', 'STATEMENT OF THE PROBLEMS', 'PROPOSED RESOLUTION', 'CERTIFICATE OF SERVICE']) {
       assert.match(all, new RegExp(heading), heading)
     }
-    // The review notes are the last thing in the document, after the certificate.
-    assert.ok(all.indexOf('Remove Before Filing') > all.indexOf('CERTIFICATE OF SERVICE'), 'the notes come after the certificate')
+    // The work product is NOT in the file named for filing. A page break and a heading saying
+    // "Remove Before Filing" are an instruction to a human, not a guard, and what sits in those
+    // notes is the petitioner's own account of what the District will argue.
+    assert.doesNotMatch(all, /Remove Before Filing/, 'the review notes are in the filing-ready PDF')
+    for (const leak of ['expected defenses', 'was not confirmed in this session', 'Verification checklist', 'Adverse authority']) {
+      assert.ok(!all.includes(leak), `the filing-ready PDF carries work product: ${leak}`)
+    }
+    // They are written beside it instead.
+    const notes = readFileSync(join(dir, 'review-notes.md'), 'utf8')
+    assert.match(notes, /Remove Before Filing/)
+    assert.match(notes, /### Arithmetic/)
     // Nothing a marker is written as ever reaches the page.
     assert.doesNotMatch(all, /\[#/, 'a paragraph label printed literally')
     assert.doesNotMatch(all, /\[@/, 'a source marker printed literally')
@@ -124,8 +133,9 @@ test('the two examples are a parent filing pro se and an attorney filing, and ea
   assert.equal(run('render', proSe).code, 0)
   const a = await wholeText(join(proSe, 'complaint.pdf'))
   assert.match(a, /Self-represented \(pro se\)/)
-  assert.match(a, /Review Notes . Remove Before Filing/)
-  assert.doesNotMatch(a, /Attorney Work Product/, "a parent's own notes are not attorney work product")
+  const aNotes = readFileSync(join(proSe, 'review-notes.md'), 'utf8')
+  assert.match(aNotes, /^## Review Notes . Remove Before Filing/m)
+  assert.doesNotMatch(aNotes, /Attorney Work Product/, "a parent's own notes are not attorney work product")
   rmSync(proSe, { recursive: true, force: true })
 
   const counsel = copy(examples.counsel)
@@ -134,8 +144,8 @@ test('the two examples are a parent filing pro se and an attorney filing, and ea
   assert.match(b, /Attorney for Petitioner and the Parent/)
   assert.match(b, /Bar No\./)
   assert.match(b, /Counsel for Petitioner and the Parent certifies/)
-  assert.match(b, /Attorney Review Notes . Attorney Work Product . Remove Before Filing/)
   assert.match(b, /20 U\.S\.C\. . 1415\(i\)\(3\)\(B\)/, "counsel's fee reservation")
+  assert.match(readFileSync(join(counsel, 'review-notes.md'), 'utf8'), /^## Attorney Review Notes . Attorney Work Product . Remove Before Filing/m)
   rmSync(counsel, { recursive: true, force: true })
 })
 
@@ -413,26 +423,51 @@ test('a claim points to its facts by label, and the label prints as that paragra
   rmSync(dir, { recursive: true, force: true })
 })
 
-test('a case name is set in italic, and a multiplication sign is not read as emphasis', async () => {
+test('a case name is drawn in a different face, and emphasis never reaches the page', async () => {
   const dir = copy(examples.proSe)
   assert.equal(run('render', dir).code, 0)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(join(dir, 'complaint.pdf'))), isEvalSupported: false }).promise
-  let text = ''
-  const fonts = new Set()
-  for (let n = 1; n <= doc.numPages; n++) {
-    for (const item of (await (await doc.getPage(n)).getTextContent()).items) {
-      text += item.str + ' '
-      if (/Endrew|Douglas/.test(item.str)) fonts.add(item.fontName)
-    }
-  }
-  text = text.replace(/\s+/g, ' ')
-  // The only asterisk anywhere is the multiplication sign in the arithmetic table.
-  assert.deepEqual(text.match(/\*/g), ['*'], 'markdown emphasis reached the page')
-  assert.match(text, /20 \* 240/)
-  assert.ok(fonts.size > 0, 'the case name is on the page')
-  const italic = []
-  for (const f of fonts) italic.push((await doc.getPage(1)).commonObjs)
+  const items = []
+  for (let n = 1; n <= doc.numPages; n++) items.push(...(await (await doc.getPage(n)).getTextContent()).items)
+  const text = items.map((i) => i.str).join(' ')
+  // No markdown survives into the pleading, in either direction: no emphasis marks, and the
+  // case name is not left in roman with its asterisks stripped.
+  assert.doesNotMatch(text, /\*/, 'a markdown emphasis mark reached the page')
+  const caseName = items.find((i) => /Endrew/.test(i.str))
+  assert.ok(caseName, 'the case name is on the page')
+  const body = items.find((i) => /Petitioner Jordan Rivera/.test(i.str) || /is a student eligible/.test(i.str))
+  assert.ok(body, 'a paragraph of body text is on the page')
+  assert.notEqual(caseName.fontName, body.fontName, 'the case name is set in the same face as the body text')
   rmSync(dir, { recursive: true, force: true })
+
+  // The arithmetic table's multiplication sign is not emphasis, and survives into the draft
+  // where the table is rendered.
+  const drafted = copy(examples.proSe, once('status: final', 'status: draft'))
+  assert.equal(run('render', drafted).code, 0)
+  const draftText = await wholeText(join(drafted, 'complaint.DRAFT.pdf'))
+  assert.match(draftText, /20 \* 240/, 'a lone asterisk is a multiplication sign, not emphasis')
+  assert.deepEqual(draftText.match(/\*/g), ['*'], 'the only asterisk in the draft is that one')
+  rmSync(drafted, { recursive: true, force: true })
+})
+
+test('a draft carries the review notes behind its banner, and a final carries none', async () => {
+  const draft = copy(examples.proSe, once('status: final', 'status: draft'))
+  assert.equal(run('render', draft).code, 0)
+  const text = await wholeText(join(draft, 'complaint.DRAFT.pdf'))
+  assert.match(text, /DRAFT . NOT FOR FILING/)
+  assert.match(text, /Remove Before Filing/, 'a draft is where the notes get read and acted on')
+  assert.match(text, /Adverse authority/)
+  const entries = zipEntries(join(draft, 'complaint.DRAFT.docx'))
+  assert.match(entries.get('word/document.xml') ?? '', /pageBreakBefore/, 'the notes start on a new page in the draft')
+  // While it is a draft the notes travel inside it, so they are not also written beside it.
+  assert.ok(!existsSync(join(draft, 'review-notes.md')))
+  rmSync(draft, { recursive: true, force: true })
+
+  const final = copy(examples.proSe)
+  assert.equal(run('render', final).code, 0)
+  assert.ok(existsSync(join(final, 'review-notes.md')), 'a final render writes the notes beside the complaint')
+  assert.doesNotMatch(await wholeText(join(final, 'complaint.pdf')), /Remove Before Filing/)
+  rmSync(final, { recursive: true, force: true })
 })
 
 test('render never names a draft, or a complaint that fails the check, for filing', async () => {
@@ -455,9 +490,8 @@ test('the Word file carries the whole document, and neither file names the softw
     const entries = zipEntries(join(dir, 'complaint.docx'))
     const document = entries.get('word/document.xml')
     assert.ok(document && document.length > 10000, 'word/document.xml is there and is not a stub')
-    assert.match(document, /Review Notes/, 'the review notes are in the Word file')
-    assert.match(document, /pageBreakBefore/, 'the notes start on a new page')
-    assert.match(document, /<w:tbl>/, 'the required-information and arithmetic tables are tables')
+    assert.doesNotMatch(document, /Remove Before Filing/, 'the review notes are in the filing-ready Word file')
+    assert.match(document, /<w:tbl>/, 'the required-information table is a table')
     assert.match(document, /<w:i\b/, 'a case name or regulation line is set in italic')
     // Nothing on the filed document says what produced it, its properties included. Left unset,
     // the Word writer stamps "Un-named" into lastModifiedBy, which a reader sees in File > Info.

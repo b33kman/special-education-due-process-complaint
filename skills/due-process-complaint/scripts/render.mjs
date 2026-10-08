@@ -22032,7 +22032,7 @@ var require_cjs = __commonJS({
 });
 
 // src/render.mjs
-import { rmSync, writeFileSync } from "node:fs";
+import { readFileSync as readFileSync2, rmSync, writeFileSync } from "node:fs";
 import { join as join2, resolve as resolve2 } from "node:path";
 
 // node_modules/docx/dist/index.mjs
@@ -40506,6 +40506,9 @@ var draft = notFinal || errors.length > 0 || openFlags.length > 0;
 var BANNER = "DRAFT \u2014 NOT FOR FILING";
 var base = draft ? "complaint.DRAFT" : "complaint";
 for (const ext of ["pdf", "docx"]) rmSync(join2(dir, `${draft ? "complaint" : "complaint.DRAFT"}.${ext}`), { force: true });
+var notesHeading = sections.find((s) => s.key === "notes")?.heading ?? "";
+var rendered = draft ? sections : sections.filter((s) => s.key !== "notes");
+rmSync(join2(dir, "review-notes.md"), { force: true });
 var curly = (t) => String(t).replace(/(^|[\s(\[{—–-])"/g, "$1\u201C").replace(/"/g, "\u201D").replace(/(^|[\s(\[{—–-])'/g, "$1\u2018").replace(/'/g, "\u2019");
 var sources = (t) => String(t).replace(/\s*\[@[^\]]*?,\s*p\.\s*(\d+)\]/gi, " (p. $1)").replace(/\s*\[@statement\]/gi, "").replace(/\s+([.,;:])/g, "$1");
 var P = (text, cls = null) => ({ text: curly(sources(text)), cls });
@@ -40535,7 +40538,7 @@ var body = [];
 var numeral = 0;
 var n = 0;
 var numbers = /* @__PURE__ */ new Map();
-for (const s of sections) {
+for (const s of rendered) {
   if (s.key === "signature" || s.key === "service") {
     const paras2 = [];
     let closing2 = s.key === "signature";
@@ -40818,11 +40821,17 @@ function wrapRuns(text, size, first, rest = first) {
   return lines.length ? lines : [[]];
 }
 var drawRuns = (segs, x, size = SIZE) => {
-  let cx = x;
+  const runs = [];
   for (const seg of segs) {
-    const f = faceOf(seg.italic);
-    if (seg.t.trim()) page.drawText(clean(seg.t), { x: cx, y: y - size, size, font: f, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
-    cx += width(seg.t, f, size);
+    const last = runs.at(-1);
+    if (last && last.italic === seg.italic) last.t += seg.t;
+    else runs.push({ t: seg.t, italic: seg.italic });
+  }
+  let cx = x;
+  for (const r of runs) {
+    const f = faceOf(r.italic);
+    if (r.t.trim()) page.drawText(clean(r.t), { x: cx, y: y - size, size, font: f, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
+    cx += width(r.t, f, size);
   }
 };
 var page = null;
@@ -41073,7 +41082,14 @@ pages.forEach((pg, i) => {
   pg.drawText(label, { x: (PAGE.w - width(label, F.regular, 11)) / 2, y: 36, size: 11, font: F.regular, color: (0, import_pdf_lib.rgb)(0, 0, 0) });
 });
 writeFileSync(join2(dir, `${base}.pdf`), await pdf.save());
+if (!draft && notesHeading) {
+  const md = readFileSync2(join2(dir, "complaint.md"), "utf8").replace(/\r\n/g, "\n");
+  const at = md.indexOf(`## ${notesHeading}`);
+  if (at >= 0) writeFileSync(join2(dir, "review-notes.md"), `${md.slice(at).trim()}
+`);
+}
 console.log(`rendered ${base}.pdf (${pages.length} page${pages.length === 1 ? "" : "s"}) and ${base}.docx`);
+if (!draft && notesHeading) console.log(`the review notes are review-notes.md, beside the complaint and not in it \u2014 work product, not for filing`);
 if (draft) {
   const why = [
     notFinal ? "complaint.md is not marked status: final" : null,

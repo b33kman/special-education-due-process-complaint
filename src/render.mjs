@@ -14,7 +14,7 @@
 // is written as complaint.DRAFT.pdf and complaint.DRAFT.docx, with
 // DRAFT — NOT FOR FILING at its head, so a draft cannot be filed by mistake.
 
-import { rmSync, writeFileSync } from 'node:fs'
+import { readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { AlignmentType, BorderStyle, Document, Footer, PageNumber, Packer, Paragraph, Table, TableCell, TableRow, TabStopType, TextRun, WidthType } from 'docx'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
@@ -33,6 +33,16 @@ const draft = notFinal || errors.length > 0 || openFlags.length > 0
 const BANNER = 'DRAFT — NOT FOR FILING'
 const base = draft ? 'complaint.DRAFT' : 'complaint'
 for (const ext of ['pdf', 'docx']) rmSync(join(dir, `${draft ? 'complaint' : 'complaint.DRAFT'}.${ext}`), { force: true })
+
+// The review notes are work product: the person's own account of what the District will argue,
+// of what could not be verified, and of what they still have to decide. While the complaint is a
+// draft they belong in it, behind the banner, which is where they get read and acted on. On a
+// final render they come OUT — a page break and a heading saying "Remove Before Filing" are an
+// instruction to a human, not a guard, and the file is named for filing. They are written beside
+// it as review-notes.md instead, so nothing can serve them to the District by accident.
+const notesHeading = sections.find((s) => s.key === 'notes')?.heading ?? ''
+const rendered = draft ? sections : sections.filter((s) => s.key !== 'notes')
+rmSync(join(dir, 'review-notes.md'), { force: true })
 
 // ─── The document, from complaint.md ──────────────────────────────────
 // One convention of quotation marks throughout, and every numbered paragraph
@@ -76,7 +86,7 @@ const body = []
 let numeral = 0
 let n = 0
 const numbers = new Map() // [#label] → paragraph number
-for (const s of sections) {
+for (const s of rendered) {
   if (s.key === 'signature' || s.key === 'service') {
     const paras = []
     let closing = s.key === 'signature'
@@ -334,11 +344,19 @@ function wrapRuns(text, size, first, rest = first) {
   return lines.length ? lines : [[]]
 }
 const drawRuns = (segs, x, size = SIZE) => {
-  let cx = x
+  // Consecutive segments in the same face are drawn as one string, so the filed document's text
+  // layer reads as words and lines rather than as one item per token.
+  const runs = []
   for (const seg of segs) {
-    const f = faceOf(seg.italic)
-    if (seg.t.trim()) page.drawText(clean(seg.t), { x: cx, y: y - size, size, font: f, color: rgb(0, 0, 0) })
-    cx += width(seg.t, f, size)
+    const last = runs.at(-1)
+    if (last && last.italic === seg.italic) last.t += seg.t
+    else runs.push({ t: seg.t, italic: seg.italic })
+  }
+  let cx = x
+  for (const r of runs) {
+    const f = faceOf(r.italic)
+    if (r.t.trim()) page.drawText(clean(r.t), { x: cx, y: y - size, size, font: f, color: rgb(0, 0, 0) })
+    cx += width(r.t, f, size)
   }
 }
 
@@ -545,7 +563,14 @@ pages.forEach((pg, i) => {
 })
 writeFileSync(join(dir, `${base}.pdf`), await pdf.save())
 
+if (!draft && notesHeading) {
+  const md = readFileSync(join(dir, 'complaint.md'), 'utf8').replace(/\r\n/g, '\n')
+  const at = md.indexOf(`## ${notesHeading}`)
+  if (at >= 0) writeFileSync(join(dir, 'review-notes.md'), `${md.slice(at).trim()}\n`)
+}
+
 console.log(`rendered ${base}.pdf (${pages.length} page${pages.length === 1 ? '' : 's'}) and ${base}.docx`)
+if (!draft && notesHeading) console.log(`the review notes are review-notes.md, beside the complaint and not in it — work product, not for filing`)
 if (draft) {
   const why = [
     notFinal ? 'complaint.md is not marked status: final' : null,
