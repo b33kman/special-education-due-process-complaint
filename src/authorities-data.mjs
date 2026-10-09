@@ -7,7 +7,7 @@
 // every state's circuit must match its row in references/state-rules.json. Edit the documents and
 // this file together, or the test fails.
 
-/** A reporter citation, normalised to volume and reporter: (580, "U.S.") -> "580 u.s." */
+/** A reporter citation, normalized to volume and reporter: (580, "U.S.") -> "580 u.s." */
 export const citeKey = (volume, reporter) => `${Number(volume)} ${String(reporter).replace(/\s+/g, '').toLowerCase()}`
 
 /** Every case references/authorities.md § 2 lists, with where it binds. */

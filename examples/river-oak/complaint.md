@@ -191,7 +191,7 @@ Self-represented (pro se)
 
 No Ninth Circuit decision is cited. None was confirmed in this session, and an unverified citation is worse than none. The California Education Code section was not opened either; it is cited without a subdivision, for the period only, and should be read before filing.
 
-### Adverse authority and expected defences
+### Adverse authority and expected defenses
 
 - The District will rely on its prior written notice of March 12, 2026 to argue the goal remains appropriate and that progress was being made. Claim A answers it from the three reports the notice itself relies on.
 - **The District will point to the accuracy half of the goal.** The January 23, 2026 report records 90% accuracy, which is the accuracy criterion the goal sets, and the same reporting period records Goal 2 as met. Claim A concedes the accuracy criterion and pleads the rate. Do not plead that Student made no progress at all.

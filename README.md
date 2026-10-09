@@ -343,7 +343,7 @@ skills/due-process-complaint/
 src/                     the scripts' source; build.mjs builds them
 examples/                two complete worked examples on invented documents
 tests/                   the tests
-docs/images/             the pictures on this page
+docs/images/             the pictures on this page; make-images.mjs redraws the three that carry the example
 CHANGELOG.md             what changed in each version
 STATES.md                where to file in each state: office, official page, contacts, time limit
 ```
