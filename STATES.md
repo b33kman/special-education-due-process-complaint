@@ -6,6 +6,8 @@ For each of the 50 states and the District of Columbia: the office that receives
 
 **Every state has the complaint go to the school district as well** — federal law requires it (34 C.F.R. § 300.508(a)) — but states differ on which office, and on whether the district gets it first, at the same time, or as a copy. Each state's **The school district** line says which. This page can't list every district's address; the Writer looks up your district's office on the district's own website and prints it, with its address, on the certificate of service.
 
+Each state also shows the **federal circuit** whose decisions bind a complaint filed there. The Writer uses it to decide which case law is binding and which is only persuasive, and it cites nothing it has not confirmed.
+
 The [Due Process Complaint Writer](README.md) reads this same information (`skills/due-process-complaint/references/state-rules.json`) and confirms each state’s details on its official filing page on every run.
 
 [Alabama](#alabama) · [Alaska](#alaska) · [Arizona](#arizona) · [Arkansas](#arkansas) · [California](#california) · [Colorado](#colorado) · [Connecticut](#connecticut) · [Delaware](#delaware) · [District of Columbia](#district-of-columbia) · [Florida](#florida) · [Georgia](#georgia) · [Hawaii](#hawaii) · [Idaho](#idaho) · [Illinois](#illinois) · [Indiana](#indiana) · [Iowa](#iowa) · [Kansas](#kansas) · [Kentucky](#kentucky) · [Louisiana](#louisiana) · [Maine](#maine) · [Maryland](#maryland) · [Massachusetts](#massachusetts) · [Michigan](#michigan) · [Minnesota](#minnesota) · [Mississippi](#mississippi) · [Missouri](#missouri) · [Montana](#montana) · [Nebraska](#nebraska) · [Nevada](#nevada) · [New Hampshire](#new-hampshire) · [New Jersey](#new-jersey) · [New Mexico](#new-mexico) · [New York](#new-york) · [North Carolina](#north-carolina) · [North Dakota](#north-dakota) · [Ohio](#ohio) · [Oklahoma](#oklahoma) · [Oregon](#oregon) · [Pennsylvania](#pennsylvania) · [Rhode Island](#rhode-island) · [South Carolina](#south-carolina) · [South Dakota](#south-dakota) · [Tennessee](#tennessee) · [Texas](#texas) · [Utah](#utah) · [Vermont](#vermont) · [Virginia](#virginia) · [Washington](#washington) · [West Virginia](#west-virginia) · [Wisconsin](#wisconsin) · [Wyoming](#wyoming)
@@ -13,6 +15,7 @@ The [Due Process Complaint Writer](README.md) reads this same information (`skil
 ## Alabama
 
 - **Files with:** Special Education Services, Alabama State Department of Education
+- **Federal circuit:** 11th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.alabamaachieves.org/special-education/dispute-resolution/>
 - **Address:** SES DPH, Special Education Services, Alabama State Department of Education, P.O. Box 30201, Montgomery, AL 36130
 - **Email:** dph@alsde.edu — complaints may be filed by email
@@ -24,6 +27,7 @@ File with the Alabama State Department of Education by mail (SES DPH, P.O. Box 3
 ## Alaska
 
 - **Files with:** Special Education Dispute Resolution, Alaska Department of Education & Early Development
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://educ.state.ak.us/sped>
 - **Address:** Special Education Dispute Resolution, P.O. Box 110500, Juneau, Alaska 99811-0500
 - **Email:** sped@alaska.gov — complaints may be filed by email
@@ -36,6 +40,7 @@ Give written notice of the request to the school district and send a copy to Spe
 ## Arizona
 
 - **Files with:** Arizona Department of Education, Exceptional Student Services, Dispute Resolution Unit
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.azed.gov/disputeresolution/due-process-hearing>
 - **Address:** Arizona Department of Education / Exceptional Student Services / Dispute Resolution Unit, 1535 West Jefferson Street, BIN #62, Phoenix, Arizona 85007
 - **Email:** ESSDRInbox@azed.gov — complaints may be filed by email
@@ -49,6 +54,7 @@ Give the complaint to the school district or charter school and forward a copy t
 ## Arkansas
 
 - **Files with:** Director, Office of Special Education, Arkansas Department of Education
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://dese.ade.arkansas.gov/Offices/special-education/dispute-resolution/due-process-hearings>
 - **Address:** Director, Office of Special Education, 1401 W. Capitol, Suite 450, Little Rock, Arkansas 72201
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -59,6 +65,7 @@ Give the written request to the school district and forward a copy to the Direct
 ## California
 
 - **Files with:** Office of Administrative Hearings, Special Education Division
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.dgs.ca.gov/oah/case-types/special-education>
 - **Address:** Special Education Division, Office of Administrative Hearings, 2349 Gateway Oaks Drive, Suite 200, Sacramento, CA 95833
 - **Online filing:** <https://www.applications.dgs.ca.gov/oah/oahsftweb> — Voluntary in special education, and it needs a signed SE-CESA agreement on file first. It does not serve the other parties — you still send the district its copy yourself.
@@ -70,6 +77,7 @@ Serve the school district first: the Office of Administrative Hearings accepts a
 ## Colorado
 
 - **Files with:** Colorado Department of Education, Exceptional Student Services Unit, Dispute Resolution Office
+- **Federal circuit:** 10th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://ed.cde.state.co.us/spedlaw/dueprocess>
 - **Address:** Colorado Department of Education (CDE), Exceptional Student Services Unit, Dispute Resolution Office, 201 E. Colfax Ave., Room 402, Denver, CO 80203
 - **Fax:** 303-866-6767 (Attn: Dispute Resolution) — complaints may be filed by fax
@@ -81,6 +89,7 @@ File the complaint with the district's Special Education Director and, at the sa
 ## Connecticut
 
 - **Files with:** Connecticut State Department of Education, Bureau of Special Education, Due Process Unit
+- **Federal circuit:** 2d Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://portal.ct.gov/SDE/Special-Education/Special-Education-Legal-and-Due-Process>
 - **Address:** CONNECTICUT STATE DEPARTMENT OF EDUCATION, BUREAU OF SPECIAL EDUCATION, DUE PROCESS UNIT, 450 Columbus Blvd., Suite 604, P.O. Box 2219, Hartford, CT 06145-2219
 - **Email:** dueprocess.sde@ct.gov — the official pages do not say whether complaints may be filed by email
@@ -93,6 +102,7 @@ Send the Request for Impartial Special Education Hearing form to the Connecticut
 ## Delaware
 
 - **Files with:** Secretary of Education, Delaware Department of Education
+- **Federal circuit:** 3d Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://education.delaware.gov/legacy/home/instruction-and-assessment/exceptional-children/special-education/for-families/rights-and-disputes/>
 - **Address:** Secretary of Education, Delaware Department of Education, John G. Townsend Building, 401 Federal Street, Suite 2, Dover, Delaware 19901
 - **Email:** dispute.resolution@doe.k12.de.us — complaints may be filed by email
@@ -105,6 +115,7 @@ File with the Secretary of Education, Delaware Department of Education, by mail,
 ## District of Columbia
 
 - **Files with:** Office of the State Superintendent of Education, Office of Dispute Resolution
+- **Federal circuit:** D.C. Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://osse.dc.gov/service/office-dispute-resolution-odr>
 - **Address:** Office of Dispute Resolution, 1050 First Street, NE, 3rd Floor, Washington, DC 20002
 - **Email:** Hearing.Office@dc.gov — complaints may be filed by email
@@ -117,6 +128,7 @@ Give the complaint to the local education agency you are complaining against (wh
 ## Florida
 
 - **Files with:** Florida Department of Education, Bureau of Exceptional Education and Student Services
+- **Federal circuit:** 11th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.fldoe.org/academics/exceptional-student-edu/dispute-resolution/>
 - **Address:** Section Administrator, Florida Department of Education, Bureau of Exceptional Educational and Student Services, 325 West Gaines Street, Suite 614, Tallahassee, FL 32399-0400
 - **Email:** BEESScomplaints@fldoe.org — complaints may be filed by email
@@ -128,6 +140,7 @@ File the request with the local school district, which files it with the Divisio
 ## Georgia
 
 - **Files with:** Georgia Department of Education, Division for Special Education Services and Supports
+- **Federal circuit:** 11th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://gadoe.org/special-education/due-process-hearings-and-decisions/>
 - **Address:** Georgia Department of Education, Division for Special Education Services and Supports, 205 Jesse Hill Jr. Drive, SE, 1562 Twin Towers East, Atlanta, Georgia 30334
 - **Email:** spedhelpdesk@doe.k12.ga.us — complaints may be filed by email
@@ -140,6 +153,7 @@ Send the request to the school district's superintendent and to the Georgia Depa
 ## Hawaii
 
 - **Files with:** Hawaii State Department of Education
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://hawaiipublicschools.org/school-services/parent-rights/dispute-resolutions-and-mediations/>
 - **Address:** Complaints Management Program, Monitoring and Compliance Branch, P.O. Box 2360, Honolulu, HI 96804
 - **Email:** specialedcomplaints@k12.hi.us — complaints may be filed by email
@@ -151,6 +165,7 @@ Hawaii has one statewide school district: submit the request (Form 105) to the C
 ## Idaho
 
 - **Files with:** Idaho Department of Education, Dispute Resolution Coordinator
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.sde.idaho.gov/about-us/departments/special-education/dispute-resolution/>
 - **Address:** Dispute Resolution Coordinator, Idaho Department of Education, PO Box 83720, Boise, ID 83720-0027
 - **Email:** disputeresolution@sde.idaho.gov — complaints may be filed by email
@@ -162,6 +177,7 @@ File with the Idaho Department of Education's Dispute Resolution Coordinator by 
 ## Illinois
 
 - **Files with:** Illinois State Board of Education
+- **Federal circuit:** 7th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.isbe.net/Pages/Special-Education-Due-Process.aspx>
 - **Address:** Illinois State Board of Education, Special Education Services Division, 100 North First Street, N-243, Springfield, Illinois 62777-0001
 - **Time limit:** 24 months, under the state’s own rule
@@ -172,6 +188,7 @@ A parent's request goes in writing to the superintendent of the school district 
 ## Indiana
 
 - **Files with:** Indiana Office of Administrative Law Proceedings
+- **Federal circuit:** 7th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.in.gov/oalp/idea-due-process-hearings/>
 - **Address:** Office of Administrative Law Proceedings, 100 North Senate Ave., Room N802, Indianapolis, IN 46204-2745
 - **Fax:** 317-232-0261 — complaints may be filed by fax
@@ -184,6 +201,7 @@ File with the Office of Administrative Law Proceedings, preferably through the I
 ## Iowa
 
 - **Files with:** Iowa Department of Education
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://educate.iowa.gov/pk-12/special-education/dispute-resolution>
 - **Address:** Iowa Department of Education, Grimes State Office Building, 400 E. 14th St., Des Moines, IA 50319-0146
 - **Email:** ideadisputeresolution@iowa.gov — complaints may be filed by email
@@ -195,6 +213,7 @@ Send the signed complaint (the model form or any written statement with the requ
 ## Kansas
 
 - **Files with:** Kansas State Department of Education, Special Education and Title Services, Dispute Resolution
+- **Federal circuit:** 10th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.ksde.gov/policy-and-funding/special-education/special-education-law/dispute-resolution>
 - **Address:** KSDE, Special Education, & Title Services Dispute Resolution, 900 SW Jackson St. Suite 620, Topeka, Kansas 66612
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -205,6 +224,7 @@ Send the signed notice to both the district superintendent or special education 
 ## Kentucky
 
 - **Files with:** Kentucky Department of Education, Office of Legal Services
+- **Federal circuit:** 6th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.education.ky.gov/specialed/excep/Pages/Dispute_Resolution_Process.aspx>
 - **Address:** Kentucky Department of Education, Office of Legal Services, 300 Sower Blvd., 5th Floor, Frankfort, KY 40601
 - **Email:** KDElegal@education.ky.gov — complaints may be filed by email
@@ -217,6 +237,7 @@ Send the request to the Kentucky Department of Education's Office of Legal Servi
 ## Louisiana
 
 - **Files with:** Louisiana Department of Education, Legal Division
+- **Federal circuit:** 5th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://doe.louisiana.gov/families-and-students/family-support-resources/family-special-education-resources/dispute-resolution>
 - **Address:** Louisiana Department of Education, Attention: Legal Division, P.O. Box 94064, Baton Rouge, Louisiana 70804-9064
 - **Email:** DisputeResolution.DOE@la.gov — complaints may be filed by email
@@ -229,6 +250,7 @@ Send the signed request to the Louisiana Department of Education's Legal Divisio
 ## Maine
 
 - **Files with:** Maine Department of Education, Dispute Resolution Office, Office of Special Services and Inclusive Education
+- **Federal circuit:** 1st Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.maine.gov/doe/learning/specialed/dueprocess>
 - **Address:** Dispute Resolution Office, Office of Special Services and Inclusive Education, Maine Department of Education, 23 State House Station, Augusta, ME 04333-0023
 - **Email:** dueprocess.doe@maine.gov — complaints may be filed by email
@@ -241,6 +263,7 @@ Mail the form to the Maine Department of Education's Dispute Resolution Office, 
 ## Maryland
 
 - **Files with:** Maryland Office of Administrative Hearings
+- **Federal circuit:** 4th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://marylandpublicschools.org/programs/Pages/Special-Education/FSDR/index.aspx>
 - **Address:** Office of Administrative Hearings, 11101 Gilroy Road, Hunt Valley, Maryland 21031
 - **Fax:** (410) 229-4277 — complaints may be filed by fax
@@ -252,6 +275,7 @@ Send the complaint in writing to both the school district's Director of Special 
 ## Massachusetts
 
 - **Files with:** Bureau of Special Education Appeals
+- **Federal circuit:** 1st Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.mass.gov/how-to/how-to-request-a-bsea-hearing>
 - **Address:** 14 Summer Street, 4th Floor, Malden, MA 02148
 - **Email:** bseapleadings@mass.gov — complaints may be filed by email
@@ -264,6 +288,7 @@ File the request with the Bureau of Special Education Appeals (the hearing offic
 ## Michigan
 
 - **Files with:** Michigan Department of Education, Office of Special Education – Due Process Complaints
+- **Federal circuit:** 6th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.michigan.gov/mde/services/special-education/dispute-resolution-options>
 - **Address:** Michigan Department of Education, Office of Special Education – Due Process Complaints, 608 West Allegan, P.O. Box 30008, Lansing, MI 48909
 - **Email:** MDE-MIComplaints@michigan.gov — complaints may be filed by email
@@ -276,6 +301,7 @@ File the signed complaint with the Michigan Department of Education, Office of S
 ## Minnesota
 
 - **Files with:** Minnesota Department of Education, Due Process Hearing Coordinator, Office of General Counsel
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://education.mn.gov/MDE/fam/sped/conf/due/>
 - **Address:** Minnesota Department of Education, Due Process Hearing Coordinator, Office of General Counsel, 400 NE Stinson Blvd., Minneapolis, MN 55413
 - **Email:** mde.dispute-resolution@state.mn.us — complaints may be filed by email
@@ -289,6 +315,7 @@ Give the request to the school district and send a copy to the Minnesota Departm
 ## Mississippi
 
 - **Files with:** Mississippi Department of Education, Office of Dispute Resolution
+- **Federal circuit:** 5th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://mdek12.org/specialeducation/dispute-resolution/>
 - **Address:** The Mississippi Department of Education, Attention: Office of Dispute Resolution, 359 N. West Street, Suite 301, Jackson, MS 39201
 - **Fax:** (601) 359-1829 — complaints may be filed by fax
@@ -300,6 +327,7 @@ Mail the form to the Mississippi Department of Education, Attention: Office of D
 ## Missouri
 
 - **Files with:** Missouri Department of Elementary and Secondary Education, Office of Special Education – Compliance
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://dese.mo.gov/special-education/due-processchild-complaint>
 - **Address:** Missouri Department of Elementary and Secondary Education, Office of Special Education – Compliance, P.O. Box 480, Jefferson City, MO 65102
 - **Email:** secompliance@dese.mo.gov — complaints may be filed by email
@@ -312,6 +340,7 @@ File with the Missouri Department of Elementary and Secondary Education, Office 
 ## Montana
 
 - **Files with:** Montana Office of Public Instruction, Dispute Resolution Office
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://opi.mt.gov/Educators/School-Climate-Student-Wellness/Special-Education/Dispute-Resolution>
 - **Address:** Dispute Resolution Office, Superintendent of Public Instruction, P.O. Box 202501, Helena, MT 59620-2501
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -322,6 +351,7 @@ Send the request to the Dispute Resolution Office, Superintendent of Public Inst
 ## Nebraska
 
 - **Files with:** Nebraska Department of Education
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.education.ne.gov/sped/due-process/>
 - **Address:** Nebraska Department of Education, State Office Building, 6th Floor, 301 Centennial Mall South, Lincoln, Nebraska 68509
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -332,6 +362,7 @@ Rule 55 says to file the petition with the Nebraska Department of Education by p
 ## Nevada
 
 - **Files with:** Nevada Department of Education, Superintendent of Public Instruction
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://doe.nv.gov/offices/office-of-comprehensive-student-services/dispute-resolution/due-process-complaint>
 - **Email:** disputeresolution@doe.nv.gov — the official pages do not say whether complaints may be filed by email
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -342,6 +373,7 @@ File the complaint with the head of the public agency (the district superintende
 ## New Hampshire
 
 - **Files with:** New Hampshire Department of Education, Governance Unit, Dispute Resolution and Constituent Complaints Section
+- **Federal circuit:** 1st Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.education.nh.gov/who-we-are/deputy-commissioner/dispute-resolution-and-complaints>
 - **Address:** NH Department of Education, Governance Unit, Dispute Resolution and Constituent Complaints Section, 25 Hall Street, Concord, NH 03301
 - **Time limit:** 24 months, under the state’s own rule
@@ -352,6 +384,7 @@ Send the original written request to the school district and a copy to the New H
 ## New Jersey
 
 - **Files with:** New Jersey Department of Education, Office of Special Education
+- **Federal circuit:** 3d Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.nj.gov/education/specialed/policy/disputeresolution/>
 - **Address:** Director, Office of Special Education (OSE), NJ Department of Education, P.O. Box 500, Trenton, NJ 08625-0500
 - **Email:** osepdisputeresolution@doe.nj.gov — complaints may be filed by email
@@ -363,6 +396,7 @@ File the entire request with the New Jersey Department of Education's Office of 
 ## New Mexico
 
 - **Files with:** New Mexico Public Education Department, Office of Special Education
+- **Federal circuit:** 10th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://web.ped.nm.gov/bureaus/special-education/dispute-resolution/due-process-hearings/>
 - **Address:** Director of Special Education, c/o Office of General Counsel, New Mexico Public Education Department, 300 Don Gaspar Ave, Santa Fe, NM 87501
 - **Email:** dispute.resolution@ped.nm.gov — complaints may be filed by email
@@ -374,6 +408,7 @@ File with the New Mexico Public Education Department through its online dispute-
 ## New York
 
 - **Files with:** New York State Education Department, Office of Special Education
+- **Federal circuit:** 2d Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.nysed.gov/special-education/due-process-hearing>
 - **Address:** New York State Education Department, Office of Special Education, Room 309 EB, 89 Washington Avenue, Albany, New York 12234, Attention: Due Process Unit
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -384,6 +419,7 @@ Send the original complaint to the school district and one copy to the New York 
 ## North Carolina
 
 - **Files with:** North Carolina Office of Administrative Hearings
+- **Federal circuit:** 4th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.oah.nc.gov/form-h-06e-special-education-petition-form>
 - **Address:** Office of Administrative Hearings, 1711 New Hope Church Road, Raleigh, NC 27609
 - **Email:** oah.clerks@oah.nc.gov — complaints may be filed by email
@@ -396,6 +432,7 @@ File the petition (Form H-06E, or Form H-06E-A for a manifestation determination
 ## North Dakota
 
 - **Files with:** North Dakota Department of Public Instruction, Office of Specially Designed Services
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.nd.gov/dpi/education-programs/special-education>
 - **Address:** ND Department of Public Instruction (NDDPI), Office of Specially Designed Services, Attn: Director of Specially Designed Services, 600 East Boulevard Avenue, Dept. 201, Bismarck, ND 58505-0440
 - **Email:** dpispecialed@nd.gov — complaints may be filed by email
@@ -408,6 +445,7 @@ Send the due process complaint to both the school district and the North Dakota 
 ## Ohio
 
 - **Files with:** Ohio Department of Education and Workforce, Dispute Resolution
+- **Federal circuit:** 6th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://education.ohio.gov/Topics/Special-Education/Dispute-Resolution>
 - **Address:** Ohio Department of Education and Workforce, Dispute Resolution, Mail Stop 409, 25 South Front Street, Columbus, OH 43215-4183
 - **Email:** oecdueprocess@education.ohio.gov — complaints may be filed by email
@@ -419,6 +457,7 @@ Send or give the original request to the school district and send a copy to the 
 ## Oklahoma
 
 - **Files with:** Oklahoma State Department of Education, Office of Special Education Services
+- **Federal circuit:** 10th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://oklahoma.gov/education/services/special-education/dispute-resolution/due-process.html>
 - **Address:** Oklahoma State Department of Education, Office of Special Education Services, 2500 N. Lincoln Boulevard, Suite 412, Oklahoma City, OK 73105
 - **Email:** sesdisputeresolution@sde.ok.gov — complaints may be filed by email
@@ -430,6 +469,7 @@ Send the complaint to both the school district and the Oklahoma State Department
 ## Oregon
 
 - **Files with:** Oregon Department of Education, Office of Student Services, Dispute Resolution Section
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.oregon.gov/ode/rules-and-policies/pages/due-process-overview.aspx>
 - **Address:** Assistant Superintendent – Student Services, Public Service Building, 255 Capitol Street NE, Salem, Oregon 97310-0203
 - **Email:** ode.disputeresolution@ode.oregon.gov — complaints may be filed by email
@@ -442,6 +482,7 @@ Send the signed request to both the Oregon Department of Education (by mail, by 
 ## Pennsylvania
 
 - **Files with:** Office for Dispute Resolution
+- **Federal circuit:** 3d Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://odr-pa.org/due-process-complaint-notice/>
 - **Address:** Office for Dispute Resolution, 6340 Flank Drive, Harrisburg, PA 17112-2764
 - **Email:** odr@odr-pa.org — complaints may be filed by email
@@ -453,6 +494,7 @@ File with the Office for Dispute Resolution through its online complaint form, b
 ## Rhode Island
 
 - **Files with:** Rhode Island Department of Education, Dispute Resolution, Office of Student, Community and Academic Supports
+- **Federal circuit:** 1st Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://ride.ri.gov/students-families/special-education/when-schools-and-families-do-not-agree>
 - **Address:** Dispute Resolution, Suite 500, Office of Student, Community and Academic Supports, RI Dept. of Education, 255 Westminster Street, Providence, RI 02903
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -463,6 +505,7 @@ Submit the model form, or a document with all of its information, to Dispute Res
 ## South Carolina
 
 - **Files with:** South Carolina Department of Education, Office of General Counsel
+- **Federal circuit:** 4th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://ed.sc.gov/districts-schools/special-education-services/parent-resources/dispute-resolution-information/due-process/due-process-hearing-request/>
 - **Address:** South Carolina Department of Education, Office of General Counsel, 1429 Senate Street, Room 1015, Columbia, South Carolina 29201
 - **Fax:** 803-734-4384 — complaints may be filed by fax
@@ -474,6 +517,7 @@ Take the signed form to the special education director of the school district, w
 ## South Dakota
 
 - **Files with:** South Dakota Department of Education, Special Education Programs
+- **Federal circuit:** 8th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://doe.sd.gov/sped/complaints.aspx>
 - **Address:** SD Department of Education, Special Education Programs, 800 Governors Drive, Pierre, SD 57501-2294
 - **Fax:** 605-773-6139 — complaints may be filed by fax
@@ -485,6 +529,7 @@ Give the complaint to the school district and forward a copy to the South Dakota
 ## Tennessee
 
 - **Files with:** Tennessee Department of Education, Office of General Counsel
+- **Federal circuit:** 6th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.tn.gov/education/legal-services/special-education-legal-services/legal-dispute-resolution-processes.html>
 - **Address:** Tennessee Department of Education, Office of General Counsel, Andrew Johnson Tower, 9th Floor, 710 James Robertson Parkway, Nashville, Tennessee 37243
 - **Email:** IDEAdisputeresolution@tn.gov — complaints may be filed by email
@@ -496,6 +541,7 @@ Email the completed form ED 5245 to both the school district and the Tennessee D
 ## Texas
 
 - **Files with:** Texas Education Agency, Office of General Counsel, Special Education Due Process Hearing Program
+- **Federal circuit:** 5th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://tea.texas.gov/about-tea/government-relations-and-legal/special-education-hearings/due-process-hearings>
 - **Address:** Texas Education Agency, 1701 North Congress Ave, Austin, Texas 78701
 - **Email:** SE-Legal@tea.texas.gov — complaints may be filed by email
@@ -508,6 +554,7 @@ File with the Texas Education Agency by email (SE-Legal@tea.texas.gov), fax (512
 ## Utah
 
 - **Files with:** Utah State Board of Education
+- **Federal circuit:** 10th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://schools.utah.gov/specialeducation/programs/studentfamilyrights>
 - **Address:** State Director of Special Education, Utah State Board of Education, 250 East 500 South, PO Box 144200, Salt Lake City, Utah 84114-4200
 - **Fax:** (801) 538-7991 — complaints may be filed by fax
@@ -519,6 +566,7 @@ File with the Utah State Board of Education, addressed to the State Director of 
 ## Vermont
 
 - **Files with:** Vermont Agency of Education
+- **Federal circuit:** 2d Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://education.vermont.gov/mediation-due-process-and-administrative-complaints>
 - **Address:** Agency of Education, Special Education Mediation Service, 1 National Life Drive, Davis 5, Montpelier, VT 05620-2501
 - **Email:** AOE.MediationDPInfo@vermont.gov — complaints may be filed by email
@@ -530,6 +578,7 @@ Submit the complaint (the parent form or a letter with the required elements) to
 ## Virginia
 
 - **Files with:** Virginia Department of Education, Office of Dispute Resolution and Administrative Services
+- **Federal circuit:** 4th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://www.doe.virginia.gov/programs-services/special-education/resolving-disputes/special-education-due-process-hearings> (did not load on 2026-09-15 (the site showed an outage notice); if it still does not, find the office’s current due process page on doe.virginia.gov)
 - **Address:** Virginia Department of Education, Office of Dispute Resolution and Administrative Services, P.O. Box 2120, Richmond, Virginia 23218-2120
 - **Email:** ODRAS@doe.virginia.gov — complaints may be filed by email
@@ -541,6 +590,7 @@ Send the request to the Virginia Department of Education's Office of Dispute Res
 ## Washington
 
 - **Files with:** Washington State Office of Administrative Hearings
+- **Federal circuit:** 9th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://ospi.k12.wa.us/student-success/special-education/dispute-resolution/request-due-process-hearing>
 - **Address:** Office of Administrative Hearings (OAH), PO Box 42489, Olympia, WA 98504-2489
 - **Email:** oah.ospi@oah.wa.gov — complaints may be filed by email
@@ -553,6 +603,7 @@ Give the original request to the school district superintendent and send a copy 
 ## West Virginia
 
 - **Files with:** West Virginia Department of Education, Division of Federal Programs & Support, Office of Special Education
+- **Federal circuit:** 4th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://wvde.us/academics/special-education/accountability-compliance/dispute-resolution>
 - **Address:** West Virginia Department of Education, Division of Federal Programs & Support, Office of Special Education, Bldg. 6, Suite 750, 1900 Kanawha Blvd. E., Charleston, WV 25305-0330
 - **Time limit:** two years from when the parent or agency knew or should have known (34 C.F.R. § 300.507(a)(2)), unless the state’s page says otherwise
@@ -563,6 +614,7 @@ Mail the complaint to the West Virginia Department of Education, Office of Speci
 ## Wisconsin
 
 - **Files with:** Wisconsin Department of Public Instruction
+- **Federal circuit:** 7th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://dpi.wi.gov/sped/dispute-resolution/due-process>
 - **Address:** DIRECTOR, SPECIAL EDUCATION TEAM, WISCONSIN DEPARTMENT OF PUBLIC INSTRUCTION, PO BOX 7841, MADISON, WI 53707-7841
 - **Email:** IDEA@DPI.WI.GOV — complaints may be filed by email
@@ -575,6 +627,7 @@ Complete three copies of form PI-2115 (or write a letter): keep one, give one to
 ## Wyoming
 
 - **Files with:** Wyoming Department of Education, Special Education Programs Division
+- **Federal circuit:** 10th Circuit — the court whose decisions bind a complaint filed here
 - **Official filing page:** <https://edu.wyoming.gov/parents/special-education/dispute-resolution/>
 - **Address:** State Director of Special Education, WDE Special Education Programs Division, 122 W. 25th St. Suite E200,, Cheyenne, Wyoming 82002
 - **Email:** wde-disputeinbox@wyo.gov — the official pages do not say whether complaints may be filed by email

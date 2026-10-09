@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude and ChatGPT that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
+  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude, ChatGPT and other AI chat apps that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
 </p>
 
 # Special Education Due Process Complaint Writer
@@ -28,6 +28,9 @@ One of these:
 
 - **Claude:** the Claude app on a paid plan (Pro, Max, Team or Enterprise). [Install in Claude](#install-in-claude)
 - **ChatGPT:** the ChatGPT desktop app, which allowed plugins on a free account as of September 2026. [Install in ChatGPT](#install-in-chatgpt)
+- **Another AI chat that reads plugins or skills:** add it from this repository the way that app adds one. The skill needs nothing from Claude or ChatGPT in particular — no account with us, no server, no connector. Its three scripts need only Node.js 20 or later, and the [developer section](#for-developers-claude-code-and-codex) at the foot of this page has the command for Claude Code, Codex and the `skills` CLI.
+
+Whichever app you use, it needs to be able to **run code and create files**, because that is how the complaint gets read, checked and written.
 
 ## Install in Claude
 
@@ -176,7 +179,7 @@ See the full [Privacy Policy](PRIVACY.md) for the data categories involved, how 
 ## Frequently asked questions
 
 ### How does it save me time?
-It does the slow parts for you. It reads every page of every document, pulls out the dates, figures and quotations that matter, and lays them out as a dated chronology with the page each came from. It suggests the claims your documents support best, finds your state's filing office, address and time limit, and sets the complaint out as a legal pleading, ready as a PDF to file and a Word file to edit. For a folder of seven school documents, the reading, drafting, checking and formatting takes roughly fifteen minutes, plus the time you take answering its questions.
+It does the slow parts for you. It reads every page of every document, pulls out the dates, figures and quotations that matter, and lays them out as a dated chronology with the page each came from. It recommends every claim your documents support, answers the reasons the school gave in its own documents, finds your state's filing office, address and time limit, and sets the complaint out as a legal pleading, ready as a Word document to edit, sign and file. For a folder of seven school documents, the reading, drafting, checking and formatting takes roughly fifteen minutes, plus the time you take answering its questions.
 
 ### How is this different from asking a regular AI chat?
 A regular chat writes what sounds right. This plugin follows a set procedure built for due process complaints:

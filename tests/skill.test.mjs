@@ -780,6 +780,20 @@ test('every state and the District of Columbia carries the circuit whose law bin
   assert.equal([...circuits.values()].reduce((a, b) => a + b, 0), 51)
 })
 
+test('STATES.md gives every state the circuit the table gives it', () => {
+  // STATES.md is the public copy of references/state-rules.json. A circuit that disagreed between
+  // them would send a reader to one court and the skill to another.
+  const { states } = JSON.parse(readFileSync(join(root, 'skills', 'due-process-complaint', 'references', 'state-rules.json'), 'utf8'))
+  const md = readFileSync(join(root, 'STATES.md'), 'utf8')
+  assert.equal(states.length, 51)
+  for (const row of states) {
+    const section = md.split(/^## /m).find((chunk) => chunk.startsWith(`${row.name}\n`))
+    assert.ok(section, `STATES.md has no section for ${row.name}`)
+    const stated = section.match(/^- \*\*Federal circuit:\*\* (\S+) Circuit/m)?.[1]
+    assert.equal(stated, row.circuit, `STATES.md says ${row.name} is in the ${stated} Circuit and the table says ${row.circuit}`)
+  }
+})
+
 test('the reference files the procedure names all exist', () => {
   const skill = readFileSync(join(root, 'skills', 'due-process-complaint', 'SKILL.md'), 'utf8')
   const named = [...skill.matchAll(/references\/([\w-]+\.(?:md|json))/g)].map((m) => m[1])
