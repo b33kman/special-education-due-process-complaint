@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude, ChatGPT and other AI chat apps that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
+  <a href="examples/river-oak/complaint.pdf"><img src="docs/images/banner.png" alt="Due Process Complaint Writer: a free plugin for Claude, ChatGPT and other AI chat apps, and an Operating Guide for Microsoft Word, that writes a due process complaint under the Individuals with Disabilities Education Act (IDEA)" width="100%"></a>
 </p>
 
 # Special Education Due Process Complaint Writer
@@ -122,6 +122,14 @@ Click **Plugins** in the left sidebar, then **Personal**. The due process compla
 Until every check passes and every flag is resolved, the document is named **complaint.DRAFT.docx** and marked **DRAFT — NOT FOR FILING**, so a draft can't be filed by mistake. While it is a draft the review notes sit inside it, behind that banner; once it's final they come out into their own file, so the complaint you file can't carry them.
 
 For the best results, choose the most capable model the app offers.
+
+## Using Word Copilot
+
+If you work in Microsoft Word rather than a chat app, **[the Operating Guide](word-copilot/Operating-Guide.docx)** gives Word Copilot the same procedure this plugin follows: the same sections, the same flags for anything it could not verify, and the same audit before the complaint is finished.
+
+Download the Operating Guide and place it in your case folder in OneDrive, or reference it by URL. Then tell Word Copilot:
+
+> Use the Operating Guide in this folder and all case documents to draft the due process complaint and run the Draft Review and Audit Protocol before finalizing.
 
 ## Due process complaint examples
 
@@ -342,6 +350,7 @@ skills/due-process-complaint/
   scripts/               pdf-text.mjs, check.mjs, render.mjs, built from src/ (do not edit)
 src/                     the scripts' source; build.mjs builds them
 examples/                two complete worked examples on invented documents
+word-copilot/            the Word‑native Operating Guide, for drafting in Microsoft Word
 tests/                   the tests
 docs/images/             the pictures on this page; make-images.mjs redraws the three that carry the example
 CHANGELOG.md             what changed in each version

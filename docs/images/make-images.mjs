@@ -38,7 +38,7 @@ const SERIF = 'https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght
 const EYEBROW = 'Individuals with Disabilities Education Act (IDEA)'
 const TITLE = 'Due Process<br>Complaint Writer'
 const TITLE_3 = 'Due Process<br>Complaint<br>Writer'
-const WHO = 'Free plugin for Claude, ChatGPT and other AI chat apps'
+const WHO = 'Free plugin for Claude, ChatGPT and other AI chat apps — and Microsoft Word'
 const WHAT = 'Reads the school documents, checks every fact against them, and drafts the complaint as a Word document to edit, sign and file.'
 
 const work = mkdtempSync(join(tmpdir(), 'dpc-images-'))
@@ -75,7 +75,7 @@ shoot('banner.png', 1600, 560, `
   <div style="position:absolute;left:114px;top:100px;width:900px">
     <p class="eyebrow" style="font-size:36px">${EYEBROW}</p>
     <h1 style="font-size:124px;line-height:0.855;margin:28px 0 0">${TITLE}</h1>
-    <p class="who" style="font-size:27px;margin-top:46px">${WHO}</p>
+    <p class="who" style="font-size:24px;margin-top:48px;width:1000px;white-space:nowrap">${WHO}</p>
   </div>
   <div class="page" style="left:1090px;top:72px;width:440px;height:488px"><img src="${PAGE_SRC}"></div>`)
 
@@ -85,7 +85,7 @@ shoot('social-preview.png', 1280, 640, `
     <p class="eyebrow" style="font-size:21px">${EYEBROW}</p>
     <h1 style="font-size:103px;line-height:0.82;margin:22px 0 0">${TITLE_3}</h1>
     <p class="what" style="font-size:24px;line-height:1.42;margin-top:48px;width:600px">${WHAT}</p>
-    <p class="who" style="font-size:21px;margin-top:34px">${WHO}</p>
+    <p class="who" style="font-size:21px;line-height:1.35;margin-top:30px">${WHO.replace(' and other AI chat apps', ' and other<br>AI chat apps')}</p>
   </div>
   <div class="page" style="left:730px;top:70px;width:500px;height:570px"><img src="${PAGE_SRC}"></div>`)
 

@@ -2,6 +2,37 @@
 
 Each release bumps `version` in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` — installed plugins are updated only when that number changes — and is published as a GitHub release.
 
+## 2.1.0 — 2026-10-10
+
+**A Word Copilot Operating Guide ships with the skill**, at `word-copilot/Operating-Guide.docx`. It is for
+people who draft in Microsoft Word rather than a chat app: put it in the case folder in OneDrive and tell
+Word Copilot to use it. It carries the two modules it is built around — Safety and Accuracy Constraints,
+and the Draft Review and Audit Protocol — and the README says how to invoke it.
+
+It sits outside `skills/`, so the skill an AI loads is unchanged and the release ZIP is still the nine
+files it was.
+
+**The guide was reconciled to the skill before it shipped**, because two procedures in one repository is
+how a reader learns the wrong one:
+
+- Its template had no Required Information table and no certificate of service, so a complaint drafted
+  from it could go out missing the elements 34 C.F.R. § 300.508(b) requires and the copy to the State
+  educational agency § 300.508(a)(2) requires. The template is the skill's thirteen sections now, with the
+  review notes after a page break and the attorney work product heading held to the filer.
+- It asked whether the complaint was being filed in New York, cited "applicable New York State
+  regulations" and captioned its example for the NYC Impartial Hearing Office. It asks for the filing state
+  now, and says never to carry one state's forum, time limit or burden of proof into another's.
+- Its flags were `[INSERT VERIFIED CITATION]`, `[DATE TO VERIFY]` and `[UNVERIFIED FACT]`. They are
+  `[MISSING-#]`, `[CONFLICT-#]`, `[VERIFY-#]` and `[COUNSEL-#]`, and its source tag is `[@Document, p. #]`
+  — the skill's own markers, so a draft begun in Word can be run through `check.mjs` unchanged.
+- It said to ask the eight clarifications in one turn and then proceed on reasonable defaults. It still asks
+  in one turn, and now never defaults the state, the filing date, the claims or the relief, and names the
+  four things confirmed with the person as the draft proceeds.
+- Its six audit passes carry the skill's fourteen checks, each named in the pass that holds it.
+- It capped factual paragraphs at three sentences. The length follows the record.
+
+**The banner and the share card say "and Microsoft Word".**
+
 ## 2.0.0 — 2026-10-08
 
 The procedure now does what the owner's own Copilot Operating Guide for Word does, on all fifty states and the District of Columbia. Twelve changes, each decided against that guide.

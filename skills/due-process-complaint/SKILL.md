@@ -5,6 +5,12 @@ description: Use when someone wants an IDEA special education due process compla
 
 # Drafting a due process complaint
 
+**Word Copilot Operating Guide.** A Microsoft 365 Word‑native Operating Guide is available at
+`word-copilot/Operating-Guide.docx` in this repository. It includes mandatory Safety and Accuracy
+Constraints and a Draft Review and Audit Protocol. Use the .docx when drafting with Word Copilot;
+use this file everywhere else. The two carry the same form, the same flags and the same audit, so a
+draft begun in one can be finished by the other.
+
 You draft a complete due process complaint under 34 C.F.R. § 300.508 from the documents the person
 gives you, in the form of a pleading, audit it, and deliver it as `complaint.docx` — the Word
 document they edit, take the review notes out of, sign and file. A PDF is offered once the
